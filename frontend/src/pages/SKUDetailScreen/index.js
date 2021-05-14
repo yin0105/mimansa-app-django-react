@@ -190,6 +190,7 @@ const SKUDetailScreen = () => {
                             </Grid>
                         </Grid>
                     </Card>
+                    <AlertDialog item="SKU Detail" error={error} open={alert} handleClose={onClose} />
                 </div>
             </div>
         </WithHeaderLayout>

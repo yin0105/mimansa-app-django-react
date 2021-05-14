@@ -91,17 +91,15 @@ const SKUDetailScreen = () => {
                                 </CardContent>
                             </Grid>
                             <Grid item lg={6}>
-                                <CardContent className="mx-3">
+                                <CardContent className="mx-3" alignItems="center"  justify="center">
                                     <div className="w-full text-center py-2">
                                         <Typography style={{ paddingRight: "20px" }}>
                                             CARTON: {next_carton}
                                         </Typography>
                                     </div>
+                                    
                                     {tote_type === "MONO" && 
                                         <form noValidate autoComplete="off">
-                                            <Typography style={{ paddingRight: "20px" }}>
-                                                Carton: {next_carton}
-                                            </Typography>
                                             <TextField id="scan_carton_id" label="Carton ID" variant="outlined" />
                                         </form>
                                     

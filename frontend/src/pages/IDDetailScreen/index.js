@@ -4,7 +4,7 @@ import { Typography, TextField, Card, CardHeader, CardContent, LinearProgress } 
 import { useHistory } from 'react-router-dom';
 import AlertDialog from '../../components';
 import { apiValidateSKU } from '../../services/news';
-import Grid from '@material-ui/core/Grid';
+
 
 const IDDetailScreen = () => {
 
@@ -116,96 +116,48 @@ const IDDetailScreen = () => {
                             Pack LPN
                     </Typography>
                     </div>
-                    <Grid container spacing={3}>
-                        <Grid item lg={6}>
-                            <Card className="mt-12">
-                                <div className="p-6">
-                                    <CardHeader
-                                        title="ID Detail Screen"
-                                        titleTypographyProps={{ variant: 'h4' }}
-                                        style={{ textAlign: "center" }}
-                                    />
-                                    <CardContent className="mx-3">
-                                        <div className="w-full text-center py-2">
-                                            <Typography style={{ paddingRight: "20px" }}>
-                                                LPN ID: {lpnid} ({tote_type})
-                                            </Typography>
-                                        </div>
-                                        <div className="w-full text-center py-2">
-                                            <Typography style={{ paddingRight: "20px" }}>
-                                                SKU: {sku}
-                                            </Typography>
-                                        </div>
-                                        <div className="w-full text-center py-2">
-                                            <Typography style={{ paddingRight: "20px" }}>
-                                                CARTONS: {cartons}
-                                            </Typography>
-                                        </div>
-                                        <div className="w-full text-center py-2">
-                                            <Typography style={{ paddingRight: "20px" }}>
-                                                CLASSIFICATION: {classification}
-                                            </Typography>
-                                        </div>
-                                        <div className="flex items-center mx-auto pt-10">
-                                            <TextField
-                                                className="m-2 w-full"
-                                                variant="outlined"
-                                                value={skuid}
-                                                onChange={e => setSKUId(e.target.value)}
-                                                onKeyUp={handleKeyUp}
-                                                label="SKU ID"
-                                                autoFocus
-                                            />
-                                        </div>
-                                    </CardContent>
+                    <Card className="mt-12">
+                        <div className="p-6">
+                            <CardHeader
+                                title="ID Detail Screen"
+                                titleTypographyProps={{ variant: 'h4' }}
+                                style={{ textAlign: "center" }}
+                            />
+                            <CardContent className="mx-3">
+                                <div className="w-full text-center py-2">
+                                    <Typography style={{ paddingRight: "20px" }}>
+                                        LPN ID: {lpnid} ({tote_type})
+                                    </Typography>
                                 </div>
-                            </Card>
-                        </Grid>
-                        <Grid item lg={6}>
-                            <Card className="mt-12">
-                                <div className="p-6">
-                                    <CardHeader
-                                        title="ID Detail Screen"
-                                        titleTypographyProps={{ variant: 'h4' }}
-                                        style={{ textAlign: "center" }}
-                                    />
-                                    <CardContent className="mx-3">
-                                        <div className="w-full text-center py-2">
-                                            <Typography style={{ paddingRight: "20px" }}>
-                                                LPN ID: {lpnid} ({tote_type})
-                                            </Typography>
-                                        </div>
-                                        <div className="w-full text-center py-2">
-                                            <Typography style={{ paddingRight: "20px" }}>
-                                                SKU: {sku}
-                                            </Typography>
-                                        </div>
-                                        <div className="w-full text-center py-2">
-                                            <Typography style={{ paddingRight: "20px" }}>
-                                                CARTONS: {cartons}
-                                            </Typography>
-                                        </div>
-                                        <div className="w-full text-center py-2">
-                                            <Typography style={{ paddingRight: "20px" }}>
-                                                CLASSIFICATION: {classification}
-                                            </Typography>
-                                        </div>
-                                        <div className="flex items-center mx-auto pt-10">
-                                            <TextField
-                                                className="m-2 w-full"
-                                                variant="outlined"
-                                                value={skuid}
-                                                onChange={e => setSKUId(e.target.value)}
-                                                onKeyUp={handleKeyUp}
-                                                label="SKU ID"
-                                                autoFocus
-                                            />
-                                        </div>
-                                    </CardContent>
+                                <div className="w-full text-center py-2">
+                                    <Typography style={{ paddingRight: "20px" }}>
+                                        SKU: {sku}
+                                    </Typography>
                                 </div>
-                            </Card>
-                        </Grid>
-                    </Grid>
+                                <div className="w-full text-center py-2">
+                                    <Typography style={{ paddingRight: "20px" }}>
+                                        CARTONS: {cartons}
+                                    </Typography>
+                                </div>
+                                <div className="w-full text-center py-2">
+                                    <Typography style={{ paddingRight: "20px" }}>
+                                        CLASSIFICATION: {classification}
+                                    </Typography>
+                                </div>
+                                <div className="flex items-center mx-auto pt-10">
+                                    <TextField
+                                        className="m-2 w-full"
+                                        variant="outlined"
+                                        value={skuid}
+                                        onChange={e => setSKUId(e.target.value)}
+                                        onKeyUp={handleKeyUp}
+                                        label="SKU ID"
+                                        autoFocus
+                                    />
+                                </div>
+                            </CardContent>
+                        </div>
+                    </Card>
                     <AlertDialog item="SKU id" error={error} open={alert} handleClose={onClose} />
                 </div>
             </div>

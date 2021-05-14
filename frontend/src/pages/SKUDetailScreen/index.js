@@ -4,6 +4,7 @@ import { Typography, Card, CardHeader, CardContent } from '@material-ui/core';
 
 import logo from '../../images/logo.png';
 import { useHistory } from 'react-router-dom';
+import Grid from '@material-ui/core/Grid';
 
 
 const SKUDetailScreen = () => {

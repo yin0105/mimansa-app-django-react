@@ -77,6 +77,7 @@ const IDDetailScreen = () => {
                 console.log('===== res: ', res);
                 setLoading(false);
                 if (res) {
+                    console.log("next carton = ", res.next_carton_nbr)
                     var scanInfo = JSON.parse(sessionStorage.getItem("scanInfo"));
                     var newObj = Object.assign({}, scanInfo, { skuid: skuid, image: res.sku_image_url, desc: res.sku_desc, dsp_sku: res.dsp_sku, next_carton: res.next_carton_nbr });
                     sessionStorage.setItem("scanInfo", JSON.stringify(newObj));

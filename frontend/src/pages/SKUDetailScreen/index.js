@@ -98,10 +98,7 @@ const SKUDetailScreen = () => {
                                             CARTON: {next_carton}
                                         </Typography>                                        
                                     </div>
-                                    <Box display="flex" 
-                                        alignItems="center"
-                                        justifyContent="center"
-                                    >
+                                    <Box display="flex" alignItems="center" justifyContent="center"py={2}>
                                         {tote_type === "MONO" && 
                                             <TextField id="scan_carton_id" label="Carton ID" variant="outlined" className="mx-auto" />                                        
                                         }

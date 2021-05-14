@@ -56,7 +56,7 @@ const SKUDetailScreen = () => {
 
     }, [history]);
 
-    const handleKeyUp = e => {
+    const handleSKUKeyUp = e => {
         if (e.keyCode === 13) {
             if (sku_brcd_list.some(item => sku_brcd === item)) {
                 if (scannedSKU < qty) {
@@ -66,12 +66,30 @@ const SKUDetailScreen = () => {
                 setError("Incorrect Barcode : " + sku_brcd)
                 setAlert(true);
             }
+            setSkuBrcd("")
+        }
+    }
 
+    const handleCartonKeyUp = e => {
+        if (e.keyCode === 13) {
+            // if (sku_brcd_list.some(item => sku_brcd === item)) {
+            //     if (scannedSKU < qty) {
+            //         setScannedSKU(scannedSKU + 1);
+            //     }
+            // } else {
+            //     setError("Incorrect Barcode : " + sku_brcd)
+            //     setAlert(true);
+            // }
+            // setSkuBrcd("")
         }
     }
 
     const inputSkuBrcd = e => {
         setSkuBrcd(e.target.value)
+    }
+
+    const inputScanCarton = e => {
+        // setSkuBrcd(e.target.value)
     }
 
     return (
@@ -139,7 +157,7 @@ const SKUDetailScreen = () => {
                                     </div>
                                     {tote_type === "MONO" && 
                                         <Box display="flex" alignItems="center" justifyContent="center" py={2}>
-                                            <TextField id="scan_carton_id" label="Carton ID" variant="outlined" className="mx-auto" />                                        
+                                            <TextField id="scan_carton_id" label="Carton ID" variant="outlined" value={scan_carton_id} className="mx-auto" onChange={e => inputScanCarton(e)} onKeyUp={handleCartonKeyUp} />
                                         </Box>
                                     }
                                     {tote_type === "MULTI" && 
@@ -157,7 +175,12 @@ const SKUDetailScreen = () => {
                                                 </Typography>                                       
                                             </div>
                                             <Box display="flex" alignItems="center" justifyContent="center" py={2}>
-                                                <TextField id="sku_brcd" label="SKU" variant="outlined" value={sku_brcd} className="mx-auto" onChange={e => inputSkuBrcd(e)} onKeyUp={handleKeyUp} />                                        
+                                                {scannedSKU < qty &&
+                                                    <TextField id="sku_brcd" label="SKU" variant="outlined" value={sku_brcd} className="mx-auto" onChange={e => inputSkuBrcd(e)} onKeyUp={handleSKUKeyUp} />                                        
+                                                }
+                                                {scannedSKU == qty &&
+                                                    <TextField id="scan_carton_id" label="Carton ID" variant="outlined" value={scan_carton_id} className="mx-auto" onChange={e => inputScanCarton(e)} onKeyUp={handleCartonKeyUp} />                                        
+                                                }
                                             </Box>
                                         </>
                                     }

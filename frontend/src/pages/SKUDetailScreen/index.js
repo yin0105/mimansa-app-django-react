@@ -51,6 +51,8 @@ const SKUDetailScreen = () => {
     }, [history]);
 
     const validateSkuBrcd = e => {
+        console.log("sku_brcd_list = ", sku_brcd_list)
+        console.log("e.target.value = ", e.target.value)
         if (sku_brcd_list.some(item => e.target.value === item)) {
             setScannedSKU(scannedSKU + 1);
         }

@@ -6,6 +6,7 @@ import logo from '../../images/logo.png';
 import { useHistory } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
+import Box from '@material-ui/core/Box';
 
 
 const SKUDetailScreen = () => {
@@ -97,11 +98,14 @@ const SKUDetailScreen = () => {
                                             CARTON: {next_carton}
                                         </Typography>                                        
                                     </div>
-                                    <div className="w-full">
+                                    <Box display="flex" 
+                                        alignItems="center"
+                                        justifyContent="center"
+                                    >
                                         {tote_type === "MONO" && 
                                             <TextField id="scan_carton_id" label="Carton ID" variant="outlined" className="mx-auto" />                                        
                                         }
-                                    </div>
+                                    </Box>
                                     
                                 </CardContent>
                             </Grid>

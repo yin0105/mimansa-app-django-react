@@ -21,6 +21,7 @@ const SKUDetailScreen = () => {
     const [desc, setDesc] = useState("");
     const [sku, setSKU] = useState("");
     const [dspsku, setDspSku] = useState("");
+    const [next_carton, setNextCarton] = useState("");
 
     useEffect(() => {
         var scanInfo = JSON.parse(sessionStorage.getItem("scanInfo"));
@@ -36,6 +37,7 @@ const SKUDetailScreen = () => {
 
             setDesc(scanInfo.desc);
             setSKU(scanInfo.dsp_sku);
+            setNextCarton(scanInfo.next_carton);
         }
 
     }, [history]);
@@ -91,7 +93,7 @@ const SKUDetailScreen = () => {
                                 <CardContent className="mx-3">
                                     <div className="w-full text-center py-2">
                                         <Typography style={{ paddingRight: "20px" }}>
-                                            LPN ID: {lpnid} ({tote_type})
+                                            CARTON: {next_carton}
                                         </Typography>
                                     </div>
                                     <div className="w-full text-center py-2">

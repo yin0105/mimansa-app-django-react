@@ -73,6 +73,7 @@ const IDDetailScreen = () => {
         setLoading(true);
 
         var scanInfo = JSON.parse(sessionStorage.getItem("scanInfo"));
+        console.log("scanInfo 1 = ", scanInfo);
 
         apiValidateSKU({ whse: scanInfo.whse, tote: scanInfo.lpnid, sku_brcd: skuid, login_user_id: scanInfo.userid })
             .then(res => {

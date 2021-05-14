@@ -38,7 +38,7 @@ const IDScreen = () => {
             history.push("/location");
         }
         if (scanInfo !== null && scanInfo.lpnid !== undefined) {
-            var newInfo = { userid: scanInfo.userid, location: scanInfo.location };
+            var newInfo = { userid: scanInfo.userid, location: scanInfo.location, whse: scanInfo.whse };
             sessionStorage.setItem("scanInfo", JSON.stringify(newInfo));
         }
         if (scanInfo !== null) {

@@ -61,7 +61,8 @@ const IDDetailScreen = () => {
                 lpnid: scanInfo.lpnid,
                 tote_type: scanInfo.tote_type,
                 distinct_skus: scanInfo.distinct_skus,
-                carton: scanInfo.distinct_carton
+                carton: scanInfo.distinct_carton,
+                whse: scanInfo.whse,
             };
             sessionStorage.setItem("scanInfo", JSON.stringify(newInfo));
         }

@@ -95,9 +95,11 @@ const SKUDetailScreen = () => {
                                     <div className="w-full text-center py-2">
                                         <Typography style={{ paddingRight: "20px" }}>
                                             CARTON: {next_carton}
-                                        </Typography>
+                                        </Typography>                                        
+                                    </div>
+                                    <div className="w-full">
                                         {tote_type === "MONO" && 
-                                            <TextField id="scan_carton_id" label="Carton ID" variant="outlined" />                                        
+                                            <TextField id="scan_carton_id" label="Carton ID" variant="outlined" className="mx-auto" />                                        
                                         }
                                     </div>
                                     

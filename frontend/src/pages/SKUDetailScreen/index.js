@@ -26,6 +26,7 @@ const SKUDetailScreen = () => {
     const [dspsku, setDspSku] = useState("");
     const [next_carton, setNextCarton] = useState("");
     const [qty, setQty] = useState(0);
+    const [sku_brcd_list, setSkuBrcdList] = useState([]);
     const [scannedSKU, setScannedSKU] = useState(0);
 
     useEffect(() => {
@@ -44,9 +45,17 @@ const SKUDetailScreen = () => {
             setSKU(scanInfo.dsp_sku);
             setNextCarton(scanInfo.next_carton);
             setQty(scanInfo.qty);
+            setSkuBrcdList(scanInfo.sku_brcd_list);
         }
 
     }, [history]);
+
+    const validateSkuBrcd = e => {
+        if (sku_brcd_list.some(item => e.target.value === item)) {
+            setScannedSKU(scannedSKU + 1);
+        }
+
+    }
 
     return (
         <WithHeaderLayout title="ID Screen">
@@ -131,7 +140,7 @@ const SKUDetailScreen = () => {
                                                 </Typography>                                       
                                             </div>
                                             <Box display="flex" alignItems="center" justifyContent="center" py={2}>
-                                                <TextField id="scan_sku" label="SKU" variant="outlined" className="mx-auto" />                                        
+                                                <TextField id="scan_sku" label="SKU" variant="outlined" className="mx-auto" onChange={e => validateSkuBrcd(e)} />                                        
                                             </Box>
                                         </>
                                     }

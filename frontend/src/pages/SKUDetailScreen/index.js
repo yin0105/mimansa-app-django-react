@@ -53,37 +53,72 @@ const SKUDetailScreen = () => {
                     <div className="w-full text-center">
                         <Typography variant="h3" color="primary">
                             Pack LPN
-                </Typography>
+                        </Typography>
                     </div>
-                    <Card className="p-6 mt-12">
-                        <CardHeader
-                            title="SKU Detail Screen"
-                            titleTypographyProps={{ variant: 'h4' }}
-                            style={{ textAlign: "center" }}
-                        />
-                        <CardContent className="mx-3">
-                            <div className="w-full text-center py-2">
-                                <Typography style={{ paddingRight: "20px" }}>
-                                    LPN ID: {lpnid} ({tote_type})
-                                </Typography>
-                            </div>
-                            <div className="w-full text-center py-2">
-                                <Typography style={{ paddingRight: "20px" }}>
-                                    SKU: {sku}
-                                </Typography>
-                            </div>
-                            <div className="w-full text-center py-2">
-                                <Typography style={{ paddingRight: "20px" }}>
-                                    SKU DESC: {desc}
-                                </Typography>
-                            </div>
-                            <div className="flex items-center mt-10">
-                                {image !== "" &&
-                                    <img className="w-32 h-32 mx-auto" src={image} alt="demo" />
-                                }
-                            </div>
-                        </CardContent>
-                    </Card>
+                    <Grid container spacing={3}>
+                        <Grid item lg={6}>
+                            <Card className="p-6 mt-12">
+                                <CardHeader
+                                    title="SKU Detail Screen"
+                                    titleTypographyProps={{ variant: 'h4' }}
+                                    style={{ textAlign: "center" }}
+                                />
+                                <CardContent className="mx-3">
+                                    <div className="w-full text-center py-2">
+                                        <Typography style={{ paddingRight: "20px" }}>
+                                            LPN ID: {lpnid} ({tote_type})
+                                        </Typography>
+                                    </div>
+                                    <div className="w-full text-center py-2">
+                                        <Typography style={{ paddingRight: "20px" }}>
+                                            SKU: {sku}
+                                        </Typography>
+                                    </div>
+                                    <div className="w-full text-center py-2">
+                                        <Typography style={{ paddingRight: "20px" }}>
+                                            SKU DESC: {desc}
+                                        </Typography>
+                                    </div>
+                                    <div className="flex items-center mt-10">
+                                        {image !== "" &&
+                                            <img className="w-32 h-32 mx-auto" src={image} alt="demo" />
+                                        }
+                                    </div>
+                                </CardContent>
+                            </Card>
+                        </Grid>
+                        <Grid item lg={6}>
+                            <Card className="p-6 mt-12">
+                                <CardHeader
+                                    title="SKU Detail Screen"
+                                    titleTypographyProps={{ variant: 'h4' }}
+                                    style={{ textAlign: "center" }}
+                                />
+                                <CardContent className="mx-3">
+                                    <div className="w-full text-center py-2">
+                                        <Typography style={{ paddingRight: "20px" }}>
+                                            LPN ID: {lpnid} ({tote_type})
+                                        </Typography>
+                                    </div>
+                                    <div className="w-full text-center py-2">
+                                        <Typography style={{ paddingRight: "20px" }}>
+                                            SKU: {sku}
+                                        </Typography>
+                                    </div>
+                                    <div className="w-full text-center py-2">
+                                        <Typography style={{ paddingRight: "20px" }}>
+                                            SKU DESC: {desc}
+                                        </Typography>
+                                    </div>
+                                    <div className="flex items-center mt-10">
+                                        {image !== "" &&
+                                            <img className="w-32 h-32 mx-auto" src={image} alt="demo" />
+                                        }
+                                    </div>
+                                </CardContent>
+                            </Card>
+                        </Grid>
+                    </Grid>
                 </div>
             </div>
         </WithHeaderLayout>

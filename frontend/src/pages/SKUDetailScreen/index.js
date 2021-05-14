@@ -94,18 +94,20 @@ const SKUDetailScreen = () => {
                                 </CardContent>
                             </Grid>
                             <Grid item lg={1}>
-                                <CardContent alignItems="center"  justify="center">
-                                    <div style={{ width: "2px", backgroundColor: "red", height: "250px"}}/>
+                                <CardContent>
+                                    <Box display="flex" alignItems="center" justifyContent="center" py={2}>
+                                        <div style={{ width: "2px", backgroundColor: "red", height: "100%"}}/>
+                                    </Box>
                                 </CardContent>
                             </Grid>
                             <Grid item lg={6}>
-                                <CardContent alignItems="center"  justify="center">
+                                <CardContent>
                                     <div className="w-full text-center py-2">
                                         <Typography style={{ paddingRight: "20px" }}>
                                             CARTON: {next_carton}
                                         </Typography>                                        
                                     </div>
-                                    <Box display="flex" alignItems="center" justifyContent="center"py={2}>
+                                    <Box display="flex" alignItems="center" justifyContent="center" py={2}>
                                         {tote_type === "MONO" && 
                                             <TextField id="scan_carton_id" label="Carton ID" variant="outlined" className="mx-auto" />                                        
                                         }

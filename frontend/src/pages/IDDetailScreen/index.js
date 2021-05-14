@@ -78,7 +78,7 @@ const IDDetailScreen = () => {
                 setLoading(false);
                 if (res) {
                     var scanInfo = JSON.parse(sessionStorage.getItem("scanInfo"));
-                    var newObj = Object.assign({}, scanInfo, { skuid: skuid, image: res.sku_image_url, desc: res.sku_desc, dsp_sku: res.dsp_sku });
+                    var newObj = Object.assign({}, scanInfo, { skuid: skuid, image: res.sku_image_url, desc: res.sku_desc, dsp_sku: res.dsp_sku, next_carton: res.next_carton_nbr });
                     sessionStorage.setItem("scanInfo", JSON.stringify(newObj));
                     history.push('/sku');
                 }

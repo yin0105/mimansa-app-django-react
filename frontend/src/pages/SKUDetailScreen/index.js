@@ -24,6 +24,7 @@ const SKUDetailScreen = () => {
     const [sku, setSKU] = useState("");
     const [dspsku, setDspSku] = useState("");
     const [next_carton, setNextCarton] = useState("");
+    const [qty, setQty] = useState(0);
 
     useEffect(() => {
         var scanInfo = JSON.parse(sessionStorage.getItem("scanInfo"));
@@ -40,6 +41,7 @@ const SKUDetailScreen = () => {
             setDesc(scanInfo.desc);
             setSKU(scanInfo.dsp_sku);
             setNextCarton(scanInfo.next_carton);
+            setQty(scanInfo.qty);
         }
 
     }, [history]);
@@ -113,11 +115,21 @@ const SKUDetailScreen = () => {
                                         </Box>
                                     }
                                     {tote_type === "MULTI" && 
-                                        <div className="w-full text-center py-2">
-                                            <Typography style={{ paddingRight: "20px" }}>
-                                                SKU: {sku}
-                                            </Typography>                                       
-                                        </div>
+                                        <>
+                                            <div className="w-full text-center py-2">
+                                                <Typography style={{ paddingRight: "20px" }}>
+                                                    SKU: {sku}
+                                                </Typography>                                       
+                                            </div>
+                                            <div className="w-full text-center py-2">
+                                                <Typography style={{ paddingRight: "20px" }}>
+                                                    QTY: {qty}
+                                                </Typography>                                       
+                                            </div>
+                                            <Box display="flex" alignItems="center" justifyContent="center" py={2}>
+                                                <TextField id="scan_sku" label="SKU" variant="outlined" className="mx-auto" />                                        
+                                            </Box>
+                                        </>
                                     }
                                     
                                 </CardContent>

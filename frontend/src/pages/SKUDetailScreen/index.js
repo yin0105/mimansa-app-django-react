@@ -96,7 +96,16 @@ const SKUDetailScreen = () => {
                                             CARTON: {next_carton}
                                         </Typography>
                                     </div>
-                                    
+                                    {tote_type === "MONO" && (
+                                        <form className={classes.root} noValidate autoComplete="off">
+                                            <Typography style={{ paddingRight: "20px" }}>
+                                                Carton: {next_carton}
+                                            </Typography>
+                                            <TextField id="scan_carton_id" label="Carton ID" variant="outlined" />
+                                        </form>
+                                    )
+
+                                    }
                                 </CardContent>
                             </Grid>
                         </Grid>

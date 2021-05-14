@@ -46,6 +46,7 @@ const SKUDetailScreen = () => {
             setNextCarton(scanInfo.next_carton);
             setQty(scanInfo.qty);
             setSkuBrcdList(scanInfo.sku_brcd_list);
+            console.log("sku_brcd_list = ", scanInfo.sku_brcd_list)
         }
 
     }, [history]);

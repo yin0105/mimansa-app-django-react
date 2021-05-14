@@ -99,11 +99,7 @@ const SKUDetailScreen = () => {
                                     </div>
                                     
                                     {tote_type === "MONO" && 
-                                        <form noValidate autoComplete="off">
-                                            <TextField id="scan_carton_id" label="Carton ID" variant="outlined" />
-                                        </form>
-                                    
-
+                                        <TextField id="scan_carton_id" label="Carton ID" variant="outlined" />                                        
                                     }
                                 </CardContent>
                             </Grid>

@@ -28,6 +28,8 @@ const SKUDetailScreen = () => {
     const [qty, setQty] = useState(0);
     const [sku_brcd_list, setSkuBrcdList] = useState([]);
     const [scannedSKU, setScannedSKU] = useState(0);
+    const [sku_brcd, setSkuBrcd] = useState("");
+    let pre_scannedSKU = 0
 
     useEffect(() => {
         var scanInfo = JSON.parse(sessionStorage.getItem("scanInfo"));
@@ -46,18 +48,28 @@ const SKUDetailScreen = () => {
             setNextCarton(scanInfo.next_carton);
             setQty(scanInfo.qty);
             setSkuBrcdList(scanInfo.sku_brcd_list);
+            pre_scannedSKU = 0
             console.log("sku_brcd_list = ", scanInfo.sku_brcd_list)
         }
 
     }, [history]);
 
-    const validateSkuBrcd = e => {
-        console.log("sku_brcd_list = ", sku_brcd_list)
-        console.log("e.target.value = ", e.target.value)
-        if (sku_brcd_list.some(item => e.target.value === item)) {
-            setScannedSKU(scannedSKU + 1);
-        }
+    const handleKeyUp = e => {
+        if (e.keyCode === 13) {
+            if (sku_brcd_list.some(item => sku_brcd === item)) {
+                if (scannedSKU < sku_brcd_list.length) {
+                    setScannedSKU(scannedSKU + 1);
+                }
+            } else {
+                setError("Incorrect Barcode : " + sku_brcd)
+                setAlert(true);
+            }
 
+        }
+    }
+
+    const inputSkuBrcd = e => {
+        setSkuBrcd(e.target.value)
     }
 
     return (
@@ -143,7 +155,7 @@ const SKUDetailScreen = () => {
                                                 </Typography>                                       
                                             </div>
                                             <Box display="flex" alignItems="center" justifyContent="center" py={2}>
-                                                <TextField id="scan_sku" label="SKU" variant="outlined" className="mx-auto" onChange={e => validateSkuBrcd(e)} />                                        
+                                                <TextField id="sku_brcd" label="SKU" variant="outlined" value={sku_brcd} className="mx-auto" onChange={e => inputSkuBrcd(e)} onKeyUp={handleKeyUp} />                                        
                                             </Box>
                                         </>
                                     }

@@ -7,6 +7,7 @@ import { useHistory } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import Box from '@material-ui/core/Box';
+import { string } from 'prop-types';
 
 
 const SKUDetailScreen = () => {
@@ -25,6 +26,7 @@ const SKUDetailScreen = () => {
     const [dspsku, setDspSku] = useState("");
     const [next_carton, setNextCarton] = useState("");
     const [qty, setQty] = useState(0);
+    const [scannedSKU, setScannedSKU] = useState(0);
 
     useEffect(() => {
         var scanInfo = JSON.parse(sessionStorage.getItem("scanInfo"));
@@ -123,7 +125,9 @@ const SKUDetailScreen = () => {
                                             </div>
                                             <div className="w-full text-center py-2">
                                                 <Typography style={{ paddingRight: "20px" }}>
-                                                    QTY: {qty}
+                                                    QTY: {qty} Unit{qty > 0 && "s"} {
+                                                        scannedSKU > 0 && ("Scanned : " + scannedSKU + " Pending : " + (qty - scannedSKU))
+                                                    }
                                                 </Typography>                                       
                                             </div>
                                             <Box display="flex" alignItems="center" justifyContent="center" py={2}>

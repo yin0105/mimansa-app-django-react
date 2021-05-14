@@ -63,6 +63,7 @@ const SKUDetailScreen = () => {
             if (sku_brcd_list.some(item => sku_brcd === item)) {
                 if (scannedSKU < qty) {
                     setScannedSKU(scannedSKU + 1);
+                    setSkuBrcd("");
                 }
             } else {
                 setError("Incorrect Barcode : " + sku_brcd)

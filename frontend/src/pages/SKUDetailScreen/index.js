@@ -69,26 +69,29 @@ const SKUDetailScreen = () => {
                         <Grid container spacing={3}>
                             <Grid item lg={6}>
                                 <CardContent className="mx-3">
-                                    <div className="w-full text-center py-2">
-                                        <Typography style={{ paddingRight: "20px" }}>
-                                            LPN ID: {lpnid} ({tote_type})
-                                        </Typography>
+                                    <div>
+                                        <div className="w-full text-center py-2">
+                                            <Typography style={{ paddingRight: "20px" }}>
+                                                LPN ID: {lpnid} ({tote_type})
+                                            </Typography>
+                                        </div>
+                                        <div className="w-full text-center py-2">
+                                            <Typography style={{ paddingRight: "20px" }}>
+                                                SKU: {sku}
+                                            </Typography>
+                                        </div>
+                                        <div className="w-full text-center py-2">
+                                            <Typography style={{ paddingRight: "20px" }}>
+                                                SKU DESC: {desc}
+                                            </Typography>
+                                        </div>
+                                        <div className="flex items-center mt-10">
+                                            {image !== "" &&
+                                                <img className="w-32 h-32 mx-auto" src={image} alt="demo" />
+                                            }
+                                        </div>
                                     </div>
-                                    <div className="w-full text-center py-2">
-                                        <Typography style={{ paddingRight: "20px" }}>
-                                            SKU: {sku}
-                                        </Typography>
-                                    </div>
-                                    <div className="w-full text-center py-2">
-                                        <Typography style={{ paddingRight: "20px" }}>
-                                            SKU DESC: {desc}
-                                        </Typography>
-                                    </div>
-                                    <div className="flex items-center mt-10">
-                                        {image !== "" &&
-                                            <img className="w-32 h-32 mx-auto" src={image} alt="demo" />
-                                        }
-                                    </div>
+                                    <div style={{ width: "2px", backgroundColor: "red", height: "250px"}}/>
                                 </CardContent>
                             </Grid>
                             <Grid item lg={6}>

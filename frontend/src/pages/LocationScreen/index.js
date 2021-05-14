@@ -55,7 +55,7 @@ const LocationScreen = () => {
                 console.log('===== res: ', res);
                 setLoading(false);
                 if (res) {
-                    print("============ whse = ", res.whse);
+                    console.log("============ whse = ", res.whse);
                     var scanInfo = JSON.parse(sessionStorage.getItem("scanInfo"));
                     var newObj = Object.assign({}, scanInfo, { location: location, whse: res.whse, dsp_locn: res.dsp_locn, });
                     sessionStorage.setItem("scanInfo", JSON.stringify(newObj));

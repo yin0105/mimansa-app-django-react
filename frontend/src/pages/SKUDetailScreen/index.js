@@ -5,6 +5,7 @@ import { Typography, Card, CardHeader, CardContent } from '@material-ui/core';
 import logo from '../../images/logo.png';
 import { useHistory } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
+import TextField from '@material-ui/core/TextField';
 
 
 const SKUDetailScreen = () => {
@@ -97,7 +98,7 @@ const SKUDetailScreen = () => {
                                         </Typography>
                                     </div>
                                     {tote_type === "MONO" && 
-                                        <form className={classes.root} noValidate autoComplete="off">
+                                        <form noValidate autoComplete="off">
                                             <Typography style={{ paddingRight: "20px" }}>
                                                 Carton: {next_carton}
                                             </Typography>

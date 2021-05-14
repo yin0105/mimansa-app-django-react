@@ -107,16 +107,18 @@ const SKUDetailScreen = () => {
                                             CARTON: {next_carton}
                                         </Typography>                                        
                                     </div>
-                                    <Box display="flex" alignItems="center" justifyContent="center" py={2}>
-                                        {tote_type === "MONO" && 
+                                    {tote_type === "MONO" && 
+                                        <Box display="flex" alignItems="center" justifyContent="center" py={2}>
                                             <TextField id="scan_carton_id" label="Carton ID" variant="outlined" className="mx-auto" />                                        
-                                        }
-                                        {tote_type === "MULTI" && 
+                                        </Box>
+                                    }
+                                    {tote_type === "MULTI" && 
+                                        <div className="w-full text-center py-2">
                                             <Typography style={{ paddingRight: "20px" }}>
                                                 SKU: {sku}
                                             </Typography>                                       
-                                        }
-                                    </Box>
+                                        </div>
+                                    }
                                     
                                 </CardContent>
                             </Grid>

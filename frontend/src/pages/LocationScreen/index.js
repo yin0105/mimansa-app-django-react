@@ -41,7 +41,7 @@ const LocationScreen = () => {
             setUserId(scanInfo.userid);
         }
 
-    }, []);
+    }, [history]);
 
 
     const validateLocation = () => {

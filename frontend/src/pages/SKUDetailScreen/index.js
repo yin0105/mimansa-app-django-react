@@ -37,7 +37,7 @@ const SKUDetailScreen = () => {
             setSKU(scanInfo.dsp_sku);
         }
 
-    }, []);
+    }, [history]);
 
     return (
         <WithHeaderLayout title="ID Screen">

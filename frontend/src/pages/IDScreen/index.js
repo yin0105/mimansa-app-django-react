@@ -46,7 +46,7 @@ const IDScreen = () => {
             setLocation(scanInfo.location);
         }
 
-    }, []);
+    }, [history]);
 
     const validateLPNId = () => {
 

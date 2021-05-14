@@ -63,7 +63,7 @@ const IDDetailScreen = () => {
             sessionStorage.setItem("scanInfo", JSON.stringify(newInfo));
         }
 
-    }, []);
+    }, [history]);
 
     const validateSKUId = () => {
 

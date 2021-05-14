@@ -31,6 +31,7 @@ const SKUDetailScreen = () => {
     const [sku_brcd_list, setSkuBrcdList] = useState([]);
     const [scannedSKU, setScannedSKU] = useState(0);
     const [sku_brcd, setSkuBrcd] = useState("");
+    const [scan_carton, setScanCarton] = useState("");
     let pre_scannedSKU = 0
 
     useEffect(() => {
@@ -157,7 +158,7 @@ const SKUDetailScreen = () => {
                                     </div>
                                     {tote_type === "MONO" && 
                                         <Box display="flex" alignItems="center" justifyContent="center" py={2}>
-                                            <TextField id="scan_carton_id" label="Carton ID" variant="outlined" value={scan_carton_id} className="mx-auto" onChange={e => inputScanCarton(e)} onKeyUp={handleCartonKeyUp} />
+                                            <TextField id="scan_carton_id" label="Carton ID" variant="outlined" value={scan_carton} className="mx-auto" onChange={e => inputScanCarton(e)} onKeyUp={handleCartonKeyUp} />
                                         </Box>
                                     }
                                     {tote_type === "MULTI" && 
@@ -179,7 +180,7 @@ const SKUDetailScreen = () => {
                                                     <TextField id="sku_brcd" label="SKU" variant="outlined" value={sku_brcd} className="mx-auto" onChange={e => inputSkuBrcd(e)} onKeyUp={handleSKUKeyUp} />                                        
                                                 }
                                                 {scannedSKU == qty &&
-                                                    <TextField id="scan_carton_id" label="Carton ID" variant="outlined" value={scan_carton_id} className="mx-auto" onChange={e => inputScanCarton(e)} onKeyUp={handleCartonKeyUp} />                                        
+                                                    <TextField id="scan_carton_id" label="Carton ID" variant="outlined" value={scan_carton} className="mx-auto" onChange={e => inputScanCarton(e)} onKeyUp={handleCartonKeyUp} />                                        
                                                 }
                                             </Box>
                                         </>

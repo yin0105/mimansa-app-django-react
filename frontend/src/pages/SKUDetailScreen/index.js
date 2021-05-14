@@ -8,6 +8,7 @@ import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import Box from '@material-ui/core/Box';
 import { string } from 'prop-types';
+import AlertDialog from '../../components';
 
 
 const SKUDetailScreen = () => {
@@ -66,8 +67,7 @@ const SKUDetailScreen = () => {
             } else {
                 setError("Incorrect Barcode : " + sku_brcd)
                 setAlert(true);
-            }
-            setSkuBrcd("")
+            }            
         }
     }
 
@@ -91,6 +91,11 @@ const SKUDetailScreen = () => {
 
     const inputScanCarton = e => {
         // setSkuBrcd(e.target.value)
+    }
+
+    const onClose = () => {
+        setSkuBrcd("");
+        setAlert(false);
     }
 
     return (

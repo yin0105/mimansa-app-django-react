@@ -93,9 +93,9 @@ const SKUDetailScreen = () => {
                                     </div>
                                 </CardContent>
                             </Grid>
-                            <Grid item lg={1}>
-                                <CardContent>
-                                    <Box display="flex" alignItems="center" justifyContent="center" py={2}>
+                            <Grid item lg={1} py={12}>
+                                <CardContent style={{ height: "100%" }}>
+                                    <Box display="flex" alignItems="center" justifyContent="center" py={2}  style={{ height: "100%" }}>
                                         <div style={{ width: "2px", backgroundColor: "red", height: "100%"}}/>
                                     </Box>
                                 </CardContent>

@@ -145,7 +145,6 @@ const SKUDetailScreen = () => {
                                 </CardContent>
                             </Card>
                         </Grid> */}
-                    </Grid>
                 </div>
             </div>
         </WithHeaderLayout>

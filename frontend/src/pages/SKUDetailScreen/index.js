@@ -96,11 +96,11 @@ const SKUDetailScreen = () => {
                                         <Typography style={{ paddingRight: "20px" }}>
                                             CARTON: {next_carton}
                                         </Typography>
+                                        {tote_type === "MONO" && 
+                                            <TextField id="scan_carton_id" label="Carton ID" variant="outlined" />                                        
+                                        }
                                     </div>
                                     
-                                    {tote_type === "MONO" && 
-                                        <TextField id="scan_carton_id" label="Carton ID" variant="outlined" />                                        
-                                    }
                                 </CardContent>
                             </Grid>
                         </Grid>

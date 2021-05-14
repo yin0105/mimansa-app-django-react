@@ -51,6 +51,8 @@ const IDDetailScreen = () => {
             setSKU(scanInfo.distinct_skus);
             setCartons(scanInfo.carton);
             setClassification(scanInfo.classification);
+
+            console.log("scanInfo = ", scanInfo);
         }
         if (scanInfo !== null && scanInfo.skuid !== undefined) {
             var newInfo = {

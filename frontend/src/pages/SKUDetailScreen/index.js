@@ -59,7 +59,7 @@ const SKUDetailScreen = () => {
     const handleKeyUp = e => {
         if (e.keyCode === 13) {
             if (sku_brcd_list.some(item => sku_brcd === item)) {
-                if (scannedSKU < sku_brcd_list.length) {
+                if (scannedSKU < qty) {
                     setScannedSKU(scannedSKU + 1);
                 }
             } else {
@@ -152,7 +152,7 @@ const SKUDetailScreen = () => {
                                             <div className="w-full text-center py-2">
                                                 <Typography style={{ paddingRight: "20px" }}>
                                                     QTY: {qty} Unit{qty > 0 && "s"} {
-                                                        scannedSKU > 0 && ("Scanned : " + scannedSKU + " Pending : " + (qty - scannedSKU))
+                                                        scannedSKU > 0 && ("(Scanned : " + scannedSKU + ", Pending : " + (qty - scannedSKU) + ")")
                                                     }
                                                 </Typography>                                       
                                             </div>

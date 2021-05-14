@@ -111,6 +111,11 @@ const SKUDetailScreen = () => {
                                         {tote_type === "MONO" && 
                                             <TextField id="scan_carton_id" label="Carton ID" variant="outlined" className="mx-auto" />                                        
                                         }
+                                        {tote_type === "MULTI" && 
+                                            <Typography style={{ paddingRight: "20px" }}>
+                                                SKU: {sku}
+                                            </Typography>                                       
+                                        }
                                     </Box>
                                     
                                 </CardContent>

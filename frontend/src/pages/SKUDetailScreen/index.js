@@ -14,6 +14,8 @@ const SKUDetailScreen = () => {
 
     let history = useHistory();
 
+    const [alert, setAlert] = useState(false);
+    const [error, setError] = useState("");
     const [skuid, setSKUId] = useState("");
     const [userid, setUserId] = useState("");
     const [lpnid, setLPNId] = useState("");

@@ -66,9 +66,9 @@ const SKUDetailScreen = () => {
                             titleTypographyProps={{ variant: 'h4' }}
                             style={{ textAlign: "center" }}
                         />
-                        <Grid container spacing={3}>
-                            <Grid item lg={6}>
-                                <CardContent className="mx-3">
+                        <Grid container spacing={0}>
+                            <Grid item lg={5}>
+                                <CardContent>
                                     <div>
                                         <div className="w-full text-center py-2">
                                             <Typography style={{ paddingRight: "20px" }}>
@@ -91,11 +91,15 @@ const SKUDetailScreen = () => {
                                             }
                                         </div>
                                     </div>
+                                </CardContent>
+                            </Grid>
+                            <Grid item lg={1}>
+                                <CardContent alignItems="center"  justify="center">
                                     <div style={{ width: "2px", backgroundColor: "red", height: "250px"}}/>
                                 </CardContent>
                             </Grid>
                             <Grid item lg={6}>
-                                <CardContent className="mx-3" alignItems="center"  justify="center">
+                                <CardContent alignItems="center"  justify="center">
                                     <div className="w-full text-center py-2">
                                         <Typography style={{ paddingRight: "20px" }}>
                                             CARTON: {next_carton}

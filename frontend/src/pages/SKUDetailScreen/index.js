@@ -154,10 +154,15 @@ const SKUDetailScreen = () => {
                     console.log('===== error: ', error.message);
                     setScanCartonFeedback(error.message);
                     setScanCartonFeedbackError(true);
-                    setScanCartonFeedbackQueue(scan_carton_feedback_queue => [...scan_carton_feedback_queue, error.message]);
-                    // setError(error.message);
-                    // setAlert(true);
-                    // ...
+                    let msg_to_add = "";
+                    if (scan_carton === "DAMAGED") {
+                        msg_to_add = "Carton DAMAGED";
+                    } else if (scan_carton === "DISCREPANCY") {
+                        msg_to_add = "Carton DISCREPANCY";
+                    } else if (scan_carton === "REPRINT") {
+                        msg_to_add = "Carton PRINTED";
+                    }
+                    setScanCartonFeedbackQueue(scan_carton_feedback_queue => [...scan_carton_feedback_queue, msg_to_add]);
                 });
         }
     }
@@ -229,23 +234,26 @@ const SKUDetailScreen = () => {
                                         </Typography>                                        
                                     </div>
                                     {tote_type === "MONO" && 
-                                        <Box display="flex" alignItems="center" justifyContent="center" py={2}>
-                                            <TextField id="scan_carton_id" label="Carton ID" variant="outlined" value={scan_carton} className="mx-auto" helperText={scan_carton_feedback} error={scan_carton_feedback_error} onChange={e => inputScanCarton(e)} onKeyUp={handleCartonKeyUp} />
-
-                                            <TableContainer component={Paper}>
-                                                <Table aria-label="error message table">
-                                                    <TableBody>
-                                                    {scan_carton_feedback_queue.map((row) => (
-                                                        <TableRow key={row}>
-                                                            <TableCell component="th" scope="row">
-                                                                {row}
-                                                            </TableCell>
-                                                        </TableRow>
-                                                    ))}
-                                                    </TableBody>
-                                                </Table>
-                                            </TableContainer>
-                                        </Box>
+                                        <>
+                                            <Box display="flex" alignItems="center" justifyContent="center" py={2}>
+                                                <TextField id="scan_carton_id" label="Carton ID" variant="outlined" value={scan_carton} className="mx-auto" helperText={scan_carton_feedback} error={scan_carton_feedback_error} onChange={e => inputScanCarton(e)} onKeyUp={handleCartonKeyUp} />
+                                            </Box>
+                                            <Box display="flex" alignItems="center" justifyContent="center" py={2}>
+                                                <TableContainer component={Paper}>
+                                                    <Table aria-label="error message table">
+                                                        <TableBody>
+                                                        {scan_carton_feedback_queue.map((row) => (
+                                                            <TableRow>
+                                                                <TableCell component="th" scope="row">
+                                                                    {row}
+                                                                </TableCell>
+                                                            </TableRow>
+                                                        ))}
+                                                        </TableBody>
+                                                    </Table>
+                                                </TableContainer>
+                                            </Box>
+                                        </>
                                     }
                                     {tote_type === "MULTI" && 
                                         <>

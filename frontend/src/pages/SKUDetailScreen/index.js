@@ -67,6 +67,7 @@ const SKUDetailScreen = () => {
     const [scan_carton_feedback, setScanCartonFeedback] = useState("");
     const [scan_carton_feedback_error, setScanCartonFeedbackError] = useState(false);
     const [scan_carton_feedback_queue, setScanCartonFeedbackQueue] = useState([]);
+    const [push_url, setPushUrl] = useState("");
 
     const [open, setOpen] = useState(false);
     const [alert_msg, setAlertMsg] = useState("");
@@ -96,16 +97,14 @@ const SKUDetailScreen = () => {
 
     }, [history]);
 
-    const handleClick = () => {
-        setOpen(true);
-    };
-
     const handleClose = (event, reason) => {
         // if (reason === 'clickaway') {
         //   return;
         // }
         setOpen(false);
-        history.push("/iddetail");
+        if (push_url !== "") {
+            history.push(push_url);
+        }
     };
 
     const handleSKUKeyUp = e => {
@@ -115,6 +114,9 @@ const SKUDetailScreen = () => {
                     setScannedSKU(scannedSKU + 1);
                     setSkuBrcd("");
                 }
+            } else if (sku_brcd === "SHORT") {
+                setScannedSKU(qty);
+                setSkuBrcd("");
             } else {
                 setError(`Incorrect Barcode : ${sku_brcd}`)
                 setAlert(true);
@@ -153,10 +155,7 @@ const SKUDetailScreen = () => {
                     if (res) {
                         console.log('==== res.message: ', res.message);
                         setScanCartonFeedback(res.message);
-                        setScanCartonFeedbackError(false);
-                        
-                        setAlertMsg(res.message);
-                        setOpen(true);                        
+                        setScanCartonFeedbackError(false);  
                     }
                 })
                 .catch(function (error) {
@@ -186,9 +185,25 @@ const SKUDetailScreen = () => {
                         console.log('==== res.message: ', res.message);
                         setScanCartonFeedback(res.message);
                         setScanCartonFeedbackError(false);
+                        
+                        if (res.tote_details.next_carton_qty === 0) {
+                            if (res.tote_details.tote_status === 95) {
+                                setPushUrl("/id");
+                            } else {
+                                setPushUrl("/iddetail");
+                            }
+                            setAlertMsg(res.message);
+                            setOpen(true);
+                        } else {
+                            setNextCarton(res.tote_details.next_carton_nbr);
+                            setPushUrl("");
+                            if (res.tote_details.tote_status === 95) {
+                                
+                            } else {
 
-                        setAlertMsg(res.message);
-                        setOpen(true);                        
+                            }
+                        }
+                                                
                     }
                 })
                 .catch(function (error) {

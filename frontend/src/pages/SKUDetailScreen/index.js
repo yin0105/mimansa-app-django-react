@@ -186,7 +186,7 @@ const SKUDetailScreen = () => {
                         setScanCartonFeedback(res.message);
                         setScanCartonFeedbackError(false);
                         
-                        if (res.tote_details.next_carton_qty === 0) {
+                        if (res.next_carton_details.next_carton_qty === 0) {
                             if (res.tote_details.tote_status === 95) {
                                 setPushUrl("/id");
                             } else {
@@ -195,7 +195,7 @@ const SKUDetailScreen = () => {
                             setAlertMsg(res.message);
                             setOpen(true);
                         } else {
-                            setNextCarton(res.tote_details.next_carton_nbr);
+                            setNextCarton(res.next_carton_details.next_carton_nbr);
                             setPushUrl("");
                             if (res.tote_details.tote_status === 95) {
                                 

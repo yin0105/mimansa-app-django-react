@@ -177,7 +177,7 @@ const SKUDetailScreen = () => {
                     setOpen(true);                        
                 });
         } else {
-            apiValidatePackCarton({ whse: scanInfo.whse, carton_nbr: next_carton, tote: lpnid, tote_type: tote_type, login_user_id: userid, sku_id: sku, qty: qty })
+            apiValidatePackCarton({ whse: scanInfo.whse, carton_nbr: sku_brcd, tote: lpnid, tote_type: tote_type, login_user_id: userid, sku_id: sku, qty: qty })
                 .then(res => {
                     console.log('===== res: ', res);
                     setLoading(false);
@@ -322,7 +322,7 @@ const SKUDetailScreen = () => {
                                                     <TextField id="sku_brcd" label="SKU" variant="outlined" value={sku_brcd} className="mx-auto" onChange={e => inputSkuBrcd(e)} onKeyUp={handleSKUKeyUp} />                                        
                                                 }
                                                 {scannedSKU == qty &&
-                                                    <TextField id="scan_carton_id" label="Carton ID" variant="outlined" value={scan_carton} className="mx-auto" onChange={e => inputScanCarton(e)} onKeyUp={handleCartonKeyUp} />                                        
+                                                    <TextField id="scan_carton_id" label="Carton ID" variant="outlined" value={scan_carton} className="mx-auto" helperText={scan_carton_feedback} error={scan_carton_feedback_error} onChange={e => inputScanCarton(e)} onKeyUp={handleCartonKeyUp} />
                                                 }
                                             </Box>
                                         </>

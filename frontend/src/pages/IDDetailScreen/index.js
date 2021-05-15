@@ -61,6 +61,7 @@ const IDDetailScreen = () => {
                 distinct_skus: scanInfo.distinct_skus,
                 carton: scanInfo.carton,
                 whse: scanInfo.whse, 
+                classification: scanInfo.classification,
             };
             sessionStorage.setItem("scanInfo", JSON.stringify(newInfo));
         }

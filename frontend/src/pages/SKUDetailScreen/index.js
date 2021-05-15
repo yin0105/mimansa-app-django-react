@@ -63,7 +63,8 @@ const SKUDetailScreen = () => {
     const [sku_brcd_list, setSkuBrcdList] = useState([]);
     const [scannedSKU, setScannedSKU] = useState(0);
     const [sku_brcd, setSkuBrcd] = useState("");
-    const [scan_carton, setScanCarton] = useState("");
+    const [
+        , setScanCarton] = useState("");
     const [scan_carton_feedback, setScanCartonFeedback] = useState("");
     const [scan_carton_feedback_error, setScanCartonFeedbackError] = useState(false);
     const [scan_carton_feedback_queue, setScanCartonFeedbackQueue] = useState([]);
@@ -177,7 +178,7 @@ const SKUDetailScreen = () => {
                     setOpen(true);                        
                 });
         } else {
-            apiValidatePackCarton({ whse: scanInfo.whse, carton_nbr: sku_brcd, tote: lpnid, tote_type: tote_type, login_user_id: userid, sku_id: sku, qty: qty })
+            apiValidatePackCarton({ whse: scanInfo.whse, carton_nbr: scan_carton, tote: lpnid, tote_type: tote_type, login_user_id: userid, sku_id: sku, qty: qty })
                 .then(res => {
                     console.log('===== res: ', res);
                     setLoading(false);

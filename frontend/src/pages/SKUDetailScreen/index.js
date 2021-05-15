@@ -16,19 +16,19 @@ function Alert(props) {
 
 const StyledTableCell = withStyles((theme) => ({
     head: {
-        backgroundColor: rgb(250, 250, 250),
+        backgroundColor: '#ffffff',
         color: theme.palette.common.white,
     },
     body: {
         fontSize: 14,
-        backgroundColor: rgb(250, 250, 250),
+        backgroundColor: '#ffffff',
     },
   }))(TableCell);
   
 const StyledTableRow = withStyles((theme) => ({
     root: {
         '&:nth-of-type(odd)': {
-        backgroundColor: rgb(200, 200, 200),
+            backgroundColor: '#eeeeee',
         },
     },
 }))(TableRow);

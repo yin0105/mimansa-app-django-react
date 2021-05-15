@@ -1,7 +1,7 @@
 import { jsonQuery, query, getLocalToken, generatePagenationParameters } from "./common";
 
 const toUpper = dict => {
-  dict.map((key) => {
+  return dict.map((key) => {
     if (typeof dict[key] === 'string') {
       return dict[key].toLowerCase();
     } else {

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import WithHeaderLayout from '../../layouts/WithHeaderLayout';
-import { Typography, TextField, Card, CardHeader, CardContent, LinearProgress, Grid, Box } from '@material-ui/core';
+import { Typography, TextField, Card, CardHeader, CardContent, LinearProgress, Grid, Box, Snackbar, makeStyles } from '@material-ui/core';
 // import { Typography, Card, CardHeader, CardContent } from '@material-ui/core';
 
 import logo from '../../images/logo.png';
@@ -9,7 +9,7 @@ import { useHistory } from 'react-router-dom';
 // import Box from '@material-ui/core/Box';
 import { string } from 'prop-types';
 import AlertDialog from '../../components';
-import { apiValidateActionCode } from '../../services/news';
+import { apiValidateActionCode, apiValidatePackCarton } from '../../services/news';
 
 
 const SKUDetailScreen = () => {
@@ -38,6 +38,9 @@ const SKUDetailScreen = () => {
     const [scan_carton, setScanCarton] = useState("");
     const [scan_carton_feedback, setScanCartonFeedback] = useState("");
     const [scan_carton_feedback_error, setScanCartonFeedbackError] = useState(false);
+
+    const [open, setOpen] = useState(false);
+    const [alert_msg, setAlertMsg] = useState("");
     
     let pre_scannedSKU = 0
 
@@ -63,6 +66,18 @@ const SKUDetailScreen = () => {
         }
 
     }, [history]);
+
+    const handleClick = () => {
+        setOpen(true);
+    };
+
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+    
+        setOpen(false);
+    };
 
     const handleSKUKeyUp = e => {
         if (e.keyCode === 13) {
@@ -98,7 +113,7 @@ const SKUDetailScreen = () => {
     }
 
     const validateSKUBrcd = () => {
-        if (scan_carton === "DAMAGED" || scan_carton === "DISCREPANCY") {
+        if (scan_carton === "DAMAGED" || scan_carton === "DISCREPANCY" || scan_carton === "REPRINT") {
             setLoading(true);
 
             var scanInfo = JSON.parse(sessionStorage.getItem("scanInfo"));
@@ -109,6 +124,11 @@ const SKUDetailScreen = () => {
                     setLoading(false);
                     if (res) {
                         console.log('==== res.message: ', res.message);
+                        setScanCartonFeedback(res.message);
+                        setScanCartonFeedbackError(false);
+
+                        setAlertMsg(res.message);
+                        setOpen(true);
                         
                         // var scanInfo = JSON.parse(sessionStorage.getItem("scanInfo"));
                         // var newObj = Object.assign({}, scanInfo, { skuid: skuid, image: res.sku_image_url, desc: res.sku_desc, dsp_sku: res.dsp_sku, next_carton: res.next_carton_nbr, qty: res.next_carton_qty, sku_brcd_list: res.sku_brcd_list });
@@ -230,6 +250,11 @@ const SKUDetailScreen = () => {
                         </Grid>
                     </Card>
                     <AlertDialog item="SKU Detail" error={error} open={alert} handleClose={onClose} />
+                    <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+                        <Alert onClose={handleClose} severity="success">
+                            {alert_msg}
+                        </Alert>
+                    </Snackbar>
                 </div>
             </div>
         </WithHeaderLayout>

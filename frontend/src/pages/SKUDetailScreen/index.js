@@ -227,6 +227,7 @@ const SKUDetailScreen = () => {
                     setScanCartonFeedbackError(true);
                 });
         } else {
+            setLoading(false);
             console.log(scan_carton, " : ", next_carton);
             setAlertMsg("Invalid Carton");
             setSeverity("warning");

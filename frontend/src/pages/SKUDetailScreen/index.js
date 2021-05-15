@@ -198,7 +198,8 @@ const SKUDetailScreen = () => {
                             setPushUrl("");
                             setScanCarton("");
                             setQty(res.next_carton_details.next_carton_qty);
-                            scannedSKU(0);
+                            setScannedSKU(0);
+                            
                             
                             if (res.tote_details.tote_status === 95) {
                                 setPushUrl("/id");

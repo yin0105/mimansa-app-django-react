@@ -71,7 +71,7 @@ const SKUDetailScreen = () => {
 
     const [open, setOpen] = useState(false);
     const [alert_msg, setAlertMsg] = useState("");
-    const [serverity, setServerity] = userState("success");
+    const [severity, setSeverity] = useState("success");
     
     let pre_scannedSKU = 0
 
@@ -194,7 +194,7 @@ const SKUDetailScreen = () => {
                                 setPushUrl("/iddetail");
                             }
                             setAlertMsg(res.message);
-                            setServerity("success");
+                            setSeverity("success");
                             setOpen(true);
                         } else {
                             setNextCarton(res.next_carton_details.next_carton_nbr);
@@ -220,7 +220,7 @@ const SKUDetailScreen = () => {
                 });
         } else {
             setAlertMsg("Invalid Carton");
-            setServerity("warning");
+            setSeverity("warning");
             setOpen(true);
         }
     }

@@ -109,6 +109,8 @@ const SKUDetailScreen = () => {
 
     const handleSKUKeyUp = e => {
         if (e.keyCode === 13) {
+            console.log("sku_brcd_list = ", sku_brcd_list);
+            console.log("sku_brcd = ", sku_brcd);
             if (sku_brcd_list.some(item => sku_brcd === item)) {
                 if (scannedSKU < qty) {
                     setScannedSKU(scannedSKU + 1);

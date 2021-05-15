@@ -37,7 +37,7 @@ const SKUDetailScreen = () => {
     const [sku_brcd, setSkuBrcd] = useState("");
     const [scan_carton, setScanCarton] = useState("");
     const [scan_carton_feedback, setScanCartonFeedback] = useState("");
-    const [scan_carton_feedback_error, setScanCartonFeedbackError] = useState(False);
+    const [scan_carton_feedback_error, setScanCartonFeedbackError] = useState(false);
     
     let pre_scannedSKU = 0
 

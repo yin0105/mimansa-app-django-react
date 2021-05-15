@@ -61,7 +61,7 @@ const IDScreen = () => {
                 if (res) {
                     var scanInfo = JSON.parse(sessionStorage.getItem("scanInfo"));
                     console.log(" == whse = ", scanInfo.whse)
-                    var newObj = Object.assign({}, scanInfo, { lpnid: lpnid, distinct_skus: res.distinct_skus, carton: res.distinct_carton, classification: res.distinct_classifications, tote_type: res.tote_type });
+                    var newObj = Object.assign({}, scanInfo, { lpnid: lpnid, distinct_skus: res.tote_details.distinct_skus, carton: res.tote_details.distinct_carton, classification: res.tote_details.distinct_classifications, tote_type: res.tote_details.tote_type });
                     sessionStorage.setItem("scanInfo", JSON.stringify(newObj));
                     history.push('/iddetail');
                 }

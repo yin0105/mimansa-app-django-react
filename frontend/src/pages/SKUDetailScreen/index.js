@@ -347,7 +347,7 @@ const SKUDetailScreen = () => {
                         </Grid>
                     </Card>
                     <AlertDialog item="SKU Detail" error={error} open={alert} handleClose={onClose} />
-                    <Snackbar open={open} autoHideDuration={6000} anchorOrigin={{ vertical: 'center', horizontal: 'center' }} onClose={handleClose}>
+                    <Snackbar open={open} autoHideDuration={6000} anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }} onClose={handleClose}>
                         <Alert onClose={handleClose} severity={severity}>
                             {alert_msg}
                         </Alert>

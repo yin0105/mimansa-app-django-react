@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import WithHeaderLayout from '../../layouts/WithHeaderLayout';
-import { Typography, TextField, Card, CardHeader, CardContent, LinearProgress, Grid, Box, Snackbar, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, withStyles, makeStyles } from '@material-ui/core';
+import { Typography, TextField, Card, CardHeader, CardContent, LinearProgress, Grid, Box, Snackbar, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@material-ui/core';
+import { withStyles, makeStyles } from '@material-ui/core/styles';
 import logo from '../../images/logo.png';
 import { useHistory } from 'react-router-dom';
 import { string } from 'prop-types';

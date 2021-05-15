@@ -16,18 +16,19 @@ function Alert(props) {
 
 const StyledTableCell = withStyles((theme) => ({
     head: {
-        backgroundColor: theme.palette.common.black,
+        backgroundColor: rgb(250, 250, 250),
         color: theme.palette.common.white,
     },
     body: {
         fontSize: 14,
+        backgroundColor: rgb(250, 250, 250),
     },
   }))(TableCell);
   
 const StyledTableRow = withStyles((theme) => ({
     root: {
         '&:nth-of-type(odd)': {
-        backgroundColor: theme.palette.action.hover,
+        backgroundColor: rgb(200, 200, 200),
         },
     },
 }))(TableRow);
@@ -262,7 +263,7 @@ const SKUDetailScreen = () => {
                                                         <TableBody>
                                                         {scan_carton_feedback_queue.map((row, i) => (
                                                             <StyledTableRow key={i}>
-                                                                <StyledTableCell component="th" scope="row">{row}</StyledTableCell>
+                                                                <StyledTableCell component="th" scope="row" align="center">{row}</StyledTableCell>
                                                             </StyledTableRow>
                                                         ))}
                                                         </TableBody>

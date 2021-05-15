@@ -1,12 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import WithHeaderLayout from '../../layouts/WithHeaderLayout';
-import { Typography, TextField, Card, CardHeader, CardContent, LinearProgress, Grid, Box, Snackbar, makeStyles } from '@material-ui/core';
-// import { Typography, Card, CardHeader, CardContent } from '@material-ui/core';
-
+import { Typography, TextField, Card, CardHeader, CardContent, LinearProgress, Grid, Box, Snackbar, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@material-ui/core';
 import logo from '../../images/logo.png';
 import { useHistory } from 'react-router-dom';
-// import Grid from '@material-ui/core/Grid';
-// import Box from '@material-ui/core/Box';
 import { string } from 'prop-types';
 import AlertDialog from '../../components';
 import { apiValidateActionCode, apiValidatePackCarton } from '../../services/news';
@@ -17,14 +13,14 @@ function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-      width: '100%',
-      '& > * + *': {
-        marginTop: theme.spacing(2),
-      },
-    },
-}));
+// const useStyles = makeStyles((theme) => ({
+//     root: {
+//       width: '100%',
+//       '& > * + *': {
+//         marginTop: theme.spacing(2),
+//       },
+//     },
+// }));
 
 
 const SKUDetailScreen = () => {
@@ -35,7 +31,7 @@ const SKUDetailScreen = () => {
 
     const [alert, setAlert] = useState(false);
     const [error, setError] = useState("");
-    const [skuid, setSKUId] = useState("");
+    // const [skuid, setSKUId] = useState("");
     const [userid, setUserId] = useState("");
     const [lpnid, setLPNId] = useState("");
     const [tote_type, setToteType] = useState("");
@@ -44,7 +40,7 @@ const SKUDetailScreen = () => {
 
     const [desc, setDesc] = useState("");
     const [sku, setSKU] = useState("");
-    const [dspsku, setDspSku] = useState("");
+    // const [dspsku, setDspSku] = useState("");
     const [next_carton, setNextCarton] = useState("");
     const [qty, setQty] = useState(0);
     const [sku_brcd_list, setSkuBrcdList] = useState([]);
@@ -53,6 +49,7 @@ const SKUDetailScreen = () => {
     const [scan_carton, setScanCarton] = useState("");
     const [scan_carton_feedback, setScanCartonFeedback] = useState("");
     const [scan_carton_feedback_error, setScanCartonFeedbackError] = useState(false);
+    const [scan_carton_feedback_queue, setScanCartonFeedbackQueue] = useState([]);
 
     const [open, setOpen] = useState(false);
     const [alert_msg, setAlertMsg] = useState("");
@@ -64,7 +61,7 @@ const SKUDetailScreen = () => {
         if (scanInfo === null || scanInfo.skuid === undefined) {
             history.push("/iddetail");
         } else {
-            setSKUId(scanInfo.skuid);
+            // setSKUId(scanInfo.skuid);
             setLPNId(scanInfo.lpnid);
             setToteType(scanInfo.tote_type);
             setUserId(scanInfo.userid);
@@ -76,7 +73,7 @@ const SKUDetailScreen = () => {
             setNextCarton(scanInfo.next_carton);
             setQty(scanInfo.qty);
             setSkuBrcdList(scanInfo.sku_brcd_list);
-            pre_scannedSKU = 0
+            // pre_scannedSKU = 0
             console.log("sku_brcd_list = ", scanInfo.sku_brcd_list)
         }
 
@@ -157,6 +154,7 @@ const SKUDetailScreen = () => {
                     console.log('===== error: ', error.message);
                     setScanCartonFeedback(error.message);
                     setScanCartonFeedbackError(true);
+                    setScanCartonFeedbackQueue(scan_carton_feedback_queue => [...scan_carton_feedback_queue, error.message]);
                     // setError(error.message);
                     // setAlert(true);
                     // ...
@@ -233,6 +231,20 @@ const SKUDetailScreen = () => {
                                     {tote_type === "MONO" && 
                                         <Box display="flex" alignItems="center" justifyContent="center" py={2}>
                                             <TextField id="scan_carton_id" label="Carton ID" variant="outlined" value={scan_carton} className="mx-auto" helperText={scan_carton_feedback} error={scan_carton_feedback_error} onChange={e => inputScanCarton(e)} onKeyUp={handleCartonKeyUp} />
+
+                                            <TableContainer component={Paper}>
+                                                <Table aria-label="error message table">
+                                                    <TableBody>
+                                                    {scan_carton_feedback_queue.map((row) => (
+                                                        <TableRow key={row}>
+                                                            <TableCell component="th" scope="row">
+                                                                {row}
+                                                            </TableCell>
+                                                        </TableRow>
+                                                    ))}
+                                                    </TableBody>
+                                                </Table>
+                                            </TableContainer>
                                         </Box>
                                     }
                                     {tote_type === "MULTI" && 

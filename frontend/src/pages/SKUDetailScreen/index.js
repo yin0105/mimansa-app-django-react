@@ -178,7 +178,7 @@ const SKUDetailScreen = () => {
                     setOpen(true);                        
                 });
         } else {
-            apiValidatePackCarton({ whse: scanInfo.whse, carton_nbr: next_carton, tote: lpnid, tote_type: tote_type, login_user_id: userid, sku_id: scanInfo.skuid, qty: qty })
+            apiValidatePackCarton({ whse: scanInfo.whse, carton_nbr: next_carton, tote: lpnid, tote_type: tote_type, login_user_id: userid, sku_id: sku, qty: qty })
                 .then(res => {
                     console.log('===== res: ', res);
                     setLoading(false);

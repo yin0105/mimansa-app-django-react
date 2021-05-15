@@ -1,11 +1,21 @@
 import { jsonQuery, query, getLocalToken, generatePagenationParameters } from "./common";
 
+const toUpper = dict => {
+  dict.map((key) => {
+    if (typeof dict[key] === 'string') {
+      return dict[key].toLowerCase();
+    } else {
+      return dict[key];
+    }
+    
+  })
+}
+
 export const getMemberInfoFromLocal = () => {
   const token = getLocalToken();
   const userInfo = token ? token.member : null;
   return userInfo;
 }
-
 
 export async function apiUpdateNews(id, data) {
   return await jsonQuery(`/news/${id}/`, 'PUT', data);
@@ -23,20 +33,20 @@ export async function apiGetLessonById(id) {
 
 
 export async function apiValidateUserId(searchParams) {
-  return await query(`/user`, {searchParams});
+  return await query(`/user`, {toUpper(searchParams)});
 }
 export async function apiValidateLocation(searchParams) {
-  return await query(`/location`, {searchParams});
+  return await query(`/location`, {toUpper(searchParams)});
 }
 export async function apiValidateLPNId(searchParams) {
-  return await query(`/tote`, {searchParams});
+  return await query(`/tote`, {toUpper(searchParams)});
 }
 export async function apiValidateSKU(searchParams) {
-  return await query(`/sku`, {searchParams});
+  return await query(`/sku`, {toUpper(searchParams)});
 }
 export async function apiValidateActionCode(searchParams) {
-  return await query(`/action_code`, {searchParams: searchParams, method: 'POST'});
+  return await query(`/action_code`, {searchParams: toUpper(searchParams), method: 'POST'});
 }
 export async function apiValidatePackCarton(searchParams) {
-  return await query(`/pack_carton`, {searchParams: searchParams, method: 'POST'});
+  return await query(`/pack_carton`, {searchParams: toUpper(searchParams), method: 'POST'});
 }

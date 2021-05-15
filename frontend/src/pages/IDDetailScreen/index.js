@@ -112,7 +112,7 @@ const IDDetailScreen = () => {
                         <span>{userid} @ {location}</span>
                     }
                 </div>
-                <div className="mx-auto" style={{ maxWidth: "1000px" }}>
+                <div className="mx-auto" style={{ maxWidth: "600px" }}>
                     <div className="w-full text-center">
                         <Typography variant="h3" color="primary">
                             Pack LPN

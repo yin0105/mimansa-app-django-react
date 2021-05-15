@@ -171,10 +171,7 @@ const SKUDetailScreen = () => {
                     } else if (scan_carton === "REPRINT") {
                         msg_to_add = "Carton PRINTED";
                     }
-                    setScanCartonFeedbackQueue(scan_carton_feedback_queue => [...scan_carton_feedback_queue, msg_to_add]);
-
-                    setAlertMsg(error.message);
-                    setOpen(true);                        
+                    setScanCartonFeedbackQueue(scan_carton_feedback_queue => [...scan_carton_feedback_queue, msg_to_add]);     
                 });
         } else {
             apiValidatePackCarton({ whse: scanInfo.whse, carton_nbr: scan_carton, tote: lpnid, tote_type: tote_type, login_user_id: userid, sku_id: sku, qty: qty })
@@ -197,8 +194,12 @@ const SKUDetailScreen = () => {
                         } else {
                             setNextCarton(res.next_carton_details.next_carton_nbr);
                             setPushUrl("");
+                            setScanCarton("");
+                            setQty(res.next_carton_details.next_carton_qty);
+                            scannedSKU(0);
+                            
                             if (res.tote_details.tote_status === 95) {
-                                
+                                setPushUrl("/id");
                             } else {
 
                             }

@@ -1,19 +1,22 @@
 import React, { useState, useEffect } from 'react'
 import WithHeaderLayout from '../../layouts/WithHeaderLayout';
-import { Typography, Card, CardHeader, CardContent } from '@material-ui/core';
+import { Typography, TextField, Card, CardHeader, CardContent, LinearProgress, Grid, Box } from '@material-ui/core';
+// import { Typography, Card, CardHeader, CardContent } from '@material-ui/core';
 
 import logo from '../../images/logo.png';
 import { useHistory } from 'react-router-dom';
-import Grid from '@material-ui/core/Grid';
-import TextField from '@material-ui/core/TextField';
-import Box from '@material-ui/core/Box';
+// import Grid from '@material-ui/core/Grid';
+// import Box from '@material-ui/core/Box';
 import { string } from 'prop-types';
 import AlertDialog from '../../components';
+import { apiValidateActionCode } from '../../services/news';
 
 
 const SKUDetailScreen = () => {
 
     let history = useHistory();
+
+    const [loading, setLoading] = useState(false);
 
     const [alert, setAlert] = useState(false);
     const [error, setError] = useState("");
@@ -74,15 +77,7 @@ const SKUDetailScreen = () => {
 
     const handleCartonKeyUp = e => {
         if (e.keyCode === 13) {
-            // if (sku_brcd_list.some(item => sku_brcd === item)) {
-            //     if (scannedSKU < qty) {
-            //         setScannedSKU(scannedSKU + 1);
-            //     }
-            // } else {
-            //     setError("Incorrect Barcode : " + sku_brcd)
-            //     setAlert(true);
-            // }
-            // setSkuBrcd("")
+            validateSKUBrcd();
         }
     }
 
@@ -91,7 +86,7 @@ const SKUDetailScreen = () => {
     }
 
     const inputScanCarton = e => {
-        // setSkuBrcd(e.target.value)
+        setScanCarton(e.target.value)
     }
 
     const onClose = () => {
@@ -99,8 +94,40 @@ const SKUDetailScreen = () => {
         setAlert(false);
     }
 
+    const validateSKUBrcd = () => {
+        if (scan_carton === "DAMAGED" || scan_carton === "DISCREPANCY") {
+            setLoading(true);
+
+            var scanInfo = JSON.parse(sessionStorage.getItem("scanInfo"));
+
+            apiValidateActionCode({ whse: scanInfo.whse, carton_nbr: next_carton_nbr, action_code: scan_carton, login_user_id: userid })
+                .then(res => {
+                    console.log('===== res: ', res);
+                    setLoading(false);
+                    if (res) {
+                        console.log('==== res.message: ', res.message);
+                        // var scanInfo = JSON.parse(sessionStorage.getItem("scanInfo"));
+                        // var newObj = Object.assign({}, scanInfo, { skuid: skuid, image: res.sku_image_url, desc: res.sku_desc, dsp_sku: res.dsp_sku, next_carton: res.next_carton_nbr, qty: res.next_carton_qty, sku_brcd_list: res.sku_brcd_list });
+                        // sessionStorage.setItem("scanInfo", JSON.stringify(newObj));
+                        // history.push('/sku');
+                    }
+                })
+                .catch(function (error) {
+                    // Handle Errors here.
+                    setLoading(false);
+                    console.log('===== error: ', error.message);
+                    setError(error.message);
+                    setAlert(true);
+                    // ...
+                });
+        }
+    }
+
     return (
         <WithHeaderLayout title="ID Screen">
+            {loading &&
+                <LinearProgress color="secondary" />
+            }
             <div className="p-8">
 
                 <div className="w-full text-right">

@@ -34,3 +34,6 @@ export async function apiValidateLPNId(searchParams) {
 export async function apiValidateSKU(searchParams) {
   return await query(`/sku`, {searchParams});
 }
+export async function apiValidateActionCode(searchParams) {
+  return await query(`/action_code`, {searchParams});
+}

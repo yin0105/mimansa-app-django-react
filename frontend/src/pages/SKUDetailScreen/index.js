@@ -71,6 +71,7 @@ const SKUDetailScreen = () => {
 
     const [open, setOpen] = useState(false);
     const [alert_msg, setAlertMsg] = useState("");
+    const [serverity, setServerity] = userState("success");
     
     let pre_scannedSKU = 0
 
@@ -175,7 +176,8 @@ const SKUDetailScreen = () => {
                     }
                     setScanCartonFeedbackQueue(scan_carton_feedback_queue => [...scan_carton_feedback_queue, msg_to_add]);     
                 });
-        } else {
+                            
+        } else if (scan_carton == next_carton) {
             apiValidatePackCarton({ whse: scanInfo.whse, carton_nbr: scan_carton, tote: lpnid, tote_type: tote_type, login_user_id: userid, sku_id: sku, qty: qty })
                 .then(res => {
                     console.log('===== res: ', res);
@@ -192,6 +194,7 @@ const SKUDetailScreen = () => {
                                 setPushUrl("/iddetail");
                             }
                             setAlertMsg(res.message);
+                            setServerity("success");
                             setOpen(true);
                         } else {
                             setNextCarton(res.next_carton_details.next_carton_nbr);
@@ -199,7 +202,6 @@ const SKUDetailScreen = () => {
                             setScanCarton("");
                             setQty(res.next_carton_details.next_carton_qty);
                             setScannedSKU(0);
-                            
                             
                             if (res.tote_details.tote_status === 95) {
                                 setPushUrl("/id");
@@ -216,6 +218,10 @@ const SKUDetailScreen = () => {
                     setScanCartonFeedback(error.message);
                     setScanCartonFeedbackError(true);
                 });
+        } else {
+            setAlertMsg("Invalid Carton");
+            setServerity("warning");
+            setOpen(true);
         }
     }
 
@@ -338,7 +344,7 @@ const SKUDetailScreen = () => {
                     </Card>
                     <AlertDialog item="SKU Detail" error={error} open={alert} handleClose={onClose} />
                     <Snackbar open={open} autoHideDuration={6000} anchorOrigin={{ vertical: 'top', horizontal: 'right' }} onClose={handleClose}>
-                        <Alert onClose={handleClose} severity="success">
+                        <Alert onClose={handleClose} severity={severity}>
                             {alert_msg}
                         </Alert>
                     </Snackbar>

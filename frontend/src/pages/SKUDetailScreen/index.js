@@ -100,7 +100,7 @@ const SKUDetailScreen = () => {
 
             var scanInfo = JSON.parse(sessionStorage.getItem("scanInfo"));
 
-            apiValidateActionCode({ whse: scanInfo.whse, carton_nbr: next_carton_nbr, action_code: scan_carton, login_user_id: userid })
+            apiValidateActionCode({ whse: scanInfo.whse, carton_nbr: next_carton, action_code: scan_carton, login_user_id: userid })
                 .then(res => {
                     console.log('===== res: ', res);
                     setLoading(false);

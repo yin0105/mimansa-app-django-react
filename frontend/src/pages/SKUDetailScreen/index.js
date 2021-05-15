@@ -32,6 +32,12 @@ const StyledTableRow = withStyles((theme) => ({
     },
 }))(TableRow);
 
+const useStyles = makeStyles({
+    table: {
+        maxWidth: 300,
+    },
+});
+
 
 const SKUDetailScreen = () => {
 
@@ -177,6 +183,8 @@ const SKUDetailScreen = () => {
         }
     }
 
+    const classes = useStyles();
+
     return (
         <WithHeaderLayout title="ID Screen">
             {loading &&
@@ -250,7 +258,7 @@ const SKUDetailScreen = () => {
                                             </Box>
                                             <Box display="flex" alignItems="center" justifyContent="center" py={2}>
                                                 <TableContainer component={Paper}>
-                                                    <Table aria-label="error message table">
+                                                    <Table className={classes.table} aria-label="error message table">
                                                         <TableBody>
                                                         {scan_carton_feedback_queue.map((row, i) => (
                                                             <StyledTableRow key={i}>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import WithHeaderLayout from '../../layouts/WithHeaderLayout';
-import { Typography, TextField, Card, CardHeader, CardContent, LinearProgress, Grid, Box, Snackbar, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@material-ui/core';
+import { Typography, TextField, Card, CardHeader, CardContent, LinearProgress, Grid, Box, Snackbar, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, withStyles, makeStyles } from '@material-ui/core';
 import logo from '../../images/logo.png';
 import { useHistory } from 'react-router-dom';
 import { string } from 'prop-types';
@@ -13,14 +13,23 @@ function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
-// const useStyles = makeStyles((theme) => ({
-//     root: {
-//       width: '100%',
-//       '& > * + *': {
-//         marginTop: theme.spacing(2),
-//       },
-//     },
-// }));
+const StyledTableCell = withStyles((theme) => ({
+    head: {
+        backgroundColor: theme.palette.common.black,
+        color: theme.palette.common.white,
+    },
+    body: {
+        fontSize: 14,
+    },
+  }))(TableCell);
+  
+const StyledTableRow = withStyles((theme) => ({
+    root: {
+        '&:nth-of-type(odd)': {
+        backgroundColor: theme.palette.action.hover,
+        },
+    },
+}))(TableRow);
 
 
 const SKUDetailScreen = () => {
@@ -242,12 +251,10 @@ const SKUDetailScreen = () => {
                                                 <TableContainer component={Paper}>
                                                     <Table aria-label="error message table">
                                                         <TableBody>
-                                                        {scan_carton_feedback_queue.map((row) => (
-                                                            <TableRow>
-                                                                <TableCell component="th" scope="row">
-                                                                    {row}
-                                                                </TableCell>
-                                                            </TableRow>
+                                                        {scan_carton_feedback_queue.map((row, i) => (
+                                                            <StyledTableRow key={i}>
+                                                                <StyledTableCell component="th" scope="row">{row}</StyledTableCell>
+                                                            </StyledTableRow>
                                                         ))}
                                                         </TableBody>
                                                     </Table>

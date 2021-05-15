@@ -189,6 +189,11 @@ const SKUDetailScreen = () => {
                         console.log('==== res.message: ', res.message);
                         setScanCartonFeedback(res.message);
                         setScanCartonFeedbackError(false);
+                        scanInfo.distinct_skus = res.tote_details.distinct_skus;
+                        scanInfo.carton = res.tote_details.distinct_carton;
+                        scanInfo.classification = res.tote_details.distinct_classifications;
+
+                        sessionStorage.setItem("scanInfo", JSON.stringify(scanInfo));
                         
                         if (res.next_carton_details.next_carton_qty === 0) {
                             if (res.tote_details.tote_status === 95) {

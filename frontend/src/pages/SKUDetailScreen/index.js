@@ -35,7 +35,7 @@ const StyledTableRow = withStyles((theme) => ({
 
 const useStyles = makeStyles({
     table: {
-        backgroundColor: '#eeeeee',
+        border: '1px solid #eeeeee',
     },
 });
 

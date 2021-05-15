@@ -259,7 +259,7 @@ const SKUDetailScreen = () => {
                                             </Box>
                                             <Box display="flex" alignItems="center" justifyContent="center" py={2}>
                                                 <TableContainer component={Paper}>
-                                                    <Table className={classes.table} aria-label="error message table">
+                                                    <Table className={classes.table} aria-label="error message table" style={{ backgroundColor: "#eeeeee" }}>
                                                         <TableBody>
                                                         {scan_carton_feedback_queue.map((row, i) => (
                                                             <StyledTableRow key={i}>

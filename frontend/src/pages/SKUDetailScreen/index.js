@@ -35,7 +35,7 @@ const StyledTableRow = withStyles((theme) => ({
 
 const useStyles = makeStyles({
     table: {
-        border: '1px solid #eeeeee',
+        border: '1px solid #cccccc',
     },
 });
 
@@ -142,11 +142,10 @@ const SKUDetailScreen = () => {
     }
 
     const validateSKUBrcd = () => {
+        setLoading(true);
+        var scanInfo = JSON.parse(sessionStorage.getItem("scanInfo"));
+
         if (scan_carton === "DAMAGED" || scan_carton === "DISCREPANCY" || scan_carton === "REPRINT") {
-            setLoading(true);
-
-            var scanInfo = JSON.parse(sessionStorage.getItem("scanInfo"));
-
             apiValidateActionCode({ whse: scanInfo.whse, carton_nbr: next_carton, action_code: scan_carton, login_user_id: userid })
                 .then(res => {
                     console.log('===== res: ', res);
@@ -155,18 +154,11 @@ const SKUDetailScreen = () => {
                         console.log('==== res.message: ', res.message);
                         setScanCartonFeedback(res.message);
                         setScanCartonFeedbackError(false);
-
                         setAlertMsg(res.message);
-                        setOpen(true);
-                        
-                        // var scanInfo = JSON.parse(sessionStorage.getItem("scanInfo"));
-                        // var newObj = Object.assign({}, scanInfo, { skuid: skuid, image: res.sku_image_url, desc: res.sku_desc, dsp_sku: res.dsp_sku, next_carton: res.next_carton_nbr, qty: res.next_carton_qty, sku_brcd_list: res.sku_brcd_list });
-                        // sessionStorage.setItem("scanInfo", JSON.stringify(newObj));
-                        // history.push('/sku');
+                        setOpen(true);                        
                     }
                 })
                 .catch(function (error) {
-                    // Handle Errors here.
                     setLoading(false);
                     console.log('===== error: ', error.message);
                     setScanCartonFeedback(error.message);
@@ -180,6 +172,26 @@ const SKUDetailScreen = () => {
                         msg_to_add = "Carton PRINTED";
                     }
                     setScanCartonFeedbackQueue(scan_carton_feedback_queue => [...scan_carton_feedback_queue, msg_to_add]);
+                });
+        } else {
+            apiValidatePackCarton({ whse: scanInfo.whse, carton_nbr: next_carton, tote: lpnid, tote_type: tote_type, login_user_id: userid, sku_id: scanInfo.skuid, qty: qty })
+                .then(res => {
+                    console.log('===== res: ', res);
+                    setLoading(false);
+                    if (res) {
+                        console.log('==== res.message: ', res.message);
+                        setScanCartonFeedback(res.message);
+                        setScanCartonFeedbackError(false);
+
+                        setAlertMsg(res.message);
+                        setOpen(true);                        
+                    }
+                })
+                .catch(function (error) {
+                    setLoading(false);
+                    console.log('===== error: ', error.message);
+                    setScanCartonFeedback(error.message);
+                    setScanCartonFeedbackError(true);
                 });
         }
     }

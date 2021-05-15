@@ -36,7 +36,8 @@ const SKUDetailScreen = () => {
     const [scannedSKU, setScannedSKU] = useState(0);
     const [sku_brcd, setSkuBrcd] = useState("");
     const [scan_carton, setScanCarton] = useState("");
-    const [scan_carton_error, setScanCartonError] = useState("");
+    const [scan_carton_feedback, setScanCartonFeedback] = useState("");
+    const [scan_carton_feedback_error, setScanCartonFeedbackError] = useState(False);
     
     let pre_scannedSKU = 0
 
@@ -119,7 +120,8 @@ const SKUDetailScreen = () => {
                     // Handle Errors here.
                     setLoading(false);
                     console.log('===== error: ', error.message);
-                    setScanCartonError(error.message)
+                    setScanCartonFeedback(error.message);
+                    setScanCartonFeedbackError(true);
                     // setError(error.message);
                     // setAlert(true);
                     // ...
@@ -195,7 +197,7 @@ const SKUDetailScreen = () => {
                                     </div>
                                     {tote_type === "MONO" && 
                                         <Box display="flex" alignItems="center" justifyContent="center" py={2}>
-                                            <TextField id="scan_carton_id" label="Carton ID" variant="outlined" value={scan_carton} className="mx-auto" helperText={scan_carton_error} onChange={e => inputScanCarton(e)} onKeyUp={handleCartonKeyUp} />
+                                            <TextField id="scan_carton_id" label="Carton ID" variant="outlined" value={scan_carton} className="mx-auto" helperText={scan_carton_feedback} error={scan_carton_feedback_error} onChange={e => inputScanCarton(e)} onKeyUp={handleCartonKeyUp} />
                                         </Box>
                                     }
                                     {tote_type === "MULTI" && 

@@ -33,16 +33,16 @@ export async function apiGetLessonById(id) {
 
 
 export async function apiValidateUserId(searchParams) {
-  return await query(`/user`, {toUpper(searchParams)});
+  return await query(`/user`, {searchParams: toUpper(searchParams)});
 }
 export async function apiValidateLocation(searchParams) {
-  return await query(`/location`, {toUpper(searchParams)});
+  return await query(`/location`, {searchParams: toUpper(searchParams)});
 }
 export async function apiValidateLPNId(searchParams) {
-  return await query(`/tote`, {toUpper(searchParams)});
+  return await query(`/tote`, {searchParams: toUpper(searchParams)});
 }
 export async function apiValidateSKU(searchParams) {
-  return await query(`/sku`, {toUpper(searchParams)});
+  return await query(`/sku`, {searchParams: toUpper(searchParams)});
 }
 export async function apiValidateActionCode(searchParams) {
   return await query(`/action_code`, {searchParams: toUpper(searchParams), method: 'POST'});

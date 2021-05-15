@@ -10,6 +10,21 @@ import { useHistory } from 'react-router-dom';
 import { string } from 'prop-types';
 import AlertDialog from '../../components';
 import { apiValidateActionCode, apiValidatePackCarton } from '../../services/news';
+import MuiAlert from '@material-ui/lab/Alert';
+
+
+function Alert(props) {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+      width: '100%',
+      '& > * + *': {
+        marginTop: theme.spacing(2),
+      },
+    },
+}));
 
 
 const SKUDetailScreen = () => {

@@ -36,6 +36,8 @@ const SKUDetailScreen = () => {
     const [scannedSKU, setScannedSKU] = useState(0);
     const [sku_brcd, setSkuBrcd] = useState("");
     const [scan_carton, setScanCarton] = useState("");
+    const [scan_carton_error, setScanCartonError] = useState("");
+    
     let pre_scannedSKU = 0
 
     useEffect(() => {
@@ -69,7 +71,7 @@ const SKUDetailScreen = () => {
                     setSkuBrcd("");
                 }
             } else {
-                setError("Incorrect Barcode : " + sku_brcd)
+                setError(`Incorrect Barcode : ${sku_brcd}`)
                 setAlert(true);
             }            
         }
@@ -106,6 +108,7 @@ const SKUDetailScreen = () => {
                     setLoading(false);
                     if (res) {
                         console.log('==== res.message: ', res.message);
+                        setScanCartonError(res.message)
                         // var scanInfo = JSON.parse(sessionStorage.getItem("scanInfo"));
                         // var newObj = Object.assign({}, scanInfo, { skuid: skuid, image: res.sku_image_url, desc: res.sku_desc, dsp_sku: res.dsp_sku, next_carton: res.next_carton_nbr, qty: res.next_carton_qty, sku_brcd_list: res.sku_brcd_list });
                         // sessionStorage.setItem("scanInfo", JSON.stringify(newObj));
@@ -191,7 +194,7 @@ const SKUDetailScreen = () => {
                                     </div>
                                     {tote_type === "MONO" && 
                                         <Box display="flex" alignItems="center" justifyContent="center" py={2}>
-                                            <TextField id="scan_carton_id" label="Carton ID" variant="outlined" value={scan_carton} className="mx-auto" onChange={e => inputScanCarton(e)} onKeyUp={handleCartonKeyUp} />
+                                            <TextField id="scan_carton_id" label="Carton ID" variant="outlined" value={scan_carton} className="mx-auto" helperText={scan_carton_error} onChange={e => inputScanCarton(e)} onKeyUp={handleCartonKeyUp} />
                                         </Box>
                                     }
                                     {tote_type === "MULTI" && 
@@ -204,7 +207,7 @@ const SKUDetailScreen = () => {
                                             <div className="w-full text-center py-2">
                                                 <Typography style={{ paddingRight: "20px" }}>
                                                     QTY: {qty} Unit{qty > 0 && "s"} {
-                                                        scannedSKU > 0 && ("(Scanned : " + scannedSKU + ", Pending : " + (qty - scannedSKU) + ")")
+                                                        scannedSKU > 0 && (`(Scanned : ${scannedSKU} , Pending : ${(qty - scannedSKU)})`)
                                                     }
                                                 </Typography>                                       
                                             </div>

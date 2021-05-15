@@ -35,5 +35,5 @@ export async function apiValidateSKU(searchParams) {
   return await query(`/sku`, {searchParams});
 }
 export async function apiValidateActionCode(searchParams) {
-  return await query(`/action_code`, {searchParams});
+  return await query(`/action_code`, {searchParams: searchParams, method: 'POST'});
 }

@@ -263,7 +263,7 @@ const SKUDetailScreen = () => {
                                                         <TableBody>
                                                         {scan_carton_feedback_queue.map((row, i) => (
                                                             <StyledTableRow key={i}>
-                                                                <StyledTableCell component="th" scope="row" align="center">{row}</StyledTableCell>
+                                                                <StyledTableCell scope="row" align="center">{row}</StyledTableCell>
                                                             </StyledTableRow>
                                                         ))}
                                                         </TableBody>

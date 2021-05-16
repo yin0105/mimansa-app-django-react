@@ -204,7 +204,7 @@ const SKUDetailScreen = () => {
 
                         sessionStorage.setItem("scanInfo", JSON.stringify(scanInfo));
                         
-                        setScanCartonFeedbackQueue(scan_carton_feedback_queue => [...scan_carton_feedback_queue, ...res.additional_message]);     
+                        setScanCartonFeedbackQueue(scan_carton_feedback_queue => [...scan_carton_feedback_queue, ...res.message]);     
 
                         if (res.next_carton_details.next_carton_qty === 0) {
                             if (res.tote_details.tote_status === 95) {
@@ -322,7 +322,7 @@ const SKUDetailScreen = () => {
                                     </div>
                                     {tote_type === "MONO" && 
                                         <>
-                                            <Box display="flex" alignItems="center" justifyContent="center" py={2}>
+                                            <Box display="flex" alignItems="center" justifyContent="center" py={2} className="w-full">
                                                 <TextField className={classes.textfield} width={340} id="scan_carton_id" label="Carton ID" variant="outlined" value={scan_carton} helperText={scan_carton_feedback} error={scan_carton_feedback_error} onChange={e => inputScanCarton(e)} onKeyUp={handleCartonKeyUp} autoFocus />
                                             </Box>
                                             <Box display="flex" alignItems="center" justifyContent="center" py={2}>
@@ -354,13 +354,13 @@ const SKUDetailScreen = () => {
                                                     }
                                                 </Typography>                                       
                                             </div>
-                                            <Box display="flex" alignItems="center" justifyContent="center" py={2} className="w-full">
+                                            <Box display="flex" alignItems="center" justifyContent="center" py={2}>
                                                 {scannedSKU < qty &&
                                                     <TextField className={classes.textfield} width={340} autoFocus id="sku_brcd" label="SKU" variant="outlined" value={sku_brcd} onChange={e => inputSkuBrcd(e)} onKeyUp={handleSKUKeyUp} />                                        
                                                 }
                                                 {scannedSKU == qty &&
                                                     <>
-                                                        <Box display="flex" alignItems="center" justifyContent="center" py={2}>
+                                                        <Box display="flex" alignItems="center" justifyContent="center" py={2} className="w-full">
                                                             <TextField className={classes.textfield} width={340} autoFocus id="scan_carton_id" label="Carton ID" variant="outlined" value={scan_carton} helperText={scan_carton_feedback} error={scan_carton_feedback_error} onChange={e => inputScanCarton(e)} onKeyUp={handleCartonKeyUp} style={{ backgroundColor: "#eeffff" }} />
                                                         </Box>
                                                         

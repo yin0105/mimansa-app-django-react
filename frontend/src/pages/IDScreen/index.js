@@ -32,7 +32,7 @@ const IDScreen = () => {
 
     useEffect(() => {
         var scanInfo = JSON.parse(sessionStorage.getItem("scanInfo"));
-
+        console.log("location =#", scanInfo.location, "#");
 
         if (scanInfo === null || scanInfo.location === null) {
             history.push("/location");

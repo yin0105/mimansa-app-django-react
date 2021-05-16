@@ -67,6 +67,9 @@ const UserScreen = () => {
                 <LinearProgress color="secondary" />
             }
             <div className="p-6">
+                <div className="w-full text-right">
+                    &nbsp;
+                </div>
                 <div className="mx-auto" style={{ maxWidth: "600px" }}>
                     <div className="w-full ">
                         <div className="w-full text-center">

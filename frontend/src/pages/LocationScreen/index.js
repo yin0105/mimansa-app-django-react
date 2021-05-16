@@ -17,17 +17,11 @@ const LocationScreen = () => {
     const [error, setError] = useState("");
 
     const handleKeyUp = e => {
-        if (e.keyCode === 13) {
-            // if (alert) {
-            //     this.onClose();
-            // } else {
-                if (location === "") {
-                    setError("Please insert Location!")
-                    setAlert(true);
-                } else {
-                    validateLocation();
-                }
-            // }
+        if (location === "") {
+            setError("Please insert Location!")
+            setAlert(true);
+        } else {
+            validateLocation();
         }
     }
 
@@ -119,7 +113,7 @@ const LocationScreen = () => {
                                 </CardContent>
                             </div>
                         </Card>
-                        <AlertDialog item="location" error={error} open={alert} handleClose={onClose} onKeyUp={e => {if (e.keyCode == 27) { console.log("alert-key");e.preventDefault(); onClose();}}}/>
+                        <AlertDialog item="location" error={error} open={alert} handleClose={onClose} onKeyDown={e => {if (e.keyCode == 27) { console.log("alert-key");e.preventDefault(); onClose();}}} />
                     </div>
                 </div>
             </div>

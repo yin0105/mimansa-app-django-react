@@ -100,7 +100,7 @@ const UserScreen = () => {
                                 </CardContent>
                             </div>
                         </Card>
-                        <AlertDialog item="User Id" error={error} open={alert} handleClose={onClose} />
+                        <AlertDialog item="User Id" error={error} open={alert} handleClose={onClose} onKeyUp={e => {if (e.keyCode == 27) { console.log("alert-key");e.preventDefault(); onClose();}}}/>
                     </div>
                 </div>
             </div>

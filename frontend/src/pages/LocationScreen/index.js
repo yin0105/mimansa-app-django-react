@@ -17,13 +17,15 @@ const LocationScreen = () => {
     const [error, setError] = useState("");
 
     const handleKeyUp = e => {
-        if (location === undefined) {
-            setLocation("");
-        } else if (location === "") {
-            setError("Please insert Location!")
-            setAlert(true);
-        } else {
-            validateLocation();
+        if (e.keyCode === 13) {
+            if (location === undefined) {
+                setLocation("");
+            } else if (location === "") {
+                setError("Please insert Location!")
+                setAlert(true);
+            } else {
+                validateLocation();
+            }
         }
     }
 

@@ -126,22 +126,22 @@ const IDDetailScreen = () => {
                                 style={{ textAlign: "center" }}
                             />
                             <CardContent className="mx-3">
-                                <div className="w-full text-center py-2">
+                                <div className="w-full text-center py-1">
                                     <Typography style={{ paddingRight: "20px" }}>
                                         LPN ID: {lpnid} ({tote_type})
                                     </Typography>
                                 </div>
-                                <div className="w-full text-center py-2">
+                                <div className="w-full text-center py-1">
                                     <Typography style={{ paddingRight: "20px" }}>
                                         SKU: {sku}
                                     </Typography>
                                 </div>
-                                <div className="w-full text-center py-2">
+                                <div className="w-full text-center py-1">
                                     <Typography style={{ paddingRight: "20px" }}>
                                         CARTONS: {cartons}
                                     </Typography>
                                 </div>
-                                <div className="w-full text-center py-2">
+                                <div className="w-full text-center py-1">
                                     <Typography style={{ paddingRight: "20px" }}>
                                         CLASSIFICATION: {classification}
                                     </Typography>

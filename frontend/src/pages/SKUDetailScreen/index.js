@@ -287,17 +287,17 @@ const SKUDetailScreen = () => {
                             <Grid item lg={5}>
                                 <CardContent>
                                     <div>
-                                        <div className="w-full text-center py-2">
+                                        <div className="w-full text-center py-1">
                                             <Typography style={{ paddingRight: "20px" }}>
                                                 LPN ID: {lpnid} ({tote_type})
                                             </Typography>
                                         </div>
-                                        <div className="w-full text-center py-2">
+                                        <div className="w-full text-center py-1">
                                             <Typography style={{ paddingRight: "20px" }}>
                                                 SKU: {sku}
                                             </Typography>
                                         </div>
-                                        <div className="w-full text-center py-2">
+                                        <div className="w-full text-center py-1">
                                             <Typography style={{ paddingRight: "20px" }}>
                                                 SKU DESC: {desc}
                                             </Typography>
@@ -319,7 +319,7 @@ const SKUDetailScreen = () => {
                             </Grid>
                             <Grid item lg={6}>
                                 <CardContent>
-                                    <div className="w-full text-center py-2">
+                                    <div className="w-full text-center py-1">
                                         <Typography style={{ paddingRight: "20px" }}>
                                             CARTON: {next_carton}
                                         </Typography>                                        
@@ -346,12 +346,12 @@ const SKUDetailScreen = () => {
                                     }
                                     {tote_type === "MULTI" && 
                                         <>
-                                            <div className="w-full text-center py-2">
+                                            <div className="w-full text-center py-1">
                                                 <Typography style={{ paddingRight: "20px" }}>
                                                     SKU: {sku}
                                                 </Typography>                                       
                                             </div>
-                                            <div className="w-full text-center py-2">
+                                            <div className="w-full text-center py-1">
                                                 <Typography style={{ paddingRight: "20px" }}>
                                                     QTY: {qty} Unit{qty > 0 && "s"} {
                                                         scannedSKU > 0 && (`(Scanned : ${scannedSKU} , Pending : ${(qty - scannedSKU)})`)

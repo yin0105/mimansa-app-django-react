@@ -368,7 +368,7 @@ const SKUDetailScreen = () => {
                                                     <>
                                                         <Box>
                                                             <Box display="flex" alignItems="center" justifyContent="center" py={2} className="w-full">
-                                                                <TextField className={classes.textfield} style={{ width: "400px" }} autoFocus id="scan_carton_id" label="Carton ID" variant="outlined" value={scan_carton} helperText={scan_carton_feedback} error={scan_carton_feedback_error} onChange={e => inputScanCarton(e)} onKeyUp={handleCartonKeyUp} style={{ backgroundColor: "#eeffff" }} />
+                                                                <TextField className={classes.textfield} autoFocus id="scan_carton_id" label="Carton ID" variant="outlined" value={scan_carton} helperText={scan_carton_feedback} error={scan_carton_feedback_error} onChange={e => inputScanCarton(e)} onKeyUp={handleCartonKeyUp} style={{ backgroundColor: "#eeffff", width: "400px" }} />
                                                             </Box>
                                                         </Box>
                                                         

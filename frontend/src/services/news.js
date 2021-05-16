@@ -1,14 +1,11 @@
 import { jsonQuery, query, getLocalToken, generatePagenationParameters } from "./common";
 
 const toUpper = dict => {
-  return Object.keys(dict).map((key) => {
-    if (typeof dict[key] === 'string') {
-        return dict[key].toUpperCase();
-    } else {
-        return dict[key];
-    }
-    
-  });
+  let new_dict = {};
+  Object.keys(dict).map((key) => {
+    new_dict[key] = typeof dict[key] === 'string' ? dict[key].toUpperCase(): dict[key];
+  })
+  return new_dict;
 }
 
 export const getMemberInfoFromLocal = () => {

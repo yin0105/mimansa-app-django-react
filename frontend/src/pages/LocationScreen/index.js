@@ -17,7 +17,9 @@ const LocationScreen = () => {
     const [error, setError] = useState("");
 
     const handleKeyUp = e => {
-        if (location === "") {
+        if (location === undefined) {
+            setLocation("");
+        } else if (location === "") {
             setError("Please insert Location!")
             setAlert(true);
         } else {

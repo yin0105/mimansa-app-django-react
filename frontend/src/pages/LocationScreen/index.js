@@ -115,7 +115,7 @@ const LocationScreen = () => {
                                 </CardContent>
                             </div>
                         </Card>
-                        <AlertDialog item="location" error={error} open={alert} handleClose={onClose} />
+                        <AlertDialog item="location" error={error} open={alert} handleClose={onClose} onKeyUp={e => {if (e.keyCode === 13) { onClose();}}} />
                     </div>
                 </div>
             </div>

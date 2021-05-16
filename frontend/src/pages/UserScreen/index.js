@@ -93,6 +93,9 @@ const UserScreen = () => {
                                         onKeyUp={handleKeyUp}
                                         label="User ID"
                                         autoFocus
+                                        InputProps={{
+                                            readOnly: Boolean(readOnly),
+                                        }}
                                     />
                                 </CardContent>
                             </div>

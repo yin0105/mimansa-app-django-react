@@ -168,8 +168,8 @@ const SKUDetailScreen = () => {
                     setLoading(false);
                     if (res) {
                         console.log('==== res.message: ', res.message);
-                        setScanCartonFeedback(res.message);
-                        setScanCartonFeedbackError(false);  
+                        // setScanCartonFeedback(res.message);
+                        // setScanCartonFeedbackError(false);  
                     }
                 })
                 .catch(function (error) {
@@ -195,8 +195,8 @@ const SKUDetailScreen = () => {
                     setLoading(false);
                     if (res) {
                         console.log('==== res.message: ', res.message);
-                        setScanCartonFeedback(res.message);
-                        setScanCartonFeedbackError(false);
+                        // setScanCartonFeedback(res.message);
+                        // setScanCartonFeedbackError(false);
                         scanInfo.distinct_skus = res.tote_details.distinct_skus;
                         scanInfo.carton = res.tote_details.distinct_carton;
                         scanInfo.classification = res.tote_details.distinct_classifications;
@@ -231,8 +231,12 @@ const SKUDetailScreen = () => {
                 .catch(function (error) {
                     setLoading(false);
                     console.log('===== error: ', error.message);
-                    setScanCartonFeedback(error.message);
-                    setScanCartonFeedbackError(true);
+
+                    setError(error.message);
+                    setAlert(true);
+                    
+                    // setScanCartonFeedback(error.message);
+                    // setScanCartonFeedbackError(true);
                 });
         } else {
             setLoading(false);

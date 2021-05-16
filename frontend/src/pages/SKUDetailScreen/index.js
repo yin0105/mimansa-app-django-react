@@ -143,6 +143,7 @@ const SKUDetailScreen = () => {
             }
             
             setSkuBrcd("");
+            setReadOnly(false);
         }
     }
 
@@ -221,7 +222,7 @@ const SKUDetailScreen = () => {
                             setScanCarton("");
                             setActionCodeForSku("");
                             setQty(res.next_carton_details.next_carton_qty);
-                            setScannedSKU(0);
+                            // setScannedSKU(0);
                             setReadOnly(false);
                             
                             if (res.tote_details.tote_status === 95) {

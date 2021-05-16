@@ -50,6 +50,7 @@ const IDDetailScreen = () => {
                     validateSKUId();
                 }
             }
+            setReadOnly(false);
                 
         }
     }

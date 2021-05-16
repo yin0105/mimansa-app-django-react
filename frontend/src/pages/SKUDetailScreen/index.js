@@ -37,9 +37,6 @@ const useStyles = makeStyles({
     table: {
         border: '1px solid #cccccc',
     },
-    textfield: {
-        width: '100px',
-    }
 });
 
 

@@ -273,7 +273,7 @@ const SKUDetailScreen = () => {
                         </Typography>
                     </div>
                     
-                    <Card className="p-6 mt-12">
+                    <Card className="p-6 mt-2">
                         <CardHeader
                             title="SKU Detail Screen"
                             titleTypographyProps={{ variant: 'h4' }}
@@ -354,7 +354,7 @@ const SKUDetailScreen = () => {
                                                     }
                                                 </Typography>                                       
                                             </div>
-                                            <Box display="flex" alignItems="center" justifyContent="center" py={2}>
+                                            <Box alignItems="center" justifyContent="center" py={2}>
                                                 {scannedSKU < qty &&
                                                     <TextField className={classes.textfield} width={340} autoFocus id="sku_brcd" label="SKU" variant="outlined" value={sku_brcd} onChange={e => inputSkuBrcd(e)} onKeyUp={handleSKUKeyUp} />                                        
                                                 }

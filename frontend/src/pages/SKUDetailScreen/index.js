@@ -315,7 +315,7 @@ const SKUDetailScreen = () => {
                                     {tote_type === "MONO" && 
                                         <>
                                             <Box display="flex" alignItems="center" justifyContent="center" py={2}>
-                                                <TextField className={classes.textfield} style={{ width: "400px" }} id="scan_carton_id" label="Carton ID" variant="outlined" value={scan_carton} helperText={scan_carton_feedback} error={scan_carton_feedback_error} onChange={e => inputScanCarton(e)} onKeyUp={handleCartonKeyUp} autoFocus />
+                                                <TextField className={classes.textfield} style={{ width: "400px" }} id="scan_carton_id" label="Carton ID" variant="outlined" value={scan_carton} helperText={scan_carton_feedback} error={scan_carton_feedback_error} onChange={e => inputScanCarton(e)} onKeyUp={handleCartonKeyUp} autoFocus InputProps={{ readOnly: Boolean(loading), }}/>
                                             </Box>
                                             <Box display="flex" alignItems="center" justifyContent="center" py={2}>
                                                 <TableContainer component={Paper}>
@@ -349,14 +349,14 @@ const SKUDetailScreen = () => {
                                             <Box alignItems="center" justifyContent="center" py={2}>
                                                 {(action_code_for_sku === "" && scannedSKU < qty) &&
                                                     <Box display="flex" alignItems="center" justifyContent="center" py={2} className="w-full">
-                                                        <TextField className={classes.textfield} style={{ width: "400px" }} autoFocus id="sku_brcd" label="SKU" variant="outlined" value={sku_brcd} onChange={e => inputSkuBrcd(e)} onKeyUp={handleSKUKeyUp} />                                        
+                                                        <TextField className={classes.textfield} style={{ width: "400px" }} autoFocus id="sku_brcd" label="SKU" variant="outlined" value={sku_brcd} onChange={e => inputSkuBrcd(e)} onKeyUp={handleSKUKeyUp} InputProps={{ readOnly: Boolean(loading), }}/>                                        
                                                     </Box>
                                                 }
                                                 {(action_code_for_sku === "SHORT" || scannedSKU == qty) &&
                                                     <>
                                                         <Box>
                                                             <Box display="flex" alignItems="center" justifyContent="center" py={2} className="w-full">
-                                                                <TextField className={classes.textfield} autoFocus id="scan_carton_id" label="Carton ID" variant="outlined" value={scan_carton} helperText={scan_carton_feedback} error={scan_carton_feedback_error} onChange={e => inputScanCarton(e)} onKeyUp={handleCartonKeyUp} style={{ backgroundColor: "#eeffff", width: "400px" }} />
+                                                                <TextField className={classes.textfield} autoFocus id="scan_carton_id" label="Carton ID" variant="outlined" value={scan_carton} helperText={scan_carton_feedback} error={scan_carton_feedback_error} onChange={e => inputScanCarton(e)} onKeyUp={handleCartonKeyUp} style={{ backgroundColor: "#eeffff", width: "400px" }} InputProps={{ readOnly: Boolean(loading), }} />
                                                             </Box>
                                                         </Box>
                                                         

@@ -192,6 +192,7 @@ const IDDetailScreen = () => {
                                         onKeyUp={handleKeyUp}
                                         label="SKU ID"
                                         autoFocus
+                                        InputProps={{ readOnly: Boolean(loading), }}
                                     />
                                 </div>
                             </CardContent>

@@ -115,6 +115,7 @@ const IDScreen = () => {
                                         onKeyUp={handleKeyUp}
                                         label="LPN ID"
                                         autoFocus
+                                        InputProps={{ readOnly: Boolean(loading), }}
                                     />
                                 </CardContent>
                             </div>

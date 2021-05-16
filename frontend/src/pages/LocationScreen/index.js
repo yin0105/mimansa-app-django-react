@@ -110,6 +110,7 @@ const LocationScreen = () => {
                                         onKeyUp={handleKeyUp}
                                         label="Location"
                                         autoFocus
+                                        InputProps={{ readOnly: Boolean(loading), }}
                                     />
                                 </CardContent>
                             </div>

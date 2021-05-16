@@ -42,12 +42,15 @@ const IDDetailScreen = () => {
             console.log(readonly);
             if (skuid === undefined) {
                 setSKUId("");
-            } else if (skuid === "") {
-                setError("Please insert SKU Id!")
-                setAlert(true);
-            } else {
-                validateSKUId();
+            } else if ( readonly ) {
+                if (skuid === "") {
+                    setError("Please insert SKU Id!")
+                    setAlert(true);
+                } else {
+                    validateSKUId();
+                }
             }
+                
         }
     }
 

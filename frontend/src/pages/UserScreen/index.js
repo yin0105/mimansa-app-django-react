@@ -94,7 +94,7 @@ const UserScreen = () => {
                                         label="User ID"
                                         autoFocus
                                         InputProps={{
-                                            readOnly: Boolean(readOnly),
+                                            readOnly: Boolean(loading),
                                         }}
                                     />
                                 </CardContent>

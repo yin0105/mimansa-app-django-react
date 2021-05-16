@@ -354,7 +354,7 @@ const SKUDetailScreen = () => {
                                                     }
                                                 </Typography>                                       
                                             </div>
-                                            <Box display="flex" alignItems="center" justifyContent="center" py={2}>
+                                            <Box display="flex" alignItems="center" justifyContent="center" py={2} className="w-full">
                                                 {scannedSKU < qty &&
                                                     <TextField className={classes.textfield} width={340} autoFocus id="sku_brcd" label="SKU" variant="outlined" value={sku_brcd} onChange={e => inputSkuBrcd(e)} onKeyUp={handleSKUKeyUp} />                                        
                                                 }

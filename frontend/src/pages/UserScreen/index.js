@@ -86,7 +86,7 @@ const UserScreen = () => {
                                         className="m-2 w-full"
                                         variant="outlined"
                                         value={userid}
-                                        onChange={e => setUserId(e.target.value)}
+                                        onChange={e => setUserId(e.target.value.toUpperCase())}
                                         onKeyUp={handleKeyUp}
                                         label="User ID"
                                         autoFocus

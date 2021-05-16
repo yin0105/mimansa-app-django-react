@@ -151,7 +151,7 @@ const IDDetailScreen = () => {
                                         className="m-2 w-full"
                                         variant="outlined"
                                         value={skuid}
-                                        onChange={e => setSKUId(e.target.value)}
+                                        onChange={e => setSKUId(e.target.value.toUpperCase())}
                                         onKeyUp={handleKeyUp}
                                         label="SKU ID"
                                         autoFocus

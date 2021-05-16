@@ -137,11 +137,11 @@ const SKUDetailScreen = () => {
     }
 
     const inputSkuBrcd = e => {
-        setSkuBrcd(e.target.value)
+        setSkuBrcd(e.target.value.toUpperCase())
     }
 
     const inputScanCarton = e => {
-        setScanCarton(e.target.value)
+        setScanCarton(e.target.value.toUpperCase())
     }
 
     const onClose = () => {

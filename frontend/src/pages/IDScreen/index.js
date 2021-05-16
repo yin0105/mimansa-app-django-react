@@ -111,7 +111,7 @@ const IDScreen = () => {
                                         className="m-2 w-full"
                                         variant="outlined"
                                         value={lpnid}
-                                        onChange={e => setLPNId(e.target.value)}
+                                        onChange={e => setLPNId(e.target.value.toUpperCase())}
                                         onKeyUp={handleKeyUp}
                                         label="LPN ID"
                                         autoFocus

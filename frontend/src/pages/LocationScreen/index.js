@@ -106,7 +106,7 @@ const LocationScreen = () => {
                                         className="m-2 w-full"
                                         variant="outlined"
                                         value={location}
-                                        onChange={e => setLocation(e.target.value)}
+                                        onChange={e => setLocation(e.target.value.toUpperCase())}
                                         onKeyUp={handleKeyUp}
                                         label="Location"
                                         autoFocus

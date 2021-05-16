@@ -35,6 +35,7 @@ const IDDetailScreen = () => {
     const [open, setOpen] = useState(false);
     const [alert_msg, setAlertMsg] = useState("");
     const [severity, setSeverity] = useState("success");
+    const [readonly, setReadOnly] = useState(false);
 
     const handleKeyUp = e => {
         if (e.keyCode === 13) {
@@ -89,6 +90,7 @@ const IDDetailScreen = () => {
     const validateSKUId = () => {
 
         setLoading(true);
+        setReadOnly(true);
 
         var scanInfo = JSON.parse(sessionStorage.getItem("scanInfo"));
 
@@ -107,6 +109,7 @@ const IDDetailScreen = () => {
                 .catch(function (error) {
                     // Handle Errors here.
                     setLoading(false);
+                    setReadOnly(false);
                     console.log('===== error: ', error.message);
                     setError(error.message);
                     setAlert(true);
@@ -196,7 +199,7 @@ const IDDetailScreen = () => {
                                         onKeyUp={handleKeyUp}
                                         label="SKU ID"
                                         autoFocus
-                                        InputProps={{ readOnly: Boolean(loading) || push_url !== "", }}
+                                        InputProps={{ readOnly: Boolean(readonly)}}
                                     />
                                 </div>
                             </CardContent>

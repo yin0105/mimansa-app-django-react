@@ -31,6 +31,9 @@ const StyledTableRow = withStyles((theme) => ({
             backgroundColor: '#eeeeee',
         },
     },
+    input: {
+        backgroundColor: '#eeffff',
+    },
 }))(TableRow);
 
 const useStyles = makeStyles({
@@ -107,19 +110,27 @@ const SKUDetailScreen = () => {
             history.push(push_url);
         }
     };
-
+    
     const handleSKUKeyUp = e => {
         if (e.keyCode === 13) {
             console.log("sku_brcd_list = ", sku_brcd_list);
             console.log("sku_brcd = ", sku_brcd);
             if (sku_brcd_list.some(item => sku_brcd === item)) {
                 if (scannedSKU < qty) {
+                    if (scannedSKU == qty - 1) {
+                        setAlertMsg("Por favor escanear el cartón.");
+                        setSeverity("success");
+                        setOpen(true);
+                    }
                     setScannedSKU(scannedSKU + 1);
                     setSkuBrcd("");
                 }
             } else if (sku_brcd === "SHORT") {
                 setScannedSKU(qty);
                 setSkuBrcd("");
+                setAlertMsg("Por favor escanear el cartón.");
+                setSeverity("success");
+                setOpen(true);
             } else {
                 setError(`Incorrect Barcode : ${sku_brcd}`)
                 setAlert(true);
@@ -303,7 +314,7 @@ const SKUDetailScreen = () => {
                                     {tote_type === "MONO" && 
                                         <>
                                             <Box display="flex" alignItems="center" justifyContent="center" py={2}>
-                                                <TextField className={classes.textfield} width={300} id="scan_carton_id" label="Carton ID" variant="outlined" value={scan_carton} helperText={scan_carton_feedback} error={scan_carton_feedback_error} onChange={e => inputScanCarton(e)} onKeyUp={handleCartonKeyUp} autoFocus />
+                                                <TextField className={classes.textfield} width={340} id="scan_carton_id" label="Carton ID" variant="outlined" value={scan_carton} helperText={scan_carton_feedback} error={scan_carton_feedback_error} onChange={e => inputScanCarton(e)} onKeyUp={handleCartonKeyUp} autoFocus />
                                             </Box>
                                             <Box display="flex" alignItems="center" justifyContent="center" py={2}>
                                                 <TableContainer component={Paper}>
@@ -336,10 +347,10 @@ const SKUDetailScreen = () => {
                                             </div>
                                             <Box display="flex" alignItems="center" justifyContent="center" py={2}>
                                                 {scannedSKU < qty &&
-                                                    <TextField className={classes.textfield} width={300} autoFocus id="sku_brcd" label="SKU" variant="outlined" value={sku_brcd} onChange={e => inputSkuBrcd(e)} onKeyUp={handleSKUKeyUp} />                                        
+                                                    <TextField className={classes.textfield} width={340} autoFocus id="sku_brcd" label="SKU" variant="outlined" value={sku_brcd} onChange={e => inputSkuBrcd(e)} onKeyUp={handleSKUKeyUp} />                                        
                                                 }
                                                 {scannedSKU == qty &&
-                                                    <TextField className={classes.textfield} width={300} autoFocus id="scan_carton_id" label="Carton ID" variant="outlined" value={scan_carton} helperText={scan_carton_feedback} error={scan_carton_feedback_error} onChange={e => inputScanCarton(e)} onKeyUp={handleCartonKeyUp} />
+                                                    <TextField className={classes.textfield} width={340} autoFocus id="scan_carton_id" label="Carton ID" variant="outlined" value={scan_carton} helperText={scan_carton_feedback} error={scan_carton_feedback_error} onChange={e => inputScanCarton(e)} onKeyUp={handleCartonKeyUp} InputProps={{ className: classes.input, }} />
                                                 }
                                             </Box>
                                         </>

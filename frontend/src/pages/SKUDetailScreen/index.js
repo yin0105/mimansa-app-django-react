@@ -114,7 +114,7 @@ const SKUDetailScreen = () => {
         if (e.keyCode === 13) {
             
             if (sku_brcd === undefined ) {
-                
+                setReadOnly(false);
             } else if ( !readonly ) {
                 if (sku_brcd_list.some(item => sku_brcd === item)) {
                     if (scannedSKU < qty) {
@@ -140,10 +140,8 @@ const SKUDetailScreen = () => {
                     setError(`Incorrect Barcode : ${sku_brcd}`)
                     setAlert(true);
                 }  
-            }
-            
-            setSkuBrcd("");
-            setReadOnly(false);
+            }            
+            setSkuBrcd("");            
         }
     }
 

@@ -72,6 +72,7 @@ const SKUDetailScreen = () => {
     const [scan_carton_feedback_queue, setScanCartonFeedbackQueue] = useState([]);
     const [push_url, setPushUrl] = useState("");
     const [action_code_for_sku, setActionCodeForSku] = useState("");
+    const [readonly, setReadOnly] = useState(false);
 
     const [open, setOpen] = useState(false);
     const [alert_msg, setAlertMsg] = useState("");
@@ -114,30 +115,32 @@ const SKUDetailScreen = () => {
             
             if (sku_brcd === undefined ) {
                 
-            } else if (sku_brcd_list.some(item => sku_brcd === item)) {
-                if (scannedSKU < qty) {
-                    if (scannedSKU == qty - 1) {
-                        setAlertMsg("Por favor escanear el cartón.");
-                        setSeverity("success");
-                        setOpen(true);
+            } else if ( !readonly ) {
+                if (sku_brcd_list.some(item => sku_brcd === item)) {
+                    if (scannedSKU < qty) {
+                        if (scannedSKU == qty - 1) {
+                            setAlertMsg("Por favor escanear el cartón.");
+                            setSeverity("success");
+                            setOpen(true);
+                        }
+                        setScannedSKU(scannedSKU + 1);
                     }
-                    setScannedSKU(scannedSKU + 1);
-                }
-            } else if (sku_brcd === "SHORT") {
-                if (scannedSKU > 0) {
-                    setActionCodeForSku("SHORT");
-                    setAlertMsg("Por favor escanear el cartón.");
+                } else if (sku_brcd === "SHORT") {
+                    if (scannedSKU > 0) {
+                        setActionCodeForSku("SHORT");
+                        setAlertMsg("Por favor escanear el cartón.");
+                    } else {
+                        setAlertMsg("Debe escanearse al menos 1 Unidad.");
+                    }
+                    
+                    
+                    setSeverity("success");
+                    setOpen(true);
                 } else {
-                    setAlertMsg("Debe escanearse al menos 1 Unidad.");
-                }
-                
-                
-                setSeverity("success");
-                setOpen(true);
-            } else {
-                setError(`Incorrect Barcode : ${sku_brcd}`)
-                setAlert(true);
-            }  
+                    setError(`Incorrect Barcode : ${sku_brcd}`)
+                    setAlert(true);
+                }  
+            }
             
             setSkuBrcd("");
         }
@@ -164,6 +167,8 @@ const SKUDetailScreen = () => {
 
     const validateSKUBrcd = () => {
         setLoading(true);
+        setReadOnly(true);
+
         var scanInfo = JSON.parse(sessionStorage.getItem("scanInfo"));
 
         if (scan_carton === "DAMAGED" || scan_carton === "DISCREPANCY" || scan_carton === "REPRINT" || scan_carton === "SHORT" || scan_carton === "CANCEL") {
@@ -171,6 +176,7 @@ const SKUDetailScreen = () => {
                 .then(res => {
                     console.log('===== res: ', res);
                     setLoading(false);
+                    setReadOnly(false);
                     if (res) {
                         console.log('==== res.message: ', res.message);
                         setScanCartonFeedbackQueue(scan_carton_feedback_queue => [...scan_carton_feedback_queue, res.message]);     
@@ -178,6 +184,7 @@ const SKUDetailScreen = () => {
                 })
                 .catch(function (error) {
                     setLoading(false);
+                    setReadOnly(false);
                     console.log('===== error: ', error.message);
 
                     setError(error.message);
@@ -215,6 +222,7 @@ const SKUDetailScreen = () => {
                             setActionCodeForSku("");
                             setQty(res.next_carton_details.next_carton_qty);
                             setScannedSKU(0);
+                            setReadOnly(false);
                             
                             if (res.tote_details.tote_status === 95) {
                                 setPushUrl("/id");
@@ -227,6 +235,7 @@ const SKUDetailScreen = () => {
                 })
                 .catch(function (error) {
                     setLoading(false);
+                    setReadOnly(false);
                     console.log('===== error: ', error.message);
 
                     // setScanCartonFeedbackQueue(scan_carton_feedback_queue => [...scan_carton_feedback_queue, ...error.additional_message]);     

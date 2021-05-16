@@ -106,7 +106,7 @@ const IDDetailScreen = () => {
             {loading &&
                 <LinearProgress color="secondary" />
             }
-            <div className="p-8">
+            <div className="p-6">
                 <div className="w-full text-right">
                     {userid !== "" && location !== "" &&
                         <span>{userid} @ {location}</span>
@@ -118,8 +118,8 @@ const IDDetailScreen = () => {
                             Pack LPN
                     </Typography>
                     </div>
-                    <Card className="mt-12">
-                        <div className="p-6">
+                    <Card className="mt-2">
+                        <div className="p-4">
                             <CardHeader
                                 title="ID Detail Screen"
                                 titleTypographyProps={{ variant: 'h4' }}

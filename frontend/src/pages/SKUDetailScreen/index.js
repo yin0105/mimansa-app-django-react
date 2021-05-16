@@ -263,7 +263,7 @@ const SKUDetailScreen = () => {
             {loading &&
                 <LinearProgress color="secondary" />
             }
-            <div className="p-8">
+            <div className="p-6">
 
                 <div className="w-full text-right">
                     {userid !== "" && location !== "" &&
@@ -277,7 +277,7 @@ const SKUDetailScreen = () => {
                         </Typography>
                     </div>
                     
-                    <Card className="p-6 mt-2">
+                    <Card className="p-4 mt-2">
                         <CardHeader
                             title="SKU Detail Screen"
                             titleTypographyProps={{ variant: 'h4' }}
@@ -327,7 +327,7 @@ const SKUDetailScreen = () => {
                                     {tote_type === "MONO" && 
                                         <>
                                             <Box display="flex" alignItems="center" justifyContent="center" py={2}>
-                                                <TextField className={classes.textfield} width={340} id="scan_carton_id" label="Carton ID" variant="outlined" value={scan_carton} helperText={scan_carton_feedback} error={scan_carton_feedback_error} onChange={e => inputScanCarton(e)} onKeyUp={handleCartonKeyUp} autoFocus />
+                                                <TextField className={classes.textfield} width={500} id="scan_carton_id" label="Carton ID" variant="outlined" value={scan_carton} helperText={scan_carton_feedback} error={scan_carton_feedback_error} onChange={e => inputScanCarton(e)} onKeyUp={handleCartonKeyUp} autoFocus />
                                             </Box>
                                             <Box display="flex" alignItems="center" justifyContent="center" py={2}>
                                                 <TableContainer component={Paper}>
@@ -361,14 +361,14 @@ const SKUDetailScreen = () => {
                                             <Box alignItems="center" justifyContent="center" py={2}>
                                                 {scannedSKU < qty &&
                                                     <Box display="flex" alignItems="center" justifyContent="center" py={2} className="w-full">
-                                                        <TextField className={classes.textfield} width={340} autoFocus id="sku_brcd" label="SKU" variant="outlined" value={sku_brcd} onChange={e => inputSkuBrcd(e)} onKeyUp={handleSKUKeyUp} />                                        
+                                                        <TextField className={classes.textfield} width={500} autoFocus id="sku_brcd" label="SKU" variant="outlined" value={sku_brcd} onChange={e => inputSkuBrcd(e)} onKeyUp={handleSKUKeyUp} />                                        
                                                     </Box>
                                                 }
                                                 {scannedSKU == qty &&
                                                     <>
                                                         <Box>
                                                             <Box display="flex" alignItems="center" justifyContent="center" py={2} className="w-full">
-                                                                <TextField className={classes.textfield} width={340} autoFocus id="scan_carton_id" label="Carton ID" variant="outlined" value={scan_carton} helperText={scan_carton_feedback} error={scan_carton_feedback_error} onChange={e => inputScanCarton(e)} onKeyUp={handleCartonKeyUp} style={{ backgroundColor: "#eeffff" }} />
+                                                                <TextField className={classes.textfield} width={500} autoFocus id="scan_carton_id" label="Carton ID" variant="outlined" value={scan_carton} helperText={scan_carton_feedback} error={scan_carton_feedback_error} onChange={e => inputScanCarton(e)} onKeyUp={handleCartonKeyUp} style={{ backgroundColor: "#eeffff" }} />
                                                             </Box>
                                                         </Box>
                                                         

@@ -66,7 +66,7 @@ const UserScreen = () => {
             {loading &&
                 <LinearProgress color="secondary" />
             }
-            <div className="p-8">
+            <div className="p-6">
                 <div className="mx-auto" style={{ maxWidth: "600px" }}>
                     <div className="w-full ">
                         <div className="w-full text-center">
@@ -74,8 +74,8 @@ const UserScreen = () => {
                                 Pack LPN
                             </Typography>
                         </div>
-                        <Card className="mt-12">
-                            <div className="p-6">
+                        <Card className="mt-2">
+                            <div className="p-4">
                                 <CardHeader
                                     title="User Screen"
                                     titleTypographyProps={{ variant: 'h4' }}

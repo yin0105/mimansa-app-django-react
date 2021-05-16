@@ -83,7 +83,7 @@ const LocationScreen = () => {
             {loading &&
                 <LinearProgress color="secondary" />
             }
-            <div className="p-8">
+            <div className="p-6">
                 <div className="w-full text-right">
                     {userid !== "" && userid}
                 </div>
@@ -94,8 +94,8 @@ const LocationScreen = () => {
                                 Pack LPN
                         </Typography>
                         </div>
-                        <Card className="mt-12">
-                            <div className="p-6">
+                        <Card className="mt-2">
+                            <div className="p-4">
                                 <CardHeader
                                     title="Location Screen"
                                     titleTypographyProps={{ variant: 'h4' }}

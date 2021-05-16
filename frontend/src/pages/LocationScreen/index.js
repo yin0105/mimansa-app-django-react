@@ -29,6 +29,7 @@ const LocationScreen = () => {
 
     useEffect(() => {
         var scanInfo = JSON.parse(sessionStorage.getItem("scanInfo"));
+        console.log("user =#", scanInfo.userid, "#");
 
         if (scanInfo === null || scanInfo.userid === null) {
             history.push("/user");

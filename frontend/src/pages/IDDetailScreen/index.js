@@ -1,9 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import WithHeaderLayout from '../../layouts/WithHeaderLayout';
-import { Typography, TextField, Card, CardHeader, CardContent, LinearProgress } from '@material-ui/core';
+import { Typography, TextField, Card, CardHeader, CardContent, LinearProgress, Snackbar } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 import AlertDialog from '../../components';
-import { apiValidateSKU } from '../../services/news';
+import { apiValidateSKU, apiCancelTote } from '../../services/news';
+import MuiAlert from '@material-ui/lab/Alert';
+
+
+function Alert(props) {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 
 const IDDetailScreen = () => {
@@ -24,6 +30,10 @@ const IDDetailScreen = () => {
     const [sku, setSKU] = useState("");
     const [cartons, setCartons] = useState("");
     const [classification, setClassification] = useState("");
+
+    const [open, setOpen] = useState(false);
+    const [alert_msg, setAlertMsg] = useState("");
+    const [severity, setSeverity] = useState("success");
 
     const handleKeyUp = e => {
         if (e.keyCode === 13) {
@@ -68,31 +78,58 @@ const IDDetailScreen = () => {
 
     }, [history]);
 
+    const handleClose = (event, reason) => {
+        setOpen(false);
+        history.push("/id");
+    };
+
     const validateSKUId = () => {
 
         setLoading(true);
 
         var scanInfo = JSON.parse(sessionStorage.getItem("scanInfo"));
 
-        apiValidateSKU({ whse: scanInfo.whse, tote: scanInfo.lpnid, sku_brcd: skuid, login_user_id: scanInfo.userid })
-            .then(res => {
-                console.log('===== res: ', res);
-                setLoading(false);
-                if (res) {
-                    var scanInfo = JSON.parse(sessionStorage.getItem("scanInfo"));
-                    var newObj = Object.assign({}, scanInfo, { skuid: skuid, image: res.sku_image_url, desc: res.sku_desc, dsp_sku: res.dsp_sku, next_carton: res.next_carton_nbr, qty: res.next_carton_qty, sku_brcd_list: res.sku_brcd_list });
-                    sessionStorage.setItem("scanInfo", JSON.stringify(newObj));
-                    history.push('/sku');
-                }
-            })
-            .catch(function (error) {
-                // Handle Errors here.
-                setLoading(false);
-                console.log('===== error: ', error.message);
-                setError(error.message);
-                setAlert(true);
-                // ...
-            });
+        if (skuid == "SHORT") {
+            apiCancelTote({ tote: scanInfo.lpnid })
+                .then(res => {
+                    console.log('===== res: ', res);
+                    setLoading(false);
+                    if (res) {
+                        setAlertMsg(res.message);
+                        setSeverity("success");
+                        setOpen(true);
+                    }
+                })
+                .catch(function (error) {
+                    // Handle Errors here.
+                    setLoading(false);
+                    console.log('===== error: ', error.message);
+                    setError(error.message);
+                    setAlert(true);
+                    // ...
+                });
+        } else {
+            apiValidateSKU({ whse: scanInfo.whse, tote: scanInfo.lpnid, sku_brcd: skuid, login_user_id: scanInfo.userid })
+                .then(res => {
+                    console.log('===== res: ', res);
+                    setLoading(false);
+                    if (res) {
+                        var scanInfo = JSON.parse(sessionStorage.getItem("scanInfo"));
+                        var newObj = Object.assign({}, scanInfo, { skuid: skuid, image: res.sku_image_url, desc: res.sku_desc, dsp_sku: res.dsp_sku, next_carton: res.next_carton_nbr, qty: res.next_carton_qty, sku_brcd_list: res.sku_brcd_list });
+                        sessionStorage.setItem("scanInfo", JSON.stringify(newObj));
+                        history.push('/sku');
+                    }
+                })
+                .catch(function (error) {
+                    // Handle Errors here.
+                    setLoading(false);
+                    console.log('===== error: ', error.message);
+                    setError(error.message);
+                    setAlert(true);
+                    // ...
+                });
+        }
+
 
     }
 
@@ -161,6 +198,11 @@ const IDDetailScreen = () => {
                         </div>
                     </Card>
                     <AlertDialog item="SKU id" error={error} open={alert} handleClose={onClose} />
+                    <Snackbar open={open} autoHideDuration={6000} anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }} onClose={handleClose}>
+                        <Alert onClose={handleClose} severity={severity}>
+                            {alert_msg}
+                        </Alert>
+                    </Snackbar>
                 </div>
             </div>
         </WithHeaderLayout>

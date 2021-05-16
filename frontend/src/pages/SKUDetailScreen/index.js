@@ -71,6 +71,7 @@ const SKUDetailScreen = () => {
     const [scan_carton_feedback_error, setScanCartonFeedbackError] = useState(false);
     const [scan_carton_feedback_queue, setScanCartonFeedbackQueue] = useState([]);
     const [push_url, setPushUrl] = useState("");
+    const [action_code_for_sku, setActionCodeForSku] = useState("");
 
     const [open, setOpen] = useState(false);
     const [alert_msg, setAlertMsg] = useState("");
@@ -102,9 +103,6 @@ const SKUDetailScreen = () => {
     }, [history]);
 
     const handleClose = (event, reason) => {
-        // if (reason === 'clickaway') {
-        //   return;
-        // }
         setOpen(false);
         if (push_url !== "") {
             history.push(push_url);
@@ -113,8 +111,8 @@ const SKUDetailScreen = () => {
     
     const handleSKUKeyUp = e => {
         if (e.keyCode === 13) {
-            console.log("sku_brcd_list = ", sku_brcd_list);
-            console.log("sku_brcd = ", sku_brcd);
+            setSkuBrcd("");
+
             if (sku_brcd_list.some(item => sku_brcd === item)) {
                 if (scannedSKU < qty) {
                     if (scannedSKU == qty - 1) {
@@ -123,12 +121,16 @@ const SKUDetailScreen = () => {
                         setOpen(true);
                     }
                     setScannedSKU(scannedSKU + 1);
-                    setSkuBrcd("");
                 }
             } else if (sku_brcd === "SHORT") {
-                setScannedSKU(qty);
-                setSkuBrcd("");
-                setAlertMsg("Por favor escanear el cartón.");
+                if (scannedSKU > 0) {
+                    setActionCodeForSku("SHORT");
+                    setAlertMsg("Por favor escanear el cartón.");
+                } else {
+                    setAlertMsg("Debe escanearse al menos 1 Unidad.");
+                }
+                
+                
                 setSeverity("success");
                 setOpen(true);
             } else {
@@ -169,8 +171,6 @@ const SKUDetailScreen = () => {
                     if (res) {
                         console.log('==== res.message: ', res.message);
                         setScanCartonFeedbackQueue(scan_carton_feedback_queue => [...scan_carton_feedback_queue, res.message]);     
-                        // setScanCartonFeedback(res.message);
-                        // setScanCartonFeedbackError(false);  
                     }
                 })
                 .catch(function (error) {
@@ -178,29 +178,16 @@ const SKUDetailScreen = () => {
                     console.log('===== error: ', error.message);
 
                     setError(error.message);
-                    setAlert(true);
-                    // setScanCartonFeedback(error.message);
-                    // setScanCartonFeedbackError(true);
-                    // let msg_to_add = "";
-                    // if (scan_carton === "DAMAGED") {
-                    //     msg_to_add = "Carton DAMAGED";
-                    // } else if (scan_carton === "DISCREPANCY") {
-                    //     msg_to_add = "Carton DISCREPANCY";
-                    // } else if (scan_carton === "REPRINT") {
-                    //     msg_to_add = "Carton PRINTED";
-                    // }
-                    // setScanCartonFeedbackQueue(scan_carton_feedback_queue => [...scan_carton_feedback_queue, msg_to_add]);     
+                    setAlert(true);  
                 });
                             
         } else if (scan_carton == next_carton) {
-            apiValidatePackCarton({ whse: scanInfo.whse, carton_nbr: scan_carton, tote: lpnid, tote_type: tote_type, login_user_id: userid, sku_id: sku, qty: qty })
+            apiValidatePackCarton({ whse: scanInfo.whse, carton_nbr: scan_carton, tote: lpnid, tote_type: tote_type, login_user_id: userid, sku_id: sku, qty: scannedSKU, action_code: action_code_for_sku })
                 .then(res => {
                     console.log('===== res: ', res);
                     setLoading(false);
                     if (res) {
                         console.log('==== res.message: ', res.message);
-                        // setScanCartonFeedback(res.message);
-                        // setScanCartonFeedbackError(false);
                         scanInfo.distinct_skus = res.tote_details.distinct_skus;
                         scanInfo.carton = res.tote_details.distinct_carton;
                         scanInfo.classification = res.tote_details.distinct_classifications;
@@ -222,6 +209,7 @@ const SKUDetailScreen = () => {
                             setNextCarton(res.next_carton_details.next_carton_nbr);
                             setPushUrl("");
                             setScanCarton("");
+                            setActionCodeForSku("");
                             setQty(res.next_carton_details.next_carton_qty);
                             setScannedSKU(0);
                             
@@ -359,12 +347,12 @@ const SKUDetailScreen = () => {
                                                 </Typography>                                       
                                             </div>
                                             <Box alignItems="center" justifyContent="center" py={2}>
-                                                {scannedSKU < qty &&
+                                                {(action_code_for_sku === "" && scannedSKU < qty) &&
                                                     <Box display="flex" alignItems="center" justifyContent="center" py={2} className="w-full">
                                                         <TextField className={classes.textfield} style={{ width: "400px" }} autoFocus id="sku_brcd" label="SKU" variant="outlined" value={sku_brcd} onChange={e => inputSkuBrcd(e)} onKeyUp={handleSKUKeyUp} />                                        
                                                     </Box>
                                                 }
-                                                {scannedSKU == qty &&
+                                                {(action_code_for_sku === "SHORT" || scannedSKU == qty) &&
                                                     <>
                                                         <Box>
                                                             <Box display="flex" alignItems="center" justifyContent="center" py={2} className="w-full">

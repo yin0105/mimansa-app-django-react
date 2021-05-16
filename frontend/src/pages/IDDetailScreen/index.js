@@ -30,6 +30,7 @@ const IDDetailScreen = () => {
     const [sku, setSKU] = useState("");
     const [cartons, setCartons] = useState("");
     const [classification, setClassification] = useState("");
+    const [push_url, setPushUrl] = useState("");
 
     const [open, setOpen] = useState(false);
     const [alert_msg, setAlertMsg] = useState("");
@@ -80,7 +81,7 @@ const IDDetailScreen = () => {
 
     const handleClose = (event, reason) => {
         setOpen(false);
-        history.push("/id");
+        history.push(push_url);
     };
 
     const validateSKUId = () => {
@@ -95,6 +96,7 @@ const IDDetailScreen = () => {
                     console.log('===== res: ', res);
                     setLoading(false);
                     if (res) {
+                        setPushUrl("/id");
                         setAlertMsg(res.message);
                         setSeverity("success");
                         setOpen(true);
@@ -192,7 +194,7 @@ const IDDetailScreen = () => {
                                         onKeyUp={handleKeyUp}
                                         label="SKU ID"
                                         autoFocus
-                                        InputProps={{ readOnly: Boolean(loading), }}
+                                        InputProps={{ readOnly: Boolean(loading) || push_url !== "", }}
                                     />
                                 </div>
                             </CardContent>

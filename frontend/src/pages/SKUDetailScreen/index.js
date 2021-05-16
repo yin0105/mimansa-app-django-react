@@ -176,17 +176,20 @@ const SKUDetailScreen = () => {
                 .catch(function (error) {
                     setLoading(false);
                     console.log('===== error: ', error.message);
-                    setScanCartonFeedback(error.message);
-                    setScanCartonFeedbackError(true);
-                    let msg_to_add = "";
-                    if (scan_carton === "DAMAGED") {
-                        msg_to_add = "Carton DAMAGED";
-                    } else if (scan_carton === "DISCREPANCY") {
-                        msg_to_add = "Carton DISCREPANCY";
-                    } else if (scan_carton === "REPRINT") {
-                        msg_to_add = "Carton PRINTED";
-                    }
-                    setScanCartonFeedbackQueue(scan_carton_feedback_queue => [...scan_carton_feedback_queue, msg_to_add]);     
+
+                    setError(error.message);
+                    setAlert(true);
+                    // setScanCartonFeedback(error.message);
+                    // setScanCartonFeedbackError(true);
+                    // let msg_to_add = "";
+                    // if (scan_carton === "DAMAGED") {
+                    //     msg_to_add = "Carton DAMAGED";
+                    // } else if (scan_carton === "DISCREPANCY") {
+                    //     msg_to_add = "Carton DISCREPANCY";
+                    // } else if (scan_carton === "REPRINT") {
+                    //     msg_to_add = "Carton PRINTED";
+                    // }
+                    // setScanCartonFeedbackQueue(scan_carton_feedback_queue => [...scan_carton_feedback_queue, msg_to_add]);     
                 });
                             
         } else if (scan_carton == next_carton) {
@@ -204,7 +207,7 @@ const SKUDetailScreen = () => {
 
                         sessionStorage.setItem("scanInfo", JSON.stringify(scanInfo));
                         
-                        setScanCartonFeedbackQueue(scan_carton_feedback_queue => [...scan_carton_feedback_queue, ...res.message]);     
+                        setScanCartonFeedbackQueue(scan_carton_feedback_queue => [...scan_carton_feedback_queue, ...res.additional_message]);     
 
                         if (res.next_carton_details.next_carton_qty === 0) {
                             if (res.tote_details.tote_status === 95) {
@@ -235,7 +238,7 @@ const SKUDetailScreen = () => {
                     setLoading(false);
                     console.log('===== error: ', error.message);
 
-                    setScanCartonFeedbackQueue(scan_carton_feedback_queue => [...scan_carton_feedback_queue, ...error.additional_message]);     
+                    // setScanCartonFeedbackQueue(scan_carton_feedback_queue => [...scan_carton_feedback_queue, ...error.additional_message]);     
 
                     setError(error.message);
                     setAlert(true);
@@ -250,6 +253,7 @@ const SKUDetailScreen = () => {
             setSeverity("warning");
             setOpen(true);
         }
+        setScanCarton("");
     }
 
     const classes = useStyles();

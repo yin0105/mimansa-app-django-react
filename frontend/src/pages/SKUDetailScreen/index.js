@@ -359,7 +359,10 @@ const SKUDetailScreen = () => {
                                                 }
                                                 {scannedSKU == qty &&
                                                     <>
-                                                        <TextField className={classes.textfield} width={340} autoFocus id="scan_carton_id" label="Carton ID" variant="outlined" value={scan_carton} helperText={scan_carton_feedback} error={scan_carton_feedback_error} onChange={e => inputScanCarton(e)} onKeyUp={handleCartonKeyUp} style={{ backgroundColor: "#eeffff" }} />
+                                                        <Box display="flex" alignItems="center" justifyContent="center" py={2}>
+                                                            <TextField className={classes.textfield} width={340} autoFocus id="scan_carton_id" label="Carton ID" variant="outlined" value={scan_carton} helperText={scan_carton_feedback} error={scan_carton_feedback_error} onChange={e => inputScanCarton(e)} onKeyUp={handleCartonKeyUp} style={{ backgroundColor: "#eeffff" }} />
+                                                        </Box>
+                                                        
                                                         <Box display="flex" alignItems="center" justifyContent="center" py={2}>
                                                             <TableContainer component={Paper}>
                                                                 <Table className={classes.table} aria-label="error message table" style={{ backgroundColor: "#eeeeee" }}>

@@ -203,6 +203,8 @@ const SKUDetailScreen = () => {
 
                         sessionStorage.setItem("scanInfo", JSON.stringify(scanInfo));
                         
+                        setScanCartonFeedbackQueue(scan_carton_feedback_queue => [...scan_carton_feedback_queue, ...res.additional_message]);     
+
                         if (res.next_carton_details.next_carton_qty === 0) {
                             if (res.tote_details.tote_status === 95) {
                                 setPushUrl("/id");
@@ -231,6 +233,8 @@ const SKUDetailScreen = () => {
                 .catch(function (error) {
                     setLoading(false);
                     console.log('===== error: ', error.message);
+
+                    setScanCartonFeedbackQueue(scan_carton_feedback_queue => [...scan_carton_feedback_queue, ...error.additional_message]);     
 
                     setError(error.message);
                     setAlert(true);
@@ -354,7 +358,22 @@ const SKUDetailScreen = () => {
                                                     <TextField className={classes.textfield} width={340} autoFocus id="sku_brcd" label="SKU" variant="outlined" value={sku_brcd} onChange={e => inputSkuBrcd(e)} onKeyUp={handleSKUKeyUp} />                                        
                                                 }
                                                 {scannedSKU == qty &&
-                                                    <TextField className={classes.textfield} width={340} autoFocus id="scan_carton_id" label="Carton ID" variant="outlined" value={scan_carton} helperText={scan_carton_feedback} error={scan_carton_feedback_error} onChange={e => inputScanCarton(e)} onKeyUp={handleCartonKeyUp} style={{ backgroundColor: "#eeffff" }} />
+                                                    <>
+                                                        <TextField className={classes.textfield} width={340} autoFocus id="scan_carton_id" label="Carton ID" variant="outlined" value={scan_carton} helperText={scan_carton_feedback} error={scan_carton_feedback_error} onChange={e => inputScanCarton(e)} onKeyUp={handleCartonKeyUp} style={{ backgroundColor: "#eeffff" }} />
+                                                        <Box display="flex" alignItems="center" justifyContent="center" py={2}>
+                                                            <TableContainer component={Paper}>
+                                                                <Table className={classes.table} aria-label="error message table" style={{ backgroundColor: "#eeeeee" }}>
+                                                                    <TableBody>
+                                                                    {scan_carton_feedback_queue.map((row, i) => (
+                                                                        <StyledTableRow key={i}>
+                                                                            <StyledTableCell scope="row" align="center">{row}</StyledTableCell>
+                                                                        </StyledTableRow>
+                                                                    ))}
+                                                                    </TableBody>
+                                                                </Table>
+                                                            </TableContainer>
+                                                        </Box>
+                                                    </>
                                                 }
                                             </Box>
                                         </>

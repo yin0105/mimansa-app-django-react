@@ -356,7 +356,9 @@ const SKUDetailScreen = () => {
                                             </div>
                                             <Box alignItems="center" justifyContent="center" py={2}>
                                                 {scannedSKU < qty &&
-                                                    <TextField className={classes.textfield} width={340} autoFocus id="sku_brcd" label="SKU" variant="outlined" value={sku_brcd} onChange={e => inputSkuBrcd(e)} onKeyUp={handleSKUKeyUp} />                                        
+                                                    <Box display="flex" alignItems="center" justifyContent="center" py={2} className="w-full">
+                                                        <TextField className={classes.textfield} width={340} autoFocus id="sku_brcd" label="SKU" variant="outlined" value={sku_brcd} onChange={e => inputSkuBrcd(e)} onKeyUp={handleSKUKeyUp} />                                        
+                                                    </Box>
                                                 }
                                                 {scannedSKU == qty &&
                                                     <>

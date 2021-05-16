@@ -21,7 +21,9 @@ const IDScreen = () => {
 
     const handleKeyUp = e => {
         if (e.keyCode === 13) {
-            if (lpnid === "") {
+            if (lpnid === undefined) {
+                setLPNId("");
+            } else if (lpnid === "") {
                 setError("Please insert LPN Id!")
                 setAlert(true);
             } else {
@@ -77,7 +79,7 @@ const IDScreen = () => {
     }
 
     const onClose = () => {
-        setLPNId("");
+        setLPNId(undefined);
         setAlert(false);
     }
 

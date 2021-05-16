@@ -38,7 +38,9 @@ const IDDetailScreen = () => {
 
     const handleKeyUp = e => {
         if (e.keyCode === 13) {
-            if (skuid === "") {
+            if (skuid === undefined) {
+                setSKUId("");
+            } else if (skuid === "") {
                 setError("Please insert SKU Id!")
                 setAlert(true);
             } else {
@@ -136,7 +138,7 @@ const IDDetailScreen = () => {
     }
 
     const onClose = () => {
-        setSKUId("");
+        setSKUId(undefined);
         setAlert(false);
     }
 

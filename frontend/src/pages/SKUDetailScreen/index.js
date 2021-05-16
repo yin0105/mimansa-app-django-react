@@ -111,9 +111,10 @@ const SKUDetailScreen = () => {
     
     const handleSKUKeyUp = e => {
         if (e.keyCode === 13) {
-            setSkuBrcd("");
-
-            if (sku_brcd_list.some(item => sku_brcd === item)) {
+            
+            if (sku_brcd === undefined ) {
+                
+            } else if (sku_brcd_list.some(item => sku_brcd === item)) {
                 if (scannedSKU < qty) {
                     if (scannedSKU == qty - 1) {
                         setAlertMsg("Por favor escanear el cartón.");
@@ -136,7 +137,9 @@ const SKUDetailScreen = () => {
             } else {
                 setError(`Incorrect Barcode : ${sku_brcd}`)
                 setAlert(true);
-            }            
+            }  
+            
+            setSkuBrcd("");
         }
     }
 
@@ -155,7 +158,7 @@ const SKUDetailScreen = () => {
     }
 
     const onClose = () => {
-        setSkuBrcd("");
+        setSkuBrcd(undefined);
         setAlert(false);
     }
 

@@ -18,7 +18,9 @@ const UserScreen = () => {
 
     const handleKeyUp = e => {
         if (e.keyCode === 13) {
-            if (userid === "") {
+            if (userid === undefined) {
+                setUserId("");
+            }else if (userid === "") {
                 setError("Please insert User Id!");
                 setAlert(true);
             } else {
@@ -57,7 +59,7 @@ const UserScreen = () => {
     }
 
     const onClose = () => {
-        setUserId("");
+        setUserId(undefined);
         setAlert(false);
     }
 
@@ -100,7 +102,7 @@ const UserScreen = () => {
                                 </CardContent>
                             </div>
                         </Card>
-                        <AlertDialog item="User Id" error={error} open={alert} handleClose={onClose} onKeyUp={e => {if (e.keyCode == 27) { console.log("alert-key");e.preventDefault(); onClose();}}}/>
+                        <AlertDialog item="User Id" error={error} open={alert} handleClose={onClose}/>
                     </div>
                 </div>
             </div>

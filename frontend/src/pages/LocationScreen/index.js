@@ -12,6 +12,9 @@ const LocationScreen = () => {
     const [loading, setLoading] = useState(false);
 
     const [userid, setUserId] = useState("");
+    const [whse, setWhse] = useState("");
+    const [whse_name, setWhseName] = useState("");
+
     const [location, setLocation] = useState("");
     const [alert, setAlert] = useState(false);
     const [error, setError] = useState("");
@@ -36,11 +39,13 @@ const LocationScreen = () => {
             history.push("/user");
         }
         if (scanInfo !== null && scanInfo.location !== undefined) {
-            var newInfo = { userid: scanInfo.userid };
+            var newInfo = { userid: scanInfo.userid, whse: scanInfo.whse, whse_name: scanInfo.whse_name };
             sessionStorage.setItem("scanInfo", JSON.stringify(newInfo));
         }
         if (scanInfo !== null) {
             setUserId(scanInfo.userid);
+            setWhse(scanInfo.whse);
+            setWhseName(scanInfo.whse_name);
         }
 
     }, [history]);
@@ -52,14 +57,13 @@ const LocationScreen = () => {
 
         var scanInfo = JSON.parse(sessionStorage.getItem("scanInfo"));
 
-        apiValidateLocation({ locn_brcd: location, login_user_id: scanInfo.userid })
+        apiValidateLocation({ whse: whse, locn_brcd: location, login_user_id: scanInfo.userid })
             .then(res => {
                 console.log('===== res: ', res);
                 setLoading(false);
                 if (res) {
-                    console.log("============ whse = ", res.whse);
                     var scanInfo = JSON.parse(sessionStorage.getItem("scanInfo"));
-                    var newObj = Object.assign({}, scanInfo, { location: location, whse: res.whse, dsp_locn: res.dsp_locn, });
+                    var newObj = Object.assign({}, scanInfo, { dsp_locn: res.dsp_locn, printer_name: res.printer_name, print_mode: res.print_mode, }); //location: location, 
                     sessionStorage.setItem("scanInfo", JSON.stringify(newObj));
                     history.push('/id');
                 }

@@ -76,7 +76,7 @@ const UserScreen = () => {
                 setLoading(false)
 
                 if (res) {
-                    sessionStorage.setItem("scanInfo", JSON.stringify({ userid: userid }));
+                    sessionStorage.setItem("scanInfo", JSON.stringify({ userid: userid, whse: res.whse, whse_name: res.whse_name }));
                     history.push('/location');
                 }
             })

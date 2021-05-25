@@ -1,10 +1,17 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { TextField, Typography, Card, CardContent, CardHeader, LinearProgress } from '@material-ui/core'
 import WithHeaderLayout from '../../layouts/WithHeaderLayout';
 import { useHistory } from 'react-router-dom';
 import AlertDialog from '../../components';
 import { apiValidateUserId } from '../../services/news';
+import { withStyles, makeStyles } from '@material-ui/core/styles';
 
+
+const StyledTextField = withStyles((theme) => ({
+    root: {
+        margin: "30px 0px",
+    },
+  }))(TextField);
 
 const UserScreen = () => {
 
@@ -13,21 +20,47 @@ const UserScreen = () => {
     const [loading, setLoading] = useState(false);
 
     const [userid, setUserId] = useState("");
+    const [password, setPassword] = useState("");
     const [alert, setAlert] = useState(false);
     const [error, setError] = useState("");
 
-    const handleKeyUp = e => {
+    const refUserId = useRef(null);
+    const refPassword = useRef(null);
+
+
+    const handleKeyUpUserId = e => {
         if (e.keyCode === 13) {
             if (userid === undefined) {
                 setUserId("");
-            }else if (userid === "") {
+            } else if (userid === "") {
                 setError("Please insert User Id!");
+                setAlert(true);
+            } else {
+                console.log('focus');
+                refPassword.current.querySelector('input').focus();
+            }
+        }
+    }
+
+    const handleKeyUpPassword = e => {
+        if (e.keyCode === 13) {
+            if (userid === undefined) {
+                setUserId("");
+                refUserId.current.querySelector('input').focus();
+            } else if (userid === "") {
+                setError("Please insert User Id!");
+                setAlert(true);                
+            } else if (password === undefined) {
+                setPassword("");                
+            } else if (password === "") {
+                setError("Please insert Password!");
                 setAlert(true);
             } else {
                 validateUserId();
             }
         }
     }
+    
 
     useEffect(() => {
         sessionStorage.removeItem("scanInfo");
@@ -37,7 +70,7 @@ const UserScreen = () => {
 
         setLoading(true);
 
-        apiValidateUserId({ login_user_id: userid })
+        apiValidateUserId({ login_user_id: userid, password: password })
             .then(res => {
                 console.log('===== res: ', res);
                 setLoading(false)
@@ -58,8 +91,13 @@ const UserScreen = () => {
 
     }
 
-    const onClose = () => {
-        setUserId(undefined);
+    const onClose = (error) => {
+        console.log("error = ", error);
+        if (error == "Please insert User Id!") {
+            setUserId(undefined);                                    
+        } else {
+            setPassword(undefined);
+        }
         setAlert(false);
     }
 
@@ -92,17 +130,32 @@ const UserScreen = () => {
                                         variant="outlined"
                                         value={userid}
                                         onChange={e => setUserId(e.target.value.toUpperCase())}
-                                        onKeyUp={handleKeyUp}
-                                        label="User ID"
-                                        autoFocus
+                                        onKeyUp={handleKeyUpUserId}
+                                        label="User"
+                                        // autoFocus
                                         InputProps={{
                                             readOnly: Boolean(loading),
                                         }}
+                                        ref={refUserId}
+                                    />
+                                    <StyledTextField                                        
+                                        className="m-2 w-full"
+                                        variant="outlined"
+                                        value={password}
+                                        onChange={e => setPassword(e.target.value)}
+                                        onKeyUp={handleKeyUpPassword}
+                                        label="Password"
+                                        // autoFocus
+                                        type="password"
+                                        InputProps={{
+                                            readOnly: Boolean(loading),
+                                        }}
+                                        ref={refPassword}
                                     />
                                 </CardContent>
                             </div>
                         </Card>
-                        <AlertDialog item="User Id" error={error} open={alert} handleClose={onClose}/>
+                        <AlertDialog item="User Id" error={error} open={alert} handleClose={() => onClose(error)}/>
                     </div>
                 </div>
             </div>

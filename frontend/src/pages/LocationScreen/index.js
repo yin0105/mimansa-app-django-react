@@ -63,7 +63,7 @@ const LocationScreen = () => {
                 setLoading(false);
                 if (res) {
                     var scanInfo = JSON.parse(sessionStorage.getItem("scanInfo"));
-                    var newObj = Object.assign({}, scanInfo, { location:location, dsp_locn: res.dsp_locn, printer_name: res.printer_name, print_mode: res.print_mode, }); //location: location, 
+                    var newObj = Object.assign({}, scanInfo, { location:location, dsp_locn: res.dsp_locn, reserve_locn: res.reserve_locn, staging_locn: res.staging_locn, printer_name: res.printer_name, print_mode: res.print_mode, }); //location: location, 
                     sessionStorage.setItem("scanInfo", JSON.stringify(newObj));
                     history.push('/id');
                 }

@@ -40,7 +40,7 @@ const IDScreen = () => {
             history.push("/location");
         }
         if (scanInfo !== null && scanInfo.lpnid !== undefined) {
-            var newInfo = { userid: scanInfo.userid, whse: scanInfo.whse, whse_name: scanInfo.whse_name, location:location, dsp_locn: res.dsp_locn, reserve_locn: res.reserve_locn, staging_locn: res.staging_locn, printer_name: res.printer_name, print_mode: res.print_mode };
+            var newInfo = { userid: scanInfo.userid, whse: scanInfo.whse, whse_name: scanInfo.whse_name, location:location, dsp_locn: scanInfo.dsp_locn, reserve_locn: scanInfo.reserve_locn, staging_locn: scanInfo.staging_locn, printer_name: scanInfo.printer_name, print_mode: scanInfo.print_mode };
             sessionStorage.setItem("scanInfo", JSON.stringify(newInfo));
         }
         if (scanInfo !== null) {

@@ -6,7 +6,7 @@ import logo from '../../images/logo.png';
 import { useHistory } from 'react-router-dom';
 import { string } from 'prop-types';
 import AlertDialog from '../../components';
-import { apiValidateActionCode, apiValidatePackCarton } from '../../services/news';
+import { apiValidateActionCode, apiValidatePackCarton, apiValidatePrintCarton } from '../../services/news';
 import MuiAlert from '@material-ui/lab/Alert';
 
 
@@ -170,8 +170,9 @@ const SKUDetailScreen = () => {
 
         var scanInfo = JSON.parse(sessionStorage.getItem("scanInfo"));
 
-        if (scan_carton === "DAMAGED" || scan_carton === "DISCREPANCY" || scan_carton === "REPRINT" || scan_carton === "SHORT" || scan_carton === "CANCEL") {
-            apiValidateActionCode({ whse: scanInfo.whse, carton_nbr: next_carton, action_code: scan_carton, login_user_id: userid })
+        if (scan_carton === "DAMAGED" || scan_carton === "DISCREPANCY" || scan_carton === "SHORT" || scan_carton === "CANCEL") {
+            apiValidateActionCode({ whse: scanInfo.whse, carton_nbr: next_carton, action_code: scan_carton, staging_locn: scanInfo.staging_locn,  login_user_id: userid })
+            // apiValidateActionCode({ whse: scanInfo.whse, carton_nbr: next_carton, printer_name: scanInfo.printer_name,  action_code: scan_carton, login_user_id: userid })
                 .then(res => {
                     console.log('===== res: ', res);
                     setLoading(false);
@@ -189,10 +190,28 @@ const SKUDetailScreen = () => {
                     setError(error.message);
                     setAlert(true);  
                 });
-                            
+        } else if (scan_carton === "REPRINT") {
+            apiValidatePrintCarton({ whse: scanInfo.whse, carton_nbr: next_carton, printer_name: scanInfo.printer_name, action_code: scan_carton, login_user_id: userid })
+                .then(res => {
+                    console.log('===== res: ', res);
+                    setLoading(false);
+                    setReadOnly(false);
+                    if (res) {
+                        console.log('==== res.message: ', res.message);
+                        setScanCartonFeedbackQueue(scan_carton_feedback_queue => [...scan_carton_feedback_queue, res.message]);     
+                    }
+                })
+                .catch(function (error) {
+                    setLoading(false);
+                    setReadOnly(false);
+                    console.log('===== error: ', error.message);
+
+                    setError(error.message);
+                    setAlert(true);  
+            });      
         } else if (scan_carton == next_carton) {
             if (tote_type === "MONO") { setScannedSKU(1);}
-            apiValidatePackCarton({ whse: scanInfo.whse, carton_nbr: scan_carton, tote: lpnid, tote_type: tote_type, login_user_id: userid, sku_id: sku, qty: scannedSKU, action_code: action_code_for_sku })
+            apiValidatePackCarton({ whse: scanInfo.whse, carton_nbr: scan_carton, tote: lpnid, tote_type: tote_type, staging_locn: scanInfo.staging_locn, login_user_id: userid, sku_id: sku, qty: scannedSKU, action_code: action_code_for_sku })
                 .then(res => {
                     console.log('===== res: ', res);
                     setLoading(false);

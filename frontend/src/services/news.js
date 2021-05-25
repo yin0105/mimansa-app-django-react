@@ -51,3 +51,7 @@ export async function apiValidatePackCarton(searchParams) {
 export async function apiCancelTote(searchParams) {
   return await query(`/cancel_tote`, {searchParams: searchParams, method: 'POST'});
 }
+export async function apiValidatePrintCarton(searchParams) {
+  return await query(`/print_carton`, {searchParams: searchParams, method: 'POST'});
+}
+

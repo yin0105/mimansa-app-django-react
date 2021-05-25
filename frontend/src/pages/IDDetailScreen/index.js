@@ -73,13 +73,22 @@ const IDDetailScreen = () => {
         if (scanInfo !== null && scanInfo.skuid !== undefined) {
             var newInfo = {
                 userid: scanInfo.userid,
+                whse: scanInfo.whse,
+                whse_name: scanInfo.whse_name,
                 location: scanInfo.location,
+                dsp_locn: scanInfo.dsp_locn,
+                reserve_locn: scanInfo.reserve_locn,
+                staging_locn: scanInfo.staging_locn,
+                printer_name: scanInfo.printer_name,
+                print_mode: scanInfo.print_mode,
+
                 lpnid: scanInfo.lpnid,
                 tote_type: scanInfo.tote_type,
+                tote_status: scanInfo.tote_status,
                 distinct_skus: scanInfo.distinct_skus,
-                carton: scanInfo.carton,
-                whse: scanInfo.whse, 
-                classification: scanInfo.classification,
+                carton: scanInfo.distinct_carton,
+                requiring_vas: scanInfo.requiring_vas,
+                classification: scanInfo.distinct_classifications,
             };
             sessionStorage.setItem("scanInfo", JSON.stringify(newInfo));
         }

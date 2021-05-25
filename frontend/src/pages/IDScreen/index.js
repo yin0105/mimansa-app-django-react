@@ -13,6 +13,7 @@ const IDScreen = () => {
 
     const [userid, setUserId] = useState("");
     const [location, setLocation] = useState("");
+    // const [reserve_locn, setReserveLocn] = useState("");
 
     const [lpnid, setLPNId] = useState("");
     const [alert, setAlert] = useState(false);
@@ -39,12 +40,13 @@ const IDScreen = () => {
             history.push("/location");
         }
         if (scanInfo !== null && scanInfo.lpnid !== undefined) {
-            var newInfo = { userid: scanInfo.userid, location: scanInfo.location, whse: scanInfo.whse };
+            var newInfo = { userid: scanInfo.userid, whse: scanInfo.whse, whse_name: scanInfo.whse_name, location:location, dsp_locn: res.dsp_locn, reserve_locn: res.reserve_locn, staging_locn: res.staging_locn, printer_name: res.printer_name, print_mode: res.print_mode };
             sessionStorage.setItem("scanInfo", JSON.stringify(newInfo));
         }
         if (scanInfo !== null) {
             setUserId(scanInfo.userid);
             setLocation(scanInfo.location);
+            // setReserveLocn(scanInfo.reserve_locn);
         }
 
     }, [history]);
@@ -55,14 +57,14 @@ const IDScreen = () => {
 
         var scanInfo = JSON.parse(sessionStorage.getItem("scanInfo"));
 
-        apiValidateLPNId({ whse: scanInfo.whse, tote: lpnid, login_user_id: scanInfo.userid })
+        apiValidateLPNId({ whse: scanInfo.whse, tote: lpnid, login_user_id: scanInfo.userid, reserve_locn: scanInfo.reserve_locn})
             .then(res => {
                 console.log('===== res: ', res);
                 setLoading(false);
                 if (res) {
                     var scanInfo = JSON.parse(sessionStorage.getItem("scanInfo"));
                     console.log(" == whse = ", scanInfo.whse)
-                    var newObj = Object.assign({}, scanInfo, { lpnid: lpnid, distinct_skus: res.tote_details.distinct_skus, carton: res.tote_details.distinct_carton, classification: res.tote_details.distinct_classifications, tote_type: res.tote_details.tote_type });
+                    var newObj = Object.assign({}, scanInfo, { lpnid: lpnid, tote_type: res.tote_details.tote_type, tote_status: res.tote_details.tote_status, distinct_skus: res.tote_details.distinct_skus, carton: res.tote_details.distinct_carton, requiring_vas: res.tote_details.requiring_vas,  classification: res.tote_details.distinct_classifications,  });
                     sessionStorage.setItem("scanInfo", JSON.stringify(newObj));
                     history.push('/iddetail');
                 }

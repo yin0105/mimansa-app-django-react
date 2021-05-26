@@ -114,7 +114,7 @@ const UserScreen = () => {
                     <div className="w-full ">
                         <div className="w-full text-center">
                             <Typography variant="h3" color="primary">
-                                Pack LPN
+                                Mimansa - Pack from tote
                             </Typography>
                         </div>
                         <Card className="mt-2">

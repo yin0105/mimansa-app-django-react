@@ -1,12 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { TextField, Typography, Card, CardContent, CardHeader, LinearProgress, TableHead, TableCell, TableBody, TableRow } from '@material-ui/core'
+import { TextField, Typography, Grid, Card, CardContent, CardHeader, LinearProgress, TableHead, TableCell, TableBody, TableRow, Table, TableContainer } from '@material-ui/core'
 import WithHeaderLayout from '../layouts/WithHeaderLayout';
 import { useHistory } from 'react-router-dom';
 import AlertDialog from '../components';
 import { apiGetToteDetails } from '../services/news';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import { Table, TableBody, TableHead, TableCell, TableContainer, TableRow } from '@material-ui/core';
 import MainMenu from '../components/menu';
 
 

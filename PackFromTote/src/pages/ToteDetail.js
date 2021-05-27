@@ -309,7 +309,7 @@ const  ToteDetail = () => {
                                     <TextField
                                         id="outlined-read-only-input"
                                         label="carton_nbr"
-                                        value={carton.arton_nbr}
+                                        value={carton.carton_nbr}
                                         InputProps={{
                                             readOnly: true,
                                         }}

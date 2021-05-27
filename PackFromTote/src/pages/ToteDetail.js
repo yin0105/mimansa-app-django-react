@@ -17,8 +17,7 @@ const useStyles = makeStyles((theme) => ({
   },
 
   table: {
-    maxWidth: 800,
-    tableLayout: 'fixed',
+    maxWidth: 1000,
   },
   cell: {
       wordBreak: 'break-word',

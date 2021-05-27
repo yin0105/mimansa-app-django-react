@@ -61,15 +61,17 @@ const  ToteDetail = () => {
 
     const handleKeyUp = e => {
         if (e.keyCode === 13) {
-            // if (userid === undefined) {
-            //     setUserId("");
-            // } else if (userid === "") {
-            //     setError("Please insert User Id!");
-            //     setAlert(true);
+            if (tote_id === undefined) {
+                setToteId("");
+            } else if (tote_id === "") {
+                setError("Please insert Tote Id!");
+                setAlert(true);
             // } else {
             //     console.log('focus');
             //     refPassword.current.querySelector('input').focus();
-            // }
+            } else {
+                getToteDetails();
+            }
         }
     }
 

@@ -123,9 +123,6 @@ export default function MainMenu() {
                 <StyledMenuItem>
                     <StyledLink to="/tote_detail">Tote Details</StyledLink>
                 </StyledMenuItem>
-                <StyledMenuItem>
-                    <Link to="/login">Tote Details</Link>
-                </StyledMenuItem>
             </StyledMenu>
         </div>
     );

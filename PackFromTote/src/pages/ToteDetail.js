@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 
-  table: {
+  tableContainer: {
     maxWidth: 800,
   },
 }));
@@ -174,8 +174,8 @@ const  ToteDetail = () => {
                 className="pt-12"
             >
                 { 
-                    tote_details &&  <TableContainer component={Paper}>
-                        <Table className={classes.table} aria-label="simple table">
+                    tote_details &&  <TableContainer component={Paper} className={classes.tableContainer}>
+                        <Table aria-label="simple table">
                             <TableHead>
                                 <TableCell>tote</TableCell>
                                 <TableCell>tote_type</TableCell>
@@ -198,6 +198,11 @@ const  ToteDetail = () => {
                             </TableBody>
                         </Table>
                     </TableContainer>
+                }
+                {
+                    carton_list && carton_list.map((carton, i) => {
+
+                    }) 
                 }
                 {/* {tote_details && <Grid item xs={10}>
                     <Card>

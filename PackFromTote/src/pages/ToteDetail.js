@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { TextField, Typography, Grid, Card, CardContent, CardHeader, LinearProgress, TableHead, TableCell, TableBody, TableRow, Table, TableContainer } from '@material-ui/core'
+import { TextField, Typography, Grid, Card, CardContent, CardHeader, LinearProgress, TableHead, TableCell, TableBody, TableRow, Table, TableContainer, Paper } from '@material-ui/core'
 import WithHeaderLayout from '../layouts/WithHeaderLayout';
 import { useHistory } from 'react-router-dom';
 import AlertDialog from '../components';
@@ -14,6 +14,10 @@ const useStyles = makeStyles((theme) => ({
       margin: theme.spacing(1),
       width: '25ch',
     },
+  },
+
+  table: {
+    maxWidth: 800,
   },
 }));
 
@@ -170,28 +174,30 @@ const  ToteDetail = () => {
                 className="pt-12"
             >
                 { 
-                    tote_details && <Table>
-                        <TableHead>
-                            <TableCell>tote</TableCell>
-                            <TableCell>tote_type</TableCell>
-                            <TableCell>tote_status</TableCell>
-                            <TableCell>distinct_skus</TableCell>
-                            <TableCell>distinct_carton</TableCell>
-                            <TableCell>requiring_vas</TableCell>
-                            <TableCell>distinct_classifications</TableCell>
-                        </TableHead>
-                        <TableBody>
-                            <TableRow>
-                            <TableCell>{tote_details.tote}</TableCell>
-                            <TableCell>{tote_details.tote_type}</TableCell>
-                            <TableCell>{tote_details.tote_status}</TableCell>
-                            <TableCell>{tote_details.distinct_skus}</TableCell>
-                            <TableCell>{tote_details.distinct_carton}</TableCell>
-                            <TableCell>{tote_details.requiring_vas}</TableCell>
-                            <TableCell>{tote_details.distinct_classifications}</TableCell>
-                            </TableRow>
-                        </TableBody>
-                    </Table>
+                    tote_details &&  <TableContainer component={Paper}>
+                        <Table className={classes.table} aria-label="simple table">
+                            <TableHead>
+                                <TableCell>tote</TableCell>
+                                <TableCell>tote_type</TableCell>
+                                <TableCell>tote_status</TableCell>
+                                <TableCell>distinct_skus</TableCell>
+                                <TableCell>distinct_carton</TableCell>
+                                <TableCell>requiring_vas</TableCell>
+                                <TableCell>distinct_classifications</TableCell>
+                            </TableHead>
+                            <TableBody>
+                                <TableRow>
+                                <TableCell>{tote_details.tote}</TableCell>
+                                <TableCell>{tote_details.tote_type}</TableCell>
+                                <TableCell>{tote_details.tote_status}</TableCell>
+                                <TableCell>{tote_details.distinct_skus}</TableCell>
+                                <TableCell>{tote_details.distinct_carton}</TableCell>
+                                <TableCell>{tote_details.requiring_vas}</TableCell>
+                                <TableCell>{tote_details.distinct_classifications}</TableCell>
+                                </TableRow>
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
                 }
                 {/* {tote_details && <Grid item xs={10}>
                     <Card>

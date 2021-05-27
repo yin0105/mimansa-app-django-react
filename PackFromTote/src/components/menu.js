@@ -118,7 +118,7 @@ export default function MainMenu() {
                 onClose={handleClose2}
             >
                 <StyledMenuItem>
-                    <StyledLink to="#">Pack from Tote</StyledLink>
+                    <StyledLink to="/location">Pack from Tote</StyledLink>
                 </StyledMenuItem>
                 <StyledMenuItem>
                     <StyledLink to="/tote_detail">Tote Details</StyledLink>

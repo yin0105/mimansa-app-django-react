@@ -10,6 +10,23 @@ import logo from '../images/logo.png';
 import MainMenu from '../components/menu';
 
 const  Main = () => {
+    let history = useHistory();
+
+    useEffect(() => {
+        var scanInfo = JSON.parse(sessionStorage.getItem("scanInfo"));
+
+        if (scanInfo === null || scanInfo.userid === undefined) {
+            history.push("/login");
+        }
+
+        var newInfo = { 
+            userid: scanInfo.userid,
+            whse: scanInfo.whse,
+            whse_name: scanInfo.whse_name,
+        };
+        sessionStorage.setItem("scanInfo", JSON.stringify(newInfo));
+    }, [history]);
+
     return (
         <MainMenu/>
     )

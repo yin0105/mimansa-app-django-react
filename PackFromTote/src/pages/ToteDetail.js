@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 
-  tableContainer: {
+  table: {
     maxWidth: 800,
   },
 }));
@@ -174,8 +174,8 @@ const  ToteDetail = () => {
                 className="pt-12"
             >
                 { 
-                    tote_details &&  <TableContainer component={Paper} className={classes.tableContainer}>
-                        <Table aria-label="simple table">
+                    tote_details &&  <TableContainer component={Paper} className={classes.table}>
+                        <Table aria-label="simple table" className={classes.table}>
                             <TableHead>
                                 <TableCell>tote</TableCell>
                                 <TableCell>tote_type</TableCell>

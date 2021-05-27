@@ -290,10 +290,11 @@ const  ToteDetail = () => {
                     </Card>
                 </Grid>}
 
-                {/* <Grid item xs={10}>
+                {carton_list && carton_list.map((carton, i) => 
+                <Grid item xs={10}>
                     <Card>
                         <CardHeader
-                            title="carton_list"
+                            title={`carton_list [${i}]`}
                             titleTypographyProps={{ variant: 'h4' }}
                             style={{ textAlign: "center" }}
                         />
@@ -308,7 +309,7 @@ const  ToteDetail = () => {
                                     <TextField
                                         id="outlined-read-only-input"
                                         label="carton_nbr"
-                                        value={carton_nbr}
+                                        value={carton.arton_nbr}
                                         InputProps={{
                                             readOnly: true,
                                         }}
@@ -320,7 +321,7 @@ const  ToteDetail = () => {
                                     <TextField
                                         id="outlined-read-only-input"
                                         label="stat_code"
-                                        value={stat_code}
+                                        value={carton.stat_code}
                                         InputProps={{
                                             readOnly: true,
                                         }}
@@ -332,7 +333,7 @@ const  ToteDetail = () => {
                                     <TextField
                                         id="outlined-read-only-input"
                                         label="sku_id"
-                                        value={sku_id}
+                                        value={carton.sku_id}
                                         InputProps={{
                                             readOnly: true,
                                         }}
@@ -344,7 +345,7 @@ const  ToteDetail = () => {
                                     <TextField
                                         id="outlined-read-only-input"
                                         label="sku_brcd"
-                                        value={sku_brcd}
+                                        value={carton.sku_brcd}
                                         InputProps={{
                                             readOnly: true,
                                         }}
@@ -356,7 +357,7 @@ const  ToteDetail = () => {
                                     <TextField
                                         id="outlined-read-only-input"
                                         label="dsp_sku"
-                                        value={dsp_sku}
+                                        value={carton.dsp_sku}
                                         InputProps={{
                                             readOnly: true,
                                         }}
@@ -368,7 +369,7 @@ const  ToteDetail = () => {
                                     <TextField
                                         id="outlined-read-only-input"
                                         label="sku_desc"
-                                        value={sku_desc}
+                                        value={carton.sku_desc}
                                         InputProps={{
                                             readOnly: true,
                                         }}
@@ -380,7 +381,7 @@ const  ToteDetail = () => {
                                     <TextField
                                         id="outlined-read-only-input"
                                         label="to_be_pakd_units"
-                                        value={to_be_pakd_units}
+                                        value={carton.to_be_pakd_units}
                                         InputProps={{
                                             readOnly: true,
                                         }}
@@ -392,7 +393,7 @@ const  ToteDetail = () => {
                                     <TextField
                                         id="outlined-read-only-input"
                                         label="units_pakd"
-                                        value={units_pakd}
+                                        value={carton.units_pakd}
                                         InputProps={{
                                             readOnly: true,
                                         }}
@@ -404,7 +405,7 @@ const  ToteDetail = () => {
                                     <TextField
                                         id="outlined-read-only-input"
                                         label="remaining"
-                                        value={remaining}
+                                        value={carton.remaining}
                                         InputProps={{
                                             readOnly: true,
                                         }}
@@ -414,7 +415,7 @@ const  ToteDetail = () => {
                             </Grid>
                         </CardContent>
                     </Card>
-                </Grid> */}
+                </Grid>)}
             </Grid>
 
             {/* <div className="d-flex">

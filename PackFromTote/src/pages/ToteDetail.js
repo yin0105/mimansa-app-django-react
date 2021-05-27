@@ -19,6 +19,9 @@ const useStyles = makeStyles((theme) => ({
   table: {
     maxWidth: 800,
   },
+  cell: {
+      wordBreak: 'break-word',
+  }
 }));
 
 
@@ -177,23 +180,23 @@ const  ToteDetail = () => {
                     tote_details &&  <TableContainer component={Paper} className={classes.table}>
                         <Table aria-label="simple table" className={classes.table}>
                             <TableHead>
-                                <TableCell>tote</TableCell>
-                                <TableCell>tote_type</TableCell>
-                                <TableCell>tote_status</TableCell>
-                                <TableCell>distinct_skus</TableCell>
-                                <TableCell>distinct_carton</TableCell>
-                                <TableCell>requiring_vas</TableCell>
-                                <TableCell>distinct_classifications</TableCell>
+                                <TableCell className={classes.cell}>tote</TableCell>
+                                <TableCell className={classes.cell}>tote_type</TableCell>
+                                <TableCell className={classes.cell}>tote_status</TableCell>
+                                <TableCell className={classes.cell}>distinct_skus</TableCell>
+                                <TableCell className={classes.cell}>distinct_carton</TableCell>
+                                <TableCell className={classes.cell}>requiring_vas</TableCell>
+                                <TableCell className={classes.cell}>distinct_classifications</TableCell>
                             </TableHead>
                             <TableBody>
                                 <TableRow>
-                                <TableCell>{tote_details.tote}</TableCell>
-                                <TableCell>{tote_details.tote_type}</TableCell>
-                                <TableCell>{tote_details.tote_status}</TableCell>
-                                <TableCell>{tote_details.distinct_skus}</TableCell>
-                                <TableCell>{tote_details.distinct_carton}</TableCell>
-                                <TableCell>{tote_details.requiring_vas}</TableCell>
-                                <TableCell>{tote_details.distinct_classifications}</TableCell>
+                                <TableCell className={classes.cell}>{tote_details.tote}</TableCell>
+                                <TableCell className={classes.cell}>{tote_details.tote_type}</TableCell>
+                                <TableCell className={classes.cell}>{tote_details.tote_status}</TableCell>
+                                <TableCell className={classes.cell}>{tote_details.distinct_skus}</TableCell>
+                                <TableCell className={classes.cell}>{tote_details.distinct_carton}</TableCell>
+                                <TableCell className={classes.cell}>{tote_details.requiring_vas}</TableCell>
+                                <TableCell className={classes.cell}>{tote_details.distinct_classifications}</TableCell>
                                 </TableRow>
                             </TableBody>
                         </Table>

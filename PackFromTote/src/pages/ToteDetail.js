@@ -182,13 +182,13 @@ const  ToteDetail = () => {
                         </TableHead>
                         <TableBody>
                             <TableRow>
-                            <TableCell>tote_details.tote</TableCell>
-                            <TableCell>tote_details.tote_type</TableCell>
-                            <TableCell>tote_details.tote_status</TableCell>
-                            <TableCell>tote_details.distinct_skus</TableCell>
-                            <TableCell>tote_details.distinct_carton</TableCell>
-                            <TableCell>tote_details.requiring_vas</TableCell>
-                            <TableCell>tote_details.distinct_classifications</TableCell>
+                            <TableCell>{tote_details.tote}</TableCell>
+                            <TableCell>{tote_details.tote_type}</TableCell>
+                            <TableCell>{tote_details.tote_status}</TableCell>
+                            <TableCell>{tote_details.distinct_skus}</TableCell>
+                            <TableCell>{tote_details.distinct_carton}</TableCell>
+                            <TableCell>{tote_details.requiring_vas}</TableCell>
+                            <TableCell>{tote_details.distinct_classifications}</TableCell>
                             </TableRow>
                         </TableBody>
                     </Table>

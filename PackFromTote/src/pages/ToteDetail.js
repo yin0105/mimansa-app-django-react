@@ -18,6 +18,7 @@ const useStyles = makeStyles((theme) => ({
 
   table: {
     maxWidth: 800,
+    tableLayout: 'fixed',
   },
   cell: {
       wordBreak: 'break-word',
@@ -180,23 +181,23 @@ const  ToteDetail = () => {
                     tote_details &&  <TableContainer component={Paper} className={classes.table}>
                         <Table aria-label="simple table" className={classes.table}>
                             <TableHead>
-                                <TableCell className={classes.cell}>tote</TableCell>
-                                <TableCell className={classes.cell}>tote_type</TableCell>
-                                <TableCell className={classes.cell}>tote_status</TableCell>
-                                <TableCell className={classes.cell}>distinct_skus</TableCell>
-                                <TableCell className={classes.cell}>distinct_carton</TableCell>
-                                <TableCell className={classes.cell}>requiring_vas</TableCell>
-                                <TableCell className={classes.cell}>distinct_classifications</TableCell>
+                                <TableCell style={{ width: '340px', }}>tote</TableCell>
+                                <TableCell style={{ width: '110px', }}>tote_type</TableCell>
+                                <TableCell style={{ width: '110px', }}>tote_status</TableCell>
+                                <TableCell style={{ width: '110px', }}>distinct_skus</TableCell>
+                                <TableCell style={{ width: '110px', }}>distinct_carton</TableCell>
+                                <TableCell style={{ width: '110px', }}>requiring_vas</TableCell>
+                                <TableCell style={{ width: '110px', }}>distinct_classifications</TableCell>
                             </TableHead>
                             <TableBody>
                                 <TableRow>
-                                <TableCell className={classes.cell}>{tote_details.tote}</TableCell>
-                                <TableCell className={classes.cell}>{tote_details.tote_type}</TableCell>
-                                <TableCell className={classes.cell}>{tote_details.tote_status}</TableCell>
-                                <TableCell className={classes.cell}>{tote_details.distinct_skus}</TableCell>
-                                <TableCell className={classes.cell}>{tote_details.distinct_carton}</TableCell>
-                                <TableCell className={classes.cell}>{tote_details.requiring_vas}</TableCell>
-                                <TableCell className={classes.cell}>{tote_details.distinct_classifications}</TableCell>
+                                <TableCell style={{ width: '340px', }}>{tote_details.tote}</TableCell>
+                                <TableCell style={{ width: '110px', }}>{tote_details.tote_type}</TableCell>
+                                <TableCell style={{ width: '110px', }}>{tote_details.tote_status}</TableCell>
+                                <TableCell style={{ width: '110px', }}>{tote_details.distinct_skus}</TableCell>
+                                <TableCell style={{ width: '110px', }}>{tote_details.distinct_carton}</TableCell>
+                                <TableCell style={{ width: '110px', }}>{tote_details.requiring_vas}</TableCell>
+                                <TableCell style={{ width: '110px', }}>{tote_details.distinct_classifications}</TableCell>
                                 </TableRow>
                             </TableBody>
                         </Table>

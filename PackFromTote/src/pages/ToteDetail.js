@@ -112,7 +112,7 @@ const  ToteDetail = () => {
 
                 if (res) {
                     setToteDetails(res.tote_details);
-                    setToteDetails(res.carton_list);
+                    setCartonList(res.carton_list);
 
                     // setTote(res.tote);
                     // setToteType(res.tote_type);

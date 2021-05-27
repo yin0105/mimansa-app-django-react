@@ -55,6 +55,6 @@ export async function apiValidatePrintCarton(searchParams) {
   return await query(`/print_carton`, {searchParams: searchParams, method: 'POST'});
 }
 export async function apiGetToteDetails(searchParams) {
-  return await query(`/tote_details`, {searchParams: searchParams, method: 'POST'});
+  return await query(`/tote_details`, {searchParams});
 }
 

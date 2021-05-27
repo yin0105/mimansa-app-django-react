@@ -6,9 +6,9 @@ import AlertDialog from '../components';
 import { apiGetToteDetails } from '../services/news';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-
-
+import { Table, TableBody, TableHead, TableCell, TableContainer, TableRow } from '@material-ui/core';
 import MainMenu from '../components/menu';
+
 
 const useStyles = makeStyles((theme) => ({
   root: {

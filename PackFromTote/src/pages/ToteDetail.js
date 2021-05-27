@@ -309,6 +309,7 @@ const  ToteDetail = () => {
                                     <TextField
                                         id="outlined-read-only-input"
                                         label="carton_nbr"
+                                        key={`carton_nbr_${i}`}
                                         value={carton.carton_nbr}
                                         InputProps={{
                                             readOnly: true,
@@ -321,6 +322,7 @@ const  ToteDetail = () => {
                                     <TextField
                                         id="outlined-read-only-input"
                                         label="stat_code"
+                                        key={`stat_code_${i}`}
                                         value={carton.stat_code}
                                         InputProps={{
                                             readOnly: true,
@@ -333,6 +335,7 @@ const  ToteDetail = () => {
                                     <TextField
                                         id="outlined-read-only-input"
                                         label="sku_id"
+                                        key={`sku_id_${i}`}
                                         value={carton.sku_id}
                                         InputProps={{
                                             readOnly: true,
@@ -345,6 +348,7 @@ const  ToteDetail = () => {
                                     <TextField
                                         id="outlined-read-only-input"
                                         label="sku_brcd"
+                                        key={`sku_brcd_${i}`}
                                         value={carton.sku_brcd}
                                         InputProps={{
                                             readOnly: true,
@@ -357,6 +361,7 @@ const  ToteDetail = () => {
                                     <TextField
                                         id="outlined-read-only-input"
                                         label="dsp_sku"
+                                        key={`dsp_sku_${i}`}
                                         value={carton.dsp_sku}
                                         InputProps={{
                                             readOnly: true,
@@ -369,6 +374,7 @@ const  ToteDetail = () => {
                                     <TextField
                                         id="outlined-read-only-input"
                                         label="sku_desc"
+                                        key={`sku_desc_${i}`}
                                         value={carton.sku_desc}
                                         InputProps={{
                                             readOnly: true,
@@ -381,6 +387,7 @@ const  ToteDetail = () => {
                                     <TextField
                                         id="outlined-read-only-input"
                                         label="to_be_pakd_units"
+                                        key={`to_be_pakd_units_${i}`}
                                         value={carton.to_be_pakd_units}
                                         InputProps={{
                                             readOnly: true,
@@ -393,6 +400,7 @@ const  ToteDetail = () => {
                                     <TextField
                                         id="outlined-read-only-input"
                                         label="units_pakd"
+                                        key={`units_pakd_${i}`}
                                         value={carton.units_pakd}
                                         InputProps={{
                                             readOnly: true,
@@ -405,6 +413,7 @@ const  ToteDetail = () => {
                                     <TextField
                                         id="outlined-read-only-input"
                                         label="remaining"
+                                        key={`remaining_${i}`}
                                         value={carton.remaining}
                                         InputProps={{
                                             readOnly: true,

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { TextField, Typography, Card, CardContent, CardHeader, LinearProgress } from '@material-ui/core'
+import { TextField, Typography, Card, CardContent, CardHeader, LinearProgress, TableHead, TableCell, TableBody, TableRow } from '@material-ui/core'
 import WithHeaderLayout from '../layouts/WithHeaderLayout';
 import { useHistory } from 'react-router-dom';
 import AlertDialog from '../components';
@@ -113,23 +113,6 @@ const  ToteDetail = () => {
                 if (res) {
                     setToteDetails(res.tote_details);
                     setCartonList(res.carton_list);
-
-                    // setTote(res.tote);
-                    // setToteType(res.tote_type);
-                    // setToteStatus(res.tote_status);
-                    // setDistinctSkus(res.distinct_skus);
-                    // setDistinctCarton(res.distinct_carton);
-                    // setRequiringVas(res.requiring_vas);
-                    // setDistinctClassifications(res.distinct_classifications);
-                    // setCartonNbr(res.carton_nbr);
-                    // setStatCode(res.stat_code);
-                    // setSkuId(res.sku_id);
-                    // setSkuBrcd(res.sku_brcd);
-                    // setDspSku(res.dsp_sku);
-                    // setSkuDesc(res.sku_desc);
-                    // setToBePakdUnits(res.to_be_pakd_units);
-                    // setUnitsPakd(res.units_pakd);
-                    // setRemaining(res.remaining);
                 }
             })
             .catch(function (error) {
@@ -188,7 +171,31 @@ const  ToteDetail = () => {
                 spacing={6}
                 className="pt-12"
             >
-                {tote_details && <Grid item xs={10}>
+                { 
+                    tote_details && <Table>
+                        <TableHead>
+                            <TableCell>tote</TableCell>
+                            <TableCell>tote_type</TableCell>
+                            <TableCell>tote_status</TableCell>
+                            <TableCell>distinct_skus</TableCell>
+                            <TableCell>distinct_carton</TableCell>
+                            <TableCell>requiring_vas</TableCell>
+                            <TableCell>distinct_classifications</TableCell>
+                        </TableHead>
+                        <TableBody>
+                            <TableRow>
+                            <TableCell>tote_details.tote</TableCell>
+                            <TableCell>tote_details.tote_type</TableCell>
+                            <TableCell>tote_details.tote_status</TableCell>
+                            <TableCell>tote_details.distinct_skus</TableCell>
+                            <TableCell>tote_details.distinct_carton</TableCell>
+                            <TableCell>tote_details.requiring_vas</TableCell>
+                            <TableCell>tote_details.distinct_classifications</TableCell>
+                            </TableRow>
+                        </TableBody>
+                    </Table>
+                }
+                {/* {tote_details && <Grid item xs={10}>
                     <Card>
                         <CardHeader
                             title="tote_details"
@@ -288,7 +295,7 @@ const  ToteDetail = () => {
                             </Grid>
                         </CardContent>
                     </Card>
-                </Grid>}
+                </Grid>} */}
 
                 {carton_list && carton_list.map((carton, i) => 
                 <Grid item xs={10}>

@@ -34,7 +34,9 @@ const  ToteDetail = () => {
     const [loading, setLoading] = useState(false);
 
     const [tote_id, setToteId] = useState("");
-    
+    const [tote_details, setToteDetails] = useState(null);
+    const [carton_list, setCartonList] = useState([]);
+
     const [tote, setTote] = useState("");
     const [tote_type, setToteType] = useState("");
     const [tote_status, setToteStatus] = useState("");
@@ -109,22 +111,25 @@ const  ToteDetail = () => {
                 setLoading(false)
 
                 if (res) {
-                    setTote(res.tote);
-                    setToteType(res.tote_type);
-                    setToteStatus(res.tote_status);
-                    setDistinctSkus(res.distinct_skus);
-                    setDistinctCarton(res.distinct_carton);
-                    setRequiringVas(res.requiring_vas);
-                    setDistinctClassifications(res.distinct_classifications);
-                    setCartonNbr(res.carton_nbr);
-                    setStatCode(res.stat_code);
-                    setSkuId(res.sku_id);
-                    setSkuBrcd(res.sku_brcd);
-                    setDspSku(res.dsp_sku);
-                    setSkuDesc(res.sku_desc);
-                    setToBePakdUnits(res.to_be_pakd_units);
-                    setUnitsPakd(res.units_pakd);
-                    setRemaining(res.remaining);
+                    setToteDetails(res.tote_details);
+                    setToteDetails(res.carton_list);
+
+                    // setTote(res.tote);
+                    // setToteType(res.tote_type);
+                    // setToteStatus(res.tote_status);
+                    // setDistinctSkus(res.distinct_skus);
+                    // setDistinctCarton(res.distinct_carton);
+                    // setRequiringVas(res.requiring_vas);
+                    // setDistinctClassifications(res.distinct_classifications);
+                    // setCartonNbr(res.carton_nbr);
+                    // setStatCode(res.stat_code);
+                    // setSkuId(res.sku_id);
+                    // setSkuBrcd(res.sku_brcd);
+                    // setDspSku(res.dsp_sku);
+                    // setSkuDesc(res.sku_desc);
+                    // setToBePakdUnits(res.to_be_pakd_units);
+                    // setUnitsPakd(res.units_pakd);
+                    // setRemaining(res.remaining);
                 }
             })
             .catch(function (error) {
@@ -183,7 +188,7 @@ const  ToteDetail = () => {
                 spacing={6}
                 className="pt-12"
             >
-                <Grid item xs={5}>
+                {tote_details && <Grid item xs={10}>
                     <Card>
                         <CardHeader
                             title="tote_details"
@@ -196,84 +201,84 @@ const  ToteDetail = () => {
                                 direction="row"                                    
                                 spacing={3}
                             >
-                                <Grid item xs={6} justify="space-evenly"
+                                <Grid item xs={3} justify="space-evenly"
                                 alignItems="center" style={{ display: 'flex', }}>
                                     <TextField
                                         id="outlined-read-only-input"
                                         label="tote"
-                                        value={tote}
+                                        value={tote_details.tote}
                                         InputProps={{
                                             readOnly: true,
                                         }}
                                         variant="outlined"
                                     />
                                 </Grid>
-                                <Grid item xs={6} justify="space-evenly"
+                                <Grid item xs={3} justify="space-evenly"
                                 alignItems="center" style={{ display: 'flex', }}>
                                     <TextField
                                         id="outlined-read-only-input"
                                         label="tote_type"
-                                        value={tote_type}
+                                        value={tote_details.tote_type}
                                         InputProps={{
                                             readOnly: true,
                                         }}
                                         variant="outlined"
                                     />
                                 </Grid>
-                                <Grid item xs={6} justify="space-evenly"
+                                <Grid item xs={3} justify="space-evenly"
                                 alignItems="center" style={{ display: 'flex', }}>
                                     <TextField
                                         id="outlined-read-only-input"
                                         label="tote_status"
-                                        value={tote_status}
+                                        value={tote_details.tote_status}
                                         InputProps={{
                                             readOnly: true,
                                         }}
                                         variant="outlined"
                                     />
                                 </Grid>
-                                <Grid item xs={6} justify="space-evenly"
+                                <Grid item xs={3} justify="space-evenly"
                                 alignItems="center" style={{ display: 'flex', }}>
                                     <TextField
                                         id="outlined-read-only-input"
                                         label="distinct_skus"
-                                        value={distinct_skus}
+                                        value={tote_details.distinct_skus}
                                         InputProps={{
                                             readOnly: true,
                                         }}
                                         variant="outlined"
                                     />
                                 </Grid>
-                                <Grid item xs={6} justify="space-evenly"
+                                <Grid item xs={3} justify="space-evenly"
                                 alignItems="center" style={{ display: 'flex', }}>
                                     <TextField
                                         id="outlined-read-only-input"
                                         label="distinct_carton"
-                                        value={distinct_carton}
+                                        value={tote_details.distinct_carton}
                                         InputProps={{
                                             readOnly: true,
                                         }}
                                         variant="outlined"
                                     />
                                 </Grid>
-                                <Grid item xs={6} justify="space-evenly"
+                                <Grid item xs={3} justify="space-evenly"
                                 alignItems="center" style={{ display: 'flex', }}>
                                     <TextField
                                         id="outlined-read-only-input"
                                         label="requiring_vas"
-                                        value={requiring_vas}
+                                        value={tote_details.requiring_vas}
                                         InputProps={{
                                             readOnly: true,
                                         }}
                                         variant="outlined"
                                     />
                                 </Grid>
-                                <Grid item xs={6} justify="space-evenly"
+                                <Grid item xs={3} justify="space-evenly"
                                 alignItems="center" style={{ display: 'flex', }}>
                                     <TextField
                                         id="outlined-read-only-input"
                                         label="distinct_classifications"
-                                        value={distinct_classifications}
+                                        value={tote_details.distinct_classifications}
                                         InputProps={{
                                             readOnly: true,
                                         }}
@@ -283,9 +288,9 @@ const  ToteDetail = () => {
                             </Grid>
                         </CardContent>
                     </Card>
-                </Grid>
+                </Grid>}
 
-                <Grid item xs={5}>
+                {/* <Grid item xs={10}>
                     <Card>
                         <CardHeader
                             title="carton_list"
@@ -298,7 +303,7 @@ const  ToteDetail = () => {
                                 direction="row"                                    
                                 spacing={3}
                             >
-                                <Grid item xs={6} justify="space-evenly"
+                                <Grid item xs={3} justify="space-evenly"
                                 alignItems="center" style={{ display: 'flex', }}>
                                     <TextField
                                         id="outlined-read-only-input"
@@ -310,7 +315,7 @@ const  ToteDetail = () => {
                                         variant="outlined"
                                     />
                                 </Grid>
-                                <Grid item xs={6} justify="space-evenly"
+                                <Grid item xs={3} justify="space-evenly"
                                 alignItems="center" style={{ display: 'flex', }}>
                                     <TextField
                                         id="outlined-read-only-input"
@@ -322,7 +327,7 @@ const  ToteDetail = () => {
                                         variant="outlined"
                                     />
                                 </Grid>
-                                <Grid item xs={6} justify="space-evenly"
+                                <Grid item xs={3} justify="space-evenly"
                                 alignItems="center" style={{ display: 'flex', }}>
                                     <TextField
                                         id="outlined-read-only-input"
@@ -334,7 +339,7 @@ const  ToteDetail = () => {
                                         variant="outlined"
                                     />
                                 </Grid>
-                                <Grid item xs={6} justify="space-evenly"
+                                <Grid item xs={3} justify="space-evenly"
                                 alignItems="center" style={{ display: 'flex', }}>
                                     <TextField
                                         id="outlined-read-only-input"
@@ -346,7 +351,7 @@ const  ToteDetail = () => {
                                         variant="outlined"
                                     />
                                 </Grid>
-                                <Grid item xs={6} justify="space-evenly"
+                                <Grid item xs={3} justify="space-evenly"
                                 alignItems="center" style={{ display: 'flex', }}>
                                     <TextField
                                         id="outlined-read-only-input"
@@ -358,7 +363,7 @@ const  ToteDetail = () => {
                                         variant="outlined"
                                     />
                                 </Grid>
-                                <Grid item xs={6} justify="space-evenly"
+                                <Grid item xs={3} justify="space-evenly"
                                 alignItems="center" style={{ display: 'flex', }}>
                                     <TextField
                                         id="outlined-read-only-input"
@@ -370,7 +375,7 @@ const  ToteDetail = () => {
                                         variant="outlined"
                                     />
                                 </Grid>
-                                <Grid item xs={6} justify="space-evenly"
+                                <Grid item xs={3} justify="space-evenly"
                                 alignItems="center" style={{ display: 'flex', }}>
                                     <TextField
                                         id="outlined-read-only-input"
@@ -382,7 +387,7 @@ const  ToteDetail = () => {
                                         variant="outlined"
                                     />
                                 </Grid>
-                                <Grid item xs={6} justify="space-evenly"
+                                <Grid item xs={3} justify="space-evenly"
                                 alignItems="center" style={{ display: 'flex', }}>
                                     <TextField
                                         id="outlined-read-only-input"
@@ -394,7 +399,7 @@ const  ToteDetail = () => {
                                         variant="outlined"
                                     />
                                 </Grid>
-                                <Grid item xs={6} justify="space-evenly"
+                                <Grid item xs={3} justify="space-evenly"
                                 alignItems="center" style={{ display: 'flex', }}>
                                     <TextField
                                         id="outlined-read-only-input"
@@ -409,7 +414,7 @@ const  ToteDetail = () => {
                             </Grid>
                         </CardContent>
                     </Card>
-                </Grid>
+                </Grid> */}
             </Grid>
 
             {/* <div className="d-flex">

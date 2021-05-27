@@ -78,7 +78,7 @@ const Login = () => {
 
                 if (res) {
                     sessionStorage.setItem("scanInfo", JSON.stringify({ userid: userid, whse: res.whse, whse_name: res.whse_name }));
-                    history.push('/location');
+                    history.push('/main');
                 }
             })
             .catch(function (error) {

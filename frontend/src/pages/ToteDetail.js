@@ -83,9 +83,9 @@ const  ToteDetail = () => {
     }
     
 
-    useEffect(() => {
-        sessionStorage.removeItem("scanInfo");
-    }, []);
+    // useEffect(() => {
+    //     sessionStorage.removeItem("scanInfo");
+    // }, []);
 
     const getToteDetails = () => {
 
@@ -149,73 +149,102 @@ const  ToteDetail = () => {
                 </div>
             </div>
 
-            <Grid
-                container
-                direction="row"
-                justify="center"
-                alignItems="baseline"
-                spacing={6}
-                className="pt-12"
-            >
-                { 
-                    tote_details &&  <TableContainer component={Paper} className={classes.table}>
-                        <Table aria-label="simple table" className={classes.table}>
-                            <TableHead>
-                                <TableCell className={classes.cell} style={{ width: '280px', }}>tote</TableCell>
-                                <TableCell className={classes.cell} style={{ width: '120px', }}>tote_type</TableCell>
-                                <TableCell className={classes.cell} style={{ width: '120px', }}>tote_status</TableCell>
-                                <TableCell className={classes.cell} style={{ width: '120px', }}>distinct_skus</TableCell>
-                                <TableCell className={classes.cell} style={{ width: '120px', }}>distinct_carton</TableCell>
-                                <TableCell className={classes.cell} style={{ width: '120px', }}>requiring_vas</TableCell>
-                                <TableCell className={classes.cell} style={{ width: '120px', }}>distinct_classifications</TableCell>
-                            </TableHead>
-                            <TableBody>
-                                <TableRow>
-                                <TableCell className={classes.cell} style={{ width: '280px', }}>{tote_details.tote}</TableCell>
-                                <TableCell className={classes.cell} style={{ width: '120px', }}>{tote_details.tote_type}</TableCell>
-                                <TableCell className={classes.cell} style={{ width: '120px', }}>{tote_details.tote_status}</TableCell>
-                                <TableCell className={classes.cell} style={{ width: '120px', }}>{tote_details.distinct_skus}</TableCell>
-                                <TableCell className={classes.cell} style={{ width: '120px', }}>{tote_details.distinct_carton}</TableCell>
-                                <TableCell className={classes.cell} style={{ width: '120px', }}>{tote_details.requiring_vas}</TableCell>
-                                <TableCell className={classes.cell} style={{ width: '120px', }}>{tote_details.distinct_classifications}</TableCell>
-                                </TableRow>
-                            </TableBody>
-                        </Table>
-                    </TableContainer>
-                }
-
-                <TableContainer component={Paper} className={classes.table}>
-                    <Table aria-label="carton table" className={classes.table}>
-                        <TableHead>
-                            <TableCell className={classes.cell} style={{ width: '110px', }}>carton_nbr</TableCell>
-                            <TableCell className={classes.cell} style={{ width: '110px', }}>stat_code</TableCell>
-                            <TableCell className={classes.cell} style={{ width: '110px', }}>sku_id</TableCell>
-                            <TableCell className={classes.cell} style={{ width: '110px', }}>sku_brcd</TableCell>
-                            <TableCell className={classes.cell} style={{ width: '110px', }}>dsp_sku</TableCell>
-                            <TableCell className={classes.cell} style={{ width: '110px', }}>sku_desc</TableCell>
-                            <TableCell className={classes.cell} style={{ width: '110px', }}>to_be_pakd_units</TableCell>
-                            <TableCell className={classes.cell} style={{ width: '110px', }}>units_pakd</TableCell>
-                            <TableCell className={classes.cell} style={{ width: '110px', }}>remaining</TableCell>
-                        </TableHead>
-                        <TableBody>
-                        {
-                            carton_list && carton_list.map((carton, i) => {
-                                <TableRow>
-                                    <TableCell className={classes.cell} style={{ width: '110px', }}>{carton.carton_nbr}</TableCell>
-                                    <TableCell className={classes.cell} style={{ width: '110px', }}>{carton.state_code}</TableCell>
-                                    <TableCell className={classes.cell} style={{ width: '110px', }}>{carton.sku_id}</TableCell>
-                                    <TableCell className={classes.cell} style={{ width: '110px', }}>{carton.sku_brcd}</TableCell>
-                                    <TableCell className={classes.cell} style={{ width: '110px', }}>{carton.dsp_sku}</TableCell>
-                                    <TableCell className={classes.cell} style={{ width: '110px', }}>{carton.sku_desc}</TableCell>
-                                    <TableCell className={classes.cell} style={{ width: '110px', }}>{carton.to_be_pakd_units}</TableCell>
-                                    <TableCell className={classes.cell} style={{ width: '110px', }}>{carton.units_pakd}</TableCell>
-                                    <TableCell className={classes.cell} style={{ width: '110px', }}>{carton.remaining}</TableCell>
-                                </TableRow>
-                            }) 
+            <Card>
+                <CardHeader
+                    title="tote_details"
+                    titleTypographyProps={{ variant: 'h4' }}
+                    style={{ textAlign: "center" }}
+                />
+                <CardContent className="mt-1 mx-3">
+                    <Grid
+                        container
+                        direction="row"
+                        justify="center"
+                        alignItems="baseline"
+                        spacing={6}
+                        className="pt-12"
+                    >
+                        { 
+                            tote_details &&  <TableContainer component={Paper} className={classes.table}>
+                                <Table aria-label="simple table" className={classes.table}>
+                                    <TableHead>
+                                        <TableCell className={classes.cell} style={{ width: '280px', }}>tote</TableCell>
+                                        <TableCell className={classes.cell} style={{ width: '120px', }}>tote_type</TableCell>
+                                        <TableCell className={classes.cell} style={{ width: '120px', }}>tote_status</TableCell>
+                                        <TableCell className={classes.cell} style={{ width: '120px', }}>distinct_skus</TableCell>
+                                        <TableCell className={classes.cell} style={{ width: '120px', }}>distinct_carton</TableCell>
+                                        <TableCell className={classes.cell} style={{ width: '120px', }}>requiring_vas</TableCell>
+                                        <TableCell className={classes.cell} style={{ width: '120px', }}>distinct_classifications</TableCell>
+                                    </TableHead>
+                                    <TableBody>
+                                        <TableRow>
+                                        <TableCell className={classes.cell} style={{ width: '280px', }}>{tote_details.tote}</TableCell>
+                                        <TableCell className={classes.cell} style={{ width: '120px', }}>{tote_details.tote_type}</TableCell>
+                                        <TableCell className={classes.cell} style={{ width: '120px', }}>{tote_details.tote_status}</TableCell>
+                                        <TableCell className={classes.cell} style={{ width: '120px', }}>{tote_details.distinct_skus}</TableCell>
+                                        <TableCell className={classes.cell} style={{ width: '120px', }}>{tote_details.distinct_carton}</TableCell>
+                                        <TableCell className={classes.cell} style={{ width: '120px', }}>{tote_details.requiring_vas}</TableCell>
+                                        <TableCell className={classes.cell} style={{ width: '120px', }}>{tote_details.distinct_classifications}</TableCell>
+                                        </TableRow>
+                                    </TableBody>
+                                </Table>
+                            </TableContainer>
                         }
-                        </TableBody>
-                    </Table>
-                </TableContainer>
+                    </Grid>
+                </CardContent>
+            </Card>
+            
+            <Card>
+                <CardHeader
+                    title="cartons"
+                    titleTypographyProps={{ variant: 'h4' }}
+                    style={{ textAlign: "center" }}
+                />
+                <CardContent className="mt-1 mx-3">
+                    <Grid
+                        container
+                        direction="row"
+                        justify="center"
+                        alignItems="baseline"
+                        spacing={6}
+                        className="pt-12"
+                    >
+                        <TableContainer component={Paper} className={classes.table}>
+                            <Table aria-label="carton table" className={classes.table}>
+                                <TableHead>
+                                    <TableCell className={classes.cell} style={{ width: '110px', }}>carton_nbr</TableCell>
+                                    <TableCell className={classes.cell} style={{ width: '110px', }}>stat_code</TableCell>
+                                    <TableCell className={classes.cell} style={{ width: '110px', }}>sku_id</TableCell>
+                                    <TableCell className={classes.cell} style={{ width: '110px', }}>sku_brcd</TableCell>
+                                    <TableCell className={classes.cell} style={{ width: '110px', }}>dsp_sku</TableCell>
+                                    <TableCell className={classes.cell} style={{ width: '110px', }}>sku_desc</TableCell>
+                                    <TableCell className={classes.cell} style={{ width: '110px', }}>to_be_pakd_units</TableCell>
+                                    <TableCell className={classes.cell} style={{ width: '110px', }}>units_pakd</TableCell>
+                                    <TableCell className={classes.cell} style={{ width: '110px', }}>remaining</TableCell>
+                                </TableHead>
+                                <TableBody>
+                                {
+                                    carton_list && carton_list.map((carton, i) => {
+                                        <TableRow>
+                                            <TableCell className={classes.cell} style={{ width: '110px', }}>{carton.carton_nbr}</TableCell>
+                                            <TableCell className={classes.cell} style={{ width: '110px', }}>{carton.state_code}</TableCell>
+                                            <TableCell className={classes.cell} style={{ width: '110px', }}>{carton.sku_id}</TableCell>
+                                            <TableCell className={classes.cell} style={{ width: '110px', }}>{carton.sku_brcd}</TableCell>
+                                            <TableCell className={classes.cell} style={{ width: '110px', }}>{carton.dsp_sku}</TableCell>
+                                            <TableCell className={classes.cell} style={{ width: '110px', }}>{carton.sku_desc}</TableCell>
+                                            <TableCell className={classes.cell} style={{ width: '110px', }}>{carton.to_be_pakd_units}</TableCell>
+                                            <TableCell className={classes.cell} style={{ width: '110px', }}>{carton.units_pakd}</TableCell>
+                                            <TableCell className={classes.cell} style={{ width: '110px', }}>{carton.remaining}</TableCell>
+                                        </TableRow>
+                                    }) 
+                                }
+                                </TableBody>
+                            </Table>
+                        </TableContainer>
+                    </Grid>                
+                </CardContent>
+            </Card>
+
                 
                 {/* {tote_details && <Grid item xs={10}>
                     <Card>
@@ -454,7 +483,7 @@ const  ToteDetail = () => {
                         </CardContent>
                     </Card>
                 </Grid>)} */}
-            </Grid>
+            
 
             {/* <div className="d-flex">
                 <div className="mx-auto mt-8" col={5} style={{ maxWidth: "600px" }}>

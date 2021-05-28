@@ -16,11 +16,8 @@ const  Main = () => {
         var scanInfo = JSON.parse(sessionStorage.getItem("scanInfo"));
 
         if (scanInfo == null || scanInfo.userid === undefined) {
-            console.log("NULL");
             history.push("/login");
         } else {
-            console.log("scanInfo = ", scanInfo);
-            console.log("scanInfo.userid = ", scanInfo.userid);
             var newInfo = { 
                 userid: scanInfo.userid,
                 whse: scanInfo.whse,

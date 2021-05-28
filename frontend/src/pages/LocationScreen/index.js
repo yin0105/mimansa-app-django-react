@@ -37,15 +37,16 @@ const LocationScreen = () => {
 
         if (scanInfo === null || scanInfo.userid === undefined) {
             history.push("/login");
-        }
-        if (scanInfo !== null && scanInfo.location !== undefined) {
-            var newInfo = { userid: scanInfo.userid, whse: scanInfo.whse, whse_name: scanInfo.whse_name };
-            sessionStorage.setItem("scanInfo", JSON.stringify(newInfo));
-        }
-        if (scanInfo !== null) {
-            setUserId(scanInfo.userid);
-            setWhse(scanInfo.whse);
-            setWhseName(scanInfo.whse_name);
+        } else {
+            if (scanInfo !== null && scanInfo.location !== undefined) {
+                var newInfo = { userid: scanInfo.userid, whse: scanInfo.whse, whse_name: scanInfo.whse_name };
+                sessionStorage.setItem("scanInfo", JSON.stringify(newInfo));
+            }
+            if (scanInfo !== null) {
+                setUserId(scanInfo.userid);
+                setWhse(scanInfo.whse);
+                setWhseName(scanInfo.whse_name);
+            }
         }
 
     }, [history]);

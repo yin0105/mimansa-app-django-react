@@ -230,7 +230,7 @@ const  ToteDetail = () => {
                                     </TableHead>
                                     <TableBody>
                                     {   
-                                        res.carton_list.map((carton, i) => {
+                                        res.carton_list.map(carton => {
                                             <TableRow>
                                                 <TableCell className={classes.cell} style={{ width: '110px', }}>{carton.carton_nbr}</TableCell>
                                                 <TableCell className={classes.cell} style={{ width: '110px', }}>{carton.state_code}</TableCell>

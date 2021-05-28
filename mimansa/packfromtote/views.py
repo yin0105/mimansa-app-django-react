@@ -1,25 +1,71 @@
+import json
+
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http.response import HttpResponse
+# from django.contrib.auth.models import User
+from django.db.models import Q
+from django.http import JsonResponse
+from django.urls import reverse_lazy
+from django.views.generic import CreateView, TemplateView
+
+from rest_framework.response import Response
+from rest_framework.viewsets import ModelViewSet
+
+from . import models, serializers
+from rest_framework.decorators import api_view
+from django import core
+from datetime import datetime
+import pytz
+from rest_framework.authtoken.models import Token
+from django.contrib.auth.models import Group
+from django.forms.models import model_to_dict
+from collections import OrderedDict
+
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.response import Response
 from . import models
 from . import serializers
 
 
-class WarehouseViewSet(ModelViewSet):    
+class IndexView(LoginRequiredMixin, TemplateView):
+    login_url = reverse_lazy('login')
+    redirect_field_name = 'redirect_to'
+    template_name = 'index.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(IndexView, self).get_context_data(**kwargs)
+        # user = User.objects.filter(id=self.request.GET.get("user_id")).first()
+        # chat = user.chat_set.all()
+        # if not chat:
+        #     context['chat'] = 0
+        # else:
+        #     context['chat'] = chat[0].id
+        return context
+
+class WarehouseViewSet(ModelViewSet): 
+    queryset = models.Warehouse.objects.all()
     serializer_class = serializers.WarehouseSerializer
+    lookup_field = 'code'
+    lookup_url_kwarg = 'code'
+
     
-    def list(self, request):
-        queryset = models.Warehouse.objects.all()
-        serializer = serializers.WarehouseSerializer(queryset, many=True)
-        return Response(serializer.data)
+    
+    # def list(self, request):
+    #     print("warehouseviewset")  
+    #     queryset = models.Warehouse.objects.all()    
+    #     serializer = serializers.WarehouseSerializer(queryset)
+    #     return Response(serializer.data)
 
 
 class LocnPrinterMapViewSet(ModelViewSet):    
     serializer_class = serializers.LocnPrinterMapSerializer
+    queryset = models.LocnPrinterMap.objects.all()
 
-    def list(self, request):
-        queryset = models.LocnPrinterMap.objects.all()
-        serializer = serializers.LocnPrinterMapSerializer(queryset, many=True)
-        return Response(serializer.data)
+    # def list(self, request):
+        
+    #     serializer = serializers.LocnPrinterMapSerializer(queryset, many=True)
+    #     return Response(serializer.data)
 
 
 # from rest_framework import generics

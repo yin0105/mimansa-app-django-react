@@ -37,13 +37,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
+    'packfromtote',
     'rest_framework',
     'drf_yasg',
     # 'common',
     'corsheaders',
     'drf_api_logger',
-    'packfromtote',
+    
 ]
 
 MIDDLEWARE = [
@@ -54,6 +54,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware', #added
 ]
 
 ROOT_URLCONF = 'mimansa.urls'
@@ -138,8 +139,52 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 
+# REST_FRAMEWORK = {
+#     'DEFAULT_PERMISSION_CLASSES': [
+#         'rest_framework.permissions.AllowAny',
+#     ]
+# }
+
 REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': [
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',
+        # 'rest_framework.authentication.TokenAuthentication',
+        # 'rest_framework.authentication.BasicAuthentication',
+    ],
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',
+        # 'rest_framework_datatables.renderers.DatatablesRenderer',
+    ),
+
+    'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.AllowAny',
-    ]
+        # 'rest_framework.permissions.IsAuthenticated',
+        # 'rest_framework.permissions.IsAdminUser',
+     ),
+    # 'DEFAULT_FILTER_BACKENDS': (
+    #     'rest_framework_filters.backends.RestFrameworkFilterBackend',
+    #     #'rest_framework_datatables.filters.DatatablesFilterBackend',
+    #     # 'django_filters.rest_framework.DjangoFilterBackend',
+    # ),
+    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
 }
+
+CORS_ALLOW_CREDENTIALS = True #added
+CORS_ORIGIN_ALLOW_ALL = True #added
+
+#added
+CORS_ORIGIN_WHITELIST = [
+    'http://localhost:3000',
+]
+
+
+CSRF_COOKIE_NAME = "X-CSRFTOKEN"
+
+CORS_ALLOW_HEADERS = (
+    'xsrfheadername',
+    'xsrfcookiename',
+    'content-type',
+    'X-CSRFTOKEN',
+    'X-XSRF-TOKEN',
+)

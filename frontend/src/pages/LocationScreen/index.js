@@ -36,7 +36,7 @@ const LocationScreen = () => {
         var scanInfo = JSON.parse(sessionStorage.getItem("scanInfo"));
 
         if (scanInfo === null || scanInfo.userid === undefined) {
-            history.push("/user");
+            history.push("/login");
         }
         if (scanInfo !== null && scanInfo.location !== undefined) {
             var newInfo = { userid: scanInfo.userid, whse: scanInfo.whse, whse_name: scanInfo.whse_name };

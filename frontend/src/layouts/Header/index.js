@@ -67,7 +67,9 @@ const Header = (props) => {
             <AppBar position="static">
                 <Toolbar>
                     <div className="flex items-center justify-between w-full">
-                        <img src={logo} className="w-10 h-10" alt="logo" />
+                        <Link to="/main">
+                            <img src={logo} className="w-10 h-10" alt="logo" />
+                        </Link>
                         <div>
                             <div className="block md:hidden">
                                 <IconButton edge="end" color="inherit" aria-label="menu" onClick={() => setOpen(!open)}>

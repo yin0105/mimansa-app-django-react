@@ -15,7 +15,7 @@ const  Main = () => {
     useEffect(() => {
         var scanInfo = JSON.parse(sessionStorage.getItem("scanInfo"));
 
-        if (scanInfo === null || scanInfo.userid === undefined) {
+        if (scanInfo == null || scanInfo.userid === undefined) {
             history.push("/login");
         }
         console.log("scanInfo = ", scanInfo);

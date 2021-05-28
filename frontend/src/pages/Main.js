@@ -18,15 +18,16 @@ const  Main = () => {
         if (scanInfo == null || scanInfo.userid === undefined) {
             console.log("NULL");
             history.push("/login");
+        } else {
+            console.log("scanInfo = ", scanInfo);
+            console.log("scanInfo.userid = ", scanInfo.userid);
+            var newInfo = { 
+                userid: scanInfo.userid,
+                whse: scanInfo.whse,
+                whse_name: scanInfo.whse_name,
+            };
+            sessionStorage.setItem("scanInfo", JSON.stringify(newInfo));
         }
-        console.log("scanInfo = ", scanInfo);
-        console.log("scanInfo.userid = ", scanInfo.userid);
-        var newInfo = { 
-            userid: scanInfo.userid,
-            whse: scanInfo.whse,
-            whse_name: scanInfo.whse_name,
-        };
-        sessionStorage.setItem("scanInfo", JSON.stringify(newInfo));
     }, [history]);
 
     return (

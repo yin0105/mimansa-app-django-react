@@ -125,6 +125,9 @@ const  ToteDetail = () => {
             {loading &&
                 <LinearProgress color="secondary" />
             }
+            {console.log("list = ", res.carton_list)}
+            {
+                                        console.log("len = ", res.carton_list.length)}
             <div className="mx-auto mt-8" style={{ maxWidth: "600px" }}>
                 <div className="w-full ">
                     <Card>
@@ -226,7 +229,7 @@ const  ToteDetail = () => {
                                         <TableCell className={classes.cell} style={{ width: '110px', }}>remaining</TableCell>
                                     </TableHead>
                                     <TableBody>
-                                    {
+                                    {   
                                         res.carton_list.map((carton, i) => {
                                             <TableRow>
                                                 <TableCell className={classes.cell} style={{ width: '110px', }}>{carton.carton_nbr}</TableCell>

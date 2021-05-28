@@ -96,8 +96,9 @@ const  ToteDetail = () => {
                 setLoading(false)
 
                 if (res) {
-                    setToteDetails(res.tote_details);
-                    setCartonList(res.carton_list);
+                    setRes(res);
+                    // setToteDetails(res.tote_details);
+                    // setCartonList(res.carton_list);
                 }
             })
             .catch(function (error) {

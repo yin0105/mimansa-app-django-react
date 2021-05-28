@@ -229,8 +229,7 @@ const  ToteDetail = () => {
                                         <TableCell className={classes.cell} style={{ width: '110px', }}>remaining</TableCell>
                                     </TableHead>
                                     <TableBody>
-                                    {   res.carton_list.map(carton => {
-                                            {/* console.log("carton = ", carton) &&  */}
+                                    {   res.carton_list.map(carton => 
                                             <TableRow>
                                                 <TableCell className={classes.cell} style={{ width: '110px', }}>{carton.carton_nbr}</TableCell>
                                                 <TableCell className={classes.cell} style={{ width: '110px', }}>{carton.state_code}</TableCell>
@@ -242,7 +241,7 @@ const  ToteDetail = () => {
                                                 <TableCell className={classes.cell} style={{ width: '110px', }}>{carton.units_pakd}</TableCell>
                                                 <TableCell className={classes.cell} style={{ width: '110px', }}>{carton.remaining}</TableCell>
                                             </TableRow>
-                                        }) 
+                                        ) 
                                     }
                                     </TableBody>
                                 </Table>

@@ -126,9 +126,6 @@ const  ToteDetail = () => {
             {loading &&
                 <LinearProgress color="secondary" />
             }
-            {console.log("list = ", res.carton_list)}
-            {
-                                        console.log("len = ", res.carton_list.length)}
             <div className="mx-auto mt-8" style={{ maxWidth: "600px" }}>
                 <div className="w-full ">
                     <Card>

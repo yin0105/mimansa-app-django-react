@@ -229,8 +229,9 @@ const  ToteDetail = () => {
                                         <TableCell className={classes.cell} style={{ width: '110px', }}>remaining</TableCell>
                                     </TableHead>
                                     <TableBody>
-                                    {   
+                                    {   console.log(res.carton_list) &&
                                         res.carton_list.map(carton => {
+                                            console.log("carton = ", carton) && 
                                             <TableRow>
                                                 <TableCell className={classes.cell} style={{ width: '110px', }}>{carton.carton_nbr}</TableCell>
                                                 <TableCell className={classes.cell} style={{ width: '110px', }}>{carton.state_code}</TableCell>

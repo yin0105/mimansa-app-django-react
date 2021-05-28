@@ -182,13 +182,13 @@ const  ToteDetail = () => {
                                     </TableHead>
                                     <TableBody>
                                         <TableRow>
-                                        <TableCell className={classes.cell} style={{ width: '280px', }}>{res.tote_details.tote}</TableCell>
-                                        <TableCell className={classes.cell} style={{ width: '120px', }}>{res.tote_details.tote_type}</TableCell>
-                                        <TableCell className={classes.cell} style={{ width: '120px', }}>{res.tote_details.tote_status}</TableCell>
-                                        <TableCell className={classes.cell} style={{ width: '120px', }}>{res.tote_details.distinct_skus}</TableCell>
-                                        <TableCell className={classes.cell} style={{ width: '120px', }}>{res.tote_details.distinct_carton}</TableCell>
-                                        <TableCell className={classes.cell} style={{ width: '120px', }}>{res.tote_details.requiring_vas}</TableCell>
-                                        <TableCell className={classes.cell} style={{ width: '120px', }}>{res.tote_details.distinct_classifications}</TableCell>
+                                            <TableCell className={classes.cell} style={{ width: '280px', }}>{res.tote_details.tote}</TableCell>
+                                            <TableCell className={classes.cell} style={{ width: '120px', }}>{res.tote_details.tote_type}</TableCell>
+                                            <TableCell className={classes.cell} style={{ width: '120px', }}>{res.tote_details.tote_status}</TableCell>
+                                            <TableCell className={classes.cell} style={{ width: '120px', }}>{res.tote_details.distinct_skus}</TableCell>
+                                            <TableCell className={classes.cell} style={{ width: '120px', }}>{res.tote_details.distinct_carton}</TableCell>
+                                            <TableCell className={classes.cell} style={{ width: '120px', }}>{res.tote_details.requiring_vas}</TableCell>
+                                            <TableCell className={classes.cell} style={{ width: '120px', }}>{res.tote_details.distinct_classifications}</TableCell>
                                         </TableRow>
                                     </TableBody>
                                 </Table>
@@ -230,7 +230,7 @@ const  ToteDetail = () => {
                                     </TableHead>
                                     <TableBody>
                                     {   res.carton_list.map(carton => {
-                                            console.log("carton = ", carton) && 
+                                            {/* console.log("carton = ", carton) &&  */}
                                             <TableRow>
                                                 <TableCell className={classes.cell} style={{ width: '110px', }}>{carton.carton_nbr}</TableCell>
                                                 <TableCell className={classes.cell} style={{ width: '110px', }}>{carton.state_code}</TableCell>

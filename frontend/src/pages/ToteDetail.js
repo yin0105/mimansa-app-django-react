@@ -185,7 +185,7 @@ const  ToteDetail = () => {
                 }
 
                 <TableContainer component={Paper} className={classes.table}>
-                    <Table aria-label="simple table" className={classes.table}>
+                    <Table aria-label="carton table" className={classes.table}>
                         <TableHead>
                             <TableCell className={classes.cell} style={{ width: '110px', }}>carton_nbr</TableCell>
                             <TableCell className={classes.cell} style={{ width: '110px', }}>stat_code</TableCell>

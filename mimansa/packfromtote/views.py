@@ -26,6 +26,7 @@ from rest_framework.viewsets import ModelViewSet
 from rest_framework.response import Response
 from . import models
 from . import serializers
+from django.views.decorators.csrf import csrf_exempt
 
 
 class IndexView(LoginRequiredMixin, TemplateView):

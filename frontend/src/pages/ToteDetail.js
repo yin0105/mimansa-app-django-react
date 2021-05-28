@@ -21,6 +21,7 @@ const useStyles = makeStyles((theme) => ({
   },
   cell: {
       wordBreak: 'break-word',
+      textAlign: 'center',
   }
 }));
 
@@ -41,22 +42,22 @@ const  ToteDetail = () => {
     const [tote_id, setToteId] = useState("");
     const [res, setRes] = useState(null);
 
-    const [tote, setTote] = useState("");
-    const [tote_type, setToteType] = useState("");
-    const [tote_status, setToteStatus] = useState("");
-    const [distinct_skus, setDistinctSkus] = useState("");
-    const [distinct_carton, setDistinctCarton] = useState("");
-    const [requiring_vas, setRequiringVas] = useState("");
-    const [distinct_classifications, setDistinctClassifications] = useState("");
-    const [carton_nbr, setCartonNbr] = useState("");
-    const [stat_code, setStatCode] = useState("");
-    const [sku_id, setSkuId] = useState("");
-    const [sku_brcd, setSkuBrcd] = useState("");
-    const [dsp_sku, setDspSku] = useState("");
-    const [sku_desc, setSkuDesc] = useState("");
-    const [to_be_pakd_units, setToBePakdUnits] = useState("");
-    const [units_pakd, setUnitsPakd] = useState("");
-    const [remaining, setRemaining] = useState("");
+    // const [tote, setTote] = useState("");
+    // const [tote_type, setToteType] = useState("");
+    // const [tote_status, setToteStatus] = useState("");
+    // const [distinct_skus, setDistinctSkus] = useState("");
+    // const [distinct_carton, setDistinctCarton] = useState("");
+    // const [requiring_vas, setRequiringVas] = useState("");
+    // const [distinct_classifications, setDistinctClassifications] = useState("");
+    // const [carton_nbr, setCartonNbr] = useState("");
+    // const [stat_code, setStatCode] = useState("");
+    // const [sku_id, setSkuId] = useState("");
+    // const [sku_brcd, setSkuBrcd] = useState("");
+    // const [dsp_sku, setDspSku] = useState("");
+    // const [sku_desc, setSkuDesc] = useState("");
+    // const [to_be_pakd_units, setToBePakdUnits] = useState("");
+    // const [units_pakd, setUnitsPakd] = useState("");
+    // const [remaining, setRemaining] = useState("");
 
     const [alert, setAlert] = useState(false);
     const [error, setError] = useState("");
@@ -236,8 +237,8 @@ const  ToteDetail = () => {
                                                 <TableCell className={classes.cell} style={{ width: '100px', }}>{carton.sku_id}</TableCell>
                                                 <TableCell className={classes.cell} style={{ width: '130px', }}>{carton.sku_brcd}</TableCell>
                                                 <TableCell className={classes.cell} style={{ width: '100px', }}>{carton.dsp_sku}</TableCell>
-                                                <TableCell className={classes.cell} style={{ width: '250px', }}>{carton.sku_desc}</TableCell>
-                                                <TableCell className={classes.cell} style={{ width: '50px', }}>{carton.to_be_pakd_units}</TableCell>
+                                                <TableCell className={classes.cell} style={{ width: '220px', }}>{carton.sku_desc}</TableCell>
+                                                <TableCell className={classes.cell} style={{ width: '80px', }}>{carton.to_be_pakd_units}</TableCell>
                                                 <TableCell className={classes.cell} style={{ width: '50px', }}>{carton.units_pakd}</TableCell>
                                                 <TableCell className={classes.cell} style={{ width: '50px', }}>{carton.remaining}</TableCell>
                                             </TableRow>

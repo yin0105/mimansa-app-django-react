@@ -150,7 +150,7 @@ const  ToteDetail = () => {
             </div>
 
             {
-                res.tote_details &&
+                res && res.tote_details &&
                 <Card>
                     <CardHeader
                         title="tote_details"
@@ -196,7 +196,7 @@ const  ToteDetail = () => {
             }
             
             {
-                res.carton_list &&
+                res && res.carton_list &&
                 <Card>
                     <CardHeader
                         title="cartons"

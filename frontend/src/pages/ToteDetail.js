@@ -149,23 +149,24 @@ const  ToteDetail = () => {
                 </div>
             </div>
 
-            <Card>
-                <CardHeader
-                    title="tote_details"
-                    titleTypographyProps={{ variant: 'h4' }}
-                    style={{ textAlign: "center" }}
-                />
-                <CardContent className="mt-1 mx-3">
-                    <Grid
-                        container
-                        direction="row"
-                        justify="center"
-                        alignItems="baseline"
-                        spacing={6}
-                        // className="pt-12"
-                    >
-                        { 
-                            tote_details &&  <TableContainer component={Paper} className={classes.table}>
+            {
+                res.tote_details &&
+                <Card>
+                    <CardHeader
+                        title="tote_details"
+                        titleTypographyProps={{ variant: 'h4' }}
+                        style={{ textAlign: "center" }}
+                    />
+                    <CardContent className="mt-1 mx-3">
+                        <Grid
+                            container
+                            direction="row"
+                            justify="center"
+                            alignItems="baseline"
+                            spacing={6}
+                            // className="pt-12"
+                        >
+                            <TableContainer component={Paper} className={classes.table}>
                                 <Table aria-label="simple table" className={classes.table}>
                                     <TableHead>
                                         <TableCell className={classes.cell} style={{ width: '280px', }}>tote</TableCell>
@@ -189,61 +190,64 @@ const  ToteDetail = () => {
                                     </TableBody>
                                 </Table>
                             </TableContainer>
-                        }
-                    </Grid>
-                </CardContent>
-            </Card>
+                        </Grid>
+                    </CardContent>
+                </Card>
+            }
             
-            <Card>
-                <CardHeader
-                    title="cartons"
-                    titleTypographyProps={{ variant: 'h4' }}
-                    style={{ textAlign: "center" }}
-                />
-                <CardContent className="mt-1 mx-3">
-                    <Grid
-                        container
-                        direction="row"
-                        justify="center"
-                        alignItems="baseline"
-                        spacing={6}
-                        // className="pt-12"
-                    >
-                        <TableContainer component={Paper} className={classes.table}>
-                            <Table aria-label="carton table" className={classes.table}>
-                                <TableHead>
-                                    <TableCell className={classes.cell} style={{ width: '110px', }}>carton_nbr</TableCell>
-                                    <TableCell className={classes.cell} style={{ width: '110px', }}>stat_code</TableCell>
-                                    <TableCell className={classes.cell} style={{ width: '110px', }}>sku_id</TableCell>
-                                    <TableCell className={classes.cell} style={{ width: '110px', }}>sku_brcd</TableCell>
-                                    <TableCell className={classes.cell} style={{ width: '110px', }}>dsp_sku</TableCell>
-                                    <TableCell className={classes.cell} style={{ width: '110px', }}>sku_desc</TableCell>
-                                    <TableCell className={classes.cell} style={{ width: '110px', }}>to_be_pakd_units</TableCell>
-                                    <TableCell className={classes.cell} style={{ width: '110px', }}>units_pakd</TableCell>
-                                    <TableCell className={classes.cell} style={{ width: '110px', }}>remaining</TableCell>
-                                </TableHead>
-                                <TableBody>
-                                {
-                                    carton_list && carton_list.map((carton, i) => {
-                                        <TableRow>
-                                            <TableCell className={classes.cell} style={{ width: '110px', }}>{res.carton.carton_nbr}</TableCell>
-                                            <TableCell className={classes.cell} style={{ width: '110px', }}>{res.carton.state_code}</TableCell>
-                                            <TableCell className={classes.cell} style={{ width: '110px', }}>{res.carton.sku_id}</TableCell>
-                                            <TableCell className={classes.cell} style={{ width: '110px', }}>{res.carton.sku_brcd}</TableCell>
-                                            <TableCell className={classes.cell} style={{ width: '110px', }}>{res.carton.dsp_sku}</TableCell>
-                                            <TableCell className={classes.cell} style={{ width: '110px', }}>{res.carton.sku_desc}</TableCell>
-                                            <TableCell className={classes.cell} style={{ width: '110px', }}>{res.carton.to_be_pakd_units}</TableCell>
-                                            <TableCell className={classes.cell} style={{ width: '110px', }}>{res.carton.units_pakd}</TableCell>
-                                            <TableCell className={classes.cell} style={{ width: '110px', }}>{res.carton.remaining}</TableCell>
-                                        </TableRow>
-                                    }) 
-                                }
-                                </TableBody>
-                            </Table>
-                        </TableContainer>
-                    </Grid>                
-                </CardContent>
-            </Card>
+            {
+                res.carton_list &&
+                <Card>
+                    <CardHeader
+                        title="cartons"
+                        titleTypographyProps={{ variant: 'h4' }}
+                        style={{ textAlign: "center" }}
+                    />
+                    <CardContent className="mt-1 mx-3">
+                        <Grid
+                            container
+                            direction="row"
+                            justify="center"
+                            alignItems="baseline"
+                            spacing={6}
+                            // className="pt-12"
+                        >
+                            <TableContainer component={Paper} className={classes.table}>
+                                <Table aria-label="carton table" className={classes.table}>
+                                    <TableHead>
+                                        <TableCell className={classes.cell} style={{ width: '110px', }}>carton_nbr</TableCell>
+                                        <TableCell className={classes.cell} style={{ width: '110px', }}>stat_code</TableCell>
+                                        <TableCell className={classes.cell} style={{ width: '110px', }}>sku_id</TableCell>
+                                        <TableCell className={classes.cell} style={{ width: '110px', }}>sku_brcd</TableCell>
+                                        <TableCell className={classes.cell} style={{ width: '110px', }}>dsp_sku</TableCell>
+                                        <TableCell className={classes.cell} style={{ width: '110px', }}>sku_desc</TableCell>
+                                        <TableCell className={classes.cell} style={{ width: '110px', }}>to_be_pakd_units</TableCell>
+                                        <TableCell className={classes.cell} style={{ width: '110px', }}>units_pakd</TableCell>
+                                        <TableCell className={classes.cell} style={{ width: '110px', }}>remaining</TableCell>
+                                    </TableHead>
+                                    <TableBody>
+                                    {
+                                        res.carton_list.map((carton, i) => {
+                                            <TableRow>
+                                                <TableCell className={classes.cell} style={{ width: '110px', }}>{res.carton.carton_nbr}</TableCell>
+                                                <TableCell className={classes.cell} style={{ width: '110px', }}>{res.carton.state_code}</TableCell>
+                                                <TableCell className={classes.cell} style={{ width: '110px', }}>{res.carton.sku_id}</TableCell>
+                                                <TableCell className={classes.cell} style={{ width: '110px', }}>{res.carton.sku_brcd}</TableCell>
+                                                <TableCell className={classes.cell} style={{ width: '110px', }}>{res.carton.dsp_sku}</TableCell>
+                                                <TableCell className={classes.cell} style={{ width: '110px', }}>{res.carton.sku_desc}</TableCell>
+                                                <TableCell className={classes.cell} style={{ width: '110px', }}>{res.carton.to_be_pakd_units}</TableCell>
+                                                <TableCell className={classes.cell} style={{ width: '110px', }}>{res.carton.units_pakd}</TableCell>
+                                                <TableCell className={classes.cell} style={{ width: '110px', }}>{res.carton.remaining}</TableCell>
+                                            </TableRow>
+                                        }) 
+                                    }
+                                    </TableBody>
+                                </Table>
+                            </TableContainer>
+                        </Grid>                
+                    </CardContent>
+                </Card>
+            }
 
                 
                 {/* {tote_details && <Grid item xs={10}>

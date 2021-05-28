@@ -229,15 +229,15 @@ const  ToteDetail = () => {
                                     {
                                         res.carton_list.map((carton, i) => {
                                             <TableRow>
-                                                <TableCell className={classes.cell} style={{ width: '110px', }}>{res.carton.carton_nbr}</TableCell>
-                                                <TableCell className={classes.cell} style={{ width: '110px', }}>{res.carton.state_code}</TableCell>
-                                                <TableCell className={classes.cell} style={{ width: '110px', }}>{res.carton.sku_id}</TableCell>
-                                                <TableCell className={classes.cell} style={{ width: '110px', }}>{res.carton.sku_brcd}</TableCell>
-                                                <TableCell className={classes.cell} style={{ width: '110px', }}>{res.carton.dsp_sku}</TableCell>
-                                                <TableCell className={classes.cell} style={{ width: '110px', }}>{res.carton.sku_desc}</TableCell>
-                                                <TableCell className={classes.cell} style={{ width: '110px', }}>{res.carton.to_be_pakd_units}</TableCell>
-                                                <TableCell className={classes.cell} style={{ width: '110px', }}>{res.carton.units_pakd}</TableCell>
-                                                <TableCell className={classes.cell} style={{ width: '110px', }}>{res.carton.remaining}</TableCell>
+                                                <TableCell className={classes.cell} style={{ width: '110px', }}>{carton.carton_nbr}</TableCell>
+                                                <TableCell className={classes.cell} style={{ width: '110px', }}>{carton.state_code}</TableCell>
+                                                <TableCell className={classes.cell} style={{ width: '110px', }}>{carton.sku_id}</TableCell>
+                                                <TableCell className={classes.cell} style={{ width: '110px', }}>{carton.sku_brcd}</TableCell>
+                                                <TableCell className={classes.cell} style={{ width: '110px', }}>{carton.dsp_sku}</TableCell>
+                                                <TableCell className={classes.cell} style={{ width: '110px', }}>{carton.sku_desc}</TableCell>
+                                                <TableCell className={classes.cell} style={{ width: '110px', }}>{carton.to_be_pakd_units}</TableCell>
+                                                <TableCell className={classes.cell} style={{ width: '110px', }}>{carton.units_pakd}</TableCell>
+                                                <TableCell className={classes.cell} style={{ width: '110px', }}>{carton.remaining}</TableCell>
                                             </TableRow>
                                         }) 
                                     }

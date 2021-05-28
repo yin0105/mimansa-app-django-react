@@ -18,7 +18,8 @@ const  Main = () => {
         if (scanInfo === null || scanInfo.userid === undefined) {
             history.push("/login");
         }
-
+        console.log("scanInfo = ", scanInfo);
+        console.log("scanInfo.userid = ", scanInfo.userid);
         var newInfo = { 
             userid: scanInfo.userid,
             whse: scanInfo.whse,

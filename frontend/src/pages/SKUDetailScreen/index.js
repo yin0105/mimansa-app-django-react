@@ -8,6 +8,8 @@ import { string } from 'prop-types';
 import AlertDialog from '../../components';
 import { apiValidateActionCode, apiValidatePackCarton, apiValidatePrintCarton } from '../../services/news';
 import MuiAlert from '@material-ui/lab/Alert';
+// import qz from "../../services/qz-tray"
+import qz from "qz-tray";
 
 
 function Alert(props) {
@@ -197,7 +199,19 @@ const SKUDetailScreen = () => {
                     console.log('==== res.message: ', res.message);
                     setScanCartonFeedbackQueue(scan_carton_feedback_queue => [...scan_carton_feedback_queue, res.message]);  
                     if (print_mode == "DIRECT")    {
-
+                        qz.websocket.connect().then(() => {
+                            return qz.printers.find(scanInfo.printer_name);
+                        }).then((printer) => {
+                            let config = qz.configs.create(printer);
+                            return qz.print(config, [res.print_command]);
+                        }).then(() => {
+                            return qz.websocket.disconnect();
+                        }).then(() => {
+                            // process.exit(0);
+                        }).catch((err) => {
+                            console.error(err);
+                            // process.exit(1);
+                        });
                     }
                     setPrinted(true);
                 }

@@ -1,6 +1,6 @@
 import React, { useState, } from 'react'
 import useCookie from 'react-use-cookie';
-import { Button, TextField, Typography, Grid, LinearProgress, } from '@material-ui/core'
+import { Button, TextField, Typography, Grid, LinearProgress, Snackbar, } from '@material-ui/core'
 import { useHistory } from 'react-router-dom';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import MainMenu from '../../components/menu';
@@ -8,6 +8,12 @@ import {DropzoneArea} from 'material-ui-dropzone';
 import axios from 'axios'
 
 import { restApiSettings } from "../../services/api";
+import MuiAlert from '@material-ui/lab/Alert';
+
+
+function Alert(props) {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -56,12 +62,46 @@ const  WarehouseCreate = () => {
     const [alert, setAlert] = useState(false);
     const [error, setError] = useState("");
 
+    const [open, setOpen] = useState(false);
+    const [alert_msg, setAlertMsg] = useState("");
+    const [severity, setSeverity] = useState("success");
+
     const handleLogoChange = files => {
         setLogo(files);
     }
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        if (code == "" || name == "" || rut == "" || addr_line_1 == "" || addr_line_2 == "" || locality == "" || city == "" || state == "" || zipcode == "" || phone == "" || logo.length == 0) {
+            if (code == "") {
+                setAlertMsg("Please enter code value.");                
+            } else if (name == "") {
+                setAlertMsg("Please enter name value.");                
+            } else if (rut == "") {
+                setAlertMsg("Please enter rut value.");                
+            } else if (addr_line_1 == "") {
+                setAlertMsg("Please enter Address Line 1 value.");                
+            } else if (addr_line_2 == "") {
+                setAlertMsg("Please enter Address Line 2 value.");                
+            } else if (locality == "") {
+                setAlertMsg("Please enter locality value.");                
+            } else if (city == "") {
+                setAlertMsg("Please enter city value.");                
+            } else if (state == "") {
+                setAlertMsg("Please enter state value.");                
+            } else if (zipcode == "") {
+                setAlertMsg("Please enter Zip Code value.");                
+            } else if (phone == "") {
+                setAlertMsg("Please enter Phone number value.");                
+            } else if (logo.length == 0) {
+                setAlertMsg("Please select logo image.");                
+            }
+
+            setSeverity("warning");
+            setOpen(true);
+            return;
+        }
+        
         let form_data = new FormData();
         form_data.append('code', code);
         form_data.append('name', name);
@@ -75,15 +115,29 @@ const  WarehouseCreate = () => {
         form_data.append('phone', phone);
         form_data.append('logo', logo[0]);
 
-        let url = `${restApiSettings.baseURL}/warehouse/${code}`;
+        let url = `${restApiSettings.baseURL}/warehouse/`;
+        console.log("url = ", url);
         axios.post(url, form_data, {
             headers: {
                 'content-type': 'multipart/form-data',            
             },
         }).then(res => {
-            console.log(res.data);
+            setAlertMsg("The warehouse has been created successfully.");                
+            setSeverity("success");
+            setOpen(true);
+        }).catch(err => {
+            if (err.response.status == 409) {
+                setAlertMsg("The code is duplicated.");
+            } else {
+                setAlertMsg("Unknown error occurred.")
+            }
+            setSeverity("error");
+            setOpen(true);
         })
-        .catch(err => console.log(err))
+    };
+
+    const handleClose = (event, reason) => {
+        setOpen(false);
     };
 
     return (
@@ -120,13 +174,11 @@ const  WarehouseCreate = () => {
                                 variant="outlined"
                                 value={code}
                                 onChange={e => setCode(e.target.value)}
-                                
                                 label="Code"
                                 autoFocus
                                 InputProps={{
                                     readOnly: Boolean(loading),
                                 }}
-                                
                             />
                             </Grid>
                             <Grid item xs={4}
@@ -136,13 +188,11 @@ const  WarehouseCreate = () => {
                                 variant="outlined"
                                 value={name}
                                 onChange={e => setName(e.target.value)}
-                                
                                 label="Name"
                                 autoFocus
                                 InputProps={{
                                     readOnly: Boolean(loading),
                                 }}
-                                
                             />
                             </Grid>
                             <Grid item xs={4}
@@ -152,13 +202,11 @@ const  WarehouseCreate = () => {
                                 variant="outlined"
                                 value={rut}
                                 onChange={e => setRut(e.target.value)}
-                                
                                 label="RUT"
                                 autoFocus
                                 InputProps={{
                                     readOnly: Boolean(loading),
                                 }}
-                                
                             />
                             </Grid>                        
                             <Grid item xs={4}
@@ -168,13 +216,11 @@ const  WarehouseCreate = () => {
                                 variant="outlined"
                                 value={addr_line_1}
                                 onChange={e => setAddrLine1(e.target.value)}
-                                
                                 label="Address Line 1"
                                 autoFocus
                                 InputProps={{
                                     readOnly: Boolean(loading),
                                 }}
-                                
                             />
                             </Grid>
                             <Grid item xs={4}
@@ -184,13 +230,12 @@ const  WarehouseCreate = () => {
                                 variant="outlined"
                                 value={addr_line_2}
                                 onChange={e => setAddrLine2(e.target.value)}
-                                
                                 label="Address Line 2"
                                 autoFocus
                                 InputProps={{
                                     readOnly: Boolean(loading),
                                 }}
-                                
+                               
                             />
                             </Grid>
                             <Grid item xs={4}
@@ -200,13 +245,11 @@ const  WarehouseCreate = () => {
                                 variant="outlined"
                                 value={locality}
                                 onChange={e => setLocality(e.target.value)}
-                                
                                 label="Locality"
                                 autoFocus
                                 InputProps={{
                                     readOnly: Boolean(loading),
                                 }}
-                                
                             />
                             </Grid>
                             <Grid item xs={4}
@@ -216,13 +259,11 @@ const  WarehouseCreate = () => {
                                 variant="outlined"
                                 value={city}
                                 onChange={e => setCity(e.target.value)}
-                                
                                 label="City"
                                 autoFocus
                                 InputProps={{
                                     readOnly: Boolean(loading),
                                 }}
-                                
                             />
                             </Grid>
                             <Grid item xs={4}
@@ -232,13 +273,11 @@ const  WarehouseCreate = () => {
                                 variant="outlined"
                                 value={state}
                                 onChange={e => setState(e.target.value)}
-                                
                                 label="State"
                                 autoFocus
                                 InputProps={{
                                     readOnly: Boolean(loading),
                                 }}
-                                
                             />
                             </Grid>
                             <Grid item xs={4}
@@ -248,13 +287,11 @@ const  WarehouseCreate = () => {
                                 variant="outlined"
                                 value={zipcode}
                                 onChange={e => setZipcode(e.target.value)}
-                                
                                 label="Zip Code"
                                 autoFocus
                                 InputProps={{
                                     readOnly: Boolean(loading),
                                 }}
-                                
                             />
                             </Grid>
                             <Grid item xs={4}
@@ -270,7 +307,6 @@ const  WarehouseCreate = () => {
                                     InputProps={{
                                         readOnly: Boolean(loading),
                                     }}
-                                    
                                 />
                             </Grid>
                         </Grid>
@@ -281,13 +317,7 @@ const  WarehouseCreate = () => {
                             justify="space-evenly"
                             xs={3}
                         >
-                            {/* <Grid item xs={3}
-                            style={{ display: 'flex', }}> */}
-                                {/* <input type="file"
-                                id="image"
-                                accept="image/png, image/jpeg"  onChange={e => this.handleImageChange(e)} require /> */}
-                                <DropzoneArea onChange={e => { handleLogoChange(e) }} />
-                            {/* </Grid> */}
+                            <DropzoneArea onChange={e => { handleLogoChange(e) }} />
                         </Grid>
                         <Grid item xs={12}
                         style={{ display: 'flex', justifyContent: "center", marginTop: "20px", }}>
@@ -296,9 +326,12 @@ const  WarehouseCreate = () => {
                         
                     </Grid>
                 </form>
+                <Snackbar open={open} autoHideDuration={6000} anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }} onClose={handleClose}>
+                    <Alert onClose={handleClose} severity={severity}>
+                        {alert_msg}
+                    </Alert>
+                </Snackbar>
             </div>
-                
-                
         </>
         
     )

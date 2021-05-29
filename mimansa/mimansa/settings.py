@@ -81,23 +81,23 @@ WSGI_APPLICATION = 'mimansa.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
-
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'mimansa',
-#         'USER': 'postgres',
-#         'PASSWORD': 'postgres',
-#         'HOST': 'localhost',
-#         'PORT': '5432',
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 #     }
 # }
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'mimansa',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    }
+}
 
 
 # Password validation
@@ -178,13 +178,15 @@ CORS_ORIGIN_WHITELIST = [
     'http://localhost:3000',
 ]
 
+CORS_ALLOWED_ORIGINS = ["http://localhost:3000"]
+
 
 # CSRF_COOKIE_NAME = "X-CSRFTOKEN"
 
-CORS_ALLOW_HEADERS = (
-    'xsrfheadername',
-    'xsrfcookiename',
-    'content-type',
-    'X-CSRFTOKEN',
-    'X-XSRF-TOKEN',
-)
+# CORS_ALLOW_HEADERS = (
+#     'xsrfheadername',
+#     'xsrfcookiename',
+#     'content-type',
+#     'X-CSRFTOKEN',
+#     'X-XSRF-TOKEN',
+# )

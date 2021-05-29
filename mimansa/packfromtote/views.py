@@ -24,44 +24,84 @@ from collections import OrderedDict
 
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.response import Response
-from . import models
-from . import serializers
+from .models import Warehouse, LocnPrinterMap
+from .serializers import WarehouseSerializer, LocnPrinterMapSerializer
 from django.views.decorators.csrf import csrf_exempt
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from rest_framework import status
 
 
-class IndexView(LoginRequiredMixin, TemplateView):
-    login_url = reverse_lazy('login')
-    redirect_field_name = 'redirect_to'
-    template_name = 'index.html'
+class WarehouseView(APIView):
+    def put(self, request, format=None):
+        print("request = ", request)
+        return Response(status=status.HTTP_201_CREATED)
 
-    def get_context_data(self, **kwargs):
-        context = super(IndexView, self).get_context_data(**kwargs)
-        # user = User.objects.filter(id=self.request.GET.get("user_id")).first()
-        # chat = user.chat_set.all()
-        # if not chat:
-        #     context['chat'] = 0
-        # else:
-        #     context['chat'] = chat[0].id
-        return context
+    def delete(self, request, format=None):
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
-class WarehouseViewSet(ModelViewSet): 
-    queryset = models.Warehouse.objects.all()
-    serializer_class = serializers.WarehouseSerializer
-    lookup_field = 'code'
-    lookup_url_kwarg = 'code'
+    def get(self, request, *args, **kwargs):
+        if "code" in request.GET:
+            data = Warehouse.objects.filter(code=request.GET.get("code"))
+        else:
+            data = Warehouse.objects.all()
+        serializer = WarehouseSerializer(data, many=True)
+        return Response(serializer.data)
+
+    def post(self, request, *args, **kwargs):
+        warehouse_serializer = WarehouseSerializer(data=request.data)
+        code = request.data["code"]
+
+        if len(Warehouse.objects.filter(code=code)) > 0:
+            return HttpResponse(status=status.HTTP_409_CONFLICT)
+        
+        if warehouse_serializer.is_valid():
+            warehouse_serializer.save()
+            return HttpResponse (WarehouseSerializer.data)
+        else:
+            print('error', WarehouseSerializer.errors)
+            return HttpResponse (WarehouseSerializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+# class IndexView(LoginRequiredMixin, TemplateView):
+#     login_url = reverse_lazy('login')
+#     redirect_field_name = 'redirect_to'
+#     template_name = 'index.html'
+
+#     def get_context_data(self, **kwargs):
+#         context = super(IndexView, self).get_context_data(**kwargs)
+#         # user = User.objects.filter(id=self.request.GET.get("user_id")).first()
+#         # chat = user.chat_set.all()
+#         # if not chat:
+#         #     context['chat'] = 0
+#         # else:
+#         #     context['chat'] = chat[0].id
+#         return context
+
+# class WarehouseViewSet(ModelViewSet): 
+#     queryset = models.Warehouse.objects.all()
+#     serializer_class = serializers.serializers.WarehouseSerializer
+#     lookup_field = 'code'
+#     lookup_url_kwarg = 'code'
+
+#     def create(self, validated_data):
+#         address_data = validated_data.pop('adresse')
+#         address = Adresse.objects.create(**address_data)
+#         organism = Organisme.objects.create(address=address, **validated_data)
+#         return organism 
 
     
     
-    # def list(self, request):
-    #     print("warehouseviewset")  
-    #     queryset = models.Warehouse.objects.all()    
-    #     serializer = serializers.WarehouseSerializer(queryset)
-    #     return Response(serializer.data)
+#     # def list(self, request):
+#     #     print("warehouseviewset")  
+#     #     queryset = models.Warehouse.objects.all()    
+#     #     serializer = serializers.serializers.WarehouseSerializer(queryset)
+#     #     return Response(serializer.data)
 
 
-class LocnPrinterMapViewSet(ModelViewSet):    
-    serializer_class = serializers.LocnPrinterMapSerializer
-    queryset = models.LocnPrinterMap.objects.all()
+# class LocnPrinterMapViewSet(ModelViewSet):    
+#     serializer_class = serializers.LocnPrinterMapSerializer
+#     queryset = models.LocnPrinterMap.objects.all()
 
     # def list(self, request):
         

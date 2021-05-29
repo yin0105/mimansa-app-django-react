@@ -197,6 +197,8 @@ const SKUDetailScreen = () => {
                 setReadOnly(false);
                 if (res) {
                     console.log('==== res.message: ', res.message);
+                    console.log("== scanInfo.print_mode = ", scanInfo.print_mode);
+                    console.log("== print_mode = ", print_mode);
                     setScanCartonFeedbackQueue(scan_carton_feedback_queue => [...scan_carton_feedback_queue, res.message]);  
                     if (print_mode == "DIRECT")    {
                         qz.websocket.connect().then(() => {

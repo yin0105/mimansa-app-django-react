@@ -27,13 +27,21 @@ const useStyles = makeStyles((theme) => ({
 
 const StyledTableCell = withStyles((theme) => ({
     head: {
-      backgroundColor: theme.palette.common.black,
-      color: theme.palette.common.white,
+        backgroundColor: theme.palette.common.black,
+        color: theme.palette.common.white,
     },
     body: {
-      fontSize: 14,
+        fontSize: 14,
     },
-  }))(TableCell);
+}))(TableCell);
+
+const StyledTableRow = withStyles((theme) => ({
+    root: {
+        '&:nth-of-type(odd)': {
+        backgroundColor: theme.palette.action.hover,
+        },
+    },
+}))(TableRow);
 
 
 const StyledTextField = withStyles((theme) => ({
@@ -238,7 +246,7 @@ const  ToteDetail = () => {
                                     </TableHead>
                                     <TableBody>
                                     {   res.carton_list.map(carton => 
-                                            <TableRow>
+                                            <StyledTableRow>
                                                 <StyledTableCell className={classes.cell} style={{ width: '170px', }}>{carton.carton_nbr}</StyledTableCell>
                                                 <StyledTableCell className={classes.cell} style={{ width: '110px', }}>{carton.state_code}</StyledTableCell>
                                                 <StyledTableCell className={classes.cell} style={{ width: '100px', }}>{carton.sku_id}</StyledTableCell>
@@ -248,7 +256,7 @@ const  ToteDetail = () => {
                                                 <StyledTableCell className={classes.cell} style={{ width: '80px', }}>{carton.to_be_pakd_units}</StyledTableCell>
                                                 <StyledTableCell className={classes.cell} style={{ width: '60px', }}>{carton.units_pakd}</StyledTableCell>
                                                 <StyledTableCell className={classes.cell} style={{ width: '50px', }}>{carton.remaining}</StyledTableCell>
-                                            </TableRow>
+                                            </StyledTableRow>
                                         ) 
                                     }
                                     </TableBody>

@@ -22,6 +22,7 @@ class Warehouse(models.Model):
         db_table='warehouse'
         verbose_name = "Warehouse"
         verbose_name_plural = "Warehouses"
+        ordering = ['code']
 
 
 class LocnPrinterMap(models.Model):
@@ -39,6 +40,7 @@ class LocnPrinterMap(models.Model):
         db_table='locn_printer_map'
         verbose_name = "Locn Printer Map"
         verbose_name_plural = "Locn Printer Map"
+        ordering = ['whse_code']
 
         constraints = [
             models.UniqueConstraint(fields=['whse_code', 'reserve_locn'], name='unique_reserve_locn'),

@@ -10,8 +10,8 @@ import SKUDetailScreen from './pages/SKUDetailScreen';
 import AddWarehouse from './pages/Warehouse/Create';
 import Main from './pages/Main';
 import ToteDetail from './pages/ToteDetail';
-import WarehouseCreate from './pages/Warehouse/Create';
-// import WarehouseList from './pages/Warehouse/List';
+// import WarehouseCreate from './pages/Warehouse/Create';
+import WarehouseList from './pages/Warehouse/List';
 
 function App() {
   return (
@@ -22,7 +22,7 @@ function App() {
           <Route path="/login" component={Login} />
           <Route path="/main" component={Main} />
           <Route path="/tote_detail" component={ToteDetail} />
-          <Route path="/warehouse" component={WarehouseCreate} />
+          <Route path="/warehouse" component={WarehouseList} />
 
           <Route path="/location" component={LocationScreen} />
           <Route path="/id" component={IDScreen} />

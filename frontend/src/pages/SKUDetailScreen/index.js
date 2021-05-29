@@ -73,6 +73,8 @@ const SKUDetailScreen = () => {
     const [push_url, setPushUrl] = useState("");
     const [action_code_for_sku, setActionCodeForSku] = useState("");
     const [readonly, setReadOnly] = useState(false);
+    const [printed, setPrinted] = useState(false);
+    const [print_mode, setPrintMode] = useState("");
 
     const [open, setOpen] = useState(false);
     const [alert_msg, setAlertMsg] = useState("");
@@ -97,10 +99,26 @@ const SKUDetailScreen = () => {
             setNextCarton(scanInfo.next_carton);
             setQty(scanInfo.qty);
             setSkuBrcdList(scanInfo.sku_brcd_list);
+            setPrintMode(scanInfo.print_mode);
             // pre_scannedSKU = 0
             console.log("sku_brcd_list = ", scanInfo.sku_brcd_list)
         }
 
+        if (tote_type === "MONO") {
+            if (!printed) {
+                validatePrintCarton("PRINT");
+                setPrinted(true);
+            }
+        } else if (tote_type === "MULTI") {
+            if (action_code_for_sku === "SHORT" || scannedSKU == qty) {
+                if (!printed) {
+                    validatePrintCarton("PRINT");
+                    setPrinted(true);
+                }
+            }
+        } else {
+            setPrinted(true);
+        }
     }, [history]);
 
     const handleClose = (event, reason) => {
@@ -164,6 +182,35 @@ const SKUDetailScreen = () => {
         setAlert(false);
     }
 
+    const validatePrintCarton = (action_code) => {
+        setLoading(true);
+        setReadOnly(true);
+
+        var scanInfo = JSON.parse(sessionStorage.getItem("scanInfo"));
+
+        apiValidatePrintCarton({ whse: scanInfo.whse, carton_nbr: next_carton, printer_name: scanInfo.printer_name, action_code: action_code, login_user_id: userid })
+            .then(res => {
+                console.log('===== res: ', res);
+                setLoading(false);
+                setReadOnly(false);
+                if (res) {
+                    console.log('==== res.message: ', res.message);
+                    setScanCartonFeedbackQueue(scan_carton_feedback_queue => [...scan_carton_feedback_queue, res.message]);  
+                    if (print_mode == "DIRECT")    {
+
+                    }
+                }
+            })
+            .catch(function (error) {
+                setLoading(false);
+                setReadOnly(false);
+                console.log('===== error: ', error.message);
+
+                setError(error.message);
+                setAlert(true);  
+        });
+    }
+
     const validateSKUBrcd = () => {
         setLoading(true);
         setReadOnly(true);
@@ -191,24 +238,7 @@ const SKUDetailScreen = () => {
                     setAlert(true);  
                 });
         } else if (scan_carton === "REPRINT") {
-            apiValidatePrintCarton({ whse: scanInfo.whse, carton_nbr: next_carton, printer_name: scanInfo.printer_name, action_code: scan_carton, login_user_id: userid })
-                .then(res => {
-                    console.log('===== res: ', res);
-                    setLoading(false);
-                    setReadOnly(false);
-                    if (res) {
-                        console.log('==== res.message: ', res.message);
-                        setScanCartonFeedbackQueue(scan_carton_feedback_queue => [...scan_carton_feedback_queue, res.message]);     
-                    }
-                })
-                .catch(function (error) {
-                    setLoading(false);
-                    setReadOnly(false);
-                    console.log('===== error: ', error.message);
-
-                    setError(error.message);
-                    setAlert(true);  
-            });      
+            validatePrintCarton(scan_carton);   
         } else if (scan_carton == next_carton) {
             if (tote_type === "MONO") { setScannedSKU(1);}
             apiValidatePackCarton({ whse: scanInfo.whse, carton_nbr: scan_carton, tote: lpnid, tote_type: tote_type, staging_locn: scanInfo.staging_locn, login_user_id: userid, sku_id: sku, qty: scannedSKU, action_code: action_code_for_sku })

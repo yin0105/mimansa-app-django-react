@@ -1,35 +1,56 @@
-import React, { useState, useEffect, useRef, Component, Fragment } from 'react';
+import React, { useState, useEffect } from 'react'
+import { Button, Snackbar, TextField, Typography, Grid, Card, CardContent, CardHeader, LinearProgress, TableHead, TableCell, TableBody, TableRow, Table, TableContainer, Paper,} from '@material-ui/core'
 import { useHistory } from 'react-router-dom';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
-// import 'bootstrap/dist/css/bootstrap.min.css';
-import axios from 'axios';
-// import 'mdbreact/dist/css/mdb.css'
+import MainMenu from '../../components/menu';
+import axios from 'axios'
 
-// import { ToastsContainer, ToastsStore } from 'react-toasts';
-// import { IoMdTrash } from "react-icons/io";
+import { restApiSettings } from "../../services/api";
+import MuiAlert from '@material-ui/lab/Alert';
 
-import { TextField, Typography, Grid, Card, CardContent, CardHeader, LinearProgress, TableHead, TableCell, TableBody, TableRow, Table, TableContainer, Paper } from '@material-ui/core'
-import './style.css';
-// import { MdDoneAll } from "react-icons/md";
-// import { TiPencil, TiUpload, TiArrowSync } from "react-icons/ti";
-// import {MDBCard, MDBInput, MDBCol, MDBContainer, MDBRow, MDBBtn,MDBIcon,MDBCardBody } from 'mdbreact';
 
+function Alert(props) {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 const useStyles = makeStyles((theme) => ({
     table: {
-        maxWidth: 1000,
+        maxWidth: 1050,
     },
     cell: {
         wordBreak: 'break-word',
     }
 }));
   
-
 const WarehouseList = () => {
     const classes = useStyles();
     let history = useHistory();
 
     const [warehouse_list, setWarehouseList] = useState([]);
+    const [loading, setLoading] = useState(false);
+
+    const [code, setCode] = useState("");
+    const [name, setName] = useState("");
+    const [rut, setRut] = useState("");
+    const [addr_line_1, setAddrLine1] = useState("");
+    const [addr_line_2, setAddrLine2] = useState("");
+    const [locality, setLocality] = useState("");
+    const [city, setCity] = useState("");
+    const [state, setState] = useState("");
+    const [zipcode, setZipcode] = useState("");
+    const [phone, setPhone] = useState("");
+    const [logo, setLogo] = useState([]);
+
+    const [alert, setAlert] = useState(false);
+    const [error, setError] = useState("");
+
+    const [open, setOpen] = useState(false);
+    const [alert_msg, setAlertMsg] = useState("");
+    const [severity, setSeverity] = useState("success");
+
+    useEffect(() => {
+        getList();
+    }, []);
 
     // constructor(props) {
     //     super(props);
@@ -59,17 +80,13 @@ const WarehouseList = () => {
     //         message: e.target.value
     //     });
     // }
-
-    // getPost() {
-    //     axios.get(`http://127.0.0.1:8000/api/posts/`)
-    //         .then(res => {
-    //             console.log(res)
-    //             this.setState({
-    //                 postList: res.data,
-    //                 isLoading: false
-    //             });
-    //         })
-    // }
+    const getList = ()  => {
+        axios.get(`${restApiSettings.baseURL}/warehouse/`)
+            .then(res => {
+                console.log(res = res)
+                setWarehouseList(res.data);
+            })
+    }
 
     // componentDidMount() {
     //     this.getPost();
@@ -120,51 +137,80 @@ const WarehouseList = () => {
     //     const { isLoading, postList } = this.state;
     //     let titleField
     //     let messageField
+    const handleClose = (event, reason) => {
+        setOpen(false);
+    };
 
-        return (
-            <TableContainer component={Paper} className={classes.table}>
-                <Table aria-label="simple table" className={classes.table}>
-                    <TableHead>
-                        <TableCell >No</TableCell>
-                        <TableCell >Code</TableCell>
-                        <TableCell >Name</TableCell>
-                        <TableCell >RUT</TableCell>
-                        <TableCell >Address Line 1</TableCell>
-                        <TableCell >Address Line 2</TableCell>
-                        <TableCell >Locality</TableCell>
-                        <TableCell >City</TableCell>
-                        <TableCell >State</TableCell>
-                        <TableCell >Zip Code</TableCell>
-                        <TableCell >Phone</TableCell>
-                        <TableCell >Logo</TableCell>
-                        <TableCell >Creation Date</TableCell>
-                        <TableCell >Modification Date</TableCell>
-                    </TableHead>
-                    <TableBody>
-                    {
-                        warehouse_list.map((warehouse, i) => {
+    return (
+        <>
+            <MainMenu/>
+            {loading &&
+                <LinearProgress color="secondary" />
+            }
+            <div className="mx-auto mt-8" style={{ maxWidth: "1050px" }}>
+                <div className="w-full text-center mb-12">
+                    <Typography variant="h3" color="primary">
+                        Warehouse
+                    </Typography>
+                </div>
+                <TableContainer component={Paper} className={classes.table}>
+                    <Table aria-label="simple table" className={classes.table}>
+                        <TableHead>
                             <TableRow>
-                                <TableCell >{ i + 1 }</TableCell>
-                                <TableCell >{warehouse.code}</TableCell>
-                                <TableCell >{warehouse.name}</TableCell>
-                                <TableCell >{warehouse.rut}</TableCell>
-                                <TableCell >{warehouse.addr_line_1}</TableCell>
-                                <TableCell >{warehouse.addr_line_2}</TableCell>
-                                <TableCell >{warehouse.locality}</TableCell>
-                                <TableCell >{warehouse.city}</TableCell>
-                                <TableCell >{warehouse.state}</TableCell>
-                                <TableCell >{warehouse.zipcode}</TableCell>
-                                <TableCell >{warehouse.phone}</TableCell>
-                                <TableCell >{warehouse.logo}</TableCell>
-                                <TableCell >{warehouse.creation_date}</TableCell>
-                                <TableCell >{warehouse.modification_date}</TableCell>                                
+                                <TableCell >No</TableCell>
+                                <TableCell >Code</TableCell>
+                                <TableCell >Name</TableCell>
+                                <TableCell >RUT</TableCell>
+                                <TableCell >Address Line 1</TableCell>
+                                <TableCell >Address Line 2</TableCell>
+                                <TableCell >Locality</TableCell>
+                                <TableCell >City</TableCell>
+                                <TableCell >State</TableCell>
+                                <TableCell >Zip Code</TableCell>
+                                <TableCell >Phone</TableCell>
+                                <TableCell >Logo</TableCell>
+                                <TableCell >Creation Date</TableCell>
+                                <TableCell >Modification Date</TableCell>
                             </TableRow>
-                        })
-                    }
-                        
-                    </TableBody>
-                </Table>
-            </TableContainer>
+                        </TableHead>
+                        <TableBody>
+                        {
+                            warehouse_list.map((warehouse, i) => {
+                                <TableRow>
+                                    <TableCell >{ i + 1 }</TableCell>
+                                    <TableCell >{warehouse.code}</TableCell>
+                                    <TableCell >{warehouse.name}</TableCell>
+                                    <TableCell >{warehouse.rut}</TableCell>
+                                    <TableCell >{warehouse.addr_line_1}</TableCell>
+                                    <TableCell >{warehouse.addr_line_2}</TableCell>
+                                    <TableCell >{warehouse.locality}</TableCell>
+                                    <TableCell >{warehouse.city}</TableCell>
+                                    <TableCell >{warehouse.state}</TableCell>
+                                    <TableCell >{warehouse.zipcode}</TableCell>
+                                    <TableCell >{warehouse.phone}</TableCell>
+                                    <TableCell >{warehouse.logo}</TableCell>
+                                    <TableCell >{warehouse.creation_date}</TableCell>
+                                    <TableCell >{warehouse.modification_date}</TableCell>                                
+                                </TableRow>
+                            })
+                        }
+                            
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+                <Snackbar open={open} autoHideDuration={6000} anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }} onClose={handleClose}>
+                    <Alert onClose={handleClose} severity={severity}>
+                        {alert_msg}
+                    </Alert>
+                </Snackbar>
+            </div>
+        </>
+        
+    )
+}
+
+export default WarehouseList;
+            
             // {/* <div>                
             //     <table className="table table-sm table-hover">
             //             <tbody>
@@ -198,8 +244,4 @@ const WarehouseList = () => {
             //         </tbody>
             //     </table>
             // </div> */}
-        );
     // }
-}
-
-export default WarehouseList;

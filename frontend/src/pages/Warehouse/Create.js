@@ -1,5 +1,4 @@
 import React, { useState, } from 'react'
-import useCookie from 'react-use-cookie';
 import { Button, TextField, Typography, Grid, LinearProgress, Snackbar, } from '@material-ui/core'
 import { useHistory } from 'react-router-dom';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
@@ -42,8 +41,6 @@ const StyledTextField = withStyles((theme) => ({
 const  WarehouseCreate = () => {
     const classes = useStyles();
     let history = useHistory();
-
-    const [sessionid, setSessionid] = useCookie('sessionid', 'mph3eugf0gh5hyzc8glvrt79r2sd6xu6');
 
     const [loading, setLoading] = useState(false);
 

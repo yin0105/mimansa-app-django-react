@@ -188,7 +188,7 @@ const SKUDetailScreen = () => {
 
         var scanInfo = JSON.parse(sessionStorage.getItem("scanInfo"));
 
-        apiValidatePrintCarton({ whse: scanInfo.whse, carton_nbr: next_carton, printer_name: scanInfo.printer_name, action_code: action_code, login_user_id: userid })
+        apiValidatePrintCarton({ whse: scanInfo.whse, carton_nbr: scanInfo.next_carton, printer_name: scanInfo.printer_name, action_code: action_code, login_user_id: scanInfo.userid })
             .then(res => {
                 console.log('===== PRINT res: ', res);
                 setLoading(false);

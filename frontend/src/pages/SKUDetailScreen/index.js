@@ -103,7 +103,7 @@ const SKUDetailScreen = () => {
             // pre_scannedSKU = 0
             console.log("sku_brcd_list = ", scanInfo.sku_brcd_list)
         }
-        console.log("tote_type = ", tote_type, "  printed = ", printed);
+        console.log("tote_type = ", scanInfo.tote_type, "  printed = ", printed);
         if (tote_type === "MONO") {
             if (!printed) {
                 validatePrintCarton("PRINT");

@@ -103,7 +103,7 @@ const SKUDetailScreen = () => {
             // pre_scannedSKU = 0
             console.log("sku_brcd_list = ", scanInfo.sku_brcd_list)
         }
-
+        console.log("tote_type = ", tote_type, "  printed = ", printed);
         if (tote_type === "MONO") {
             if (!printed) {
                 validatePrintCarton("PRINT");
@@ -190,7 +190,7 @@ const SKUDetailScreen = () => {
 
         apiValidatePrintCarton({ whse: scanInfo.whse, carton_nbr: next_carton, printer_name: scanInfo.printer_name, action_code: action_code, login_user_id: userid })
             .then(res => {
-                console.log('===== res: ', res);
+                console.log('===== PRINT res: ', res);
                 setLoading(false);
                 setReadOnly(false);
                 if (res) {

@@ -112,8 +112,7 @@ const SKUDetailScreen = () => {
         } else if (scanInfo.tote_type === "MULTI") {
             if (action_code_for_sku === "SHORT" || scannedSKU == qty) {
                 if (!printed) {
-                    validatePrintCarton("PRINT");
-                    setPrinted(true);
+                    validatePrintCarton("PRINT");                    
                 }
             }
         } else {
@@ -199,6 +198,7 @@ const SKUDetailScreen = () => {
                     if (print_mode == "DIRECT")    {
 
                     }
+                    setPrinted(true);
                 }
             })
             .catch(function (error) {

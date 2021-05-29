@@ -198,9 +198,10 @@ const SKUDetailScreen = () => {
                 if (res) {
                     console.log('==== res.message: ', res.message);
                     console.log("== scanInfo.print_mode = ", scanInfo.print_mode);
-                    console.log("== print_mode = ", print_mode);
+                    
                     setScanCartonFeedbackQueue(scan_carton_feedback_queue => [...scan_carton_feedback_queue, res.message]);  
-                    if (print_mode == "DIRECT")    {
+                    if (scanInfo.print_mode == "DIRECT")    {
+                        console.log("== print_mode = ", scanInfo.print_mode);
                         qz.websocket.connect().then(() => {
                             return qz.printers.find(scanInfo.printer_name);
                         }).then((printer) => {

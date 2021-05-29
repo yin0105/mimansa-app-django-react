@@ -182,6 +182,7 @@ const SKUDetailScreen = () => {
     }
 
     const validatePrintCarton = (action_code) => {
+        console.log(" == validatePrintCarton == ");
         setLoading(true);
         setReadOnly(true);
 

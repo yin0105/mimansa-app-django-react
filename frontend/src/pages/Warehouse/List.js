@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Button, Snackbar, TextField, Typography, Grid, Card, CardContent, CardHeader, LinearProgress, TableHead, TableCell, TableBody, TableRow, Table, TableContainer, Paper,} from '@material-ui/core'
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import MainMenu from '../../components/menu';
 import axios from 'axios'
@@ -15,12 +15,41 @@ function Alert(props) {
 
 const useStyles = makeStyles((theme) => ({
     table: {
-        maxWidth: 1050,
+        maxWidth: 1150,
+        marginBottom: 20,
+        marginTop: 20,
     },
     cell: {
         wordBreak: 'break-word',
     }
 }));
+
+const StyledTableCell = withStyles((theme) => ({
+    head: {
+        backgroundColor: theme.palette.common.black,
+        color: theme.palette.common.white,
+        textAlign: 'center',
+    },
+    body: {
+        fontSize: 14,
+        textAlign: 'center',
+    },
+}))(TableCell);
+
+const StyledTableRow = withStyles((theme) => ({
+    root: {
+        '&:nth-of-type(odd)': {
+        backgroundColor: theme.palette.action.hover,
+        },
+    },
+}))(TableRow);
+
+
+const StyledTextField = withStyles((theme) => ({
+    root: {
+        margin: "30px 0px",
+    },
+}))(TextField);
   
 const WarehouseList = () => {
     const classes = useStyles();
@@ -122,13 +151,14 @@ const WarehouseList = () => {
     //     })
     // }
 
-    // deleteRow = (id) => {
-    //     axios.delete('http://127.0.0.1:8000/api/posts' + `/${id}/`)
-    //         .then(res => {
-    //             // ToastsStore.warning('Successfully Deleted!');
-    //             this.getPost();
-    //         });
-    // }
+    const deleteRow = (id) => {
+        axios.delete(`${restApiSettings.baseURL}/warehouse/${id}/`)
+            .then(res => {
+                setAlertMsg("The warehouse has been deleted successfully.");                
+                setSeverity("success");
+                setOpen(true);
+            });
+    }
 
 
 
@@ -147,52 +177,64 @@ const WarehouseList = () => {
             {loading &&
                 <LinearProgress color="secondary" />
             }
-            <div className="mx-auto mt-8" style={{ maxWidth: "1050px" }}>
-                <div className="w-full text-center mb-12">
+            <div className="mx-auto mt-8" style={{ maxWidth: "1150px" }}>
+                <div className="w-full text-center mb-6">
                     <Typography variant="h3" color="primary">
                         Warehouse
                     </Typography>
                 </div>
+                <Button variant="contained" color="primary" onClick={() => history.push("/warehouse/create")}>Add Warehouse</Button>
+                {/* <Link to="/warehouse/create">Add Warehouse</Link> */}
                 <TableContainer component={Paper} className={classes.table}>
-                    <Table aria-label="simple table" className={classes.table}>
+                    <Table aria-label="simple table">
                         <TableHead>
                             <TableRow>
-                                <TableCell >No</TableCell>
-                                <TableCell >Code</TableCell>
-                                <TableCell >Name</TableCell>
-                                <TableCell >RUT</TableCell>
-                                <TableCell >Address Line 1</TableCell>
-                                <TableCell >Address Line 2</TableCell>
-                                <TableCell >Locality</TableCell>
-                                <TableCell >City</TableCell>
-                                <TableCell >State</TableCell>
-                                <TableCell >Zip Code</TableCell>
-                                <TableCell >Phone</TableCell>
-                                <TableCell >Logo</TableCell>
-                                <TableCell >Creation Date</TableCell>
-                                <TableCell >Modification Date</TableCell>
+                                <StyledTableCell >No</StyledTableCell>
+                                <StyledTableCell >Code</StyledTableCell>
+                                <StyledTableCell >Name</StyledTableCell>
+                                <StyledTableCell >RUT</StyledTableCell>
+                                <StyledTableCell >Address Line 1</StyledTableCell>
+                                <StyledTableCell >Address Line 2</StyledTableCell>
+                                <StyledTableCell >Locality</StyledTableCell>
+                                <StyledTableCell >City</StyledTableCell>
+                                <StyledTableCell >State</StyledTableCell>
+                                <StyledTableCell >Zip Code</StyledTableCell>
+                                <StyledTableCell >Phone</StyledTableCell>
+                                <StyledTableCell >Logo</StyledTableCell>
+                                <StyledTableCell >Creation Date</StyledTableCell>
+                                <StyledTableCell >Modification Date</StyledTableCell>
+                                <StyledTableCell >Action</StyledTableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
                         {
-                            warehouse_list.map((warehouse, i) => {
-                                <TableRow>
-                                    <TableCell >{ i + 1 }</TableCell>
-                                    <TableCell >{warehouse.code}</TableCell>
-                                    <TableCell >{warehouse.name}</TableCell>
-                                    <TableCell >{warehouse.rut}</TableCell>
-                                    <TableCell >{warehouse.addr_line_1}</TableCell>
-                                    <TableCell >{warehouse.addr_line_2}</TableCell>
-                                    <TableCell >{warehouse.locality}</TableCell>
-                                    <TableCell >{warehouse.city}</TableCell>
-                                    <TableCell >{warehouse.state}</TableCell>
-                                    <TableCell >{warehouse.zipcode}</TableCell>
-                                    <TableCell >{warehouse.phone}</TableCell>
-                                    <TableCell >{warehouse.logo}</TableCell>
-                                    <TableCell >{warehouse.creation_date}</TableCell>
-                                    <TableCell >{warehouse.modification_date}</TableCell>                                
-                                </TableRow>
-                            })
+                            warehouse_list.map((warehouse, i) => 
+                                <StyledTableRow key={i}>
+                                    <StyledTableCell key={"no_" + i} >{ i + 1 }</StyledTableCell>
+                                    <StyledTableCell key={"code_" + i} >{warehouse.code}</StyledTableCell>
+                                    <StyledTableCell key={"name_" + i} >{warehouse.name}</StyledTableCell>
+                                    <StyledTableCell key={"rut_" + i} >{warehouse.rut}</StyledTableCell>
+                                    <StyledTableCell key={"addr_line_1_" + i} >{warehouse.addr_line_1}</StyledTableCell>
+                                    <StyledTableCell key={"addr_line_2_" + i} >{warehouse.addr_line_2}</StyledTableCell>
+                                    <StyledTableCell key={"locality_" + i} >{warehouse.locality}</StyledTableCell>
+                                    <StyledTableCell key={"city_" + i} >{warehouse.city}</StyledTableCell>
+                                    <StyledTableCell key={"state_" + i} >{warehouse.state}</StyledTableCell>
+                                    <StyledTableCell key={"zipcode_" + i} >{warehouse.zipcode}</StyledTableCell>
+                                    <StyledTableCell key={"phone_" + i} >{warehouse.phone}</StyledTableCell>
+                                    <StyledTableCell key={"logo_" + i} >
+                                        {warehouse.logo !== null && <img src={'http://localhost:8000/logo/' + warehouse.logo.split("/")[2]}/>}
+                                    </StyledTableCell>
+                                        {/* {warehouse.logo}</StyledTableCell> */}
+                                    {/* <StyledTableCell key={"logo_" + i} >{warehouse.logo}</StyledTableCell> */}
+                                    <StyledTableCell key={"creation_date_" + i} >{warehouse.creation_date}</StyledTableCell>
+                                    <StyledTableCell key={"modification_date_" + i} >{warehouse.modification_date}</StyledTableCell>                                
+                                    <StyledTableCell key={"action_" + i} style={{ wordWrap: 'no-wrap'}}>
+                                        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+                                        <Button variant="outlined" id="printPageButton" onClick={ e => history.push(`/warehouse/edit/${warehouse.id}`)} style={{ marginBottom: '10px', }}><i className="fa fa-pencil"></i></Button>
+                                        <Button variant="outlined" id="printPageButton" onClick={ e => deleteRow(warehouse.id)}><i className="fa fa-trash"></i></Button>
+                                    </StyledTableCell>
+                                </StyledTableRow>
+                            )
                         }
                             
                         </TableBody>

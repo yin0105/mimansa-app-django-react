@@ -1,5 +1,5 @@
 import React, { useState, } from 'react'
-import { Button, TextField, Typography, Grid, LinearProgress, Snackbar, } from '@material-ui/core'
+import { Button, TextField, Typography, Grid, LinearProgress, Snackbar, FormHelperText, } from '@material-ui/core'
 import { useHistory } from 'react-router-dom';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import MainMenu from '../../components/menu';
@@ -27,6 +27,9 @@ const useStyles = makeStyles((theme) => ({
   },
   cell: {
       wordBreak: 'break-word',
+  },
+  grid_with_textfield: {
+      display: 'flex',
   }
 }));
 
@@ -164,8 +167,7 @@ const  WarehouseCreate = () => {
                             justify="space-evenly"
                             xs={9}
                         >
-                            <Grid item xs={4}
-                            style={{ display: 'flex', }}>
+                            <Grid item xs={4}>
                                 <TextField                                        
                                 className="m-2 w-full"
                                 variant="outlined"
@@ -178,8 +180,7 @@ const  WarehouseCreate = () => {
                                 }}
                             />
                             </Grid>
-                            <Grid item xs={4}
-                            style={{ display: 'flex', }}>
+                            <Grid item xs={4}>
                                 <TextField                                        
                                 className="m-2 w-full"
                                 variant="outlined"
@@ -192,8 +193,7 @@ const  WarehouseCreate = () => {
                                 }}
                             />
                             </Grid>
-                            <Grid item xs={4}
-                            style={{ display: 'flex', }}>
+                            <Grid item xs={4}>
                                 <TextField                                        
                                 className="m-2 w-full"
                                 variant="outlined"
@@ -206,8 +206,7 @@ const  WarehouseCreate = () => {
                                 }}
                             />
                             </Grid>                        
-                            <Grid item xs={4}
-                            style={{ display: 'flex', }}>
+                            <Grid item xs={4}>
                                 <TextField                                        
                                 className="m-2 w-full"
                                 variant="outlined"
@@ -220,8 +219,7 @@ const  WarehouseCreate = () => {
                                 }}
                             />
                             </Grid>
-                            <Grid item xs={4}
-                            style={{ display: 'flex', }}>
+                            <Grid item xs={4}>
                                 <TextField                                        
                                 className="m-2 w-full"
                                 variant="outlined"
@@ -235,8 +233,7 @@ const  WarehouseCreate = () => {
                                
                             />
                             </Grid>
-                            <Grid item xs={4}
-                            style={{ display: 'flex', }}>
+                            <Grid item xs={4}>
                                 <TextField                                        
                                 className="m-2 w-full"
                                 variant="outlined"
@@ -249,8 +246,7 @@ const  WarehouseCreate = () => {
                                 }}
                             />
                             </Grid>
-                            <Grid item xs={4}
-                            style={{ display: 'flex', }}>
+                            <Grid item xs={4}>
                                 <TextField                                        
                                 className="m-2 w-full"
                                 variant="outlined"
@@ -263,8 +259,7 @@ const  WarehouseCreate = () => {
                                 }}
                             />
                             </Grid>
-                            <Grid item xs={4}
-                            style={{ display: 'flex', }}>
+                            <Grid item xs={4}>
                                 <TextField                                        
                                 className="m-2 w-full"
                                 variant="outlined"
@@ -277,8 +272,7 @@ const  WarehouseCreate = () => {
                                 }}
                             />
                             </Grid>
-                            <Grid item xs={4}
-                            style={{ display: 'flex', }}>
+                            <Grid item xs={4}>
                                 <TextField                                        
                                 className="m-2 w-full"
                                 variant="outlined"
@@ -291,8 +285,7 @@ const  WarehouseCreate = () => {
                                 }}
                             />
                             </Grid>
-                            <Grid item xs={4}
-                            style={{ display: 'flex', }}>
+                            <Grid item xs={4}>
                                 <TextField                                        
                                     className="m-2 w-full"
                                     variant="outlined"
@@ -316,9 +309,10 @@ const  WarehouseCreate = () => {
                         >
                             <DropzoneArea onChange={e => { handleLogoChange(e) }} />
                         </Grid>
-                        <Grid item xs={12}
-                        style={{ display: 'flex', justifyContent: "center", marginTop: "20px", }}>
-                            <Button variant="contained" color="primary" type="submit" >Create</Button>
+                        <Grid item xs={4}
+                        style={{ display: 'flex', justifyContent: "space-around", marginTop: "20px", }}>
+                            <Button variant="contained" color="primary" type="submit" className="mr-20">Create</Button>
+                            <Button variant="contained" color="primary" onClick={() => history.push("/warehouse/list")}>Go Back</Button>
                         </Grid>
                         
                     </Grid>

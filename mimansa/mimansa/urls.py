@@ -31,4 +31,4 @@ urlpatterns = [
     path('api/warehouse/', views.WarehouseView.as_view(), name= 'warehouse_list'),
     # path('api/locnprintermap/', views.LocnPrinterMapView.as_view(), name= 'locnprintermap_list'),
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
-] 
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

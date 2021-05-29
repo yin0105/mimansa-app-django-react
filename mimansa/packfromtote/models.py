@@ -11,7 +11,7 @@ class Warehouse(models.Model):
     state = models.CharField(max_length=20,null=True,blank=True)
     zipcode = models.CharField(max_length=20, null=True,blank=True)
     phone = models.CharField(max_length=20, null=True,blank=True)
-    logo = models.ImageField(upload_to='logo', null=True,blank=True)
+    logo = models.ImageField(upload_to='', null=True,blank=True)
     creation_date = models.DateTimeField(auto_now_add=True, verbose_name='Fecha Creacion')
     modification_date = models.DateTimeField(auto_now=True, verbose_name='Fecha Modificacion')
 

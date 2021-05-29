@@ -190,3 +190,7 @@ CORS_ALLOWED_ORIGINS = ["http://localhost:3000"]
 #     'X-CSRFTOKEN',
 #     'X-XSRF-TOKEN',
 # )
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'logo')
+print("MEDIA_ROOT = ", MEDIA_ROOT)
+MEDIA_URL = '/logo/'

@@ -94,7 +94,7 @@ const LocnPrinterMapList = () => {
             {loading &&
                 <LinearProgress color="secondary" />
             }
-            <div className="mx-auto mt-8" style={{ maxWidth: "1150px" }}>
+            <div className="mx-auto mt-8">
                 <div className="w-full text-center mb-6">
                     <Typography variant="h3" color="primary">
                         LocnPrinterMap

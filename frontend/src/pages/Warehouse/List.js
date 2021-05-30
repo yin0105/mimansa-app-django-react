@@ -16,13 +16,8 @@ function Alert(props) {
 
 const useStyles = makeStyles((theme) => ({
     table: {
-        maxWidth: 1150,
-        marginBottom: 20,
-        marginTop: 20,
+        minWidth: 650,
     },
-    cell: {
-        wordBreak: 'break-word',
-    }
 }));
 
 const StyledTableCell = withStyles((theme) => ({
@@ -99,7 +94,7 @@ const WarehouseList = () => {
             {loading &&
                 <LinearProgress color="secondary" />
             }
-            <div className="mx-auto mt-8" style={{ maxWidth: "1150px" }}>
+            <div className="mx-auto mt-8">
                 <div className="w-full text-center mb-6">
                     <Typography variant="h3" color="primary">
                         Warehouse
@@ -107,54 +102,54 @@ const WarehouseList = () => {
                 </div>
                 <Button variant="contained" color="primary" onClick={() => history.push("/warehouse/create")}>Add Warehouse</Button>
                 {/* <Link to="/warehouse/create">Add Warehouse</Link> */}
-                <TableContainer component={Paper} className={classes.table}>
-                    <Table aria-label="simple table">
+                <TableContainer component={Paper}>
+                    <Table className={classes.table} size="small" aria-label="a dense table">
                         <TableHead>
                             <TableRow>
-                                <StyledTableCell >No</StyledTableCell>
-                                <StyledTableCell >Code</StyledTableCell>
-                                <StyledTableCell >Name</StyledTableCell>
-                                <StyledTableCell >RUT</StyledTableCell>
-                                <StyledTableCell >Address Line 1</StyledTableCell>
-                                <StyledTableCell >Address Line 2</StyledTableCell>
-                                <StyledTableCell >Locality</StyledTableCell>
-                                <StyledTableCell >City</StyledTableCell>
-                                <StyledTableCell >State</StyledTableCell>
-                                <StyledTableCell >Zip Code</StyledTableCell>
-                                <StyledTableCell >Phone</StyledTableCell>
-                                <StyledTableCell >Logo</StyledTableCell>
-                                <StyledTableCell >Creation Date</StyledTableCell>
-                                <StyledTableCell >Modification Date</StyledTableCell>
-                                <StyledTableCell >Action</StyledTableCell>
+                                <TableCell >No</TableCell>
+                                <TableCell >Code</TableCell>
+                                <TableCell >Name</TableCell>
+                                <TableCell >RUT</TableCell>
+                                <TableCell >Address Line 1</TableCell>
+                                <TableCell >Address Line 2</TableCell>
+                                <TableCell >Locality</TableCell>
+                                <TableCell >City</TableCell>
+                                <TableCell >State</TableCell>
+                                <TableCell >Zip Code</TableCell>
+                                <TableCell >Phone</TableCell>
+                                <TableCell >Logo</TableCell>
+                                <TableCell >Creation Date</TableCell>
+                                <TableCell >Modification Date</TableCell>
+                                <TableCell >Action</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
                         {
                             warehouse_list.map((warehouse, i) => 
                                 <StyledTableRow key={i}>
-                                    <StyledTableCell key={"no_" + i} >{ i + 1 }</StyledTableCell>
-                                    <StyledTableCell key={"code_" + i} >{warehouse.code}</StyledTableCell>
-                                    <StyledTableCell key={"name_" + i} >{warehouse.name}</StyledTableCell>
-                                    <StyledTableCell key={"rut_" + i} >{warehouse.rut}</StyledTableCell>
-                                    <StyledTableCell key={"addr_line_1_" + i} >{warehouse.addr_line_1}</StyledTableCell>
-                                    <StyledTableCell key={"addr_line_2_" + i} >{warehouse.addr_line_2}</StyledTableCell>
-                                    <StyledTableCell key={"locality_" + i} >{warehouse.locality}</StyledTableCell>
-                                    <StyledTableCell key={"city_" + i} >{warehouse.city}</StyledTableCell>
-                                    <StyledTableCell key={"state_" + i} >{warehouse.state}</StyledTableCell>
-                                    <StyledTableCell key={"zipcode_" + i} >{warehouse.zipcode}</StyledTableCell>
-                                    <StyledTableCell key={"phone_" + i} >{warehouse.phone}</StyledTableCell>
-                                    <StyledTableCell key={"logo_" + i} >
+                                    <TableCell key={"no_" + i} >{ i + 1 }</TableCell>
+                                    <TableCell key={"code_" + i} >{warehouse.code}</TableCell>
+                                    <TableCell key={"name_" + i} >{warehouse.name}</TableCell>
+                                    <TableCell key={"rut_" + i} >{warehouse.rut}</TableCell>
+                                    <TableCell key={"addr_line_1_" + i} >{warehouse.addr_line_1}</TableCell>
+                                    <TableCell key={"addr_line_2_" + i} >{warehouse.addr_line_2}</TableCell>
+                                    <TableCell key={"locality_" + i} >{warehouse.locality}</TableCell>
+                                    <TableCell key={"city_" + i} >{warehouse.city}</TableCell>
+                                    <TableCell key={"state_" + i} >{warehouse.state}</TableCell>
+                                    <TableCell key={"zipcode_" + i} >{warehouse.zipcode}</TableCell>
+                                    <TableCell key={"phone_" + i} >{warehouse.phone}</TableCell>
+                                    <TableCell key={"logo_" + i} >
                                         {warehouse.logo !== null && <img src={`${backendSettings.logoBaseURL}/${warehouse.logo.split("/")[2]}`}/>}
-                                    </StyledTableCell>
-                                        {/* {warehouse.logo}</StyledTableCell> */}
-                                    {/* <StyledTableCell key={"logo_" + i} >{warehouse.logo}</StyledTableCell> */}
-                                    <StyledTableCell key={"creation_date_" + i} >{warehouse.creation_date}</StyledTableCell>
-                                    <StyledTableCell key={"modification_date_" + i} >{warehouse.modification_date}</StyledTableCell>                                
-                                    <StyledTableCell key={"action_" + i} style={{ wordWrap: 'no-wrap'}}>
+                                    </TableCell>
+                                        {/* {warehouse.logo}</TableCell> */}
+                                    {/* <TableCell key={"logo_" + i} >{warehouse.logo}</TableCell> */}
+                                    <TableCell key={"creation_date_" + i} >{warehouse.creation_date}</TableCell>
+                                    <TableCell key={"modification_date_" + i} >{warehouse.modification_date}</TableCell>                                
+                                    <TableCell key={"action_" + i} style={{ wordWrap: 'no-wrap'}}>
                                         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
                                         <Button variant="outlined" id="printPageButton" onClick={ e => history.push(`/warehouse/edit/${warehouse.code}`)} style={{ marginBottom: '10px', }}><i className="fa fa-pencil"></i></Button>
                                         <Button variant="outlined" id="printPageButton" onClick={ e => deleteRow(warehouse.code)}><i className="fa fa-trash"></i></Button>
-                                    </StyledTableCell>
+                                    </TableCell>
                                 </StyledTableRow>
                             )
                         }

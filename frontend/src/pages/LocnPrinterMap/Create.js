@@ -90,6 +90,16 @@ const  LocnPrinterMapCreate = () => {
             setSeverity("warning");
             setOpen(true);
             return;
+        } else {
+            if (!validateReserveLocn(reserve_locn)) {
+                setAlertMsg("Invalid reserve_locn."); 
+                setSeverity("warning");
+                setOpen(true);
+            } else if (!validateStagingLocn(staging_locn)) {
+                setAlertMsg("Invalid staging_locn."); 
+                setSeverity("warning");
+                setOpen(true);
+            }
         }
         
         let form_data = new FormData();
@@ -122,6 +132,16 @@ const  LocnPrinterMapCreate = () => {
     const handleClose = (event, reason) => {
         setOpen(false);
     };
+
+    const validateReserveLocn = locn => {
+        // validate reserve_locn
+        return true;
+    }
+
+    const validateStagingLocn = locn => {
+        // validate reserve_locn
+        return true;
+    }
 
     return (
         <>

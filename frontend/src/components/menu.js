@@ -60,11 +60,15 @@ export default function MainMenu() {
     const [anchorEl2, setAnchorEl2] = React.useState(null);
 
     const handleClick = (event) => {
-        setAnchorEl(event.currentTarget);
+        if (anchorEl !== event.currentTarget) {
+            setAnchorEl(event.currentTarget);
+        }
     };
 
     const handleClick2 = (event) => {
-        setAnchorEl2(event.currentTarget);
+        if (anchorEl !== event.currentTarget) {
+            setAnchorEl2(event.currentTarget);
+        }
     };
 
     const handleClose = () => {
@@ -78,11 +82,13 @@ export default function MainMenu() {
     return (
         <div style={{ backgroundColor: "#3f51b5", height: "64px", justifyContent: "center", display: "flex", alignItems: "flex-end", color: "white"}}>
             <Button
-                aria-controls="maestros-menu"
+                // aria-controls="maestros-menu"
+                aria-owns={anchorEl ? "maestros-menu" : undefined}
                 aria-haspopup="true"
                 variant="text"
                 style={{ color: "white", marginRight: "150px", }}
                 onClick={handleClick}
+                onMouseOver={handleClick}
             >
                 Maestros
             </Button>
@@ -92,6 +98,7 @@ export default function MainMenu() {
                 keepMounted
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
+                MenuListProps={{ onMouseLeave: handleClose }}
             >
                 <StyledMenuItem>
                     <StyledLink to="/warehouse/list">Warehouse</StyledLink>
@@ -107,6 +114,7 @@ export default function MainMenu() {
                 variant="text"
                 style={{ color: "white" }}
                 onClick={handleClick2}
+                onMouseOver={handleClick2}
             >
                 Pack from Tote
             </Button>
@@ -116,6 +124,7 @@ export default function MainMenu() {
                 keepMounted
                 open={Boolean(anchorEl2)}
                 onClose={handleClose2}
+                MenuListProps={{ onMouseLeave: handleClose2 }}
             >
                 <StyledMenuItem>
                     <StyledLink to="/location">Pack from Tote</StyledLink>

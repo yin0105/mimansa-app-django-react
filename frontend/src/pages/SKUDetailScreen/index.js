@@ -64,7 +64,7 @@ const SKUDetailScreen = () => {
     const [sku, setSKU] = useState("");
     // const [dspsku, setDspSku] = useState("");
     const [next_carton, setNextCarton] = useState("");
-    const [qty, setQty] = useState(0);
+    const [qty, setQty] = useState(null);
     const [sku_brcd_list, setSkuBrcdList] = useState([]);
     const [scannedSKU, setScannedSKU] = useState(0);
     const [sku_brcd, setSkuBrcd] = useState("");
@@ -288,7 +288,6 @@ const SKUDetailScreen = () => {
                             setScanCarton("");
                             setActionCodeForSku("");
                             setQty(res.next_carton_details.next_carton_qty);
-                            // setScannedSKU(0);
                             setReadOnly(false);
                             
                             if (res.tote_details.tote_status === 95) {

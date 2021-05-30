@@ -5,8 +5,9 @@ import { withStyles, makeStyles } from '@material-ui/core/styles';
 import MainMenu from '../../components/menu';
 import axios from 'axios'
 
-import { restApiSettings } from "../../services/api";
+import { restApiSettings, backendSettings } from "../../services/api";
 import MuiAlert from '@material-ui/lab/Alert';
+import { useConfirm } from 'material-ui-confirm';
 
 
 function Alert(props) {
@@ -54,24 +55,10 @@ const StyledTextField = withStyles((theme) => ({
 const WarehouseList = () => {
     const classes = useStyles();
     let history = useHistory();
+    const confirm = useConfirm();
 
     const [warehouse_list, setWarehouseList] = useState([]);
     const [loading, setLoading] = useState(false);
-
-    const [code, setCode] = useState("");
-    const [name, setName] = useState("");
-    const [rut, setRut] = useState("");
-    const [addr_line_1, setAddrLine1] = useState("");
-    const [addr_line_2, setAddrLine2] = useState("");
-    const [locality, setLocality] = useState("");
-    const [city, setCity] = useState("");
-    const [state, setState] = useState("");
-    const [zipcode, setZipcode] = useState("");
-    const [phone, setPhone] = useState("");
-    const [logo, setLogo] = useState([]);
-
-    const [alert, setAlert] = useState(false);
-    const [error, setError] = useState("");
 
     const [open, setOpen] = useState(false);
     const [alert_msg, setAlertMsg] = useState("");
@@ -81,34 +68,6 @@ const WarehouseList = () => {
         getList();
     }, []);
 
-    // constructor(props) {
-    //     super(props);
-    //     this.onChangeTitle = this.onChangeTitle.bind(this);
-    //     this.onChangeMessage = this.onChangeMessage.bind(this);
-
-
-
-    //     // setting the initial states
-    //     this.state = {
-    //         id: '',
-    //         title: '',
-    //         message: '',
-    //         postList: [],
-    //         isLoading: true,
-    //         isEditing: false,
-
-    //     }
-    // }
-    // const onChangeTitle = (e) => {
-    //     this.setState({
-    //         title: e.target.value
-    //     });
-    // }
-    // onChangeMessage(e) {
-    //     this.setState({
-    //         message: e.target.value
-    //     });
-    // }
     const getList = ()  => {
         axios.get(`${restApiSettings.baseURL}/warehouse/`)
             .then(res => {
@@ -117,56 +76,19 @@ const WarehouseList = () => {
             })
     }
 
-    // componentDidMount() {
-    //     this.getPost();
-    // }
-
-    // reset = () => {
-    //     this.setState({
-    //         id: '',
-    //         title: '',
-    //         message: ''
-    //     })
-    // }
-
-    // showEditForm = () => {
-    //     console.log("in show edit form")
-    //     this.setState({
-    //         isEditing: true
-    //     })
-    // }
-    // editRow = (id, title, message) => {
-    //     this.setState({
-    //         id: id,
-    //         title: title,
-    //         message: message
-
-    //     })
-    // }
-    // initialisePostView = (title, message) =>{
-    //     console.log("initialise view")
-    //     this.setState({
-    //         titleField: title,
-    //         messageField: message
-    //     })
-    // }
-
-    const deleteRow = (id) => {
-        axios.delete(`${restApiSettings.baseURL}/warehouse/${id}/`)
-            .then(res => {
-                setAlertMsg("The warehouse has been deleted successfully.");                
-                setSeverity("success");
-                setOpen(true);
-            });
+    const deleteRow = (code) => {
+        confirm({ description: 'Are you sure to delete the warehouse?' })
+            .then(() => {
+                axios.delete(`${restApiSettings.baseURL}/warehouse/?code=${code}`)
+                    .then(res => {
+                        setAlertMsg("The warehouse has been deleted successfully.");                
+                        setSeverity("success");
+                        setOpen(true);
+                        getList();
+                    });
+            }).catch(() => {});
     }
 
-
-
-
-    // render() {
-    //     const { isLoading, postList } = this.state;
-    //     let titleField
-    //     let messageField
     const handleClose = (event, reason) => {
         setOpen(false);
     };
@@ -222,7 +144,7 @@ const WarehouseList = () => {
                                     <StyledTableCell key={"zipcode_" + i} >{warehouse.zipcode}</StyledTableCell>
                                     <StyledTableCell key={"phone_" + i} >{warehouse.phone}</StyledTableCell>
                                     <StyledTableCell key={"logo_" + i} >
-                                        {warehouse.logo !== null && <img src={'http://localhost:8000/logo/' + warehouse.logo.split("/")[2]}/>}
+                                        {warehouse.logo !== null && <img src={`${backendSettings.logoBaseURL}/${warehouse.logo.split("/")[2]}`}/>}
                                     </StyledTableCell>
                                         {/* {warehouse.logo}</StyledTableCell> */}
                                     {/* <StyledTableCell key={"logo_" + i} >{warehouse.logo}</StyledTableCell> */}
@@ -230,8 +152,8 @@ const WarehouseList = () => {
                                     <StyledTableCell key={"modification_date_" + i} >{warehouse.modification_date}</StyledTableCell>                                
                                     <StyledTableCell key={"action_" + i} style={{ wordWrap: 'no-wrap'}}>
                                         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
-                                        <Button variant="outlined" id="printPageButton" onClick={ e => history.push(`/warehouse/edit/${warehouse.id}`)} style={{ marginBottom: '10px', }}><i className="fa fa-pencil"></i></Button>
-                                        <Button variant="outlined" id="printPageButton" onClick={ e => deleteRow(warehouse.id)}><i className="fa fa-trash"></i></Button>
+                                        <Button variant="outlined" id="printPageButton" onClick={ e => history.push(`/warehouse/edit/${warehouse.code}`)} style={{ marginBottom: '10px', }}><i className="fa fa-pencil"></i></Button>
+                                        <Button variant="outlined" id="printPageButton" onClick={ e => deleteRow(warehouse.code)}><i className="fa fa-trash"></i></Button>
                                     </StyledTableCell>
                                 </StyledTableRow>
                             )
@@ -252,38 +174,3 @@ const WarehouseList = () => {
 }
 
 export default WarehouseList;
-            
-            // {/* <div>                
-            //     <table className="table table-sm table-hover">
-            //             <tbody>
-
-
-
-            //         {(postList.map((item, i) => {
-
-            //                     return [
-
-            //                         <Fragment>
-
-
-            //                             <tr key={i}>
-            //                                 <td>{item.id}</td>
-            //                                 <td>{item.title}</td>
-            //                                 <td>{item.message}</td>
-
-            //                                 <td>
-            //                                     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
-            //                                     <Button variant="dark" id="printPageButton" onClick={(e) => this.showEditForm()}><i className="fa fa-pencil"></i></Button>
-            //                                     <Button variant="light" id="printPageButton" onClick={(e) => this.deleteRow(item.id, e)}><i className="fa fa-trash"></i></Button>
-
-            //                                 </td>
-            //                             </tr>
-            //                         </Fragment>
-
-            //                     ];
-            //             })
-            //         )}
-            //         </tbody>
-            //     </table>
-            // </div> */}
-    // }

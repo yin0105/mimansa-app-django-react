@@ -30,14 +30,26 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
+from django.shortcuts import get_object_or_404
 
 
 class WarehouseView(APIView):
     def put(self, request, format=None):
-        print("request = ", request)
-        return Response(status=status.HTTP_201_CREATED)
+        pre_code=request.GET.get("code")
+        data = request.data
+
+        if pre_code != data["code"]:
+            if len(Warehouse.objects.filter(code=data["code"])) > 0:
+                return HttpResponse(status=status.HTTP_409_CONFLICT)
+        print("pre_code = ", pre_code)
+        try:
+            Warehouse.objects.filter(code=pre_code).update(code = data["code"], name = data["name"], rut = data["rut"], addr_line_1 = data["addr_line_1"], addr_line_2 = data["addr_line_2"], locality = data["locality"], city = data["city"], state = data["state"], zipcode = data["zipcode"], phone = data["phone"], logo = data["logo"])
+            return HttpResponse(status=status.HTTP_200_OK)
+        except:
+            return HttpResponse(status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, format=None):
+        Warehouse.objects.filter(code=request.GET.get("code")).delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
     def get(self, request, *args, **kwargs):
@@ -63,153 +75,36 @@ class WarehouseView(APIView):
             return HttpResponse (WarehouseSerializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-# class IndexView(LoginRequiredMixin, TemplateView):
-#     login_url = reverse_lazy('login')
-#     redirect_field_name = 'redirect_to'
-#     template_name = 'index.html'
+class LocnPrinterMapView(APIView):
+    def put(self, request, format=None):
+        data = request.data
 
-#     def get_context_data(self, **kwargs):
-#         context = super(IndexView, self).get_context_data(**kwargs)
-#         # user = User.objects.filter(id=self.request.GET.get("user_id")).first()
-#         # chat = user.chat_set.all()
-#         # if not chat:
-#         #     context['chat'] = 0
-#         # else:
-#         #     context['chat'] = chat[0].id
-#         return context
+        try:
+            LocnPrinterMap.objects.filter(id=request.GET.get("id")).update(whse_code = data["whse_code"], reserve_locn = data["reserve_locn"], staging_locn = data["staging_locn"], printer_name = data["printer_name"])
+            return HttpResponse(status=status.HTTP_200_OK)
+        except:
+            return HttpResponse(status=status.HTTP_400_BAD_REQUEST)
 
-# class WarehouseViewSet(ModelViewSet): 
-#     queryset = models.Warehouse.objects.all()
-#     serializer_class = serializers.serializers.WarehouseSerializer
-#     lookup_field = 'code'
-#     lookup_url_kwarg = 'code'
+    def delete(self, request, format=None):
+        LocnPrinterMap.objects.filter(id=request.GET.get("id")).delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
-#     def create(self, validated_data):
-#         address_data = validated_data.pop('adresse')
-#         address = Adresse.objects.create(**address_data)
-#         organism = Organisme.objects.create(address=address, **validated_data)
-#         return organism 
+    def get(self, request, *args, **kwargs):
+        if "id" in request.GET:
+            data = LocnPrinterMap.objects.filter(id=request.GET.get("id"))
+        else:
+            data = LocnPrinterMap.objects.all()
+        serializer = LocnPrinterMapSerializer(data, many=True)
+        return Response(serializer.data)
 
-    
-    
-#     # def list(self, request):
-#     #     print("warehouseviewset")  
-#     #     queryset = models.Warehouse.objects.all()    
-#     #     serializer = serializers.serializers.WarehouseSerializer(queryset)
-#     #     return Response(serializer.data)
-
-
-# class LocnPrinterMapViewSet(ModelViewSet):    
-#     serializer_class = serializers.LocnPrinterMapSerializer
-#     queryset = models.LocnPrinterMap.objects.all()
-
-    # def list(self, request):
+    def post(self, request, *args, **kwargs):
+        locnprintermap_serializer = LocnPrinterMapSerializer(data=request.data)
         
-    #     serializer = serializers.LocnPrinterMapSerializer(queryset, many=True)
-    #     return Response(serializer.data)
+        if locnprintermap_serializer.is_valid():
+            locnprintermap_serializer.save()
+            return HttpResponse (LocnPrinterMapSerializer.data)
+        else:
+            print('error', LocnPrinterMapSerializer.errors)
+            return HttpResponse (LocnPrinterMapSerializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-# from rest_framework import generics
-
-
-
-# class ListTodo(generics.ListCreateAPIView):
-#     queryset = models.Todo.objects.all()
-#     serializer_class = TodoSerializer
-
-
-# class DetailTodo(generics.RetrieveUpdateDestroyAPIView):
-#     queryset = models.Todo.objects.all()
-#     serializer_class = TodoSerializer
-
-
-
-# from django.http.response import HttpResponse
-# from django.views.generic import (
-#     ListView,
-#     DetailView,
-#     CreateView,
-#     UpdateView,
-#     DeleteView,
-# )
-# from django.contrib import messages
-# from django.shortcuts import redirect
-# from django.http import Http404
-# from django.urls import reverse_lazy
-# from rest_framework.response import Response
-# from django import forms
-# from django.http import HttpResponse
-# from datetime import datetime
-# from django.shortcuts import render
-# from django.core.exceptions import ValidationError
-# from .models import Warehouse
-
-
-# class WarehouseListView(ListView):
-#     model = Warehouse
-
-#     def get_queryset(self):
-#         return Warehouse.objects.all()
-
-
-# class WarehouseDetailView(DetailView):
-#     model = Warehouse
-#     slug_field = 'code'
-#     slug_url_kwarg = 'code'
-
-#     def get_queryset(self):
-#         return Warehouse.objects.filter(code=self.kwargs.get('code'))
-
-
-# class WarehouseCreateView(CreateView):
-#     model = Warehouse
-#     fields = ('code', 'name', 'rut', 'addr_line_1', 'addr_line_2', 'locality', 'city', 'state', 'zipcode', 'phone', 'logo')
-#     template_name = 'Warehouses/Warehouse_form.html'
-#     context_object_name = 'Warehouse'
-#     slug_field = 'code'
-#     slug_url_kwarg = 'code'
-
-#     def get_queryset(self):
-#         return Warehouse.objects.filter(code=self.kwargs.get('code'))
-
-#     def form_valid(self, form):
-#         messages.success(self.request, "The Warehouse created successfully")
-#         return super().form_valid(form)
-
-#     def form_invalid(self, form):
-#         messages.error(self.request, "The creation has failed")
-#         return super().form_invalid(form)
-
-
-# class WarehouseUpdateView(UpdateView):
-#     model = Warehouse
-#     fields = ('code', 'name', 'rut', 'addr_line_1', 'addr_line_2', 'locality', 'city', 'state', 'zipcode', 'phone', 'logo')
-#     template_name = 'Warehouses/Warehouse_form.html'
-#     context_object_name = 'Warehouse'
-#     slug_field = 'code'
-#     slug_url_kwarg = 'code'
-
-#     def get_queryset(self):        
-#         return Warehouse.objects.filter(code=self.kwargs.get('code'))
-
-#     def form_valid(self, form):
-#         messages.success(self.request, "The Warehouse updated successfully")
-#         return super().form_valid(form)
-
-#     def form_invalid(self, form):
-#         messages.error(self.request, "The update has failed")
-#         return super().form_invalid(form)
-
-
-# class WarehouseDeleteView(DeleteView):
-#     model = Warehouse
-#     fields = ('code', 'name', 'rut', 'addr_line_1', 'addr_line_2', 'locality', 'city', 'state', 'zipcode', 'phone', 'logo')
-#     template_name = 'Warehouses/Warehouse_confirm_delete.html'
-#     context_object_name = 'Warehouse'
-#     slug_field = 'code'
-#     slug_url_kwarg = 'code'
-#     success_url = "/Warehouses/" 
-
-#     def get_queryset(self):
-#         messages.error(self.request, "The Warehouse deleted successfully")
-#         return Warehouse.objects.filter(code=self.kwargs.get('code'))

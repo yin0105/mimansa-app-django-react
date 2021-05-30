@@ -94,10 +94,10 @@ export default function MainMenu() {
                 onClose={handleClose}
             >
                 <StyledMenuItem>
-                    <StyledLink to="/warehouse">Warehouse</StyledLink>
+                    <StyledLink to="/warehouse/list">Warehouse</StyledLink>
                 </StyledMenuItem>
                 <StyledMenuItem>
-                    <StyledLink to="/locnprintermap">Location Printer Map</StyledLink>
+                    <StyledLink to="/locnprintermap/list">Location Printer Map</StyledLink>
                 </StyledMenuItem>
             </StyledMenu>
 

@@ -162,6 +162,7 @@ const  WarehouseEdit = () => {
             setAlertMsg("The warehouse has been updated successfully.");                
             setSeverity("success");
             setOpen(true);
+            history.push("/warehouse/list");
         }).catch(err => {
             if (err.response.status == 409) {
                 setAlertMsg("The code is duplicated.");

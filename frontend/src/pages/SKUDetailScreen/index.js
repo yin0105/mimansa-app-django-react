@@ -10,6 +10,7 @@ import { apiValidateActionCode, apiValidatePackCarton, apiValidatePrintCarton } 
 import MuiAlert from '@material-ui/lab/Alert';
 // import qz from "../../services/qz-tray"
 import qz from "qz-tray";
+import MainMenu from '../../components/menu';
 
 
 function Alert(props) {
@@ -325,7 +326,8 @@ const SKUDetailScreen = () => {
     const classes = useStyles();
 
     return (
-        <WithHeaderLayout title="ID Screen">
+        <>
+            <MainMenu/>
             {loading &&
                 <LinearProgress color="secondary" />
             }
@@ -469,7 +471,7 @@ const SKUDetailScreen = () => {
                     </Snackbar>
                 </div>
             </div>
-        </WithHeaderLayout>
+        </>
     )
 }
 

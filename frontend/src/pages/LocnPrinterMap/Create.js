@@ -95,10 +95,12 @@ const  LocnPrinterMapCreate = () => {
                 setAlertMsg("Invalid reserve_locn."); 
                 setSeverity("warning");
                 setOpen(true);
+                return;
             } else if (!validateStagingLocn(staging_locn)) {
                 setAlertMsg("Invalid staging_locn."); 
                 setSeverity("warning");
                 setOpen(true);
+                return;
             }
         }
         
@@ -118,6 +120,7 @@ const  LocnPrinterMapCreate = () => {
             setAlertMsg("The LocationPrinterMap has been created successfully.");                
             setSeverity("success");
             setOpen(true);
+            history.push("/locnprintermap/list");
         }).catch(err => {
             if (err.response.status == 409) {
                 setAlertMsg("The data is duplicated.");

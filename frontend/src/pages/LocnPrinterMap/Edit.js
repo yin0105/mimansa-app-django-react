@@ -108,6 +108,18 @@ const  LocnPrinterMapEdit = () => {
             setSeverity("warning");
             setOpen(true);
             return;
+        } else {
+            if (!validateReserveLocn(reserve_locn)) {
+                setAlertMsg("Invalid reserve_locn."); 
+                setSeverity("warning");
+                setOpen(true);
+                return;
+            } else if (!validateStagingLocn(staging_locn)) {
+                setAlertMsg("Invalid staging_locn."); 
+                setSeverity("warning");
+                setOpen(true);
+                return;
+            }
         }
         
         let form_data = new FormData();
@@ -126,6 +138,7 @@ const  LocnPrinterMapEdit = () => {
             setAlertMsg("The LocationPrinterMap has been created successfully.");                
             setSeverity("success");
             setOpen(true);
+            history.push("/locnprintermap/list");
         }).catch(err => {
             if (err.response.status == 409) {
                 setAlertMsg("The data is duplicated.");
@@ -140,6 +153,16 @@ const  LocnPrinterMapEdit = () => {
     const handleClose = (event, reason) => {
         setOpen(false);
     };
+
+    const validateReserveLocn = locn => {
+        // validate reserve_locn
+        return true;
+    }
+
+    const validateStagingLocn = locn => {
+        // validate reserve_locn
+        return true;
+    }
 
     return (
         <>

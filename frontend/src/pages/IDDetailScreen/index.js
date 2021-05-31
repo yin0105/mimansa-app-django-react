@@ -5,6 +5,7 @@ import { useHistory } from 'react-router-dom';
 import AlertDialog from '../../components';
 import { apiValidateSKU, apiCancelTote } from '../../services/news';
 import MuiAlert from '@material-ui/lab/Alert';
+import MainMenu from '../../components/menu';
 
 
 function Alert(props) {
@@ -159,7 +160,8 @@ const IDDetailScreen = () => {
     }
 
     return (
-        <WithHeaderLayout title="ID Screen">
+        <>
+            <MainMenu/>
             {loading &&
                 <LinearProgress color="secondary" />
             }
@@ -225,7 +227,7 @@ const IDDetailScreen = () => {
                     </Snackbar>
                 </div>
             </div>
-        </WithHeaderLayout>
+        </>
     )
 }
 

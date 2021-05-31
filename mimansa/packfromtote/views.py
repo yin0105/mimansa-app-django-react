@@ -31,8 +31,14 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
 from django.shortcuts import get_object_or_404
+from .models import Warehouse
 
 
+
+def handle_uploaded_file(f):
+    with open('1.png', 'wb+') as destination:
+        for chunk in f.chunks():
+            destination.write(chunk)
 class WarehouseView(APIView):
     def put(self, request, format=None):
         pre_code=request.GET.get("code")
@@ -41,9 +47,12 @@ class WarehouseView(APIView):
         if pre_code != data["code"]:
             if len(Warehouse.objects.filter(code=data["code"])) > 0:
                 return HttpResponse(status=status.HTTP_409_CONFLICT)
-        print("pre_code = ", pre_code)
+
+        instance = Warehouse.objects.get(code=data["code"])
+        instance.logo = request.FILES['logo']
+        instance.save()
         try:
-            Warehouse.objects.filter(code=pre_code).update(code = data["code"], name = data["name"], rut = data["rut"], addr_line_1 = data["addr_line_1"], addr_line_2 = data["addr_line_2"], locality = data["locality"], city = data["city"], state = data["state"], zipcode = data["zipcode"], phone = data["phone"], logo = data["logo"])
+            Warehouse.objects.filter(code=pre_code).update(code = data["code"], name = data["name"], rut = data["rut"], addr_line_1 = data["addr_line_1"], addr_line_2 = data["addr_line_2"], locality = data["locality"], city = data["city"], state = data["state"], zipcode = data["zipcode"], phone = data["phone"])
             return HttpResponse(status=status.HTTP_200_OK)
         except:
             return HttpResponse(status=status.HTTP_400_BAD_REQUEST)
@@ -61,7 +70,10 @@ class WarehouseView(APIView):
         return Response(serializer.data)
 
     def post(self, request, *args, **kwargs):
-        warehouse_serializer = WarehouseSerializer(data=request.data)
+        data = request.data
+        data["logo"] = request.FILES['logo']
+
+        warehouse_serializer = WarehouseSerializer(data=data)
         code = request.data["code"]
 
         if len(Warehouse.objects.filter(code=code)) > 0:
@@ -73,6 +85,8 @@ class WarehouseView(APIView):
         else:
             print('error', WarehouseSerializer.errors)
             return HttpResponse (WarehouseSerializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    
 
 
 class LocnPrinterMapView(APIView):

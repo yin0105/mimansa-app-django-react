@@ -4,6 +4,7 @@ import { Typography, TextField, Card, CardHeader, CardContent, LinearProgress } 
 import { useHistory } from 'react-router-dom';
 import AlertDialog from '../../components';
 import { apiValidateLocation } from '../../services/news';
+import MainMenu from '../../components/menu';
 
 const LocationScreen = () => {
 
@@ -86,7 +87,11 @@ const LocationScreen = () => {
     }
 
     return (
-        <WithHeaderLayout title="Location Screen">
+        <>
+            <MainMenu/>
+            {loading &&
+                <LinearProgress color="secondary" />
+            }
             {loading &&
                 <LinearProgress color="secondary" />
             }
@@ -126,7 +131,7 @@ const LocationScreen = () => {
                     </div>
                 </div>
             </div>
-        </WithHeaderLayout>
+        </>
     )
 }
 

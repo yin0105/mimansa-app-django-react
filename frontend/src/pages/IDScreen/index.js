@@ -4,6 +4,7 @@ import { Typography, TextField, Card, CardHeader, CardContent, LinearProgress } 
 import { useHistory } from 'react-router-dom';
 import AlertDialog from '../../components';
 import { apiValidateLPNId } from '../../services/news';
+import MainMenu from '../../components/menu';
 
 const IDScreen = () => {
 
@@ -97,7 +98,8 @@ const IDScreen = () => {
     }
 
     return (
-        <WithHeaderLayout title="ID Screen">
+        <>
+            <MainMenu/>
             {loading &&
                 <LinearProgress color="secondary" />
             }
@@ -138,7 +140,7 @@ const IDScreen = () => {
                     </div>
                 </div>
             </div>
-        </WithHeaderLayout>
+        </>
     )
 }
 

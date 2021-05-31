@@ -16,8 +16,13 @@ function Alert(props) {
 
 const useStyles = makeStyles((theme) => ({
     table: {
-        minWidth: 650,
+        maxWidth: 1150,
+        marginBottom: 20,
+        marginTop: 20,
     },
+    cell: {
+        wordBreak: 'break-word',
+    }
 }));
 
 const StyledTableCell = withStyles((theme) => ({
@@ -94,7 +99,7 @@ const LocnPrinterMapList = () => {
             {loading &&
                 <LinearProgress color="secondary" />
             }
-            <div className="mx-auto mt-8">
+            <div className="mx-auto mt-8" style={{ maxWidth: "1150px" }}>
                 <div className="w-full text-center mb-6">
                     <Typography variant="h3" color="primary">
                         LocnPrinterMap
@@ -102,36 +107,36 @@ const LocnPrinterMapList = () => {
                 </div>
                 <Button variant="contained" color="primary" onClick={() => history.push("/locnprintermap/create")}>Add LocnPrinterMap</Button>
                 {/* <Link to="/locnprintermap/create">Add LocnPrinterMap</Link> */}
-                <TableContainer component={Paper}>
-                    <Table className={classes.table} size="small" aria-label="a dense table">
+                <TableContainer component={Paper} className={classes.table}>
+                    <Table aria-label="simple table">
                         <TableHead>
                             <TableRow>
-                                <TableCell >No</TableCell>
-                                <TableCell >Warehouse Code</TableCell>
-                                <TableCell >Reserve Location</TableCell>
-                                <TableCell >Staging Location</TableCell>
-                                <TableCell >Printer name</TableCell>
-                                <TableCell >Creation Date</TableCell>
-                                <TableCell >Modification Date</TableCell>
-                                <TableCell >Action</TableCell>
+                                <StyledTableCell >No</StyledTableCell>
+                                <StyledTableCell >Warehouse Code</StyledTableCell>
+                                <StyledTableCell >Reserve Location</StyledTableCell>
+                                <StyledTableCell >Staging Location</StyledTableCell>
+                                <StyledTableCell >Printer name</StyledTableCell>
+                                <StyledTableCell >Creation Date</StyledTableCell>
+                                <StyledTableCell >Modification Date</StyledTableCell>
+                                <StyledTableCell >Action</StyledTableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
                         {
                             locnprintermap_list.map((locnprintermap, i) => 
                                 <StyledTableRow key={i}>
-                                    <TableCell key={"no_" + i} >{ i + 1 }</TableCell>
-                                    <TableCell key={"whse_code_" + i} >{locnprintermap.whse_code}</TableCell>
-                                    <TableCell key={"reserve_locn_" + i} >{locnprintermap.reserve_locn}</TableCell>
-                                    <TableCell key={"staging_locn_" + i} >{locnprintermap.staging_locn}</TableCell>
-                                    <TableCell key={"printer_name_" + i} >{locnprintermap.printer_name}</TableCell>
-                                    <TableCell key={"creation_date_" + i} >{locnprintermap.creation_date}</TableCell>
-                                    <TableCell key={"modification_date_" + i} >{locnprintermap.modification_date}</TableCell>                                
-                                    <TableCell key={"action_" + i} style={{ wordWrap: 'no-wrap'}}>
+                                    <StyledTableCell key={"no_" + i} >{ i + 1 }</StyledTableCell>
+                                    <StyledTableCell key={"whse_code_" + i} >{locnprintermap.whse_code}</StyledTableCell>
+                                    <StyledTableCell key={"reserve_locn_" + i} >{locnprintermap.reserve_locn}</StyledTableCell>
+                                    <StyledTableCell key={"staging_locn_" + i} >{locnprintermap.staging_locn}</StyledTableCell>
+                                    <StyledTableCell key={"printer_name_" + i} >{locnprintermap.printer_name}</StyledTableCell>
+                                    <StyledTableCell key={"creation_date_" + i} >{locnprintermap.creation_date}</StyledTableCell>
+                                    <StyledTableCell key={"modification_date_" + i} >{locnprintermap.modification_date}</StyledTableCell>                                
+                                    <StyledTableCell key={"action_" + i} style={{ wordWrap: 'no-wrap'}}>
                                         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
                                         <Button variant="outlined" id="printPageButton" onClick={ e => history.push(`/locnprintermap/edit/${locnprintermap.id}`)}><i className="fa fa-pencil"></i></Button>
                                         <Button variant="outlined" id="printPageButton" onClick={ e => deleteRow(locnprintermap.id)}><i className="fa fa-trash"></i></Button>
-                                    </TableCell>
+                                    </StyledTableCell>
                                 </StyledTableRow>
                             )
                         }

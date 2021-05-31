@@ -110,7 +110,7 @@ const Login = () => {
             </div>
             <div className="mx-auto" style={{ maxWidth: "600px" }}>
                 <div className="w-full ">
-                    <img src={logo} className="mx-auto m-20" alt="logo" />
+                    <img src={logo} className="mx-auto mb-10" alt="logo" />
                     <div className="w-full text-center">
                         <Typography variant="h3" color="primary">
                             Mimansa - Pack from tote

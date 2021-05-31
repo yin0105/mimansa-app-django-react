@@ -327,149 +327,151 @@ const SKUDetailScreen = () => {
     return (
         <>
             <MainMenu/>
-            {loading &&
-                <LinearProgress color="secondary" />
-            }
-            <div className="p-6">
+            <WithHeaderLayout title="SKU Detail Screen">
+                {loading &&
+                    <LinearProgress color="secondary" />
+                }
+                <div className="p-6">
 
-                <div className="w-full text-right">
-                    {userid !== "" && location !== "" &&
-                        <span>{userid} @ {location}</span>
-                    }
-                </div>
-                <div className="mx-auto" style={{ maxWidth: "1000px" }}>
-                    <div className="w-full text-center">
-                        <Typography variant="h3" color="primary">
-                            Pack LPN
-                        </Typography>
+                    <div className="w-full text-right">
+                        {userid !== "" && location !== "" &&
+                            <span>{userid} @ {location}</span>
+                        }
                     </div>
-                    
-                    <Card className="p-4 mt-2">
-                        <CardHeader
-                            title="SKU Detail Screen"
-                            titleTypographyProps={{ variant: 'h4' }}
-                            style={{ textAlign: "center" }}
-                        />
-                        <Grid container spacing={0}>
-                            <Grid item lg={5}>
-                                <CardContent>
-                                    <div>
-                                        <div className="w-full text-center py-1">
-                                            <Typography style={{ paddingRight: "20px" }}>
-                                                LPN ID: {lpnid} ({tote_type})
-                                            </Typography>
-                                        </div>
-                                        <div className="w-full text-center py-1">
-                                            <Typography style={{ paddingRight: "20px" }}>
-                                                SKU: {sku}
-                                            </Typography>
-                                        </div>
-                                        <div className="w-full text-center py-1">
-                                            <Typography style={{ paddingRight: "20px" }}>
-                                                SKU DESC: {desc}
-                                            </Typography>
-                                        </div>
-                                        <div className="flex items-center mt-10">
-                                            {image !== "" &&
-                                                <img className="w-32 h-32 mx-auto" src={image} alt="demo" />
-                                            }
-                                        </div>
-                                    </div>
-                                </CardContent>
-                            </Grid>
-                            <Grid item lg={1} py={12}>
-                                <CardContent style={{ height: "100%" }}>
-                                    <Box display="flex" alignItems="center" justifyContent="center" py={2}  style={{ height: "100%" }}>
-                                        <div style={{ width: "2px", backgroundColor: "rgba(0, 0, 0, 24%)", height: "100%"}}/>
-                                    </Box>
-                                </CardContent>
-                            </Grid>
-                            <Grid item lg={6}>
-                                <CardContent>
-                                    <div className="w-full text-center py-1">
-                                        <Typography style={{ paddingRight: "20px" }}>
-                                            CARTON: {next_carton}
-                                        </Typography>                                        
-                                    </div>
-                                    {tote_type === "MONO" && 
-                                        <>
-                                            <Box display="flex" alignItems="center" justifyContent="center" py={2}>
-                                                <TextField className={classes.textfield} style={{ width: "400px" }} id="scan_carton_id" label="Carton ID" variant="outlined" value={scan_carton} helperText={scan_carton_feedback} error={scan_carton_feedback_error} onChange={e => inputScanCarton(e)} onKeyUp={handleCartonKeyUp} autoFocus />
-                                            </Box>
-                                            <Box display="flex" alignItems="center" justifyContent="center" py={2}>
-                                                <TableContainer component={Paper}>
-                                                    <Table className={classes.table} aria-label="error message table" style={{ backgroundColor: "#eeeeee" }}>
-                                                        <TableBody>
-                                                        {scan_carton_feedback_queue.map((row, i) => (
-                                                            <StyledTableRow key={i}>
-                                                                <StyledTableCell scope="row" align="center">{row}</StyledTableCell>
-                                                            </StyledTableRow>
-                                                        ))}
-                                                        </TableBody>
-                                                    </Table>
-                                                </TableContainer>
-                                            </Box>
-                                        </>
-                                    }
-                                    {tote_type === "MULTI" && 
-                                        <>
+                    <div className="mx-auto" style={{ maxWidth: "1000px" }}>
+                        <div className="w-full text-center">
+                            <Typography variant="h3" color="primary">
+                                Pack LPN
+                            </Typography>
+                        </div>
+                        
+                        <Card className="p-4 mt-2">
+                            <CardHeader
+                                title="SKU Detail Screen"
+                                titleTypographyProps={{ variant: 'h4' }}
+                                style={{ textAlign: "center" }}
+                            />
+                            <Grid container spacing={0}>
+                                <Grid item lg={5}>
+                                    <CardContent>
+                                        <div>
+                                            <div className="w-full text-center py-1">
+                                                <Typography style={{ paddingRight: "20px" }}>
+                                                    LPN ID: {lpnid} ({tote_type})
+                                                </Typography>
+                                            </div>
                                             <div className="w-full text-center py-1">
                                                 <Typography style={{ paddingRight: "20px" }}>
                                                     SKU: {sku}
-                                                </Typography>                                       
+                                                </Typography>
                                             </div>
                                             <div className="w-full text-center py-1">
                                                 <Typography style={{ paddingRight: "20px" }}>
-                                                    QTY: {qty} Unit{qty > 0 && "s"} {
-                                                        scannedSKU > 0 && (`(Scanned : ${scannedSKU} , Pending : ${(qty - scannedSKU)})`)
-                                                    }
-                                                </Typography>                                       
+                                                    SKU DESC: {desc}
+                                                </Typography>
                                             </div>
-                                            <Box alignItems="center" justifyContent="center" py={2}>
-                                                {(action_code_for_sku === "" && scannedSKU < qty) &&
-                                                    <Box display="flex" alignItems="center" justifyContent="center" py={2} className="w-full">
-                                                        <TextField className={classes.textfield} style={{ width: "400px" }} autoFocus id="sku_brcd" label="SKU" variant="outlined" value={sku_brcd} onChange={e => inputSkuBrcd(e)} onKeyUp={handleSKUKeyUp} />                                        
-                                                    </Box>
+                                            <div className="flex items-center mt-10">
+                                                {image !== "" &&
+                                                    <img className="w-32 h-32 mx-auto" src={image} alt="demo" />
                                                 }
-                                                {(action_code_for_sku === "SHORT" || scannedSKU == qty) &&
-                                                    <>
-                                                        <Box>
-                                                            <Box display="flex" alignItems="center" justifyContent="center" py={2} className="w-full">
-                                                                <TextField className={classes.textfield} autoFocus id="scan_carton_id" label="Carton ID" variant="outlined" value={scan_carton} helperText={scan_carton_feedback} error={scan_carton_feedback_error} onChange={e => inputScanCarton(e)} onKeyUp={handleCartonKeyUp} style={{ backgroundColor: "#eeffff", width: "400px" }}  />
+                                            </div>
+                                        </div>
+                                    </CardContent>
+                                </Grid>
+                                <Grid item lg={1} py={12}>
+                                    <CardContent style={{ height: "100%" }}>
+                                        <Box display="flex" alignItems="center" justifyContent="center" py={2}  style={{ height: "100%" }}>
+                                            <div style={{ width: "2px", backgroundColor: "rgba(0, 0, 0, 24%)", height: "100%"}}/>
+                                        </Box>
+                                    </CardContent>
+                                </Grid>
+                                <Grid item lg={6}>
+                                    <CardContent>
+                                        <div className="w-full text-center py-1">
+                                            <Typography style={{ paddingRight: "20px" }}>
+                                                CARTON: {next_carton}
+                                            </Typography>                                        
+                                        </div>
+                                        {tote_type === "MONO" && 
+                                            <>
+                                                <Box display="flex" alignItems="center" justifyContent="center" py={2}>
+                                                    <TextField className={classes.textfield} style={{ width: "400px" }} id="scan_carton_id" label="Carton ID" variant="outlined" value={scan_carton} helperText={scan_carton_feedback} error={scan_carton_feedback_error} onChange={e => inputScanCarton(e)} onKeyUp={handleCartonKeyUp} autoFocus />
+                                                </Box>
+                                                <Box display="flex" alignItems="center" justifyContent="center" py={2}>
+                                                    <TableContainer component={Paper}>
+                                                        <Table className={classes.table} aria-label="error message table" style={{ backgroundColor: "#eeeeee" }}>
+                                                            <TableBody>
+                                                            {scan_carton_feedback_queue.map((row, i) => (
+                                                                <StyledTableRow key={i}>
+                                                                    <StyledTableCell scope="row" align="center">{row}</StyledTableCell>
+                                                                </StyledTableRow>
+                                                            ))}
+                                                            </TableBody>
+                                                        </Table>
+                                                    </TableContainer>
+                                                </Box>
+                                            </>
+                                        }
+                                        {tote_type === "MULTI" && 
+                                            <>
+                                                <div className="w-full text-center py-1">
+                                                    <Typography style={{ paddingRight: "20px" }}>
+                                                        SKU: {sku}
+                                                    </Typography>                                       
+                                                </div>
+                                                <div className="w-full text-center py-1">
+                                                    <Typography style={{ paddingRight: "20px" }}>
+                                                        QTY: {qty} Unit{qty > 0 && "s"} {
+                                                            scannedSKU > 0 && (`(Scanned : ${scannedSKU} , Pending : ${(qty - scannedSKU)})`)
+                                                        }
+                                                    </Typography>                                       
+                                                </div>
+                                                <Box alignItems="center" justifyContent="center" py={2}>
+                                                    {(action_code_for_sku === "" && scannedSKU < qty) &&
+                                                        <Box display="flex" alignItems="center" justifyContent="center" py={2} className="w-full">
+                                                            <TextField className={classes.textfield} style={{ width: "400px" }} autoFocus id="sku_brcd" label="SKU" variant="outlined" value={sku_brcd} onChange={e => inputSkuBrcd(e)} onKeyUp={handleSKUKeyUp} />                                        
+                                                        </Box>
+                                                    }
+                                                    {(action_code_for_sku === "SHORT" || scannedSKU == qty) &&
+                                                        <>
+                                                            <Box>
+                                                                <Box display="flex" alignItems="center" justifyContent="center" py={2} className="w-full">
+                                                                    <TextField className={classes.textfield} autoFocus id="scan_carton_id" label="Carton ID" variant="outlined" value={scan_carton} helperText={scan_carton_feedback} error={scan_carton_feedback_error} onChange={e => inputScanCarton(e)} onKeyUp={handleCartonKeyUp} style={{ backgroundColor: "#eeffff", width: "400px" }}  />
+                                                                </Box>
                                                             </Box>
-                                                        </Box>
-                                                        
-                                                        <Box display="flex" alignItems="center" justifyContent="center" py={2}>
-                                                            <TableContainer component={Paper}>
-                                                                <Table className={classes.table} aria-label="error message table" style={{ backgroundColor: "#eeeeee" }}>
-                                                                    <TableBody>
-                                                                    {scan_carton_feedback_queue.map((row, i) => (
-                                                                        <StyledTableRow key={i}>
-                                                                            <StyledTableCell scope="row" align="center">{row}</StyledTableCell>
-                                                                        </StyledTableRow>
-                                                                    ))}
-                                                                    </TableBody>
-                                                                </Table>
-                                                            </TableContainer>
-                                                        </Box>
-                                                    </>
-                                                }
-                                            </Box>
-                                        </>
-                                    }
-                                    
-                                </CardContent>
+                                                            
+                                                            <Box display="flex" alignItems="center" justifyContent="center" py={2}>
+                                                                <TableContainer component={Paper}>
+                                                                    <Table className={classes.table} aria-label="error message table" style={{ backgroundColor: "#eeeeee" }}>
+                                                                        <TableBody>
+                                                                        {scan_carton_feedback_queue.map((row, i) => (
+                                                                            <StyledTableRow key={i}>
+                                                                                <StyledTableCell scope="row" align="center">{row}</StyledTableCell>
+                                                                            </StyledTableRow>
+                                                                        ))}
+                                                                        </TableBody>
+                                                                    </Table>
+                                                                </TableContainer>
+                                                            </Box>
+                                                        </>
+                                                    }
+                                                </Box>
+                                            </>
+                                        }
+                                        
+                                    </CardContent>
+                                </Grid>
                             </Grid>
-                        </Grid>
-                    </Card>
-                    <AlertDialog item="SKU Detail" error={error} open={alert} handleClose={onClose} />
-                    <Snackbar open={open} autoHideDuration={6000} anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }} onClose={handleClose}>
-                        <Alert onClose={handleClose} severity={severity}>
-                            {alert_msg}
-                        </Alert>
-                    </Snackbar>
+                        </Card>
+                        <AlertDialog item="SKU Detail" error={error} open={alert} handleClose={onClose} />
+                        <Snackbar open={open} autoHideDuration={6000} anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }} onClose={handleClose}>
+                            <Alert onClose={handleClose} severity={severity}>
+                                {alert_msg}
+                            </Alert>
+                        </Snackbar>
+                    </div>
                 </div>
-            </div>
+            </WithHeaderLayout>
         </>
     )
 }

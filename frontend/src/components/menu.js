@@ -79,9 +79,13 @@ export default function MainMenu() {
         setAnchorEl2(null);
     };
 
+    const handleLeave = () => {
+        console.log("handleLeave()");
+    }
+
     return (
         <div style={{ backgroundColor: "#3f51b5", height: "64px", justifyContent: "center", display: "flex", alignItems: "flex-end", color: "white"}}>
-            <Button
+            <div
                 // aria-controls="maestros-menu"
                 aria-owns={anchorEl ? "maestros-menu" : undefined}
                 aria-haspopup="true"
@@ -89,9 +93,12 @@ export default function MainMenu() {
                 style={{ color: "white", marginRight: "150px", }}
                 onClick={handleClick}
                 onMouseOver={handleClick}
+                onMouseOut={handleLeave}
+                // onMouseEnter={enterButton}
+                // onMouseLeave={leaveButton}
             >
                 Maestros
-            </Button>
+            </div>
             <StyledMenu
                 id="maestros-menu"
                 anchorEl={anchorEl}
@@ -99,6 +106,10 @@ export default function MainMenu() {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
                 MenuListProps={{ onMouseLeave: handleClose }}
+                // MenuListProps={{
+                //     onMouseEnter: enterMenu,
+                //     onMouseLeave: leaveMenu,
+                // }}
             >
                 <StyledMenuItem>
                     <StyledLink to="/warehouse/list">Warehouse</StyledLink>

@@ -100,46 +100,48 @@ const IDScreen = () => {
     return (
         <>
             <MainMenu/>
-            {loading &&
-                <LinearProgress color="secondary" />
-            }
-            <div className="p-6">
-                <div className="w-full text-right">
-                    {userid !== "" && location !== "" &&
-                        <span>{userid} @ {location}</span>}
-                </div>
-                <div className="mx-auto" style={{ maxWidth: "600px" }}>
-                    <div className="w-full ">
-                        <div className="w-full text-center">
-                            <Typography variant="h3" color="primary">
-                                Pack LPN
-                        </Typography>
-                        </div>
-                        <Card className="mt-2">
-                            <div className="p-4">
-                                <CardHeader
-                                    title="ID Screen"
-                                    titleTypographyProps={{ variant: 'h4' }}
-                                    style={{ textAlign: "center" }}
-                                />
-                                <CardContent className="mt-8 mx-3">
-                                    <TextField
-                                        className="m-2 w-full"
-                                        variant="outlined"
-                                        value={lpnid}
-                                        onChange={e => setLPNId(e.target.value.toUpperCase())}
-                                        onKeyUp={handleKeyUp}
-                                        label="LPN ID"
-                                        autoFocus
-                                        InputProps={{ readOnly: Boolean(loading), }}
-                                    />
-                                </CardContent>
+            <WithHeaderLayout title="ID Screen">
+                {loading &&
+                    <LinearProgress color="secondary" />
+                }
+                <div className="p-6">
+                    <div className="w-full text-right">
+                        {userid !== "" && location !== "" &&
+                            <span>{userid} @ {location}</span>}
+                    </div>
+                    <div className="mx-auto" style={{ maxWidth: "600px" }}>
+                        <div className="w-full ">
+                            <div className="w-full text-center">
+                                <Typography variant="h3" color="primary">
+                                    Pack LPN
+                            </Typography>
                             </div>
-                        </Card>
-                        <AlertDialog item="LPN id" error={error} open={alert} handleClose={onClose} />
+                            <Card className="mt-2">
+                                <div className="p-4">
+                                    <CardHeader
+                                        title="ID Screen"
+                                        titleTypographyProps={{ variant: 'h4' }}
+                                        style={{ textAlign: "center" }}
+                                    />
+                                    <CardContent className="mt-8 mx-3">
+                                        <TextField
+                                            className="m-2 w-full"
+                                            variant="outlined"
+                                            value={lpnid}
+                                            onChange={e => setLPNId(e.target.value.toUpperCase())}
+                                            onKeyUp={handleKeyUp}
+                                            label="LPN ID"
+                                            autoFocus
+                                            InputProps={{ readOnly: Boolean(loading), }}
+                                        />
+                                    </CardContent>
+                                </div>
+                            </Card>
+                            <AlertDialog item="LPN id" error={error} open={alert} handleClose={onClose} />
+                        </div>
                     </div>
                 </div>
-            </div>
+            </WithHeaderLayout>
         </>
     )
 }

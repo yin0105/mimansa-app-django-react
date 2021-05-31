@@ -162,71 +162,73 @@ const IDDetailScreen = () => {
     return (
         <>
             <MainMenu/>
-            {loading &&
-                <LinearProgress color="secondary" />
-            }
-            <div className="p-6">
-                <div className="w-full text-right">
-                    {userid !== "" && location !== "" &&
-                        <span>{userid} @ {location}</span>
-                    }
-                </div>
-                <div className="mx-auto" style={{ maxWidth: "600px" }}>
-                    <div className="w-full text-center">
-                        <Typography variant="h3" color="primary">
-                            Pack LPN
-                    </Typography>
+            <WithHeaderLayout title="ID Detail Screen">
+                {loading &&
+                    <LinearProgress color="secondary" />
+                }
+                <div className="p-6">
+                    <div className="w-full text-right">
+                        {userid !== "" && location !== "" &&
+                            <span>{userid} @ {location}</span>
+                        }
                     </div>
-                    <Card className="mt-2">
-                        <div className="p-4">
-                            <CardHeader
-                                title="ID Detail Screen"
-                                titleTypographyProps={{ variant: 'h4' }}
-                                style={{ textAlign: "center" }}
-                            />
-                            <CardContent className="mx-3">
-                                <div className="w-full text-center py-1">
-                                    <Typography style={{ paddingRight: "20px" }}>
-                                        LPN ID: {lpnid} ({tote_type})
-                                    </Typography>
-                                </div>
-                                <div className="w-full text-center py-1">
-                                    <Typography style={{ paddingRight: "20px" }}>
-                                        SKU: {sku}
-                                    </Typography>
-                                </div>
-                                <div className="w-full text-center py-1">
-                                    <Typography style={{ paddingRight: "20px" }}>
-                                        CARTONS: {cartons}
-                                    </Typography>
-                                </div>
-                                <div className="w-full text-center py-1">
-                                    <Typography style={{ paddingRight: "20px" }}>
-                                        CLASSIFICATION: {classification}
-                                    </Typography>
-                                </div>
-                                <div className="flex items-center mx-auto pt-10">
-                                    <TextField
-                                        className="m-2 w-full"
-                                        variant="outlined"
-                                        value={skuid}
-                                        onChange={e => setSKUId(e.target.value.toUpperCase())}
-                                        onKeyUp={handleKeyUp}
-                                        label="SKU ID"
-                                        autoFocus
-                                    />
-                                </div>
-                            </CardContent>
+                    <div className="mx-auto" style={{ maxWidth: "600px" }}>
+                        <div className="w-full text-center">
+                            <Typography variant="h3" color="primary">
+                                Pack LPN
+                        </Typography>
                         </div>
-                    </Card>
-                    <AlertDialog item="SKU id" error={error} open={alert} handleClose={onClose} />
-                    <Snackbar open={open} autoHideDuration={6000} anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }} onClose={handleClose}>
-                        <Alert onClose={handleClose} severity={severity}>
-                            {alert_msg}
-                        </Alert>
-                    </Snackbar>
+                        <Card className="mt-2">
+                            <div className="p-4">
+                                <CardHeader
+                                    title="ID Detail Screen"
+                                    titleTypographyProps={{ variant: 'h4' }}
+                                    style={{ textAlign: "center" }}
+                                />
+                                <CardContent className="mx-3">
+                                    <div className="w-full text-center py-1">
+                                        <Typography style={{ paddingRight: "20px" }}>
+                                            LPN ID: {lpnid} ({tote_type})
+                                        </Typography>
+                                    </div>
+                                    <div className="w-full text-center py-1">
+                                        <Typography style={{ paddingRight: "20px" }}>
+                                            SKU: {sku}
+                                        </Typography>
+                                    </div>
+                                    <div className="w-full text-center py-1">
+                                        <Typography style={{ paddingRight: "20px" }}>
+                                            CARTONS: {cartons}
+                                        </Typography>
+                                    </div>
+                                    <div className="w-full text-center py-1">
+                                        <Typography style={{ paddingRight: "20px" }}>
+                                            CLASSIFICATION: {classification}
+                                        </Typography>
+                                    </div>
+                                    <div className="flex items-center mx-auto pt-10">
+                                        <TextField
+                                            className="m-2 w-full"
+                                            variant="outlined"
+                                            value={skuid}
+                                            onChange={e => setSKUId(e.target.value.toUpperCase())}
+                                            onKeyUp={handleKeyUp}
+                                            label="SKU ID"
+                                            autoFocus
+                                        />
+                                    </div>
+                                </CardContent>
+                            </div>
+                        </Card>
+                        <AlertDialog item="SKU id" error={error} open={alert} handleClose={onClose} />
+                        <Snackbar open={open} autoHideDuration={6000} anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }} onClose={handleClose}>
+                            <Alert onClose={handleClose} severity={severity}>
+                                {alert_msg}
+                            </Alert>
+                        </Snackbar>
+                    </div>
                 </div>
-            </div>
+            </WithHeaderLayout>
         </>
     )
 }

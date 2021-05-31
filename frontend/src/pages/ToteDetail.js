@@ -159,7 +159,7 @@ const  ToteDetail = () => {
                             spacing={6}
                             // className="pt-12"
                         >
-                            <TableContainer component={Paper}>
+                            <TableContainer component={Paper} className={classes.table}>
                                 <Table aria-label="simple table" className={classes.table}>
                                     <TableHead>
                                         <TableRow>

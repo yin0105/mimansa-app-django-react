@@ -65,7 +65,7 @@ const SKUDetailScreen = () => {
     const [sku, setSKU] = useState("");
     // const [dspsku, setDspSku] = useState("");
     const [next_carton, setNextCarton] = useState("");
-    const [qty, setQty] = useState(null);
+    const [qty, setQty] = useState(0);
     const [sku_brcd_list, setSkuBrcdList] = useState([]);
     const [scannedSKU, setScannedSKU] = useState(0);
     const [sku_brcd, setSkuBrcd] = useState("");
@@ -112,15 +112,16 @@ const SKUDetailScreen = () => {
                 validatePrintCarton("PRINT");
                 setPrinted(true);
             }
-        } else if (scanInfo.tote_type === "MULTI") {
-            if (action_code_for_sku === "SHORT" || scannedSKU == qty) {
-                if (!printed) {
-                    validatePrintCarton("PRINT");                    
-                }
-            }
-        } else {
-            setPrinted(true);
-        }
+        } 
+        // else if (scanInfo.tote_type === "MULTI") {
+        //     if (action_code_for_sku === "SHORT" || scannedSKU == qty) {
+        //         if (!printed) {
+        //             validatePrintCarton("PRINT");                    
+        //         }
+        //     }
+        // } else {
+        //     setPrinted(true);
+        // }
     }, [history]);
 
     const handleClose = (event, reason) => {
@@ -149,10 +150,10 @@ const SKUDetailScreen = () => {
                     if (scannedSKU > 0) {
                         setActionCodeForSku("SHORT");
                         setAlertMsg("Por favor escanear el cartón.");
+                        validatePrintCarton("PRINT");
                     } else {
                         setAlertMsg("Debe escanearse al menos 1 Unidad.");
                     }
-                    
                     
                     setSeverity("success");
                     setOpen(true);
@@ -185,7 +186,7 @@ const SKUDetailScreen = () => {
     }
 
     const validatePrintCarton = (action_code) => {
-        console.log(" == validatePrintCarton == ");
+        console.log(" == validatePrintCarton == ", action_code);
         setLoading(true);
         setReadOnly(true);
 
@@ -290,6 +291,10 @@ const SKUDetailScreen = () => {
                             setActionCodeForSku("");
                             setQty(res.next_carton_details.next_carton_qty);
                             setReadOnly(false);
+
+                            if (tote_type === "MULTI" && res.next_carton_details.next_carton_qty == 0) {
+                                validatePrintCarton("PRINT");
+                            }
                             
                             if (res.tote_details.tote_status === 95) {
                                 setPushUrl("/id");

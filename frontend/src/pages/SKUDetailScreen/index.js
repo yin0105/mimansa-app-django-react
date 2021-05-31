@@ -113,15 +113,6 @@ const SKUDetailScreen = () => {
                 setPrinted(true);
             }
         } 
-        // else if (scanInfo.tote_type === "MULTI") {
-        //     if (action_code_for_sku === "SHORT" || scannedSKU == qty) {
-        //         if (!printed) {
-        //             validatePrintCarton("PRINT");                    
-        //         }
-        //     }
-        // } else {
-        //     setPrinted(true);
-        // }
     }, [history]);
 
     const handleClose = (event, reason) => {
@@ -202,8 +193,13 @@ const SKUDetailScreen = () => {
                     console.log('==== res.message: ', res.message);
                     console.log("== scanInfo.print_mode = ", scanInfo.print_mode);
                     
-                    setScanCartonFeedbackQueue(scan_carton_feedback_queue => [...scan_carton_feedback_queue, res.message]);  
-                    if (scanInfo.print_mode == "DIRECT")    {
+                    // setScanCartonFeedbackQueue(scan_carton_feedback_queue => [...scan_carton_feedback_queue, res.message]); 
+                    if (res.message != "") {
+                        setAlertMsg(res.message);
+                        setSeverity("success");
+                        setOpen(true); 
+                    }
+                    if (scanInfo.print_mode == "DIRECT" && res.print_command != "")    {
                         console.log("== print_mode = ", scanInfo.print_mode);
                         qz.websocket.connect().then(() => {
                             return qz.printers.find(scanInfo.printer_name);
@@ -214,6 +210,7 @@ const SKUDetailScreen = () => {
                             return qz.websocket.disconnect();
                         }).then(() => {
                             // process.exit(0);
+                            console.log("printed successfully.");
                         }).catch((err) => {
                             console.error(err);
                             // process.exit(1);
@@ -292,10 +289,6 @@ const SKUDetailScreen = () => {
                             setActionCodeForSku("");
                             setQty(res.next_carton_details.next_carton_qty);
                             setReadOnly(false);
-
-                            // if (tote_type === "MULTI" && res.next_carton_details.next_carton_qty == 0) {
-                            //     validatePrintCarton("PRINT");
-                            // }
                             
                             if (res.tote_details.tote_status === 95) {
                                 setPushUrl("/id");

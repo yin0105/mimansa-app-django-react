@@ -159,26 +159,28 @@ const  ToteDetail = () => {
                             spacing={6}
                             // className="pt-12"
                         >
-                            <TableContainer component={Paper} className={classes.table}>
+                            <TableContainer component={Paper}>
                                 <Table aria-label="simple table" className={classes.table}>
                                     <TableHead>
-                                        <StyledTableCell className={classes.cell} style={{ width: '280px', }}>tote</StyledTableCell>
-                                        <StyledTableCell className={classes.cell} style={{ width: '120px', }}>tote_type</StyledTableCell>
-                                        <StyledTableCell className={classes.cell} style={{ width: '120px', }}>tote_status</StyledTableCell>
-                                        <StyledTableCell className={classes.cell} style={{ width: '120px', }}>distinct_skus</StyledTableCell>
-                                        <StyledTableCell className={classes.cell} style={{ width: '120px', }}>distinct_carton</StyledTableCell>
-                                        <StyledTableCell className={classes.cell} style={{ width: '120px', }}>requiring_vas</StyledTableCell>
-                                        <StyledTableCell className={classes.cell} style={{ width: '120px', }}>distinct_classifications</StyledTableCell>
+                                        <TableRow>
+                                            <StyledTableCell className={classes.cell}>tote</StyledTableCell>
+                                            <StyledTableCell className={classes.cell}>tote_type</StyledTableCell>
+                                            <StyledTableCell className={classes.cell}>tote_status</StyledTableCell>
+                                            <StyledTableCell className={classes.cell}>distinct_skus</StyledTableCell>
+                                            <StyledTableCell className={classes.cell}>distinct_carton</StyledTableCell>
+                                            <StyledTableCell className={classes.cell}>requiring_vas</StyledTableCell>
+                                            <StyledTableCell className={classes.cell}>distinct_classifications</StyledTableCell>
+                                        </TableRow>
                                     </TableHead>
                                     <TableBody>
                                         <TableRow>
-                                            <StyledTableCell className={classes.cell} style={{ width: '280px', }}>{res.tote_details.tote}</StyledTableCell>
-                                            <StyledTableCell className={classes.cell} style={{ width: '120px', }}>{res.tote_details.tote_type}</StyledTableCell>
-                                            <StyledTableCell className={classes.cell} style={{ width: '120px', }}>{res.tote_details.tote_status}</StyledTableCell>
-                                            <StyledTableCell className={classes.cell} style={{ width: '120px', }}>{res.tote_details.distinct_skus}</StyledTableCell>
-                                            <StyledTableCell className={classes.cell} style={{ width: '120px', }}>{res.tote_details.distinct_carton}</StyledTableCell>
-                                            <StyledTableCell className={classes.cell} style={{ width: '120px', }}>{res.tote_details.requiring_vas}</StyledTableCell>
-                                            <StyledTableCell className={classes.cell} style={{ width: '120px', }}>{res.tote_details.distinct_classifications}</StyledTableCell>
+                                            <StyledTableCell className={classes.cell}>{res.tote_details.tote}</StyledTableCell>
+                                            <StyledTableCell className={classes.cell}>{res.tote_details.tote_type}</StyledTableCell>
+                                            <StyledTableCell className={classes.cell}>{res.tote_details.tote_status}</StyledTableCell>
+                                            <StyledTableCell className={classes.cell}>{res.tote_details.distinct_skus}</StyledTableCell>
+                                            <StyledTableCell className={classes.cell}>{res.tote_details.distinct_carton}</StyledTableCell>
+                                            <StyledTableCell className={classes.cell}>{res.tote_details.requiring_vas}</StyledTableCell>
+                                            <StyledTableCell className={classes.cell}>{res.tote_details.distinct_classifications}</StyledTableCell>
                                         </TableRow>
                                     </TableBody>
                                 </Table>

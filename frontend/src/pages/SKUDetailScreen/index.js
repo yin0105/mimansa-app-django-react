@@ -143,6 +143,7 @@ const SKUDetailScreen = () => {
                             setAlertMsg("Por favor escanear el cartón.");
                             setSeverity("success");
                             setOpen(true);
+                            validatePrintCarton("PRINT");
                         }
                         setScannedSKU(scannedSKU + 1);
                     }
@@ -292,9 +293,9 @@ const SKUDetailScreen = () => {
                             setQty(res.next_carton_details.next_carton_qty);
                             setReadOnly(false);
 
-                            if (tote_type === "MULTI" && res.next_carton_details.next_carton_qty == 0) {
-                                validatePrintCarton("PRINT");
-                            }
+                            // if (tote_type === "MULTI" && res.next_carton_details.next_carton_qty == 0) {
+                            //     validatePrintCarton("PRINT");
+                            // }
                             
                             if (res.tote_details.tote_status === 95) {
                                 setPushUrl("/id");

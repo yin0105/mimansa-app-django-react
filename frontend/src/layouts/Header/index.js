@@ -26,10 +26,6 @@ const Header = (props) => {
 
     const links = [
         {
-            route: `/user`,
-            title: `User`,
-        },
-        {
             route: `/location`,
             title: `Location`,
         },

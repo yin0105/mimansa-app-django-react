@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
@@ -9,6 +9,7 @@ import InboxIcon from '@material-ui/icons/MoveToInbox';
 import DraftsIcon from '@material-ui/icons/Drafts';
 import SendIcon from '@material-ui/icons/Send';
 import { Link } from 'react-router-dom';
+import SubMenu from './SubMenu';
 
 
 const StyledMenu = withStyles({
@@ -56,94 +57,60 @@ const StyledLink = withStyles((theme) => ({
 }))(Link);
 
 export default function MainMenu() {
-    const [anchorEl, setAnchorEl] = React.useState(null);
-    const [anchorEl2, setAnchorEl2] = React.useState(null);
-
-    const handleClick = (event) => {
-        if (anchorEl !== event.currentTarget) {
-            setAnchorEl(event.currentTarget);
-        }
-    };
-
-    const handleClick2 = (event) => {
-        if (anchorEl !== event.currentTarget) {
-            setAnchorEl2(event.currentTarget);
-        }
-    };
-
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
-
-    const handleClose2 = () => {
-        setAnchorEl2(null);
-    };
-
-    const handleLeave = () => {
-        console.log("handleLeave()");
-    }
+    const [showMaestrosMenu, setshowMaestrosMenu] = useState(false);
+    const [showPackFromToteMenu, setshowPackFromToteMenu] = useState(false);
+    
+    const maestrosMenus = [
+        {
+          value: "Warehouse",
+          link: "/warehouse/list",
+        },
+        {
+          value: "Location Printer Map",
+          link: "/locnprintermap/list",
+        },
+      ];
+    const packFromToteMenus = [
+        {
+            value: "Pack from Tote",
+            link: "/location",
+          },
+          {
+            value: "Tote Details",
+            link: "/tote_detail",
+          },
+      ];
 
     return (
         <div style={{ backgroundColor: "#3f51b5", height: "64px", justifyContent: "center", display: "flex", alignItems: "flex-end", color: "white"}}>
-            <div
-                // aria-controls="maestros-menu"
-                aria-owns={anchorEl ? "maestros-menu" : undefined}
-                aria-haspopup="true"
-                variant="text"
-                style={{ color: "white", marginRight: "150px", }}
-                onClick={handleClick}
-                onMouseOver={handleClick}
-                onMouseOut={handleLeave}
-                // onMouseEnter={enterButton}
-                // onMouseLeave={leaveButton}
-            >
-                Maestros
-            </div>
-            <StyledMenu
-                id="maestros-menu"
-                anchorEl={anchorEl}
-                keepMounted
-                open={Boolean(anchorEl)}
-                onClose={handleClose}
-                MenuListProps={{ onMouseLeave: handleClose }}
-                // MenuListProps={{
-                //     onMouseEnter: enterMenu,
-                //     onMouseLeave: leaveMenu,
-                // }}
-            >
-                <StyledMenuItem>
-                    <StyledLink to="/warehouse/list">Warehouse</StyledLink>
-                </StyledMenuItem>
-                <StyledMenuItem>
-                    <StyledLink to="/locnprintermap/list">Location Printer Map</StyledLink>
-                </StyledMenuItem>
-            </StyledMenu>
-
-            <Button
-                aria-controls="packfromtote-menu"
-                aria-haspopup="true"
-                variant="text"
-                style={{ color: "white" }}
-                onClick={handleClick2}
-                onMouseOver={handleClick2}
-            >
-                Pack from Tote
-            </Button>
-            <StyledMenu
-                id="packfromtote-menu"
-                anchorEl={anchorEl2}
-                keepMounted
-                open={Boolean(anchorEl2)}
-                onClose={handleClose2}
-                MenuListProps={{ onMouseLeave: handleClose2 }}
-            >
-                <StyledMenuItem>
-                    <StyledLink to="/location">Pack from Tote</StyledLink>
-                </StyledMenuItem>
-                <StyledMenuItem>
-                    <StyledLink to="/tote_detail">Tote Details</StyledLink>
-                </StyledMenuItem>
-            </StyledMenu>
+            <nav className="flex space-x-2">
+                <div className="mt-auto font-bold text-gray-700 mx-20">
+                    <div  className={`cursor-pointer relative border-white text-white hover:border-primary hover:text-white text-md p-3`}                
+                    onMouseEnter={() => setshowMaestrosMenu(true)}
+                    onMouseLeave={() => setshowMaestrosMenu(false)}
+                    >
+                    <Link to="#">Maestros</Link>
+                    <SubMenu
+                        menuItems={maestrosMenus}
+                        isShow={showMaestrosMenu}
+                        orientation="right"
+                    />
+                    </div>
+                </div>
+                <div className="mt-auto font-bold text-gray-700 mx-20" >
+                    <div  className={`cursor-pointer relative border-white text-white hover:border-primary hover:text-white text-md p-3`}                
+                    onMouseEnter={() => setshowPackFromToteMenu(true)}
+                    onMouseLeave={() => setshowPackFromToteMenu(false)}
+                    >
+                    <Link to="#">Pack from Tote</Link>
+                    <SubMenu
+                        menuItems={packFromToteMenus}
+                        isShow={showPackFromToteMenu}
+                        orientation="right"
+                    />
+                    </div>
+                </div>
+            </nav>
         </div>
     );
 }

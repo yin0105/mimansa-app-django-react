@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: 1000,
   },
   cell: {
-      wordBreak: 'break-word',
+      wordBreak: 'initial',
       textAlign: 'center',
   }
 }));
@@ -164,13 +164,13 @@ const  ToteDetail = () => {
                                 <Table aria-label="simple table" className={classes.table}>
                                     <TableHead>
                                         <TableRow>
-                                            <StyledTableCell>tote</StyledTableCell>
-                                            <StyledTableCell>tote_type</StyledTableCell>
-                                            <StyledTableCell>tote_status</StyledTableCell>
-                                            <StyledTableCell>distinct_skus</StyledTableCell>
-                                            <StyledTableCell>distinct_carton</StyledTableCell>
-                                            <StyledTableCell>requiring_vas</StyledTableCell>
-                                            <StyledTableCell>distinct_classifications</StyledTableCell>
+                                            <StyledTableCell className={classes.cell}>tote</StyledTableCell>
+                                            <StyledTableCell className={classes.cell}>tote_type</StyledTableCell>
+                                            <StyledTableCell className={classes.cell}>tote_status</StyledTableCell>
+                                            <StyledTableCell className={classes.cell}>distinct_skus</StyledTableCell>
+                                            <StyledTableCell className={classes.cell}>distinct_carton</StyledTableCell>
+                                            <StyledTableCell className={classes.cell}>requiring_vas</StyledTableCell>
+                                            <StyledTableCell className={classes.cell}>distinct_classifications</StyledTableCell>
                                         </TableRow>
                                     </TableHead>
                                     <TableBody>
@@ -212,15 +212,15 @@ const  ToteDetail = () => {
                                 <Table aria-label="carton table" className={classes.table}>
                                     <TableHead>
                                         <TableRow>
-                                            <StyledTableCell>carton_nbr</StyledTableCell>
-                                            <StyledTableCell>stat_code</StyledTableCell>
-                                            <StyledTableCell>sku_id</StyledTableCell>
-                                            <StyledTableCell>sku_brcd</StyledTableCell>
-                                            <StyledTableCell>dsp_sku</StyledTableCell>
-                                            <StyledTableCell>sku_desc</StyledTableCell>
-                                            <StyledTableCell>to_be_pakd_units</StyledTableCell>
-                                            <StyledTableCell>units_pakd</StyledTableCell>
-                                            <StyledTableCell>remaining</StyledTableCell>
+                                            <StyledTableCell className={classes.cell}>carton_nbr</StyledTableCell>
+                                            <StyledTableCell className={classes.cell}>stat_code</StyledTableCell>
+                                            <StyledTableCell className={classes.cell}>sku_id</StyledTableCell>
+                                            <StyledTableCell className={classes.cell}>sku_brcd</StyledTableCell>
+                                            <StyledTableCell className={classes.cell}>dsp_sku</StyledTableCell>
+                                            <StyledTableCell className={classes.cell}>sku_desc</StyledTableCell>
+                                            <StyledTableCell className={classes.cell}>to_be_pakd_units</StyledTableCell>
+                                            <StyledTableCell className={classes.cell}>units_pakd</StyledTableCell>
+                                            <StyledTableCell className={classes.cell}>remaining</StyledTableCell>
                                         </TableRow>
                                     </TableHead>
                                     <TableBody>

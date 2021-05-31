@@ -211,29 +211,29 @@ const  ToteDetail = () => {
                                 <Table aria-label="carton table" className={classes.table}>
                                     <TableHead>
                                         <TableRow>
-                                            <StyledTableCell className={classes.cell} style={{ width: '110px', }}>carton_nbr</StyledTableCell>
-                                            <StyledTableCell className={classes.cell} style={{ width: '110px', }}>stat_code</StyledTableCell>
-                                            <StyledTableCell className={classes.cell} style={{ width: '110px', }}>sku_id</StyledTableCell>
-                                            <StyledTableCell className={classes.cell} style={{ width: '110px', }}>sku_brcd</StyledTableCell>
-                                            <StyledTableCell className={classes.cell} style={{ width: '110px', }}>dsp_sku</StyledTableCell>
-                                            <StyledTableCell className={classes.cell} style={{ width: '110px', }}>sku_desc</StyledTableCell>
-                                            <StyledTableCell className={classes.cell} style={{ width: '110px', }}>to_be_pakd_units</StyledTableCell>
-                                            <StyledTableCell className={classes.cell} style={{ width: '110px', }}>units_pakd</StyledTableCell>
-                                            <StyledTableCell className={classes.cell} style={{ width: '110px', }}>remaining</StyledTableCell>
+                                            <StyledTableCell className={classes.cell}>carton_nbr</StyledTableCell>
+                                            <StyledTableCell className={classes.cell}>stat_code</StyledTableCell>
+                                            <StyledTableCell className={classes.cell}>sku_id</StyledTableCell>
+                                            <StyledTableCell className={classes.cell}>sku_brcd</StyledTableCell>
+                                            <StyledTableCell className={classes.cell}>dsp_sku</StyledTableCell>
+                                            <StyledTableCell className={classes.cell}>sku_desc</StyledTableCell>
+                                            <StyledTableCell className={classes.cell}>to_be_pakd_units</StyledTableCell>
+                                            <StyledTableCell className={classes.cell}>units_pakd</StyledTableCell>
+                                            <StyledTableCell className={classes.cell}>remaining</StyledTableCell>
                                         </TableRow>
                                     </TableHead>
                                     <TableBody>
                                     {   res.carton_list.map(carton => 
                                             <StyledTableRow>
-                                                <StyledTableCell className={classes.cell} style={{ width: '170px', }}>{carton.carton_nbr}</StyledTableCell>
-                                                <StyledTableCell className={classes.cell} style={{ width: '110px', }}>{carton.state_code}</StyledTableCell>
-                                                <StyledTableCell className={classes.cell} style={{ width: '100px', }}>{carton.sku_id}</StyledTableCell>
-                                                <StyledTableCell className={classes.cell} style={{ width: '130px', }}>{carton.sku_brcd}</StyledTableCell>
-                                                <StyledTableCell className={classes.cell} style={{ width: '80px', }}>{carton.dsp_sku}</StyledTableCell>
-                                                <StyledTableCell className={classes.cell} style={{ width: '220px', }}>{carton.sku_desc}</StyledTableCell>
-                                                <StyledTableCell className={classes.cell} style={{ width: '80px', }}>{carton.to_be_pakd_units}</StyledTableCell>
-                                                <StyledTableCell className={classes.cell} style={{ width: '60px', }}>{carton.units_pakd}</StyledTableCell>
-                                                <StyledTableCell className={classes.cell} style={{ width: '50px', }}>{carton.remaining}</StyledTableCell>
+                                                <StyledTableCell className={classes.cell}>{carton.carton_nbr}</StyledTableCell>
+                                                <StyledTableCell className={classes.cell}>{carton.state_code}</StyledTableCell>
+                                                <StyledTableCell className={classes.cell}>{carton.sku_id}</StyledTableCell>
+                                                <StyledTableCell className={classes.cell}>{carton.sku_brcd}</StyledTableCell>
+                                                <StyledTableCell className={classes.cell}>{carton.dsp_sku}</StyledTableCell>
+                                                <StyledTableCell className={classes.cell}>{carton.sku_desc}</StyledTableCell>
+                                                <StyledTableCell className={classes.cell}>{carton.to_be_pakd_units}</StyledTableCell>
+                                                <StyledTableCell className={classes.cell}>{carton.units_pakd}</StyledTableCell>
+                                                <StyledTableCell className={classes.cell}>{carton.remaining}</StyledTableCell>
                                             </StyledTableRow>
                                         ) 
                                     }

@@ -193,12 +193,12 @@ const SKUDetailScreen = () => {
                     console.log('==== res.message: ', res.message);
                     console.log("== scanInfo.print_mode = ", scanInfo.print_mode);
                     
-                    // setScanCartonFeedbackQueue(scan_carton_feedback_queue => [...scan_carton_feedback_queue, res.message]); 
-                    if (res.message != "") {
-                        setAlertMsg(res.message);
-                        setSeverity("success");
-                        setOpen(true); 
-                    }
+                    setScanCartonFeedbackQueue(scan_carton_feedback_queue => [...scan_carton_feedback_queue, res.message]); 
+                    // if (res.message != "") {
+                    //     setAlertMsg(res.message);
+                    //     setSeverity("success");
+                    //     setOpen(true); 
+                    // }
                     if (scanInfo.print_mode == "DIRECT" && res.print_command != "")    {
                         console.log("== print_mode = ", scanInfo.print_mode);
                         qz.websocket.connect().then(() => {

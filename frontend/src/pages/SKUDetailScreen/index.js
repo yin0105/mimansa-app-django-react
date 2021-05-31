@@ -148,9 +148,9 @@ const SKUDetailScreen = () => {
                     }
                 } else if (sku_brcd === "SHORT") {
                     if (scannedSKU > 0) {
+                        validatePrintCarton("PRINT");
                         setActionCodeForSku("SHORT");
                         setAlertMsg("Por favor escanear el cartón.");
-                        validatePrintCarton("PRINT");
                     } else {
                         setAlertMsg("Debe escanearse al menos 1 Unidad.");
                     }

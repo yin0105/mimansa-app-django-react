@@ -58,6 +58,7 @@ const  WarehouseCreate = () => {
     const [zipcode, setZipcode] = useState("");
     const [phone, setPhone] = useState("");
     const [logo, setLogo] = useState([]);
+    const [logo_filename, setLogoFilename] = useState("");
 
     const [alert, setAlert] = useState(false);
     const [error, setError] = useState("");
@@ -66,9 +67,17 @@ const  WarehouseCreate = () => {
     const [alert_msg, setAlertMsg] = useState("");
     const [severity, setSeverity] = useState("success");
 
-    const handleLogoChange = files => {
-        setLogo(files);
+    const handleLogoChange = e => {
+        setLogo(e.target.files);
+        setLogoFilename(e.target.files[0].name);
     }
+
+    // onChange = e => {
+    //     log.debug('from change');
+    //     this.setState({
+    //       uploadedFile: e.target.files[0]
+    //     });
+    //   }
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -166,9 +175,9 @@ const  WarehouseCreate = () => {
                             direction="row"                                    
                             spacing={3}
                             justify="space-evenly"
-                            xs={9}
+                            xs={12}
                         >
-                            <Grid item xs={4}>
+                            <Grid item xs={3}>
                                 <TextField                                        
                                 className="m-2 w-full"
                                 variant="outlined"
@@ -181,7 +190,7 @@ const  WarehouseCreate = () => {
                                 }}
                             />
                             </Grid>
-                            <Grid item xs={4}>
+                            <Grid item xs={3}>
                                 <TextField                                        
                                 className="m-2 w-full"
                                 variant="outlined"
@@ -194,7 +203,7 @@ const  WarehouseCreate = () => {
                                 }}
                             />
                             </Grid>
-                            <Grid item xs={4}>
+                            <Grid item xs={3}>
                                 <TextField                                        
                                 className="m-2 w-full"
                                 variant="outlined"
@@ -207,7 +216,7 @@ const  WarehouseCreate = () => {
                                 }}
                             />
                             </Grid>                        
-                            <Grid item xs={4}>
+                            <Grid item xs={3}>
                                 <TextField                                        
                                 className="m-2 w-full"
                                 variant="outlined"
@@ -220,7 +229,7 @@ const  WarehouseCreate = () => {
                                 }}
                             />
                             </Grid>
-                            <Grid item xs={4}>
+                            <Grid item xs={3}>
                                 <TextField                                        
                                 className="m-2 w-full"
                                 variant="outlined"
@@ -234,7 +243,7 @@ const  WarehouseCreate = () => {
                                
                             />
                             </Grid>
-                            <Grid item xs={4}>
+                            <Grid item xs={3}>
                                 <TextField                                        
                                 className="m-2 w-full"
                                 variant="outlined"
@@ -247,7 +256,7 @@ const  WarehouseCreate = () => {
                                 }}
                             />
                             </Grid>
-                            <Grid item xs={4}>
+                            <Grid item xs={3}>
                                 <TextField                                        
                                 className="m-2 w-full"
                                 variant="outlined"
@@ -260,7 +269,7 @@ const  WarehouseCreate = () => {
                                 }}
                             />
                             </Grid>
-                            <Grid item xs={4}>
+                            <Grid item xs={3}>
                                 <TextField                                        
                                 className="m-2 w-full"
                                 variant="outlined"
@@ -273,7 +282,7 @@ const  WarehouseCreate = () => {
                                 }}
                             />
                             </Grid>
-                            <Grid item xs={4}>
+                            <Grid item xs={3}>
                                 <TextField                                        
                                 className="m-2 w-full"
                                 variant="outlined"
@@ -286,7 +295,7 @@ const  WarehouseCreate = () => {
                                 }}
                             />
                             </Grid>
-                            <Grid item xs={4}>
+                            <Grid item xs={3}>
                                 <TextField                                        
                                     className="m-2 w-full"
                                     variant="outlined"
@@ -300,8 +309,22 @@ const  WarehouseCreate = () => {
                                     }}
                                 />
                             </Grid>
+                            <Grid item xs={6} style={{ diaplay: 'flex', alignItems: 'center' }}>
+                                <input
+                                    style={{ display: "none" }}
+                                    id="logo"
+                                    type="file"
+                                    onChange={ e => handleLogoChange(e) }
+                                />
+                                <label htmlFor="logo">
+                                    <Button variant="text" color="primary" component="span" className="mr-5">
+                                        Logo
+                                    </Button>
+                                    <label>{ logo_filename }</label>
+                                </label>
+                            </Grid>
                         </Grid>
-                        <Grid
+                        {/* <Grid
                             container
                             direction="row"                                    
                             spacing={3}
@@ -309,7 +332,7 @@ const  WarehouseCreate = () => {
                             xs={3}
                         >
                             <DropzoneArea onChange={e => { handleLogoChange(e) }} />
-                        </Grid>
+                        </Grid> */}
                         <Grid item xs={4}
                         style={{ display: 'flex', justifyContent: "space-around", marginTop: "20px", }}>
                             <Button variant="contained" color="primary" type="submit" className="mr-20">Create</Button>

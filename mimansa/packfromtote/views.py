@@ -49,8 +49,12 @@ class WarehouseView(APIView):
                 return HttpResponse(status=status.HTTP_409_CONFLICT)
 
         instance = Warehouse.objects.get(code=data["code"])
-        instance.logo = request.FILES['logo']
-        instance.save()
+        try:
+            instance.logo = request.FILES['logo']
+            instance.save()
+        except:
+            pass
+        
         try:
             Warehouse.objects.filter(code=pre_code).update(code = data["code"], name = data["name"], rut = data["rut"], addr_line_1 = data["addr_line_1"], addr_line_2 = data["addr_line_2"], locality = data["locality"], city = data["city"], state = data["state"], zipcode = data["zipcode"], phone = data["phone"])
             return HttpResponse(status=status.HTTP_200_OK)

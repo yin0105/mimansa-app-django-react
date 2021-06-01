@@ -64,6 +64,7 @@ const  WarehouseEdit = () => {
     const [phone, setPhone] = useState("");
     const [logo, setLogo] = useState([]);
     const [pre_logo, setPreLogo] = useState("");
+    const [logo_filename, setLogoFilename] = useState("");
 
     const [pre_code, setPreCode] = useState("");
 
@@ -102,13 +103,14 @@ const  WarehouseEdit = () => {
             })
     }
 
-    const handleLogoChange = files => {
-        setLogo(files);
+    const handleLogoChange = e => {
+        setLogo(e.target.files);
+        setLogoFilename(e.target.files[0].name);
     }
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (code == "" || name == "" || rut == "" || addr_line_1 == "" || addr_line_2 == "" || locality == "" || city == "" || state == "" || zipcode == "" || phone == "" || logo.length == 0) {
+        if (code == "" || name == "" || rut == "" || addr_line_1 == "" || addr_line_2 == "" || locality == "" || city == "" || state == "" || zipcode == "" || phone == "") {
             if (code == "") {
                 setAlertMsg("Please enter code value.");                
             } else if (name == "") {
@@ -129,8 +131,6 @@ const  WarehouseEdit = () => {
                 setAlertMsg("Please enter Zip Code value.");                
             } else if (phone == "") {
                 setAlertMsg("Please enter Phone number value.");                
-            } else if (logo.length == 0) {
-                setAlertMsg("Please select logo image.");                
             }
 
             setSeverity("warning");
@@ -203,9 +203,9 @@ const  WarehouseEdit = () => {
                             direction="row"                                    
                             spacing={3}
                             justify="space-evenly"
-                            xs={9}
+                            xs={12}
                         >
-                            <Grid item xs={4}>
+                            <Grid item xs={3}>
                                 <TextField                                        
                                 className="m-2 w-full"
                                 variant="outlined"
@@ -218,7 +218,7 @@ const  WarehouseEdit = () => {
                                 }}
                             />
                             </Grid>
-                            <Grid item xs={4}>
+                            <Grid item xs={3}>
                                 <TextField                                        
                                 className="m-2 w-full"
                                 variant="outlined"
@@ -231,7 +231,7 @@ const  WarehouseEdit = () => {
                                 }}
                             />
                             </Grid>
-                            <Grid item xs={4}>
+                            <Grid item xs={3}>
                                 <TextField                                        
                                 className="m-2 w-full"
                                 variant="outlined"
@@ -244,7 +244,7 @@ const  WarehouseEdit = () => {
                                 }}
                             />
                             </Grid>                        
-                            <Grid item xs={4}>
+                            <Grid item xs={3}>
                                 <TextField                                        
                                 className="m-2 w-full"
                                 variant="outlined"
@@ -257,7 +257,7 @@ const  WarehouseEdit = () => {
                                 }}
                             />
                             </Grid>
-                            <Grid item xs={4}>
+                            <Grid item xs={3}>
                                 <TextField                                        
                                 className="m-2 w-full"
                                 variant="outlined"
@@ -271,7 +271,7 @@ const  WarehouseEdit = () => {
                                
                             />
                             </Grid>
-                            <Grid item xs={4}>
+                            <Grid item xs={3}>
                                 <TextField                                        
                                 className="m-2 w-full"
                                 variant="outlined"
@@ -284,7 +284,7 @@ const  WarehouseEdit = () => {
                                 }}
                             />
                             </Grid>
-                            <Grid item xs={4}>
+                            <Grid item xs={3}>
                                 <TextField                                        
                                 className="m-2 w-full"
                                 variant="outlined"
@@ -297,7 +297,7 @@ const  WarehouseEdit = () => {
                                 }}
                             />
                             </Grid>
-                            <Grid item xs={4}>
+                            <Grid item xs={3}>
                                 <TextField                                        
                                 className="m-2 w-full"
                                 variant="outlined"
@@ -310,7 +310,7 @@ const  WarehouseEdit = () => {
                                 }}
                             />
                             </Grid>
-                            <Grid item xs={4}>
+                            <Grid item xs={3}>
                                 <TextField                                        
                                 className="m-2 w-full"
                                 variant="outlined"
@@ -323,7 +323,7 @@ const  WarehouseEdit = () => {
                                 }}
                             />
                             </Grid>
-                            <Grid item xs={4}>
+                            <Grid item xs={3}>
                                 <TextField                                        
                                     className="m-2 w-full"
                                     variant="outlined"
@@ -337,8 +337,32 @@ const  WarehouseEdit = () => {
                                     }}
                                 />
                             </Grid>
+                            {/* <Grid item xs={2} style={{ diaplay: 'flex', alignItems: 'center' }}>
+                                {pre_logo !== null && <img src={`${backendSettings.logoBaseURL}/${pre_logo.split("/")[2]}`} style={{ height: '50px' }}/>}
+                            </Grid> */}
+                            <Grid item xs={6} className="flex items-center">
+                            
+                                <input
+                                    style={{ display: "none" }}
+                                    id="logo"
+                                    type="file"
+                                    onChange={ e => handleLogoChange(e) }
+                                />                                
+                                <label htmlFor="logo" className="flex items-center">
+                                    <Button variant="text" color="primary" component="span" className="mr-5">
+                                        Logo
+                                    </Button>
+                                    {
+                                        logo_filename === "" && pre_logo !== null && <img src={`${backendSettings.logoBaseURL}/${pre_logo.split("/")[2]}`} style={{ height: '50px' }}/>
+                                    }
+                                    {
+                                        logo_filename !== "" && <label>{ logo_filename }</label>
+                                    }
+                                </label>
+                            </Grid>
                         </Grid>
-                        <Grid
+                        
+                        {/* <Grid
                             container
                             direction="row"                                    
                             spacing={3}
@@ -348,7 +372,7 @@ const  WarehouseEdit = () => {
                         >
                             {pre_logo !== null && <img src={`${backendSettings.logoBaseURL}/${pre_logo.split("/")[2]}`}/>}
                             <DropzoneArea onChange={e => { handleLogoChange(e) }} />
-                        </Grid>
+                        </Grid> */}
                         <Grid item xs={4}
                         style={{ display: 'flex', justifyContent: "space-around", marginTop: "20px", }}>
                             <Button variant="contained" color="primary" type="submit" className="mr-20">Update</Button>

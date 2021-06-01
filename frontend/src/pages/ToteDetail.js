@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
   },
 
   table: {
-    maxWidth: 1000,
+    maxWidth: 1200,
   },
   cell: {
       wordBreak: 'initial',
@@ -114,7 +114,7 @@ const  ToteDetail = () => {
             {loading &&
                 <LinearProgress color="secondary" />
             }
-            <div className="mx-auto mt-8" style={{ maxWidth: "600px" }}>
+            <div className="mx-auto mt-8" style={{ maxWidth: "1200px" }}>
                 <div className="w-full text-center mb-10">
                     <Typography variant="h3" color="primary">
                         ToteDetails

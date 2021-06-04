@@ -125,7 +125,7 @@ const SKUDetailScreen = () => {
     const handleSKUKeyUp = e => {
         if (e.keyCode === 13) {
 
-            if (sku_brcd === undefined ) {
+            if (sku_brcd === "%*%" ) {
                 setReadOnly(false);
             } else if ( !readonly ) {
                 if (sku_brcd_list.some(item => sku_brcd === item)) {
@@ -173,7 +173,7 @@ const SKUDetailScreen = () => {
     }
 
     const onClose = () => {
-        setSkuBrcd(undefined);
+        setSkuBrcd("%*%");
         setAlert(false);
     }
 

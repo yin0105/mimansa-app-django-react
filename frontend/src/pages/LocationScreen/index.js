@@ -22,7 +22,7 @@ const LocationScreen = () => {
 
     const handleKeyUp = e => {
         if (e.keyCode === 13) {
-            if (location === undefined) {
+            if (location === "%*%") {
                 setLocation("");
             } else if (location === "") {
                 setError("Please insert Location!")
@@ -83,7 +83,7 @@ const LocationScreen = () => {
     }
 
     const onClose = () => {
-        setLocation(undefined);
+        setLocation("%*%");
         setAlert(false);
     }
 

@@ -82,35 +82,42 @@ export default function MainMenu() {
       ];
 
     return (
-        <div style={{ backgroundColor: "#3f51b5", height: "64px", justifyContent: "center", display: "flex", alignItems: "flex-end", color: "white"}}>
-            <nav className="flex space-x-2">
-                <div className="mt-auto font-bold text-gray-700 mx-20">
-                    <div  className={`cursor-pointer relative border-white text-white hover:border-primary hover:text-white text-md p-3`}
-                    onMouseEnter={() => setshowMaestrosMenu(true)}
-                    onMouseLeave={() => setshowMaestrosMenu(false)}
-                    >
-                    <Link to="#">Maestros</Link>
-                    <SubMenu
-                        menuItems={maestrosMenus}
-                        isShow={showMaestrosMenu}
-                        orientation="right"
-                    />
+        <>
+            <div style={{ backgroundColor: "#3f51b5", height: "64px", justifyContent: "center", display: "flex", alignItems: "flex-end", color: "white"}}>
+                <nav className="flex space-x-2">
+                    <div className="mt-auto font-bold text-gray-700 mx-20">
+                        <div  className={`cursor-pointer relative border-white text-white hover:border-primary hover:text-white text-md p-3`}
+                        onMouseEnter={() => setshowMaestrosMenu(true)}
+                        onMouseLeave={() => setshowMaestrosMenu(false)}
+                        >
+                        <Link to="#">Maestros</Link>
+                        <SubMenu
+                            menuItems={maestrosMenus}
+                            isShow={showMaestrosMenu}
+                            orientation="right"
+                        />
+                        </div>
                     </div>
-                </div>
-                <div className="mt-auto font-bold text-gray-700 mx-20" >
-                    <div  className={`cursor-pointer relative border-white text-white hover:border-primary hover:text-white text-md p-3`}
-                    onMouseEnter={() => setshowPackFromToteMenu(true)}
-                    onMouseLeave={() => setshowPackFromToteMenu(false)}
-                    >
-                    <Link to="#">Empacar Desde Tote</Link>
-                    <SubMenu
-                        menuItems={packFromToteMenus}
-                        isShow={showPackFromToteMenu}
-                        orientation="right"
-                    />
+                    <div className="mt-auto font-bold text-gray-700 mx-20" >
+                        <div  className={`cursor-pointer relative border-white text-white hover:border-primary hover:text-white text-md p-3`}
+                        onMouseEnter={() => setshowPackFromToteMenu(true)}
+                        onMouseLeave={() => setshowPackFromToteMenu(false)}
+                        >
+                        <Link to="#">Empacar Desde Tote</Link>
+                        <SubMenu
+                            menuItems={packFromToteMenus}
+                            isShow={showPackFromToteMenu}
+                            orientation="right"
+                        />
+                        </div>
                     </div>
+                </nav>
+            </div>
+            <div className="">
+                <div className="w-full">
+                    {props.children}
                 </div>
-            </nav>
-        </div>
+            </div>
+        </>
     );
 }

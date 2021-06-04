@@ -56,7 +56,7 @@ const StyledLink = withStyles((theme) => ({
     },
 }))(Link);
 
-export default function MainMenu() {
+export default MainMenu = (props) => {
     const [showMaestrosMenu, setshowMaestrosMenu] = useState(false);
     const [showPackFromToteMenu, setshowPackFromToteMenu] = useState(false);
 

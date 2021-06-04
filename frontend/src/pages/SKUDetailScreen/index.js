@@ -237,7 +237,6 @@ const SKUDetailScreen = () => {
 
         if (scan_carton === "DAMAGED" || scan_carton === "DISCREPANCY" || scan_carton === "SHORT" || scan_carton === "CANCEL") {
             apiValidateActionCode({ whse: scanInfo.whse, carton_nbr: next_carton, action_code: scan_carton, staging_locn: scanInfo.staging_locn,  login_user_id: userid })
-            // apiValidateActionCode({ whse: scanInfo.whse, carton_nbr: next_carton, printer_name: scanInfo.printer_name,  action_code: scan_carton, login_user_id: userid })
                 .then(res => {
                     console.log('===== res: ', res);
                     setLoading(false);
@@ -259,7 +258,8 @@ const SKUDetailScreen = () => {
             validatePrintCarton(scan_carton);
         } else if (scan_carton == next_carton) {
             if (tote_type === "MONO") { setScannedSKU(1);}
-            apiValidatePackCarton({ whse: scanInfo.whse, carton_nbr: scan_carton, tote: lpnid, tote_type: tote_type, staging_locn: scanInfo.staging_locn, login_user_id: userid, sku_id: sku, qty: tote_type === "MONO"?1:scannedSKU, action_code: action_code_for_sku })
+            const cur_qty = tote_type === "MONO"?1:scannedSKU;
+            apiValidatePackCarton({ whse: scanInfo.whse, carton_nbr: scan_carton, tote: lpnid, tote_type: tote_type, staging_locn: scanInfo.staging_locn, login_user_id: userid, sku_id: sku, qty: cur_qty, action_code: action_code_for_sku })
                 .then(res => {
                     console.log('===== res: ', res);
                     setLoading(false);

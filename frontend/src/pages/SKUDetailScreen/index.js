@@ -272,7 +272,8 @@ const SKUDetailScreen = () => {
 
                         sessionStorage.setItem("scanInfo", JSON.stringify(scanInfo));
 
-                        setScanCartonFeedbackQueue(scan_carton_feedback_queue => [...scan_carton_feedback_queue, ...res.additional_message]);
+                        // setScanCartonFeedbackQueue(scan_carton_feedback_queue => [...scan_carton_feedback_queue, ...res.additional_message]);
+                        setScanCartonFeedbackQueue([]);
 
                         if (res.next_carton_details.next_carton_qty === 0) {
                             if (res.tote_details.tote_status === 95) {

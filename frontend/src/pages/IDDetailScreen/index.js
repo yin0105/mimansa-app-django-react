@@ -41,7 +41,7 @@ const IDDetailScreen = () => {
     const handleKeyUp = e => {
         if (e.keyCode === 13) {
             console.log(readonly);
-            if (skuid === undefined) {
+            if (skuid === "%*%") {
                 setSKUId("");
                 setReadOnly(false);
             } else if ( !readonly ) {
@@ -157,7 +157,7 @@ const IDDetailScreen = () => {
     }
 
     const onClose = () => {
-        setSKUId(undefined);
+        setSKUId("%*%");
         setAlert(false);
     }
 

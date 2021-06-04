@@ -145,6 +145,7 @@ const IDDetailScreen = () => {
                 .catch(function (error) {
                     // Handle Errors here.
                     setLoading(false);
+                    setReadOnly(false);
                     console.log('===== error: ', error.message);
                     setError(error.message);
                     setAlert(true);

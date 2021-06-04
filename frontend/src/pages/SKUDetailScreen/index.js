@@ -259,7 +259,7 @@ const SKUDetailScreen = () => {
             validatePrintCarton(scan_carton);
         } else if (scan_carton == next_carton) {
             if (tote_type === "MONO") { setScannedSKU(1);}
-            apiValidatePackCarton({ whse: scanInfo.whse, carton_nbr: scan_carton, tote: lpnid, tote_type: tote_type, staging_locn: scanInfo.staging_locn, login_user_id: userid, sku_id: sku, qty: scannedSKU, action_code: action_code_for_sku })
+            apiValidatePackCarton({ whse: scanInfo.whse, carton_nbr: scan_carton, tote: lpnid, tote_type: tote_type, staging_locn: scanInfo.staging_locn, login_user_id: userid, sku_id: sku, qty: tote_type === "MONO"?1:scannedSKU, action_code: action_code_for_sku })
                 .then(res => {
                     console.log('===== res: ', res);
                     setLoading(false);

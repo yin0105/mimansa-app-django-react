@@ -264,6 +264,7 @@ const SKUDetailScreen = () => {
                     console.log('===== res: ', res);
                     setLoading(false);
                     if (res) {
+                        setScannedSKU(0);
                         console.log('==== res.message: ', res.message);
                         scanInfo.distinct_skus = res.tote_details.distinct_skus;
                         scanInfo.carton = res.tote_details.distinct_carton;

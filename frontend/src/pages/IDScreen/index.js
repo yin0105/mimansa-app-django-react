@@ -94,7 +94,7 @@ const IDScreen = () => {
     }
 
     const onClose = () => {
-        setLPNId("%*%");
+        setLPNId("");
         setAlert(false);
     }
 

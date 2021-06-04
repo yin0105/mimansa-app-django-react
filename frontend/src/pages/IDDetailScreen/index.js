@@ -157,7 +157,7 @@ const IDDetailScreen = () => {
     }
 
     const onClose = () => {
-        setSKUId("%*%");
+        setSKUId("");
         setAlert(false);
     }
 

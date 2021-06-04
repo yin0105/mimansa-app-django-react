@@ -327,8 +327,7 @@ const SKUDetailScreen = () => {
     const classes = useStyles();
 
     return (
-        <>
-            <MainMenu/>
+        <MainMenu>
             <WithHeaderLayout title="SKU">
                 {loading &&
                     <LinearProgress color="secondary" />
@@ -474,7 +473,7 @@ const SKUDetailScreen = () => {
                     </div>
                 </div>
             </WithHeaderLayout>
-        </>
+        </MainMenu>
     )
 }
 

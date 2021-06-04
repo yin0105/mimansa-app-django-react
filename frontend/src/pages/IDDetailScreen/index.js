@@ -161,8 +161,7 @@ const IDDetailScreen = () => {
     }
 
     return (
-        <>
-            <MainMenu/>
+        <MainMenu>
             <WithHeaderLayout title="Detalles del Tote">
                 {loading &&
                     <LinearProgress color="secondary" />
@@ -230,7 +229,7 @@ const IDDetailScreen = () => {
                     </div>
                 </div>
             </WithHeaderLayout>
-        </>
+        </MainMenu>
     )
 }
 

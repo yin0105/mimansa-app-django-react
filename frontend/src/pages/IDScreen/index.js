@@ -99,8 +99,7 @@ const IDScreen = () => {
     }
 
     return (
-        <>
-            <MainMenu/>
+        <MainMenu>
             <WithHeaderLayout title="TOTE">
                 {loading &&
                     <LinearProgress color="secondary" />
@@ -143,7 +142,7 @@ const IDScreen = () => {
                     </div>
                 </div>
             </WithHeaderLayout>
-        </>
+        </MainMenu>
     )
 }
 

@@ -184,7 +184,7 @@ const SKUDetailScreen = () => {
 
         var scanInfo = JSON.parse(sessionStorage.getItem("scanInfo"));
 
-        apiValidatePrintCarton({ whse: scanInfo.whse, carton_nbr: scanInfo.next_carton, printer_name: scanInfo.printer_name, action_code: action_code, login_user_id: scanInfo.userid })
+        apiValidatePrintCarton({ whse: scanInfo.whse, carton_nbr: next_carton===""?scanInfo.next_carton:next_carton, printer_name: scanInfo.printer_name, action_code: action_code, login_user_id: scanInfo.userid })
             .then(res => {
                 console.log('===== PRINT res: ', res);
                 setLoading(false);
@@ -272,8 +272,8 @@ const SKUDetailScreen = () => {
 
                         sessionStorage.setItem("scanInfo", JSON.stringify(scanInfo));
 
-                        // setScanCartonFeedbackQueue(scan_carton_feedback_queue => [...scan_carton_feedback_queue, ...res.additional_message]);
                         setScanCartonFeedbackQueue([]);
+                        // setScanCartonFeedbackQueue(scan_carton_feedback_queue => [...scan_carton_feedback_queue, ...res.additional_message]);
 
                         if (res.next_carton_details.next_carton_qty === 0) {
                             if (res.tote_details.tote_status === 95) {

@@ -51,7 +51,7 @@ const StyledTextField = withStyles((theme) => ({
         margin: "30px 0px",
     },
 }))(TextField);
-  
+
 const WarehouseList = () => {
     const classes = useStyles();
     let history = useHistory();
@@ -69,22 +69,35 @@ const WarehouseList = () => {
     }, []);
 
     const getList = ()  => {
+        setLoading(true);
         axios.get(`${restApiSettings.baseURL}/warehouse/`)
             .then(res => {
                 console.log(res = res)
                 setWarehouseList(res.data);
-            })
+                setLoading(false);
+            }).catch(err => {
+                setLoading(false);
+            });
     }
 
     const deleteRow = (code) => {
         confirm({ description: 'Are you sure to delete the warehouse?' })
             .then(() => {
+                setLoading(true);
                 axios.delete(`${restApiSettings.baseURL}/warehouse/?code=${code}`)
                     .then(res => {
-                        setAlertMsg("The warehouse has been deleted successfully.");                
+                        setAlertMsg("The warehouse has been deleted successfully.");
                         setSeverity("success");
                         setOpen(true);
                         getList();
+                    }).catch(err => {
+                        console.log(" error = ", err.response.data);
+                        let errMsg = err.response.data;
+                        errMsg = err.response.data.substr(1, errMsg.length - 2);
+                        setAlertMsg(errMsg);
+                        setSeverity("error");
+                        setOpen(true);
+                        setLoading(false);
                     });
             }).catch(() => {});
     }
@@ -111,26 +124,26 @@ const WarehouseList = () => {
                     <Table aria-label="simple table">
                         <TableHead>
                             <TableRow>
-                                <StyledTableCell >No</StyledTableCell>
-                                <StyledTableCell >Code</StyledTableCell>
-                                <StyledTableCell >Name</StyledTableCell>
+                                <StyledTableCell >N.</StyledTableCell>
+                                <StyledTableCell >Código</StyledTableCell>
+                                <StyledTableCell >Nombre</StyledTableCell>
                                 <StyledTableCell >RUT</StyledTableCell>
-                                <StyledTableCell >Address Line 1</StyledTableCell>
-                                <StyledTableCell >Address Line 2</StyledTableCell>
-                                <StyledTableCell >Locality</StyledTableCell>
-                                <StyledTableCell >City</StyledTableCell>
-                                <StyledTableCell >State</StyledTableCell>
-                                <StyledTableCell >Zip Code</StyledTableCell>
-                                <StyledTableCell >Phone</StyledTableCell>
+                                <StyledTableCell >Dirección Linea 1</StyledTableCell>
+                                <StyledTableCell >Dirección Linea 2</StyledTableCell>
+                                <StyledTableCell >Comuna</StyledTableCell>
+                                <StyledTableCell >Ciudad</StyledTableCell>
+                                <StyledTableCell >Region</StyledTableCell>
+                                <StyledTableCell >Código Postal</StyledTableCell>
+                                <StyledTableCell >Fono</StyledTableCell>
                                 <StyledTableCell >Logo</StyledTableCell>
-                                <StyledTableCell >Creation Date</StyledTableCell>
-                                <StyledTableCell >Modification Date</StyledTableCell>
-                                <StyledTableCell >Action</StyledTableCell>
+                                <StyledTableCell >Fecha Creación</StyledTableCell>
+                                <StyledTableCell >Fecha Modificación</StyledTableCell>
+                                <StyledTableCell >Acción</StyledTableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
                         {
-                            warehouse_list.map((warehouse, i) => 
+                            warehouse_list.map((warehouse, i) =>
                                 <StyledTableRow key={i}>
                                     <StyledTableCell key={"no_" + i} >{ i + 1 }</StyledTableCell>
                                     <StyledTableCell key={"code_" + i} >{warehouse.code}</StyledTableCell>
@@ -149,7 +162,7 @@ const WarehouseList = () => {
                                         {/* {warehouse.logo}</StyledTableCell> */}
                                     {/* <StyledTableCell key={"logo_" + i} >{warehouse.logo}</StyledTableCell> */}
                                     <StyledTableCell key={"creation_date_" + i} >{warehouse.creation_date}</StyledTableCell>
-                                    <StyledTableCell key={"modification_date_" + i} >{warehouse.modification_date}</StyledTableCell>                                
+                                    <StyledTableCell key={"modification_date_" + i} >{warehouse.modification_date}</StyledTableCell>
                                     <StyledTableCell key={"action_" + i} style={{ wordWrap: 'no-wrap'}}>
                                         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
                                         <Button variant="outlined" id="printPageButton" onClick={ e => history.push(`/warehouse/edit/${warehouse.code}`)} style={{ marginBottom: '10px', }}><i className="fa fa-pencil"></i></Button>
@@ -158,7 +171,7 @@ const WarehouseList = () => {
                                 </StyledTableRow>
                             )
                         }
-                            
+
                         </TableBody>
                     </Table>
                 </TableContainer>
@@ -169,7 +182,7 @@ const WarehouseList = () => {
                 </Snackbar>
             </div>
         </>
-        
+
     )
 }
 

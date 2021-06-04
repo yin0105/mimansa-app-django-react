@@ -34,7 +34,7 @@ class LocnPrinterMap(models.Model):
     modification_date = models.DateTimeField(auto_now=True, verbose_name='Fecha Modificacion')
 
     def __str__(self):
-        return self.whse_code.code + '-' + self.reserve_locn + self.staging_locn + self.printer
+        return self.whse_code.code + '-' + self.reserve_locn + self.staging_locn + self.printer_name
 
     class Meta:
         db_table='locn_printer_map'

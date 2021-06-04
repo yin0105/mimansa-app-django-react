@@ -1,4 +1,5 @@
 import json
+import django
 
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -62,8 +63,13 @@ class WarehouseView(APIView):
             return HttpResponse(status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, format=None):
-        Warehouse.objects.filter(code=request.GET.get("code")).delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+        try:
+            Warehouse.objects.filter(code=request.GET.get("code")).delete()
+            return Response(status=status.HTTP_204_NO_CONTENT)
+        except Exception as err:
+            return HttpResponse (err, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            
+
 
     def get(self, request, *args, **kwargs):
         if "code" in request.GET:

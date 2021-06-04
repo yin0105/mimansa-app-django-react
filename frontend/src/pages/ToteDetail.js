@@ -71,12 +71,12 @@ const  ToteDetail = () => {
                 setError("Please insert Tote Id!");
                 setAlert(true);
             } else {
-                getToteDetails(); 
-                setToteId("");               
+                getToteDetails();
+                setToteId("");
             }
         }
     }
-    
+
 
     const getToteDetails = () => {
 
@@ -104,7 +104,7 @@ const  ToteDetail = () => {
 
     const onClose = (error) => {
         console.log("error = ", error);
-        setToteId(undefined);                                    
+        setToteId(undefined);
         setAlert(false);
     }
 
@@ -114,23 +114,23 @@ const  ToteDetail = () => {
             {loading &&
                 <LinearProgress color="secondary" />
             }
-            <div className="mx-auto mt-8" style={{ maxWidth: "1200px" }}>
+            <div className="mx-auto mt-8" style={{ maxWidth: "600px" }}>
                 <div className="w-full text-center mb-10">
                     <Typography variant="h3" color="primary">
-                        ToteDetails
+                        Consulta de Tote
                     </Typography>
                 </div>
                 <div className="w-full ">
                     <Card>
                         {/* <div className="p-4"> */}
                             <CardContent className="mt-1 mx-3">
-                                <StyledTextField                                        
+                                <StyledTextField
                                     className="m-2 w-full"
                                     variant="outlined"
                                     value={tote_id}
                                     onChange={e => setToteId(e.target.value)}
                                     onKeyUp={handleKeyUp}
-                                    label="Tote ID"
+                                    label="Tote"
                                     autoFocus
                                     InputProps={{
                                         readOnly: Boolean(loading),
@@ -147,7 +147,7 @@ const  ToteDetail = () => {
                 res && res.tote_details &&
                 <Card>
                     <CardHeader
-                        title="tote_details"
+                        title="Tote"
                         titleTypographyProps={{ variant: 'h4' }}
                         style={{ textAlign: "center" }}
                     />
@@ -164,13 +164,13 @@ const  ToteDetail = () => {
                                 <Table aria-label="simple table" className={classes.table}>
                                     <TableHead>
                                         <TableRow>
-                                            <StyledTableCell className={classes.cell}>tote</StyledTableCell>
-                                            <StyledTableCell className={classes.cell}>tote_type</StyledTableCell>
-                                            <StyledTableCell className={classes.cell}>tote_status</StyledTableCell>
-                                            <StyledTableCell className={classes.cell}>distinct_skus</StyledTableCell>
-                                            <StyledTableCell className={classes.cell}>distinct_carton</StyledTableCell>
-                                            <StyledTableCell className={classes.cell}>requiring_vas</StyledTableCell>
-                                            <StyledTableCell className={classes.cell}>distinct_classifications</StyledTableCell>
+                                            <StyledTableCell className={classes.cell}>Tote</StyledTableCell>
+                                            <StyledTableCell className={classes.cell}>Tipo</StyledTableCell>
+                                            <StyledTableCell className={classes.cell}>Estado</StyledTableCell>
+                                            <StyledTableCell className={classes.cell}>Distintos SKUs</StyledTableCell>
+                                            <StyledTableCell className={classes.cell}>Distintos Cartones</StyledTableCell>
+                                            <StyledTableCell className={classes.cell}>VAS</StyledTableCell>
+                                            <StyledTableCell className={classes.cell}>Distintos Clasificaciones</StyledTableCell>
                                         </TableRow>
                                     </TableHead>
                                     <TableBody>
@@ -190,12 +190,12 @@ const  ToteDetail = () => {
                     </CardContent>
                 </Card>
             }
-            
+
             {
                 res && res.carton_list &&
                 <Card>
                     <CardHeader
-                        title="cartons"
+                        title="Cartónes"
                         titleTypographyProps={{ variant: 'h4' }}
                         style={{ textAlign: "center" }}
                     />
@@ -212,19 +212,19 @@ const  ToteDetail = () => {
                                 <Table aria-label="carton table" className={classes.table}>
                                     <TableHead>
                                         <TableRow>
-                                            <StyledTableCell className={classes.cell}>carton_nbr</StyledTableCell>
-                                            <StyledTableCell className={classes.cell}>stat_code</StyledTableCell>
-                                            <StyledTableCell className={classes.cell}>sku_id</StyledTableCell>
-                                            <StyledTableCell className={classes.cell}>sku_brcd</StyledTableCell>
-                                            <StyledTableCell className={classes.cell}>dsp_sku</StyledTableCell>
-                                            <StyledTableCell className={classes.cell}>sku_desc</StyledTableCell>
-                                            <StyledTableCell className={classes.cell}>to_be_pakd_units</StyledTableCell>
-                                            <StyledTableCell className={classes.cell}>units_pakd</StyledTableCell>
-                                            <StyledTableCell className={classes.cell}>remaining</StyledTableCell>
+                                            <StyledTableCell className={classes.cell}>Carton</StyledTableCell>
+                                            <StyledTableCell className={classes.cell}>Estado</StyledTableCell>
+                                            <StyledTableCell className={classes.cell}>SKU_ID</StyledTableCell>
+                                            <StyledTableCell className={classes.cell}>Brcd</StyledTableCell>
+                                            <StyledTableCell className={classes.cell}>DSP SKU</StyledTableCell>
+                                            <StyledTableCell className={classes.cell}>Desc</StyledTableCell>
+                                            <StyledTableCell className={classes.cell}>Cant. a Empacar</StyledTableCell>
+                                            <StyledTableCell className={classes.cell}>Cant. Empacada</StyledTableCell>
+                                            <StyledTableCell className={classes.cell}>Pendiente</StyledTableCell>
                                         </TableRow>
                                     </TableHead>
                                     <TableBody>
-                                    {   res.carton_list.map(carton => 
+                                    {   res.carton_list.map(carton =>
                                             <StyledTableRow>
                                                 <StyledTableCell className={classes.cell}>{carton.carton_nbr}</StyledTableCell>
                                                 <StyledTableCell className={classes.cell}>{carton.state_code}</StyledTableCell>
@@ -236,18 +236,18 @@ const  ToteDetail = () => {
                                                 <StyledTableCell className={classes.cell}>{carton.units_pakd}</StyledTableCell>
                                                 <StyledTableCell className={classes.cell}>{carton.remaining}</StyledTableCell>
                                             </StyledTableRow>
-                                        ) 
+                                        )
                                     }
                                     </TableBody>
                                 </Table>
                             </TableContainer>
-                        </Grid>                
+                        </Grid>
                     </CardContent>
                 </Card>
             }
             <AlertDialog item="User Id" error={error} open={alert} handleClose={() => onClose(error)}/>
         </>
-        
+
     )
 }
 

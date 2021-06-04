@@ -59,24 +59,24 @@ const StyledLink = withStyles((theme) => ({
 export default function MainMenu() {
     const [showMaestrosMenu, setshowMaestrosMenu] = useState(false);
     const [showPackFromToteMenu, setshowPackFromToteMenu] = useState(false);
-    
+
     const maestrosMenus = [
         {
           value: "Warehouse",
           link: "/warehouse/list",
         },
         {
-          value: "Location Printer Map",
+          value: "Mapeo - Ubicación/Impresora",
           link: "/locnprintermap/list",
         },
       ];
     const packFromToteMenus = [
         {
-            value: "Pack from Tote",
+            value: "Empacar Desde Tote",
             link: "/location",
           },
           {
-            value: "Tote Details",
+            value: "Consulta de Tote",
             link: "/tote_detail",
           },
       ];
@@ -85,7 +85,7 @@ export default function MainMenu() {
         <div style={{ backgroundColor: "#3f51b5", height: "64px", justifyContent: "center", display: "flex", alignItems: "flex-end", color: "white"}}>
             <nav className="flex space-x-2">
                 <div className="mt-auto font-bold text-gray-700 mx-20">
-                    <div  className={`cursor-pointer relative border-white text-white hover:border-primary hover:text-white text-md p-3`}                
+                    <div  className={`cursor-pointer relative border-white text-white hover:border-primary hover:text-white text-md p-3`}
                     onMouseEnter={() => setshowMaestrosMenu(true)}
                     onMouseLeave={() => setshowMaestrosMenu(false)}
                     >
@@ -98,11 +98,11 @@ export default function MainMenu() {
                     </div>
                 </div>
                 <div className="mt-auto font-bold text-gray-700 mx-20" >
-                    <div  className={`cursor-pointer relative border-white text-white hover:border-primary hover:text-white text-md p-3`}                
+                    <div  className={`cursor-pointer relative border-white text-white hover:border-primary hover:text-white text-md p-3`}
                     onMouseEnter={() => setshowPackFromToteMenu(true)}
                     onMouseLeave={() => setshowPackFromToteMenu(false)}
                     >
-                    <Link to="#">Pack from Tote</Link>
+                    <Link to="#">Empacar Desde Tote</Link>
                     <SubMenu
                         menuItems={packFromToteMenus}
                         isShow={showPackFromToteMenu}

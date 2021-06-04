@@ -50,9 +50,9 @@ const Login = () => {
                 refUserId.current.querySelector('input').focus();
             } else if (userid === "") {
                 setError("Please insert User Id!");
-                setAlert(true);                
+                setAlert(true);
             } else if (password === undefined) {
-                setPassword("");                
+                setPassword("");
             } else if (password === "") {
                 setError("Please insert Password!");
                 setAlert(true);
@@ -61,7 +61,7 @@ const Login = () => {
             }
         }
     }
-    
+
 
     useEffect(() => {
         sessionStorage.removeItem("scanInfo");
@@ -95,7 +95,7 @@ const Login = () => {
     const onClose = (error) => {
         console.log("error = ", error);
         if (error == "Please insert User Id!") {
-            setUserId(undefined);                                    
+            setUserId(undefined);
         } else {
             setPassword(undefined);
         }
@@ -103,7 +103,7 @@ const Login = () => {
     }
 
     return (
-        
+
         <div className="p-6">
             <div className="w-full text-right">
                 &nbsp;
@@ -112,8 +112,8 @@ const Login = () => {
                 <div className="w-full ">
                     <img src={logo} className="mx-auto mb-10" alt="logo" />
                     <div className="w-full text-center">
-                        <Typography variant="h3" color="primary">
-                            Mimansa - Pack from tote
+                        <Typography variant="h4" color="primary">
+                            Mimansa - Empacar Desde Tote
                         </Typography>
                     </div>
                     <Card className="mt-2">
@@ -125,20 +125,20 @@ const Login = () => {
                                     value={userid}
                                     onChange={e => setUserId(e.target.value.toUpperCase())}
                                     onKeyUp={handleKeyUpUserId}
-                                    label="User"
+                                    label="Usuario"
                                     // autoFocus
                                     InputProps={{
                                         readOnly: Boolean(loading),
                                     }}
                                     ref={refUserId}
                                 />
-                                <StyledTextField                                        
+                                <StyledTextField
                                     className="m-2 w-full"
                                     variant="outlined"
                                     value={password}
                                     onChange={e => setPassword(e.target.value)}
                                     onKeyUp={handleKeyUpPassword}
-                                    label="Password"
+                                    label="Contraseña"
                                     // autoFocus
                                     type="password"
                                     InputProps={{

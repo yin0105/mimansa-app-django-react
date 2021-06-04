@@ -27,7 +27,7 @@ const StyledTableCell = withStyles((theme) => ({
         backgroundColor: '#ffffff',
     },
   }))(TableCell);
-  
+
 const StyledTableRow = withStyles((theme) => ({
     root: {
         '&:nth-of-type(odd)': {
@@ -82,7 +82,7 @@ const SKUDetailScreen = () => {
     const [open, setOpen] = useState(false);
     const [alert_msg, setAlertMsg] = useState("");
     const [severity, setSeverity] = useState("success");
-    
+
     let pre_scannedSKU = 0
 
     useEffect(() => {
@@ -112,7 +112,7 @@ const SKUDetailScreen = () => {
                 validatePrintCarton("PRINT");
                 setPrinted(true);
             }
-        } 
+        }
     }, [history]);
 
     const handleClose = (event, reason) => {
@@ -121,10 +121,10 @@ const SKUDetailScreen = () => {
             history.push(push_url);
         }
     };
-    
+
     const handleSKUKeyUp = e => {
         if (e.keyCode === 13) {
-            
+
             if (sku_brcd === undefined ) {
                 setReadOnly(false);
             } else if ( !readonly ) {
@@ -146,15 +146,15 @@ const SKUDetailScreen = () => {
                     } else {
                         setAlertMsg("Debe escanearse al menos 1 Unidad.");
                     }
-                    
+
                     setSeverity("success");
                     setOpen(true);
                 } else {
                     setError(`Incorrect Barcode : ${sku_brcd}`)
                     setAlert(true);
-                }  
-            }            
-            setSkuBrcd("");            
+                }
+            }
+            setSkuBrcd("");
         }
     }
 
@@ -192,12 +192,12 @@ const SKUDetailScreen = () => {
                 if (res) {
                     console.log('==== res.message: ', res.message);
                     console.log("== scanInfo.print_mode = ", scanInfo.print_mode);
-                    
-                    setScanCartonFeedbackQueue(scan_carton_feedback_queue => [...scan_carton_feedback_queue, res.message]); 
+
+                    setScanCartonFeedbackQueue(scan_carton_feedback_queue => [...scan_carton_feedback_queue, res.message]);
                     // if (res.message != "") {
                     //     setAlertMsg(res.message);
                     //     setSeverity("success");
-                    //     setOpen(true); 
+                    //     setOpen(true);
                     // }
                     if (scanInfo.print_mode == "DIRECT" && res.print_command != "")    {
                         console.log("== print_mode = ", scanInfo.print_mode);
@@ -225,7 +225,7 @@ const SKUDetailScreen = () => {
                 console.log('===== error: ', error.message);
 
                 setError(error.message);
-                setAlert(true);  
+                setAlert(true);
         });
     }
 
@@ -244,7 +244,7 @@ const SKUDetailScreen = () => {
                     setReadOnly(false);
                     if (res) {
                         console.log('==== res.message: ', res.message);
-                        setScanCartonFeedbackQueue(scan_carton_feedback_queue => [...scan_carton_feedback_queue, res.message]);     
+                        setScanCartonFeedbackQueue(scan_carton_feedback_queue => [...scan_carton_feedback_queue, res.message]);
                     }
                 })
                 .catch(function (error) {
@@ -253,10 +253,10 @@ const SKUDetailScreen = () => {
                     console.log('===== error: ', error.message);
 
                     setError(error.message);
-                    setAlert(true);  
+                    setAlert(true);
                 });
         } else if (scan_carton === "REPRINT") {
-            validatePrintCarton(scan_carton);   
+            validatePrintCarton(scan_carton);
         } else if (scan_carton == next_carton) {
             if (tote_type === "MONO") { setScannedSKU(1);}
             apiValidatePackCarton({ whse: scanInfo.whse, carton_nbr: scan_carton, tote: lpnid, tote_type: tote_type, staging_locn: scanInfo.staging_locn, login_user_id: userid, sku_id: sku, qty: scannedSKU, action_code: action_code_for_sku })
@@ -270,8 +270,8 @@ const SKUDetailScreen = () => {
                         scanInfo.classification = res.tote_details.distinct_classifications;
 
                         sessionStorage.setItem("scanInfo", JSON.stringify(scanInfo));
-                        
-                        setScanCartonFeedbackQueue(scan_carton_feedback_queue => [...scan_carton_feedback_queue, ...res.additional_message]);     
+
+                        setScanCartonFeedbackQueue(scan_carton_feedback_queue => [...scan_carton_feedback_queue, ...res.additional_message]);
 
                         if (res.next_carton_details.next_carton_qty === 0) {
                             if (res.tote_details.tote_status === 95) {
@@ -289,14 +289,14 @@ const SKUDetailScreen = () => {
                             setActionCodeForSku("");
                             setQty(res.next_carton_details.next_carton_qty);
                             setReadOnly(false);
-                            
+
                             if (res.tote_details.tote_status === 95) {
                                 setPushUrl("/id");
                             } else {
 
                             }
                         }
-                                                
+
                     }
                 })
                 .catch(function (error) {
@@ -304,11 +304,11 @@ const SKUDetailScreen = () => {
                     setReadOnly(false);
                     console.log('===== error: ', error.message);
 
-                    // setScanCartonFeedbackQueue(scan_carton_feedback_queue => [...scan_carton_feedback_queue, ...error.additional_message]);     
+                    // setScanCartonFeedbackQueue(scan_carton_feedback_queue => [...scan_carton_feedback_queue, ...error.additional_message]);
 
                     setError(error.message);
                     setAlert(true);
-                    
+
                     // setScanCartonFeedback(error.message);
                     // setScanCartonFeedbackError(true);
                 });
@@ -327,7 +327,7 @@ const SKUDetailScreen = () => {
     return (
         <>
             <MainMenu/>
-            <WithHeaderLayout title="SKU Detail Screen">
+            <WithHeaderLayout title="SKU">
                 {loading &&
                     <LinearProgress color="secondary" />
                 }
@@ -340,15 +340,15 @@ const SKUDetailScreen = () => {
                     </div>
                     <div className="mx-auto" style={{ maxWidth: "1000px" }}>
                         <div className="w-full text-center">
-                            <Typography variant="h3" color="primary">
-                                Pack LPN
+                            <Typography variant="h4" color="primary">
+                                Empacar Desde Tote
                             </Typography>
                         </div>
-                        
+
                         <Card className="p-4 mt-2">
                             <CardHeader
                                 title="SKU Detail Screen"
-                                titleTypographyProps={{ variant: 'h4' }}
+                                titleTypographyProps={{ variant: 'h5' }}
                                 style={{ textAlign: "center" }}
                             />
                             <Grid container spacing={0}>
@@ -357,7 +357,7 @@ const SKUDetailScreen = () => {
                                         <div>
                                             <div className="w-full text-center py-1">
                                                 <Typography style={{ paddingRight: "20px" }}>
-                                                    LPN ID: {lpnid} ({tote_type})
+                                                    TOTE: {lpnid} ({tote_type})
                                                 </Typography>
                                             </div>
                                             <div className="w-full text-center py-1">
@@ -389,10 +389,10 @@ const SKUDetailScreen = () => {
                                     <CardContent>
                                         <div className="w-full text-center py-1">
                                             <Typography style={{ paddingRight: "20px" }}>
-                                                CARTON: {next_carton}
-                                            </Typography>                                        
+                                            CARTÓN: {next_carton}
+                                            </Typography>
                                         </div>
-                                        {tote_type === "MONO" && 
+                                        {tote_type === "MONO" &&
                                             <>
                                                 <Box display="flex" alignItems="center" justifyContent="center" py={2}>
                                                     <TextField className={classes.textfield} style={{ width: "400px" }} id="scan_carton_id" label="Carton ID" variant="outlined" value={scan_carton} helperText={scan_carton_feedback} error={scan_carton_feedback_error} onChange={e => inputScanCarton(e)} onKeyUp={handleCartonKeyUp} autoFocus />
@@ -412,24 +412,24 @@ const SKUDetailScreen = () => {
                                                 </Box>
                                             </>
                                         }
-                                        {tote_type === "MULTI" && 
+                                        {tote_type === "MULTI" &&
                                             <>
                                                 <div className="w-full text-center py-1">
                                                     <Typography style={{ paddingRight: "20px" }}>
                                                         SKU: {sku}
-                                                    </Typography>                                       
+                                                    </Typography>
                                                 </div>
                                                 <div className="w-full text-center py-1">
                                                     <Typography style={{ paddingRight: "20px" }}>
                                                         QTY: {qty} Unit{qty > 0 && "s"} {
                                                             scannedSKU > 0 && (`(Scanned : ${scannedSKU} , Pending : ${(qty - scannedSKU)})`)
                                                         }
-                                                    </Typography>                                       
+                                                    </Typography>
                                                 </div>
                                                 <Box alignItems="center" justifyContent="center" py={2}>
                                                     {(action_code_for_sku === "" && scannedSKU < qty) &&
                                                         <Box display="flex" alignItems="center" justifyContent="center" py={2} className="w-full">
-                                                            <TextField className={classes.textfield} style={{ width: "400px" }} autoFocus id="sku_brcd" label="SKU" variant="outlined" value={sku_brcd} onChange={e => inputSkuBrcd(e)} onKeyUp={handleSKUKeyUp} />                                        
+                                                            <TextField className={classes.textfield} style={{ width: "400px" }} autoFocus id="sku_brcd" label="SKU" variant="outlined" value={sku_brcd} onChange={e => inputSkuBrcd(e)} onKeyUp={handleSKUKeyUp} />
                                                         </Box>
                                                     }
                                                     {(action_code_for_sku === "SHORT" || scannedSKU == qty) &&
@@ -439,7 +439,7 @@ const SKUDetailScreen = () => {
                                                                     <TextField className={classes.textfield} autoFocus id="scan_carton_id" label="Carton ID" variant="outlined" value={scan_carton} helperText={scan_carton_feedback} error={scan_carton_feedback_error} onChange={e => inputScanCarton(e)} onKeyUp={handleCartonKeyUp} style={{ backgroundColor: "#eeffff", width: "400px" }}  />
                                                                 </Box>
                                                             </Box>
-                                                            
+
                                                             <Box display="flex" alignItems="center" justifyContent="center" py={2}>
                                                                 <TableContainer component={Paper}>
                                                                     <Table className={classes.table} aria-label="error message table" style={{ backgroundColor: "#eeeeee" }}>
@@ -458,7 +458,7 @@ const SKUDetailScreen = () => {
                                                 </Box>
                                             </>
                                         }
-                                        
+
                                     </CardContent>
                                 </Grid>
                             </Grid>

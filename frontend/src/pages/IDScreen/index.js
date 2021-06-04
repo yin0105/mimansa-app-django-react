@@ -30,6 +30,7 @@ const IDScreen = () => {
                 setAlert(true);
             } else {
                 validateLPNId();
+                setLPNId("");
             }
         }
     }
@@ -100,7 +101,7 @@ const IDScreen = () => {
     return (
         <>
             <MainMenu/>
-            <WithHeaderLayout title="ID Screen">
+            <WithHeaderLayout title="TOTE">
                 {loading &&
                     <LinearProgress color="secondary" />
                 }
@@ -112,15 +113,15 @@ const IDScreen = () => {
                     <div className="mx-auto" style={{ maxWidth: "600px" }}>
                         <div className="w-full ">
                             <div className="w-full text-center">
-                                <Typography variant="h3" color="primary">
-                                    Pack LPN
+                                <Typography variant="h4" color="primary">
+                                    Empacar Desde Tote
                             </Typography>
                             </div>
                             <Card className="mt-2">
                                 <div className="p-4">
                                     <CardHeader
-                                        title="ID Screen"
-                                        titleTypographyProps={{ variant: 'h4' }}
+                                        title="TOTE"
+                                        titleTypographyProps={{ variant: 'h5' }}
                                         style={{ textAlign: "center" }}
                                     />
                                     <CardContent className="mt-8 mx-3">
@@ -130,7 +131,7 @@ const IDScreen = () => {
                                             value={lpnid}
                                             onChange={e => setLPNId(e.target.value.toUpperCase())}
                                             onKeyUp={handleKeyUp}
-                                            label="LPN ID"
+                                            label="TOTE"
                                             autoFocus
                                             InputProps={{ readOnly: Boolean(loading), }}
                                         />

@@ -83,34 +83,36 @@ const  WarehouseCreate = () => {
         e.preventDefault();
         if (code == "" || name == "" || rut == "" || addr_line_1 == "" || addr_line_2 == "" || locality == "" || city == "" || state == "" || zipcode == "" || phone == "" || logo.length == 0) {
             if (code == "") {
-                setAlertMsg("Please enter code value.");                
+                setAlertMsg("Please enter code value.");
             } else if (name == "") {
-                setAlertMsg("Please enter name value.");                
+                setAlertMsg("Please enter name value.");
             } else if (rut == "") {
-                setAlertMsg("Please enter rut value.");                
+                setAlertMsg("Please enter rut value.");
             } else if (addr_line_1 == "") {
-                setAlertMsg("Please enter Address Line 1 value.");                
+                setAlertMsg("Please enter Address Line 1 value.");
             } else if (addr_line_2 == "") {
-                setAlertMsg("Please enter Address Line 2 value.");                
+                setAlertMsg("Please enter Address Line 2 value.");
             } else if (locality == "") {
-                setAlertMsg("Please enter locality value.");                
+                setAlertMsg("Please enter locality value.");
             } else if (city == "") {
-                setAlertMsg("Please enter city value.");                
+                setAlertMsg("Please enter city value.");
             } else if (state == "") {
-                setAlertMsg("Please enter state value.");                
+                setAlertMsg("Please enter state value.");
             } else if (zipcode == "") {
-                setAlertMsg("Please enter Zip Code value.");                
+                setAlertMsg("Please enter Zip Code value.");
             } else if (phone == "") {
-                setAlertMsg("Please enter Phone number value.");                
+                setAlertMsg("Please enter Phone number value.");
             } else if (logo.length == 0) {
-                setAlertMsg("Please select logo image.");                
+                setAlertMsg("Please select logo image.");
             }
 
             setSeverity("warning");
             setOpen(true);
             return;
         }
-        
+
+        setLoading(true);
+
         let form_data = new FormData();
         form_data.append('code', code);
         form_data.append('name', name);
@@ -128,13 +130,14 @@ const  WarehouseCreate = () => {
         console.log("url = ", url);
         axios.post(url, form_data, {
             headers: {
-                'content-type': 'multipart/form-data',            
+                'content-type': 'multipart/form-data',
             },
         }).then(res => {
-            setAlertMsg("The warehouse has been created successfully.");                
+            setAlertMsg("The warehouse has been created successfully.");
             setSeverity("success");
             setOpen(true);
             history.push("/warehouse/list");
+            setLoading(false);
         }).catch(err => {
             if (err.response.status == 409) {
                 setAlertMsg("The code is duplicated.");
@@ -143,6 +146,7 @@ const  WarehouseCreate = () => {
             }
             setSeverity("error");
             setOpen(true);
+            setLoading(false);
         })
     };
 
@@ -165,25 +169,25 @@ const  WarehouseCreate = () => {
                 <form onSubmit={handleSubmit}>
                     <Grid
                         container
-                        direction="row"                                    
+                        direction="row"
                         spacing={1}
                         justify="space-evenly"
                         alignItems="center"
                     >
                         <Grid
                             container
-                            direction="row"                                    
+                            direction="row"
                             spacing={3}
                             justify="space-evenly"
                             xs={12}
                         >
                             <Grid item xs={3}>
-                                <TextField                                        
+                                <TextField
                                 className="m-2 w-full"
                                 variant="outlined"
                                 value={code}
                                 onChange={e => setCode(e.target.value)}
-                                label="Code"
+                                label="Código"
                                 autoFocus
                                 InputProps={{
                                     readOnly: Boolean(loading),
@@ -191,12 +195,12 @@ const  WarehouseCreate = () => {
                             />
                             </Grid>
                             <Grid item xs={3}>
-                                <TextField                                        
+                                <TextField
                                 className="m-2 w-full"
                                 variant="outlined"
                                 value={name}
                                 onChange={e => setName(e.target.value)}
-                                label="Name"
+                                label="Nombre"
                                 autoFocus
                                 InputProps={{
                                     readOnly: Boolean(loading),
@@ -204,7 +208,7 @@ const  WarehouseCreate = () => {
                             />
                             </Grid>
                             <Grid item xs={3}>
-                                <TextField                                        
+                                <TextField
                                 className="m-2 w-full"
                                 variant="outlined"
                                 value={rut}
@@ -215,14 +219,14 @@ const  WarehouseCreate = () => {
                                     readOnly: Boolean(loading),
                                 }}
                             />
-                            </Grid>                        
+                            </Grid>
                             <Grid item xs={3}>
-                                <TextField                                        
+                                <TextField
                                 className="m-2 w-full"
                                 variant="outlined"
                                 value={addr_line_1}
                                 onChange={e => setAddrLine1(e.target.value)}
-                                label="Address Line 1"
+                                label="Dirección Linea 1"
                                 autoFocus
                                 InputProps={{
                                     readOnly: Boolean(loading),
@@ -230,26 +234,26 @@ const  WarehouseCreate = () => {
                             />
                             </Grid>
                             <Grid item xs={3}>
-                                <TextField                                        
+                                <TextField
                                 className="m-2 w-full"
                                 variant="outlined"
                                 value={addr_line_2}
                                 onChange={e => setAddrLine2(e.target.value)}
-                                label="Address Line 2"
+                                label="Dirección Linea 2"
                                 autoFocus
                                 InputProps={{
                                     readOnly: Boolean(loading),
                                 }}
-                               
+
                             />
                             </Grid>
                             <Grid item xs={3}>
-                                <TextField                                        
+                                <TextField
                                 className="m-2 w-full"
                                 variant="outlined"
                                 value={locality}
                                 onChange={e => setLocality(e.target.value)}
-                                label="Locality"
+                                label="Comuna"
                                 autoFocus
                                 InputProps={{
                                     readOnly: Boolean(loading),
@@ -257,12 +261,12 @@ const  WarehouseCreate = () => {
                             />
                             </Grid>
                             <Grid item xs={3}>
-                                <TextField                                        
+                                <TextField
                                 className="m-2 w-full"
                                 variant="outlined"
                                 value={city}
                                 onChange={e => setCity(e.target.value)}
-                                label="City"
+                                label="Ciudad"
                                 autoFocus
                                 InputProps={{
                                     readOnly: Boolean(loading),
@@ -270,12 +274,12 @@ const  WarehouseCreate = () => {
                             />
                             </Grid>
                             <Grid item xs={3}>
-                                <TextField                                        
+                                <TextField
                                 className="m-2 w-full"
                                 variant="outlined"
                                 value={state}
                                 onChange={e => setState(e.target.value)}
-                                label="State"
+                                label="Region"
                                 autoFocus
                                 InputProps={{
                                     readOnly: Boolean(loading),
@@ -283,12 +287,12 @@ const  WarehouseCreate = () => {
                             />
                             </Grid>
                             <Grid item xs={3}>
-                                <TextField                                        
+                                <TextField
                                 className="m-2 w-full"
                                 variant="outlined"
                                 value={zipcode}
                                 onChange={e => setZipcode(e.target.value)}
-                                label="Zip Code"
+                                label="Código Postal"
                                 autoFocus
                                 InputProps={{
                                     readOnly: Boolean(loading),
@@ -296,13 +300,13 @@ const  WarehouseCreate = () => {
                             />
                             </Grid>
                             <Grid item xs={3}>
-                                <TextField                                        
+                                <TextField
                                     className="m-2 w-full"
                                     variant="outlined"
                                     value={phone}
                                     onChange={e => setPhone(e.target.value)}
-                                    
-                                    label="Phone"
+
+                                    label="Fono"
                                     autoFocus
                                     InputProps={{
                                         readOnly: Boolean(loading),
@@ -326,7 +330,7 @@ const  WarehouseCreate = () => {
                         </Grid>
                         {/* <Grid
                             container
-                            direction="row"                                    
+                            direction="row"
                             spacing={3}
                             justify="space-evenly"
                             xs={3}
@@ -338,7 +342,7 @@ const  WarehouseCreate = () => {
                             <Button variant="contained" color="primary" type="submit" className="mr-20">Create</Button>
                             <Button variant="contained" color="primary" onClick={() => history.push("/warehouse/list")}>Go Back</Button>
                         </Grid>
-                        
+
                     </Grid>
                 </form>
                 <Snackbar open={open} autoHideDuration={6000} anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }} onClose={handleClose}>
@@ -348,7 +352,7 @@ const  WarehouseCreate = () => {
                 </Snackbar>
             </div>
         </>
-        
+
     )
 }
 

@@ -27,19 +27,19 @@ const Header = (props) => {
     const links = [
         {
             route: `/location`,
-            title: `Location`,
+            title: `Ubicación`,
         },
         {
             route: `/id`,
-            title: `IDScan`,
+            title: `TOTE`,
         },
         {
             route: `/iddetail`,
-            title: `IDDetail`,
+            title: `Detalles TOTE`,
         },
         {
             route: `/sku`,
-            title: `SKUDetail`,
+            title: `SKU`,
         }
     ];
 

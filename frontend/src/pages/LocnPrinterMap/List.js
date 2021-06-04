@@ -51,7 +51,7 @@ const StyledTextField = withStyles((theme) => ({
         margin: "30px 0px",
     },
 }))(TextField);
-  
+
 const LocnPrinterMapList = () => {
     const classes = useStyles();
     let history = useHistory();
@@ -69,22 +69,30 @@ const LocnPrinterMapList = () => {
     }, []);
 
     const getList = ()  => {
+        setLoading(true);
         axios.get(`${restApiSettings.baseURL}/locnprintermap/`)
             .then(res => {
                 console.log(res = res)
                 setLocnPrinterMapList(res.data);
-            })
+                setLoading(false);
+            }).catch(err => {
+                setLoading(false);
+            });
     }
 
     const deleteRow = (id) => {
         confirm({ description: 'Are you sure to delete the locnprintermap?' })
             .then(() => {
+                setLoading(true);
                 axios.delete(`${restApiSettings.baseURL}/locnprintermap/?id=${id}`)
                     .then(res => {
-                        setAlertMsg("The locnprintermap has been deleted successfully.");                
+                        setAlertMsg("The locnprintermap has been deleted successfully.");
                         setSeverity("success");
                         setOpen(true);
                         getList();
+                        setLoading(false);
+                    }).catch(err => {
+                        setLoading(false);
                     });
             }).catch(() => {});
     }
@@ -111,19 +119,19 @@ const LocnPrinterMapList = () => {
                     <Table aria-label="simple table">
                         <TableHead>
                             <TableRow>
-                                <StyledTableCell >No</StyledTableCell>
-                                <StyledTableCell >Warehouse Code</StyledTableCell>
-                                <StyledTableCell >Reserve Location</StyledTableCell>
-                                <StyledTableCell >Staging Location</StyledTableCell>
-                                <StyledTableCell >Printer name</StyledTableCell>
-                                <StyledTableCell >Creation Date</StyledTableCell>
-                                <StyledTableCell >Modification Date</StyledTableCell>
-                                <StyledTableCell >Action</StyledTableCell>
+                                <StyledTableCell >N.</StyledTableCell>
+                                <StyledTableCell >Warehouse</StyledTableCell>
+                                <StyledTableCell >Ubic. Reserva</StyledTableCell>
+                                <StyledTableCell >Ubic. Anclaje</StyledTableCell>
+                                <StyledTableCell >Cola</StyledTableCell>
+                                <StyledTableCell >Fecha Creación</StyledTableCell>
+                                <StyledTableCell >Fecha Modificación</StyledTableCell>
+                                <StyledTableCell >Acción</StyledTableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
                         {
-                            locnprintermap_list.map((locnprintermap, i) => 
+                            locnprintermap_list.map((locnprintermap, i) =>
                                 <StyledTableRow key={i}>
                                     <StyledTableCell key={"no_" + i} >{ i + 1 }</StyledTableCell>
                                     <StyledTableCell key={"whse_code_" + i} >{locnprintermap.whse_code}</StyledTableCell>
@@ -131,7 +139,7 @@ const LocnPrinterMapList = () => {
                                     <StyledTableCell key={"staging_locn_" + i} >{locnprintermap.staging_locn}</StyledTableCell>
                                     <StyledTableCell key={"printer_name_" + i} >{locnprintermap.printer_name}</StyledTableCell>
                                     <StyledTableCell key={"creation_date_" + i} >{locnprintermap.creation_date}</StyledTableCell>
-                                    <StyledTableCell key={"modification_date_" + i} >{locnprintermap.modification_date}</StyledTableCell>                                
+                                    <StyledTableCell key={"modification_date_" + i} >{locnprintermap.modification_date}</StyledTableCell>
                                     <StyledTableCell key={"action_" + i} style={{ wordWrap: 'no-wrap'}}>
                                         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
                                         <Button variant="outlined" id="printPageButton" onClick={ e => history.push(`/locnprintermap/edit/${locnprintermap.id}`)}><i className="fa fa-pencil"></i></Button>
@@ -140,7 +148,7 @@ const LocnPrinterMapList = () => {
                                 </StyledTableRow>
                             )
                         }
-                            
+
                         </TableBody>
                     </Table>
                 </TableContainer>
@@ -151,7 +159,7 @@ const LocnPrinterMapList = () => {
                 </Snackbar>
             </div>
         </>
-        
+
     )
 }
 

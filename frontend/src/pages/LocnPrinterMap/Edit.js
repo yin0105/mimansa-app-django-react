@@ -73,7 +73,7 @@ const  LocnPrinterMapEdit = () => {
         axios.get(`${restApiSettings.baseURL}/warehouse/`)
             .then(res => {
                 console.log(res = res)
-                
+
                 setWarehouseList(res.data.map(d => ({
                     "value" : d.code,
                     "label" : d.code
@@ -96,13 +96,13 @@ const  LocnPrinterMapEdit = () => {
         e.preventDefault();
         if (whse_code == "" || reserve_locn == "" || staging_locn == "" || printer_name == "") {
             if (whse_code == "") {
-                setAlertMsg("Please enter Warehouse Code.");                
+                setAlertMsg("Please enter Warehouse Code.");
             } else if (reserve_locn == "") {
-                setAlertMsg("Please enter Reserve Location.");                
+                setAlertMsg("Please enter Reserve Location.");
             } else if (staging_locn == "") {
-                setAlertMsg("Please enter Staging Location.");                
+                setAlertMsg("Please enter Staging Location.");
             } else if (printer_name == "") {
-                setAlertMsg("Please enter Printer Name.");                
+                setAlertMsg("Please enter Printer Name.");
             }
 
             setSeverity("warning");
@@ -110,18 +110,20 @@ const  LocnPrinterMapEdit = () => {
             return;
         } else {
             if (!validateReserveLocn(reserve_locn)) {
-                setAlertMsg("Invalid reserve_locn."); 
+                setAlertMsg("Invalid reserve_locn.");
                 setSeverity("warning");
                 setOpen(true);
                 return;
             } else if (!validateStagingLocn(staging_locn)) {
-                setAlertMsg("Invalid staging_locn."); 
+                setAlertMsg("Invalid staging_locn.");
                 setSeverity("warning");
                 setOpen(true);
                 return;
             }
         }
-        
+
+        setLoading(true);
+
         let form_data = new FormData();
         form_data.append('whse_code', whse_code);
         form_data.append('reserve_locn', reserve_locn);
@@ -132,13 +134,14 @@ const  LocnPrinterMapEdit = () => {
         console.log("url = ", url);
         axios.put(url, form_data, {
             headers: {
-                'content-type': 'multipart/form-data',            
+                'content-type': 'multipart/form-data',
             },
         }).then(res => {
-            setAlertMsg("The LocationPrinterMap has been created successfully.");                
+            setAlertMsg("The LocationPrinterMap has been created successfully.");
             setSeverity("success");
             setOpen(true);
             history.push("/locnprintermap/list");
+            setLoading(false);
         }).catch(err => {
             if (err.response.status == 409) {
                 setAlertMsg("The data is duplicated.");
@@ -147,6 +150,7 @@ const  LocnPrinterMapEdit = () => {
             }
             setSeverity("error");
             setOpen(true);
+            setLoading(false);
         })
     };
 
@@ -179,28 +183,28 @@ const  LocnPrinterMapEdit = () => {
                 <form onSubmit={handleSubmit}>
                     <Grid
                         container
-                        direction="row"                                    
+                        direction="row"
                         spacing={1}
                         justify="space-evenly"
                         alignItems="center"
                     >
                         <Grid
                             container
-                            direction="row"                                    
+                            direction="row"
                             spacing={3}
                             justify="space-evenly"
                             xs={3}
-                        >                            
+                        >
                             <Grid item xs={12}>
                                 <Select options={warehouse_list}  value={warehouse_list.filter(option => option.value === whse_code)} onChange={e => setWhseCode(e.value)}></Select>
                             </Grid>
                             <Grid item xs={12}>
-                                <TextField                                        
+                                <TextField
                                 className="m-2 w-full"
                                 variant="outlined"
                                 value={reserve_locn}
                                 onChange={e => setReserveLocn(e.target.value)}
-                                label="reserve_locn"
+                                label="Ubic. Reserva"
                                 autoFocus
                                 InputProps={{
                                     readOnly: Boolean(loading),
@@ -208,12 +212,12 @@ const  LocnPrinterMapEdit = () => {
                             />
                             </Grid>
                             <Grid item xs={12}>
-                                <TextField                                        
+                                <TextField
                                 className="m-2 w-full"
                                 variant="outlined"
                                 value={staging_locn}
                                 onChange={e => setStagingLocn(e.target.value)}
-                                label="staging_locn"
+                                label="Ubic. Anclaje"
                                 autoFocus
                                 InputProps={{
                                     readOnly: Boolean(loading),
@@ -221,12 +225,12 @@ const  LocnPrinterMapEdit = () => {
                             />
                             </Grid>
                             <Grid item xs={12}>
-                                <TextField                                        
+                                <TextField
                                 className="m-2 w-full"
                                 variant="outlined"
                                 value={printer_name}
                                 onChange={e => setPrinterName(e.target.value)}
-                                label="printer_name"
+                                label="Cola"
                                 autoFocus
                                 InputProps={{
                                     readOnly: Boolean(loading),
@@ -248,7 +252,7 @@ const  LocnPrinterMapEdit = () => {
                 </Snackbar>
             </div>
         </>
-        
+
     )
 }
 

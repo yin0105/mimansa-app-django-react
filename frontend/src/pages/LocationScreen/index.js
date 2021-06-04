@@ -29,6 +29,7 @@ const LocationScreen = () => {
                 setAlert(true);
             } else {
                 validateLocation();
+                setLocation("");
             }
         }
     }
@@ -103,15 +104,15 @@ const LocationScreen = () => {
                     <div className="mx-auto" style={{ maxWidth: "600px" }}>
                         <div className="w-full ">
                             <div className="w-full text-center">
-                                <Typography variant="h3" color="primary">
-                                    Pack LPN
+                                <Typography variant="h4" color="primary">
+                                    Empacar Desde Tote
                             </Typography>
                             </div>
                             <Card className="mt-2">
                                 <div className="p-4">
                                     <CardHeader
-                                        title="Location Screen"
-                                        titleTypographyProps={{ variant: 'h4' }}
+                                        title="Ubicación"
+                                        titleTypographyProps={{ variant: 'h5' }}
                                         style={{ textAlign: "center" }}
                                     />
                                     <CardContent className="mt-8 mx-3">
@@ -121,7 +122,7 @@ const LocationScreen = () => {
                                             value={location}
                                             onChange={e => setLocation(e.target.value.toUpperCase())}
                                             onKeyUp={handleKeyUp}
-                                            label="Location"
+                                            label="Ubicación"
                                             autoFocus
                                             InputProps={{ readOnly: Boolean(loading), }}
                                         />

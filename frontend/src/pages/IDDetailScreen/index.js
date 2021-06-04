@@ -50,6 +50,7 @@ const IDDetailScreen = () => {
                     setAlert(true);
                 } else {
                     validateSKUId();
+                    setSKUId("");
                 }
             }
         }
@@ -162,7 +163,7 @@ const IDDetailScreen = () => {
     return (
         <>
             <MainMenu/>
-            <WithHeaderLayout title="ID Detail Screen">
+            <WithHeaderLayout title="Detalles del Tote">
                 {loading &&
                     <LinearProgress color="secondary" />
                 }
@@ -174,21 +175,21 @@ const IDDetailScreen = () => {
                     </div>
                     <div className="mx-auto" style={{ maxWidth: "600px" }}>
                         <div className="w-full text-center">
-                            <Typography variant="h3" color="primary">
-                                Pack LPN
+                            <Typography variant="h4" color="primary">
+                                Empacar Desde Tote
                         </Typography>
                         </div>
                         <Card className="mt-2">
                             <div className="p-4">
                                 <CardHeader
-                                    title="ID Detail Screen"
-                                    titleTypographyProps={{ variant: 'h4' }}
+                                    title="Detalles del Tote"
+                                    titleTypographyProps={{ variant: 'h5' }}
                                     style={{ textAlign: "center" }}
                                 />
                                 <CardContent className="mx-3">
                                     <div className="w-full text-center py-1">
                                         <Typography style={{ paddingRight: "20px" }}>
-                                            LPN ID: {lpnid} ({tote_type})
+                                            TOTE: {lpnid} ({tote_type})
                                         </Typography>
                                     </div>
                                     <div className="w-full text-center py-1">
@@ -198,12 +199,12 @@ const IDDetailScreen = () => {
                                     </div>
                                     <div className="w-full text-center py-1">
                                         <Typography style={{ paddingRight: "20px" }}>
-                                            CARTONS: {cartons}
+                                        CARTÓNES: {cartons}
                                         </Typography>
                                     </div>
                                     <div className="w-full text-center py-1">
                                         <Typography style={{ paddingRight: "20px" }}>
-                                            CLASSIFICATION: {classification}
+                                        CLASIFICACIÓN: {classification}
                                         </Typography>
                                     </div>
                                     <div className="flex items-center mx-auto pt-10">
@@ -213,7 +214,7 @@ const IDDetailScreen = () => {
                                             value={skuid}
                                             onChange={e => setSKUId(e.target.value.toUpperCase())}
                                             onKeyUp={handleKeyUp}
-                                            label="SKU ID"
+                                            label="SKU"
                                             autoFocus
                                         />
                                     </div>

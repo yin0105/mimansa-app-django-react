@@ -41,7 +41,7 @@ const IDDetailScreen = () => {
     const handleKeyUp = e => {
         if (e.keyCode === 13) {
             console.log(readonly);
-            if (skuid === "%*%") {
+            if (skuid === "") {
                 setSKUId("");
                 setReadOnly(false);
             } else if ( !readonly ) {
